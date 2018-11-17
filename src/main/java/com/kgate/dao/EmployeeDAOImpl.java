@@ -36,32 +36,41 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         String qry = "select employee0_.name, employee0_.email, employee0_.address, employee0_.telephone  from  employee123 employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE '" + txt + "%'";
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(qry).list();
         List<Employee> emp = new ArrayList<>();
+//        Employee e = new Employee();
 
         for (Object d : data) {
 
             Object arr[] = (Object[]) d;
-            Employee e;
-            for (int i = 1; i < arr.length; i++) {
-                    System.out.println(arr[i]);
-            // String fields[i] = new String[];
-            }
+            String st, st1, st2, st3;
+//            String s[] = null;
+//            for (int i = 0; i <= arr.length; i++) {
+//                s[i] = (String) arr[i];
+//
+//            }
+            Employee e = new Employee();
+            st = (String) arr[0];
+            st1 = (String) arr[1];
+            st2 = (String) arr[2];
+            st3 = (String) arr[3];
 
+            e.setName(st);
+            e.setEmail(st1);
+            e.setAddress(st2);
+            e.setTelephone(st3);
+            
+            emp.add(e);
+  
         }
 
-//            
-      //  emp.add();
-
-    
-
-    return emp ;
+        return emp;
 
 //        String query = "from Employee u where u.name like '" + txt + "%' or u.email like '" + txt + "%' or u.address like '" + txt + "%' or u.telephone like '" + txt + "%'";
 //        return sessionFactory.getCurrentSession().createQuery(query)
 //                .list();
-}
+    }
 
 //for search employee by skills method defined
-public List<Employee> findByNamedQueryAndNamedParams(
+    public List<Employee> findByNamedQueryAndNamedParams(
             final String name,
             final Map<String, ? extends Object> params
     ) {
@@ -78,48 +87,39 @@ public List<Employee> findByNamedQueryAndNamedParams(
     }
 
     @SuppressWarnings("unchecked")
-        public List<Employee> searchEmployeesBySkill(String skill) {
+    public List<Employee> searchEmployeesBySkill(String skill) {
         Map<String, Object> map = new HashMap<>();
         map.put("skill_name", skill);
         return findByNamedQueryAndNamedParams("Employee.searhBySkills", map);
     }
 
     @SuppressWarnings("unchecked")
-        public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
 
         return sessionFactory.getCurrentSession().createQuery("from Employee")
                 .list();
     }
 
     @Override
-        public 
-
-
-
-void deleteEmployee(Integer employeeId) {
+    public void deleteEmployee(Integer employeeId) {
         Employee employee = (Employee) sessionFactory.getCurrentSession().load(
-                Employee.class
-
-, employeeId);
+                Employee.class,
+                employeeId);
         if (null != employee) {
             this.sessionFactory.getCurrentSession().delete(employee);
         }
 
     }
 
-    public Employee 
-
-
-
-getEmployee(int empid) {
+    public Employee
+            getEmployee(int empid) {
         return (Employee) sessionFactory.getCurrentSession().get(
-                Employee.class
-
-, empid);
+                Employee.class,
+                empid);
     }
 
     @Override
-        public Employee updateEmployee(Employee employee) {
+    public Employee updateEmployee(Employee employee) {
         sessionFactory.getCurrentSession().update(employee);
         return employee;
     }
