@@ -11,6 +11,7 @@ import com.kgate.model.Skill;
 import static java.lang.Math.E;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import org.hibernate.Query;
@@ -35,7 +36,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         // String query ="from Employee e inner join fetch e.listSkill as el like '"+txt+"%'";
         String qry = "select employee0_.name, employee0_.email, employee0_.address, employee0_.telephone  from  employee123 employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE '" + txt + "%'";
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(qry).list();
-        List<Employee> emp = new ArrayList<>();
+
+        HashSet<Employee> h = new HashSet<Employee>();
 //        Employee e = new Employee();
 
         for (Object d : data) {
@@ -57,10 +59,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             e.setEmail(st1);
             e.setAddress(st2);
             e.setTelephone(st3);
-            
-            emp.add(e);
-  
+
+            h.add(e);
+
         }
+        List<Employee> emp = new ArrayList<>(h);
 
         return emp;
 

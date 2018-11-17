@@ -52,6 +52,7 @@ public class Employee implements Serializable {
     @Transient
     private List<String> skills = new ArrayList<>();
 
+    
     public List<Skill> getListSkill() {
         return listSkill;
     }
