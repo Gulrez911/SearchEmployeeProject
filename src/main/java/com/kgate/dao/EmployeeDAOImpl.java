@@ -34,10 +34,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         //  String query1 = "from Employee e, Skill s inner join listSkill ";
         //  String query = "from Employee ,Skill s INNER JOIN e.skills el INNER JOIN s.listSkill sl where el = sl like '"+txt+"%' ";
         // String query ="from Employee e inner join fetch e.listSkill as el like '"+txt+"%'";
-        String qry = "select employee0_.name, employee0_.email, employee0_.address, employee0_.telephone  from  employee123 employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE '" + txt + "%'";
+        String qry = "select employee0_.name, employee0_.email, employee0_.address, employee0_.telephone  from  employee123 employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE '" + txt + "'";
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(qry).list();
 
-        HashSet<Employee> h = new HashSet<Employee>();
+         List<Employee> emp = new ArrayList<>();
 //        Employee e = new Employee();
 
         for (Object d : data) {
@@ -60,11 +60,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             e.setAddress(st2);
             e.setTelephone(st3);
 
-            h.add(e);
+            emp.add(e);
 
         }
-        List<Employee> emp = new ArrayList<>(h);
-
+        
         return emp;
 
 //        String query = "from Employee u where u.name like '" + txt + "%' or u.email like '" + txt + "%' or u.address like '" + txt + "%' or u.telephone like '" + txt + "%'";
@@ -90,15 +89,15 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Employee> searchEmployeesBySkill(String skill) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("skill_name", skill);
-        return findByNamedQueryAndNamedParams("Employee.searhBySkills", map);
+    public List<Employee> searchEmployeesBySkill(String txt) {
+        
+        String query = "from Employee u where u.name like '"+txt+"%' or u.email like '"+txt+"%' or u.address like '"+txt+"%' or u.telephone like '"+txt+"%' " ;
+        return sessionFactory.getCurrentSession().createQuery(query).list();
     }
 
     @SuppressWarnings("unchecked")
     public List<Employee> getAllEmployees() {
-
+        
         return sessionFactory.getCurrentSession().createQuery("from Employee")
                 .list();
     }

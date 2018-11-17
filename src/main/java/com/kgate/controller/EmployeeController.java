@@ -49,7 +49,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/search_employeelist_skill")
     public ModelAndView searchEmployeeBySkill(ModelAndView model, @RequestParam("skillSearch") String skillSearch) throws IOException {
-        List<Employee> listEmployee = employeeService.searchEmployees(skillSearch);
+        List<Employee> listEmployee = employeeService.searchEmployeesBySkill(skillSearch);
         model.addObject("listEmployee", listEmployee);
         model.setViewName("home");
         return model;
