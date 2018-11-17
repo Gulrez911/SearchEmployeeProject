@@ -9,13 +9,14 @@
         <title>Employee Management Screen</title>
     </head>
     <body>
+        
         <div align="center">
             <h1>Employee List</h1>
             <form action="<s:url value="/search_employeelist"/>">
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
                 <button>Find</button>
             </form>
-                <br>
+            <br>
             <form action="<s:url value="/search_employeelist_skill"/>">
                 <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}"/>
                 <button>Find</button>

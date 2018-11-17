@@ -7,6 +7,7 @@
         <title>User Login.</title>
     </head>
     <body>
+        <img src="/resources/login.jpg" alt="Trulli" width="500" height="333">
         <!--        <a href="/SpringMVCHibernateCRUD/employeelist">EmployeeList</a>-->
         <h4>User Login.</h4>
     <center>
