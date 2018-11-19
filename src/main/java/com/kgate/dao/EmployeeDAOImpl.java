@@ -28,7 +28,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Employee> searchEmployees(String txt) {
+    public List<Employee> searchEmployeesBySkill(String txt) {
 
         //  String query = "from Employee u where u.name like '"+txt+"%' or u.email like '"+txt+"%' or u.address like '"+txt+"%' " ;
         //  String query1 = "from Employee e, Skill s inner join listSkill ";
@@ -89,7 +89,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Employee> searchEmployeesBySkill(String txt) {
+    public List<Employee> searchEmployees(String txt) {
         
         String query = "from Employee u where u.name like '"+txt+"%' or u.email like '"+txt+"%' or u.address like '"+txt+"%' or u.telephone like '"+txt+"%' " ;
         return sessionFactory.getCurrentSession().createQuery(query).list();
