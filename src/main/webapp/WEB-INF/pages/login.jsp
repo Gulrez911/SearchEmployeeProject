@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Login.</title>
     </head>
-    <body>
+    <body background>
         <img src="/resources/login.jpg" alt="Trulli" width="500" height="333">
         <!--        <a href="/SpringMVCHibernateCRUD/employeelist">EmployeeList</a>-->
         <h4>User Login.</h4>

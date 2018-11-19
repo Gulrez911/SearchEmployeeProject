@@ -17,16 +17,16 @@
     <!-- Getting Database properties -->
     <context:property-placeholder location="classpath:application.properties" />
     <bean id="messageSource"
-        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
  
         <property name="basename" value="/WEB-INF/messages" />
  
     </bean>
-    <mvc:annotation-driven />
+   
 
     <!-- Specifying the Resource location to load JS, CSS, Images etc -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
-
+    <mvc:annotation-driven />
     <!-- View Resolver -->
     <bean
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -36,7 +36,7 @@
 
     <!-- DataSource -->
     <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-              id="dataSource">
+          id="dataSource">
         <property name="driverClassName" value="${database.driver}"></property>
         <property name="url" value="${database.url}"></property>
         <property name="username" value="${database.user}"></property>
@@ -45,7 +45,7 @@
 
     <!-- Hibernate SessionFactory -->
     <bean id="sessionFactory"
-              class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
         <property name="hibernateProperties">
             <props>
@@ -60,7 +60,7 @@
 
     <!-- Transaction -->
     <bean id="transactionManager"
-              class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
