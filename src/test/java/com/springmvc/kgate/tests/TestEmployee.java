@@ -24,15 +24,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
 @Transactional
 public class TestEmployee {
+
     @Autowired
     EmployeeDAO edao;
-    
+
     @Test
-	@Rollback(value=false)
-    public void testSearchEmployees(){
+    @Rollback(value = false)
+    public void testSearchEmployees() {
         String skill = "HTML";
         List<Employee> emps = edao.searchEmployees(skill);
-        System.out.println(""+emps.size());
+        System.out.println("" + emps.size());
     }
-    
+
 }
