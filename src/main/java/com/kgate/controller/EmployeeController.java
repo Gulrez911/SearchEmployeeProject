@@ -117,7 +117,7 @@ public class EmployeeController {
        
     
     @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@Valid @ModelAttribute("employee") Employee employee, BindingResult result) {
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
             employee.getListSkill().add(sk);
@@ -128,11 +128,7 @@ public class EmployeeController {
 
             employeeService.addEmployee(employee);
         } else {
-            employeeService.updateEmployee(employee);
-        }
-
-        if (result.hasErrors()) {
-            return new ModelAndView("EmployeeForm");
+            employeeService.addEmployee(employee);
         }
 
         return new ModelAndView("redirect:/employeelist");
