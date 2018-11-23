@@ -6,6 +6,25 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
+
+        <style>
+            table {
+                border-collapse: collapse;
+
+            }
+
+            th, td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even){background-color: #f2f2f2}
+
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+        </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Skills</title>
     </head>
@@ -18,9 +37,9 @@
                     <tr>
                         <td>Name:</td>
                         <td><form:input path="skill_name" name="skill_name" id="skill_name"/></td><br>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align="center"><input type="submit" value="Add"></td>
+
+
+                    <td colspan="2" align="center"><input type="submit" value="Add"></td>
                     </tr>
                 </table>
             </form:form>

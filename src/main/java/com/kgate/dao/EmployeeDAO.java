@@ -6,17 +6,18 @@ import com.kgate.model.Skill;
 
 public interface EmployeeDAO {
 
-	public void addEmployee(Employee employee);
+    public void addEmployee(Employee employee);
 
-	public List<Employee> getAllEmployees();
-        //search Employee
-        public List<Employee> searchEmployees(String txt);
+    public List<Employee> getAllEmployees();
+    //search Employee
 
-	public void deleteEmployee(Integer employeeId);
+    public List<Employee> searchEmployees(String txt);
 
-	public Employee updateEmployee(Employee employee);
+    public void deleteEmployee(Integer employeeId);
 
-	public Employee getEmployee(int employeeid);
-        
-         public List<Employee> searchEmployeesBySkill(String skill);
+    public Employee updateEmployee(Employee employee);
+
+    public Employee getEmployee(int employeeid);
+
+    public List<Employee> searchEmployeesBySkill(String skill);
 }
