@@ -65,4 +65,19 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" />
+    
+<!--    Jackson 
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="objectMapper" ref="jacksonObjectMapper" />
+            </bean>        
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="jacksonObjectMapper" class="de.Company.backend.web.CompanyObjectMapper" />-->
+    
+    
 </beans>

@@ -1,5 +1,6 @@
 package com.kgate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,11 +38,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class Employee implements Serializable {
 
+    
     private static final long serialVersionUID = -3465813074586302847L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+   
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "join_employee_skill",
             joinColumns = {
@@ -52,7 +57,6 @@ public class Employee implements Serializable {
     @Transient
     private List<String> skills = new ArrayList<>();
 
-    
     public List<Skill> getListSkill() {
         return listSkill;
     }
