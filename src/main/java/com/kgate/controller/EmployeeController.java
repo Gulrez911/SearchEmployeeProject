@@ -3,6 +3,13 @@ package com.kgate.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
@@ -16,7 +23,11 @@ import com.kgate.model.Employee;
 import com.kgate.model.Skill;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.SkillService;
+
+
 import java.util.Map;
+import java.util.Properties;
+
 import javax.validation.Valid;
 
 import org.springframework.validation.BindingResult;
@@ -131,10 +142,45 @@ public class EmployeeController {
         } else {
             employeeService.addEmployee(employee);
         }
-
+        
+        EmployeeController ec=new  EmployeeController();
+        ec.sendMail(employee.getEmail(),"Employee is added", "confirm message");
         return new ModelAndView("redirect:/employeelist");
     }
 
+    
+   public String sendMail(String to, String message, String subject) {
+        final Employee e = new Employee();
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("pawarvihan5@gmail.com", "vihan@454");
+            }
+        });
+
+        Message message1 = new MimeMessage(session);
+        try {
+
+            message1.setFrom(new InternetAddress("test@gmail.com"));
+            message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message1.setSubject(subject);
+            message1.setText(message);
+            Transport.send(message1);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e1) {
+            throw new RuntimeException(e1);
+        }
+        return "employeelist";
+
+    }
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
