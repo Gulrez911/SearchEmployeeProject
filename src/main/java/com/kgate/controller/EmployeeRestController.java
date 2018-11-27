@@ -1,6 +1,5 @@
 package com.kgate.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kgate.model.Employee;
 import com.kgate.model.Skill;
 import com.kgate.service.EmployeeService;

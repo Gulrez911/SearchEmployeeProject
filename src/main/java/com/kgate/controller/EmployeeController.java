@@ -24,7 +24,6 @@ import com.kgate.model.Skill;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.SkillService;
 
-
 import java.util.Map;
 import java.util.Properties;
 
@@ -67,7 +66,6 @@ public class EmployeeController {
     }
 
     //with validation
-    
     @RequestMapping(value = "/employeelist")
     public ModelAndView listEmployee(ModelAndView model) throws IOException {
         List<Employee> listEmployee = employeeService.getAllEmployees();
@@ -108,11 +106,6 @@ public class EmployeeController {
 //        }
 //        return new ModelAndView("redirect:/employeelist");
 //    }
-    
-    
-    
-    
-    
 //    @RequestMapping(value = "/loginsuccess", method = RequestMethod.POST)
 //	public String doLogin(@Valid @ModelAttribute("employee") Employee employee,
 //			BindingResult result, Map<String, Object> model) {
@@ -124,10 +117,6 @@ public class EmployeeController {
 //		return "LoginSuccess";
 //
 //        }
-         
-       
-       
-    
     @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
     public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
         for (String skill : employee.getSkills()) {
@@ -142,14 +131,13 @@ public class EmployeeController {
         } else {
             employeeService.addEmployee(employee);
         }
-        
-        EmployeeController ec=new  EmployeeController();
-        ec.sendMail(employee.getEmail(),"Employee is added", "confirm message");
+
+        EmployeeController ec = new EmployeeController();
+        ec.sendMail(employee.getEmail(), "Employee is added", "confirm message");
         return new ModelAndView("redirect:/employeelist");
     }
 
-    
-   public String sendMail(String to, String message, String subject) {
+    public void sendMail(String to, String message, String subject) {
         final Employee e = new Employee();
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -160,7 +148,7 @@ public class EmployeeController {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("pawarvihan5@gmail.com", "vihan@454");
+                return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
             }
         });
 
@@ -178,9 +166,10 @@ public class EmployeeController {
         } catch (MessagingException e1) {
             throw new RuntimeException(e1);
         }
-        return "employeelist";
+    //    return "employeelist";
 
     }
+
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
@@ -201,9 +190,4 @@ public class EmployeeController {
         return model;
     }
 
-    
-    
-    
-    
-    
 }

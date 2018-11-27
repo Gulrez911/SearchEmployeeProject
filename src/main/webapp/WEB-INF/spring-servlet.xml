@@ -16,12 +16,12 @@
         
     <!-- Getting Database properties -->
     <context:property-placeholder location="classpath:application.properties" />
-    <bean id="messageSource"
+<!--    <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
  
         <property name="basename" value="/WEB-INF/messages" />
  
-    </bean>
+    </bean>-->
    
 
     <!-- Specifying the Resource location to load JS, CSS, Images etc -->
