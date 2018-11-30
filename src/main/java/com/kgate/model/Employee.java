@@ -27,24 +27,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "employee123")
-//@NamedQueries({
-//    @NamedQuery(
-//            name = "Employee.searhBySkills",
-//            //	//query = "select e from Employee e   where :skill_name in e.listSkill"
-//                    query = "select *  from  employee123 employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE 'Ruby'"
-//           // query = "from Employee e where e.name = :name"
-//    )
-//})
 
 public class Employee implements Serializable {
 
-    
     private static final long serialVersionUID = -3465813074586302847L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-   
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "join_employee_skill",
