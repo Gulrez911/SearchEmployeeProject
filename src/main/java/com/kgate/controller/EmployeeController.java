@@ -164,7 +164,7 @@ public class EmployeeController {
             }
 
             EmployeeController ec = new EmployeeController();
-            ec.sendMail(employee.getEmail(), "Employee is added", "confirm message");
+            ec.sendMail(employee.getEmail(), "Employee is added Successfully", "confirm message");
             return new ModelAndView("redirect:/employeelist");
         } else {
             return new ModelAndView("invalid");
