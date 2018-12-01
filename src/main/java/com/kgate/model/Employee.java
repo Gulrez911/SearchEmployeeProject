@@ -48,6 +48,17 @@ public class Employee implements Serializable {
     @Transient
     private List<String> skills = new ArrayList<>();
 
+    @Transient
+    private String otp;
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
     public List<Skill> getListSkill() {
         return listSkill;
     }
@@ -117,6 +128,11 @@ public class Employee implements Serializable {
 
     public void setSkills(List<String> skills) {
         this.skills = skills;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name=" + name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + '}';
     }
 
 }

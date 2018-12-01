@@ -33,7 +33,10 @@
                     <tr>
                         <td>Email:</td>
                         <td><form:input path="email" type="email" /></td>
-
+                    <tr>
+                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
+                        <td><form:input path="otp" /></td>
+                    </tr>
                     </tr>
                     <tr>
                         <td>Address:</td>
@@ -54,7 +57,7 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2" align="center"><input type="submit" value="Save"></td>
+                        <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>
             </form:form>
