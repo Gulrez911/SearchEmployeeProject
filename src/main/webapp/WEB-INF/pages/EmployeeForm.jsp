@@ -27,12 +27,12 @@
                     <form:hidden path="id"/>
                     <tr>
                         <td><font color="yellow">Name:</font></td>
-                        <td><form:input path="name" /></td>
+                        <td><form:input path="name"  required="required"/></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td><font color="yellow"> Email: </font></td>
-                        <td><form:input path="email" type="email" /></td>
+                        <td><form:input path="email" type="email"  required="required"/></td>
                     <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td><form:input path="otp" /></td>
@@ -49,7 +49,7 @@
                     <tr>
                         <td><font color="yellow"> Skills: </font></td>
                         <td>
-                            <form:select path="skills" >
+                            <form:select path="skills"  required="required">
 
                                 <form:options items="${listSkill}" />
                             </form:select>
