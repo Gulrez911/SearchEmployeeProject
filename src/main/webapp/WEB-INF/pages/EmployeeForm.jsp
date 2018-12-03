@@ -16,9 +16,9 @@
         </style>
 
     </head>
-    <body>
+    <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">>
         <div align="center">
-            <h1>New/Edit Employee</h1>
+            <h1><font color="red">New/Edit Employee </font></h1>
 
             <%--<form:errors path="employee.*"/>--%>
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
@@ -26,14 +26,17 @@
                 <table>
                     <form:hidden path="id"/>
                     <tr>
-                        <td>Name:</td>
+                        <td><font color="yellow">Name:</font></td>
                         <td><form:input path="name" /></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
-                        <td>Email:</td>
+                        <td><font color="yellow"> Email: </font></td>
                         <td><form:input path="email" type="email" /></td>
-
+                    <tr>
+                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
+                        <td><form:input path="otp" /></td>
+                    </tr>
                     </tr>
                     <%-- <tr>
                        <td><input type="submit" value="Send OTP"></td>
@@ -43,15 +46,15 @@
                        <td><form:input path="otp" /></td>
                     </tr> --%>
                     <tr>
-                        <td>Address:</td>
+                        <td><font color="yellow">Address:</font></td>
                         <td><form:input path="address" /></td>
                     </tr>
                     <tr>
-                        <td>Telephone:</td>
+                        <td><font color="yellow"> Telephone: </font></td>
                         <td><form:input path="telephone" /></td>
                     </tr>
                     <tr>
-                        <td>Skills:</td>
+                        <td><font color="yellow"> Skills: </font></td>
                         <td>
                             <form:select path="skills" >
 
@@ -61,7 +64,7 @@
                     </tr>
 
                     <tr>
-                        <td colspan="2" align="center"><input type="submit" value="Save"></td>
+                        <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>
             </form:form>

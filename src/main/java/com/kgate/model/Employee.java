@@ -27,24 +27,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "employee123")
-//@NamedQueries({
-//    @NamedQuery(
-//            name = "Employee.searhBySkills",
-//            //	//query = "select e from Employee e   where :skill_name in e.listSkill"
-//                    query = "select *  from  employee123 employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE 'Ruby'"
-//           // query = "from Employee e where e.name = :name"
-//    )
-//})
 
 public class Employee implements Serializable {
 
-    
     private static final long serialVersionUID = -3465813074586302847L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-   
+
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "join_employee_skill",
@@ -56,6 +47,17 @@ public class Employee implements Serializable {
 
     @Transient
     private List<String> skills = new ArrayList<>();
+
+    @Transient
+    private String otp;
+
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
 
     public List<Skill> getListSkill() {
         return listSkill;
@@ -137,6 +139,11 @@ public class Employee implements Serializable {
 
     public void setSkills(List<String> skills) {
         this.skills = skills;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name=" + name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + '}';
     }
 
 }

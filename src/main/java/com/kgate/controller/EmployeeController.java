@@ -26,6 +26,7 @@ import com.kgate.service.SkillService;
 
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -48,6 +49,13 @@ public class EmployeeController {
 
     @Autowired
     private SkillService skillService;
+
+    public String generateOTP() {
+        Random random = new Random();
+        String id = String.format("%04d", random.nextInt(10000));
+        return id;
+    }
+    public String temp_otp = "";
 
     @RequestMapping(value = "/search_employeelist")
     public ModelAndView searchEmployee(ModelAndView model, @RequestParam("freeText") String freeText) throws IOException {
@@ -117,24 +125,50 @@ public class EmployeeController {
 //		return "LoginSuccess";
 //
 //        }
-    @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-        for (String skill : employee.getSkills()) {
-            Skill sk = skillService.getSkillByName(skill);
-            employee.getListSkill().add(sk);
-        }
-
-        if (employee.getId() == 0) { // if employee id is 0 then creating the
-            // employee other updating the employee
-
-            employeeService.addEmployee(employee);
-        } else {
-            employeeService.addEmployee(employee);
-        }
+    @RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
+    public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
 
         EmployeeController ec = new EmployeeController();
-        ec.sendMail(employee.getEmail(), "Employee is added", "confirm message");
-        return new ModelAndView("redirect:/employeelist");
+        temp_otp = ec.generateOTP();
+        demo(temp_otp);
+        System.out.println("otp: " + temp_otp);
+        ec.sendMail(employee.getEmail(), temp_otp, "confirm message");
+        ModelAndView model = new ModelAndView();
+        List<Skill> listSkill = skillService.getAllSkills();
+        model.addObject("listSkill", listSkill);
+//        model.addObject("employee", employee);
+        model.setViewName("EmployeeForm");
+        return model;
+    }
+    public String temp_3;
+
+    public void demo(String temp_otp2) {
+        this.temp_3 = temp_otp2;
+    }
+
+    @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
+        if (employee.getOtp().equals(temp_3)) {
+            System.out.println("OTP: " + temp_3);
+            for (String skill : employee.getSkills()) {
+                Skill sk = skillService.getSkillByName(skill);
+                employee.getListSkill().add(sk);
+            }
+
+            if (employee.getId() == 0) { // if employee id is 0 then creating the
+                // employee other updating the employee
+
+                employeeService.addEmployee(employee);
+            } else {
+                employeeService.addEmployee(employee);
+            }
+
+            EmployeeController ec = new EmployeeController();
+            ec.sendMail(employee.getEmail(), "Employee is added Successfully", "confirm message");
+            return new ModelAndView("redirect:/employeelist");
+        } else {
+            return new ModelAndView("invalid");
+        }
     }
 
     public void sendMail(String to, String message, String subject) {
@@ -166,7 +200,7 @@ public class EmployeeController {
         } catch (MessagingException e1) {
             throw new RuntimeException(e1);
         }
-    //    return "employeelist";
+        //    return "employeelist";
 
     }
 
