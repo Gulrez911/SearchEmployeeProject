@@ -35,6 +35,13 @@
                         <td><form:input path="email" type="email" /></td>
 
                     </tr>
+                    <%-- <tr>
+                       <td><input type="submit" value="Send OTP"></td>
+                    </tr>
+                    <tr>
+                       <td>Enter OTP</td>
+                       <td><form:input path="otp" /></td>
+                    </tr> --%>
                     <tr>
                         <td>Address:</td>
                         <td><form:input path="address" /></td>

@@ -1,7 +1,8 @@
 package com.kgate.service;
 
-import com.kgate.model.Skill;
 import java.util.List;
+
+import com.kgate.model.Skill;
 
 public interface SkillService {
 

@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kgate.dao.EmployeeDAO;
-import com.kgate.dao.SkillDao;
 import com.kgate.model.Employee;
-import com.kgate.model.Skill;
 
 @Service
 @Transactional

@@ -79,8 +79,19 @@ public class Employee implements Serializable {
 
     @Column
     private String telephone;
+    
+   /* @Transient
+    private String otp;
 
-    public int getId() {
+    public String getOtp() {
+		return otp;
+	}
+
+	public void setOtp(String otp) {
+		this.otp = otp;
+	}*/
+
+	public int getId() {
         return id;
     }
 
