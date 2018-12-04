@@ -16,9 +16,9 @@
         </style>
 
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">>
+    <body style="background-image: url('http://www.ppt123.net/beijing/UploadFiles_8374/201805/20180526063117156.jpg'); ">
         <div align="center">
-            <h1><font color="red">New/Edit Employee </font></h1>
+            <h1 style="color:white">New/Edit Employee</h1>
 
             <%--<form:errors path="employee.*"/>--%>
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
@@ -26,12 +26,12 @@
                 <table>
                     <form:hidden path="id"/>
                     <tr>
-                        <td><font color="yellow">Name:</font></td>
+                        <td style="color:white">Name:</td>
                         <td><form:input path="name"  required="required"/></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
-                        <td><font color="yellow"> Email: </font></td>
+                        <td style="color:white"> Email:</td>
                         <td><form:input path="email" type="email"  required="required"/></td>
                     <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
@@ -39,15 +39,15 @@
                     </tr>
                     </tr>
                     <tr>
-                        <td><font color="yellow">Address:</font></td>
+                        <td style="color:white">Address:</font></td>
                         <td><form:input path="address" /></td>
                     </tr>
                     <tr>
-                        <td><font color="yellow"> Telephone: </font></td>
+                        <td style="color:white"> Telephone: </font></td>
                         <td><form:input path="telephone" /></td>
                     </tr>
                     <tr>
-                        <td><font color="yellow"> Skills: </font></td>
+                        <td style="color:white"> Skills: </font></td>
                         <td>
                             <form:select path="skills"  required="required">
 

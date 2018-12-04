@@ -8,10 +8,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Management Screen</title>
     </head>
-    <body>
+    <body style="background-image: url('http://www.ppt123.net/beijing/UploadFiles_8374/201805/20180526063117156.jpg'); ">
         
         <div align="center">
-            <h1>Employee List</h1>
+            <h1 style="color:white">Employee List</h1>
             <form action="<s:url value="/search_employeelist"/>">
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
                 <button>Find</button>
@@ -24,14 +24,14 @@
             <br>
             <table border="1">
 
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Telephone</th>
-                <th>Action</th>
+                <th style="color:white">Name</th>
+                <th style="color:white">Email</th>
+                <th style="color:white">Address</th>
+                <th style="color:white">Telephone</th>
+                <th style="color:white">Action</th>
 
                 <c:forEach var="employee" items="${listEmployee}">
-                    <tr>
+                    <tr style="color:white">
 
                         <td>${employee.name}</td>
                         <td>${employee.email}</td>
