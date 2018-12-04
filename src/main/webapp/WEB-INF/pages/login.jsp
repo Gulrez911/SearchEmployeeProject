@@ -6,7 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Login.</title>
     </head>
-    <body style="background-image: url('http://deltatimes24.com/uploads/images/login-background-images-for-website-10.jpg'); ">
+    <body background="<%=request.getContextPath()%>/resources/images/india-wallpaper.jpg">
 
         <!--        <a href="/SpringMVCHibernateCRUD/employeelist">EmployeeList</a>-->
         <h1 style="color:white" align="center">Login</h1>

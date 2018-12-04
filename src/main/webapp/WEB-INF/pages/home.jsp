@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Management Screen</title>
     </head>
-    <body style="background-image: url('http://www.ppt123.net/beijing/UploadFiles_8374/201805/20180526063117156.jpg'); ">
+    <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
         
         <div align="center">
             <h1 style="color:white">Employee List</h1>
@@ -24,11 +24,11 @@
             <br>
             <table border="1">
 
-                <th style="color:white">Name</th>
-                <th style="color:white">Email</th>
-                <th style="color:white">Address</th>
-                <th style="color:white">Telephone</th>
-                <th style="color:white">Action</th>
+                <th style="color:red">Name</th>
+                <th style="color:red">Email</th>
+                <th style="color:red">Address</th>
+                <th style="color:red">Telephone</th>
+                <th style="color:red">Action</th>
 
                 <c:forEach var="employee" items="${listEmployee}">
                     <tr style="color:white">
@@ -37,9 +37,9 @@
                         <td>${employee.email}</td>
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
-                        <td><a href="editEmployee?id=${employee.id}">Edit</a>
+                        <td ><a href="editEmployee?id=${employee.id}" style="color:greenyellow">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteEmployee?id=${employee.id}">Delete</a></td>
+                                href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>
 
                     </tr>
                 </c:forEach>

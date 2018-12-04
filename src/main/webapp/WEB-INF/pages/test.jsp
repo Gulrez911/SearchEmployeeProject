@@ -28,7 +28,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Skills</title>
     </head>
-    <body style="background-image: url('http://www.freegreatpicture.com/files/147/16968-high-resolution-color-background.jpg');">
+    <body  background="<%=request.getContextPath()%>/resources/images/gal.jpg">
         <div align="center">
             <h1 style="color:white">Skills Tracker: Add Skill Page</h1>
             <form:form action="saveTest" method="post" modelAttribute="skill" commandName="skill">

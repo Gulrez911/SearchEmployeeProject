@@ -125,6 +125,8 @@ public class EmployeeController {
 //		return "LoginSuccess";
 //
 //        }
+    
+    
     @RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
     public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
 
@@ -217,8 +219,8 @@ public class EmployeeController {
 
         Employee employee = employeeService.getEmployee(employeeId);
         ModelAndView model = new ModelAndView("EmployeeForm");
-        List<Skill> listSkill = skillService.getAllSkills();
-        model.addObject("listSkill", listSkill);
+//        List<Skill> listSkill = skillService.getAllSkills();
+//        model.addObject("listSkill", listSkill);
         model.addObject("employee", employee);
 
         return model;

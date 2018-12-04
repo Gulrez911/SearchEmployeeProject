@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
     </head>
-    <body style="background-image: url('http://storage.cloversites.com/evangeltemple2/site_images/page3_picture0_1388523616.jpg');">
+    <body background="<%=request.getContextPath()%>/resources/images/af.jpg">
         <h3 style="color:white" align="center">You have successfully Login</h3>
     <center><a href="/SpringMVCHibernateCRUD/test"><font style="color:white" size="5">Add Skill</font></a><br></center>
  <center><a href="/SpringMVCHibernateCRUD/employeelist"><font style="color:white" size="5">Employee List</font></a></center> 
