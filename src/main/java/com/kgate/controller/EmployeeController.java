@@ -64,7 +64,7 @@ public class EmployeeController {
         model.setViewName("home");
         return model;
     }
-
+//original method for skill search
     @RequestMapping(value = "/search_employeelist_skill")
     public ModelAndView searchEmployeeBySkill(ModelAndView model, @RequestParam("skillSearch") String skillSearch) throws IOException {
         List<Employee> listEmployee = employeeService.searchEmployeesBySkill(skillSearch);
@@ -72,12 +72,54 @@ public class EmployeeController {
         model.setViewName("home");
         return model;
     }
+    
+    @RequestMapping(value = "/search_employeelist_skill1")
+    public ModelAndView searchEmployeeBySkill1(ModelAndView model, @RequestParam("skillSearch") String skillSearch) throws IOException {
+        
+    	
+    	
+        int flag=1;
+         
+    	 List<Skill> listSkill = skillService.getAllSkills();
+       if(skillSearch.length()>2)
+       {
+    	   for(Skill s:listSkill)
+    	   {
+    		   String a=s.getSkill_name().toLowerCase();
+    		   if(a.contains(skillSearch))
+    		   {
+    			   List<Employee> listEmployee = employeeService.searchEmployeesBySkill(a);
+    			   model.addObject("listEmployee", listEmployee);
+    			   flag=0;
+    		   }
+    	   }
+    	  
+          
+       }
+       else
+       {
+    	   model.addObject("error","data not found");
+    	   model.setViewName("home");
+    	   return model;
+       }
+       if(flag==1)
+       {
+    	   model.addObject("error","data not found");
+    	   model.setViewName("home");
+    	   return model;
+       }
+       model.setViewName("home");
+       return model;
+       
+    }
 
     //with validation
     @RequestMapping(value = "/employeelist")
     public ModelAndView listEmployee(ModelAndView model) throws IOException {
         List<Employee> listEmployee = employeeService.getAllEmployees();
         model.addObject("listEmployee", listEmployee);
+        List<Skill> listSkill = skillService.getAllSkills();
+        model.addObject("listSkill", listSkill);
         model.setViewName("home");
         return model;
     }
