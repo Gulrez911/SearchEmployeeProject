@@ -28,14 +28,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add Skills</title>
     </head>
-    <body>
+    <body  background="<%=request.getContextPath()%>/resources/images/gal.jpg">
         <div align="center">
-            <h1>Skills Tracker: Add Skill Page</h1>
+            <h1 style="color:white">Skills Tracker: Add Skill Page</h1>
             <form:form action="saveTest" method="post" modelAttribute="skill" commandName="skill">
                 <table>
                     <form:hidden path="skill_Id"/>
                     <tr>
-                        <td>Name:</td>
+                        <td style="color:white">Name:</td>
                         <td><form:input path="skill_name" name="skill_name" id="skill_name"/></td><br>
 
 
@@ -47,7 +47,7 @@
 
 
                 <th>Skills</th>
-                <th>Action</th>
+                <th >Action</th>
 
                 <c:forEach var="skill" items="${listSkill}">
                     <tr>

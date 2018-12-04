@@ -10,17 +10,23 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Management Screen</title>
     </head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <body>
+
+
+    <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
+
         
         <div align="center">
+
             <h1>Employee List</h1>
             
-            <div ng-app="myApp" ng-controller="namesCtrl">
+          
          
+
+            <h1 style="color:white">Employee List</h1>
+
             <form action="<s:url value="/search_employeelist"/>">
            
-                <input type="text" name="freeText"  ng-model="test" placeholder="Enter Text To Search" value="${param.freeText}"/>
+                <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
                 
                 <button>Find</button>
             </form>
@@ -29,50 +35,27 @@
             <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}"/>
                 <button>Find</button>
             </form>
-          <%-- 
-           <ul>
-  <li ng-repeat="x in names | filter:test">
-    {{ x }}
-  </li>
-</ul></div>
-<script>
-angular.module('myApp', []).controller('namesCtrl', function($scope) {
-    $scope.names = /* [
-        'Jani',
-        'Carl',
-        'Margareth',
-        'Hege',
-        'Joe',
-        'Gustav',
-        'Birgit',
-        'Mary',
-        'Kai'
-    ]; */
-        
-});
-</script>
-
-            <br><br><br> <br> --%>
+         
             <br>
             <p>${error}</p>
             <table border="1">
 
-                <th>Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Telephone</th>
-                <th>Action</th>
+                <th style="color:red">Name</th>
+                <th style="color:red">Email</th>
+                <th style="color:red">Address</th>
+                <th style="color:red">Telephone</th>
+                <th style="color:red">Action</th>
 
                 <c:forEach var="employee" items="${listEmployee}">
-                    <tr>
+                    <tr style="color:white">
 
                         <td>${employee.name}</td>
                         <td>${employee.email}</td>
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
-                        <td><a href="editEmployee?id=${employee.id}">Edit</a>
+                        <td ><a href="editEmployee?id=${employee.id}" style="color:greenyellow">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteEmployee?id=${employee.id}">Delete</a></td>
+                                href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>
 
                     </tr>
                 </c:forEach>

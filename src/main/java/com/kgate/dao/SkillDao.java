@@ -16,4 +16,6 @@ public interface SkillDao {
     public Skill getSkill(int skill_Id);
 
     public Skill getSkillByName(String skillName);
+    
+    
 }

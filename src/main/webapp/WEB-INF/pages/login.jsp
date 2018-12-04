@@ -6,16 +6,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>User Login.</title>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/Blue-bckgrnd.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/india-wallpaper.jpg">
 
         <!--        <a href="/SpringMVCHibernateCRUD/employeelist">EmployeeList</a>-->
-        <h4>User Login.</h4>
+        <h1 style="color:white" align="center">Login</h1>
     <center>
         <form:form method="post" name="loginForm" >
             <table>
-                <tr><td>User Name: </td><td><input name="userName" type="textbox"></td></tr>
-                <tr><td>Password: </td><td><input name="password" type="password"></td></tr>
-                <tr><td colspan="2" align="right"><input type="submit" value="Submit"></td></tr>
+                <tr><td style="color:white">User Name: </td><td><input name="userName" type="textbox"></td></tr>
+                <tr><td style="color:white">Password: </td><td><input name="password" type="password"></td></tr>
+                <tr><td colspan="2" align="right"><input type="submit" value="LOGIN"></td></tr>
             </table>
             <div style="color:red">${error}</div>
         </form:form>
