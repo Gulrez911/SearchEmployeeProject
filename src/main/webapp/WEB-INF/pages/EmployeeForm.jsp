@@ -58,7 +58,7 @@
                     <tr>
                         <td style="color:yellow"> Skills: </font></td>
                         <td>
-                            <form:select path="skills"  required="required">
+                            <form:select path="skills" >
 
                                 <form:options items="${listSkill}" />
                             </form:select>
@@ -70,7 +70,8 @@
                     </tr>
                 </table>
             </form:form>
-
+                
+         
         </div>
     </body>
 </html>
