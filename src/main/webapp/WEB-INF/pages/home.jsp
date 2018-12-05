@@ -22,6 +22,7 @@
                 <button>Find</button>
             </form>
             <br>
+            <p style="color:white">${message}</p>
             <table border="1">
 
                 <th style="color:white">Name</th>

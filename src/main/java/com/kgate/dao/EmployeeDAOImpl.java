@@ -89,7 +89,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(Integer employeeId) {
 
-        String query ="delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id ="+employeeId+"";
+        String query ="delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where  employee123.id = join_employee_skill.id and employee123.id ="+employeeId+"";
         
           SQLQuery  sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
           sqlq.executeUpdate();
@@ -116,30 +116,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
 	
-	@Override
-	public boolean OtpInvalid(String email) {
-		String status="Not approved";
-		Session s = this.sessionFactory.getCurrentSession();
-		  String q ="UPDATE Employee SET status=? WHERE email=?";
-		  Query query=s.createQuery(q);
-		  query.setParameter(0,status);
-		  query.setParameter(1,email);
-		
-		return true;
-	}
-
-	@Override
-	public boolean Otpvalid(String email) {
-		String status="Approved";
-		Session s = this.sessionFactory.getCurrentSession();
-		  String q ="UPDATE Employee SET status=? WHERE email=?";
-		  Query query=s.createQuery(q);
-		  query.setParameter(0,status);
-		  query.setParameter(1,email);
-		  int result=query.executeUpdate();
-		return true;
-	}
-
+	
 	@Override
 	public Employee searchByEmail(String email) {
 		 String query = "from Employee u where u.email = '" + email + "'";

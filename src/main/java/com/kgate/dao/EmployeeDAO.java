@@ -22,6 +22,5 @@ public interface EmployeeDAO {
     public List<Employee> searchEmployeesBySkill(String skill);
    
     
-    public boolean OtpInvalid(String email);
-    public boolean Otpvalid(String email);
+
 }

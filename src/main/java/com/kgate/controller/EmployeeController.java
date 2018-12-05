@@ -127,6 +127,12 @@ public class EmployeeController {
 //        }
     @RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
     public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
+    	 
+    	for (String skill : employee.getSkills()) {
+              Skill sk = skillService.getSkillByName(skill);
+              employee.getListSkill().add(sk);
+          }
+
 
         EmployeeController ec = new EmployeeController();
         String temp_otp = ec.generateOTP();
@@ -142,22 +148,18 @@ public class EmployeeController {
         model.setViewName("EmployeeForm");
         return model;
     }
-    public String temp_3;
+  
 
    
 
     @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee,@RequestParam("email")String email,@RequestParam("id")int Id) {
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
       /*  if (employee.getOtp().equals(temp_3)) {*/
 //            System.out.println("OTP: " + temp_3);
-            for (String skill : employee.getSkills()) {
-                Skill sk = skillService.getSkillByName(skill);
-                employee.getListSkill().add(sk);
-            }
-
+          
            Employee emp = employeeService.searchByEmail(employee.getEmail());
            		if(emp == null) {
-           			throw new RuntimeException("can nnot be null");
+           			throw new RuntimeException("cannnot be null");
            		}
            		else {
            			if( employee.getOtp().equals(emp.getOtp())){
@@ -166,11 +168,12 @@ public class EmployeeController {
            			}
            			else {
            				//send him a message that otp is invalid
+           				return new ModelAndView("invalid");
            			}
            		}
 //           String password=employee.getPassword();
             EmployeeController ec = new EmployeeController();
-            ec.sendMail(employee.getEmail(),employee.getOtp()+employee.getPassword(),"confirm message");
+            ec.sendMail(employee.getEmail(),"OTP:"+employee.getOtp()+"\n password:"+employee.getPassword(),"confirm message");
             return new ModelAndView("redirect:/employeelist");
            }
 
@@ -211,7 +214,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request) {
-        int employeeId = Integer.parseInt(request.getParameter("id"));
+       int employeeId = Integer.parseInt(request.getParameter("id"));
         employeeService.deleteEmployee(employeeId);
         return new ModelAndView("redirect:/employeelist");
     }
@@ -221,12 +224,27 @@ public class EmployeeController {
         int employeeId = Integer.parseInt(request.getParameter("id"));
 
         Employee employee = employeeService.getEmployee(employeeId);
-        ModelAndView model = new ModelAndView("EmployeeForm");
-        List<Skill> listSkill = skillService.getAllSkills();
+        ModelAndView model = new ModelAndView("edit");
+         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
         model.addObject("employee", employee);
 
         return model;
     }
+    
+    
+    @RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
+    public ModelAndView updateperson(@ModelAttribute Employee employee) {
+
+    	 employeeService.updateEmployee(employee);
+        String message = "Employee is successfully edited.";
+        ModelAndView mav = new ModelAndView("home");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+        return mav;
+
+    }
+    
 
 }
