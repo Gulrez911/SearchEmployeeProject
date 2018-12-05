@@ -278,8 +278,14 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
-    public ModelAndView init() {
+    public ModelAndView downloadPDF() {
         List<Employee> listEmployee = employeeService.getAllEmployees();
         return new ModelAndView("pdfView", "listEmployee", listEmployee);
+    }
+    
+    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+    public ModelAndView downloadExcel() {
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        return new ModelAndView("excelView", "listEmployee", listEmployee);
     }
 }
