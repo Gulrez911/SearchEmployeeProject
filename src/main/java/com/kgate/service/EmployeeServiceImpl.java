@@ -63,5 +63,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void setEmployeeDAO(EmployeeDAO employeeDAO) {
         this.employeeDAO = employeeDAO;
     }
+    @Override
+   @Transactional
+	public boolean OtpInvalid(String email) {
+		return employeeDAO.OtpInvalid(email) ;
+		
+	}
+    @Override
+	@Transactional
+	public boolean Otpvalid(String email) {
+	
+		return employeeDAO.Otpvalid(email);
+	}
+	@Override
+	public Employee searchByEmail(String email) {
+		
+		return employeeDAO.searchByEmail(email);
+	}
+	
 
 }

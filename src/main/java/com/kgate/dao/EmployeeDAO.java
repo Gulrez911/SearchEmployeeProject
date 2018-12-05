@@ -12,7 +12,7 @@ public interface EmployeeDAO {
     //search Employee
 
     public List<Employee> searchEmployees(String txt);
-
+    public Employee searchByEmail(String email);
     public void deleteEmployee(Integer employeeId);
 
     public Employee updateEmployee(Employee employee);
@@ -20,4 +20,8 @@ public interface EmployeeDAO {
     public Employee getEmployee(int employeeid);
 
     public List<Employee> searchEmployeesBySkill(String skill);
+   
+    
+    public boolean OtpInvalid(String email);
+    public boolean Otpvalid(String email);
 }

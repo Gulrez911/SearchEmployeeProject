@@ -55,7 +55,7 @@ public class EmployeeController {
         String id = String.format("%04d", random.nextInt(10000));
         return id;
     }
-    public String temp_otp = "";
+
 
     @RequestMapping(value = "/search_employeelist")
     public ModelAndView searchEmployee(ModelAndView model, @RequestParam("freeText") String freeText) throws IOException {
@@ -129,10 +129,12 @@ public class EmployeeController {
     public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
 
         EmployeeController ec = new EmployeeController();
-        temp_otp = ec.generateOTP();
-        demo(temp_otp);
-        System.out.println("otp: " + temp_otp);
-        ec.sendMail(employee.getEmail(), temp_otp, "confirm message");
+        String temp_otp = ec.generateOTP();
+        employee.setOtp(temp_otp);
+        employee.setStatus("Not Approved");
+        employeeService.addEmployee(employee);
+//        System.out.println("otp: " + temp_otp);
+        ec.sendMail("pawarvihan5@gmail.com", temp_otp, "confirm message");
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
@@ -142,36 +144,37 @@ public class EmployeeController {
     }
     public String temp_3;
 
-    public void demo(String temp_otp2) {
-        this.temp_3 = temp_otp2;
-    }
+   
 
     @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-        if (employee.getOtp().equals(temp_3)) {
-            System.out.println("OTP: " + temp_3);
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee,@RequestParam("email")String email,@RequestParam("id")int Id) {
+      /*  if (employee.getOtp().equals(temp_3)) {*/
+//            System.out.println("OTP: " + temp_3);
             for (String skill : employee.getSkills()) {
                 Skill sk = skillService.getSkillByName(skill);
                 employee.getListSkill().add(sk);
             }
 
-            if (employee.getId() == 0) { // if employee id is 0 then creating the
-                // employee other updating the employee
-
-                employeeService.addEmployee(employee);
-            } else {
-                employeeService.addEmployee(employee);
-            }
-
+           Employee emp = employeeService.searchByEmail(employee.getEmail());
+           		if(emp == null) {
+           			throw new RuntimeException("can nnot be null");
+           		}
+           		else {
+           			if( employee.getOtp().equals(emp.getOtp())){
+           				emp.setStatus("Approved");
+           				employeeService.updateEmployee(emp);
+           			}
+           			else {
+           				//send him a message that otp is invalid
+           			}
+           		}
+//           String password=employee.getPassword();
             EmployeeController ec = new EmployeeController();
-            ec.sendMail(employee.getEmail(), "Employee is added Successfully", "confirm message");
+            ec.sendMail(employee.getEmail(),employee.getOtp()+employee.getPassword(),"confirm message");
             return new ModelAndView("redirect:/employeelist");
-        } else {
-            return new ModelAndView("invalid");
-        }
-    }
+           }
 
-    public void sendMail(String to, String message, String subject) {
+    public void sendMail(String to, String message,String subject) {
         final Employee e = new Employee();
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -187,12 +190,14 @@ public class EmployeeController {
         });
 
         Message message1 = new MimeMessage(session);
+       
         try {
 
             message1.setFrom(new InternetAddress("test@gmail.com"));
             message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message1.setSubject(subject);
             message1.setText(message);
+            
             Transport.send(message1);
 
             System.out.println("Done");

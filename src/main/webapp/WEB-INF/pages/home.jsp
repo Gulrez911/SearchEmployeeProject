@@ -44,7 +44,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <h4>
+            <h4 style="color:white">
                 New Employee Register <a href="newEmployee">here</a>
             </h4>
         </div>

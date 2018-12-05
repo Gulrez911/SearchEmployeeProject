@@ -22,4 +22,9 @@ public interface EmployeeService {
 	public Employee getEmployee(int employeeid);
 
 	public Employee updateEmployee(Employee employee);
+	  
+	public boolean OtpInvalid(String email);
+	   
+	public boolean Otpvalid(String email);
+	public Employee searchByEmail(String email);
 }

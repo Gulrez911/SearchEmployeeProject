@@ -24,7 +24,7 @@
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
-                    <form:hidden path="id"/>
+                    <form:hidden path="id" name="id"/>
                     <tr>
                         <td style="color:white">Name:</td>
                         <td><form:input path="name"  required="required"/></td>
@@ -32,11 +32,8 @@
                     </tr>
                     <tr>
                         <td style="color:white"> Email:</td>
-                        <td><form:input path="email" type="email"  required="required"/></td>
-                    <tr>
-                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
-                        <td><form:input path="otp" /></td>
-                    </tr>
+                        <td><form:input path="email" type="email" name="email"  required="required"/></td>
+                  
                     </tr>
                     <tr>
                         <td style="color:white">Address:</font></td>
@@ -44,8 +41,20 @@
                     </tr>
                     <tr>
                         <td style="color:white"> Telephone: </font></td>
-                        <td><form:input path="telephone" /></td>
+                        <td><form:input path="telephone" required="required"/></td>
                     </tr>
+                    
+                       <tr>
+                        <td style="color:white">Password:</td>
+                        <td><form:input path="password" type="password" required="required"/></td>
+                    </tr>
+                    
+                      <tr>
+                        <td style="color:white">OTP:</td>
+                        <td><form:input path="otp" /></td>
+                    </tr>
+                    
+                    
                     <tr>
                         <td style="color:white"> Skills: </font></td>
                         <td>
@@ -57,6 +66,7 @@
                     </tr>
 
                     <tr>
+                    <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>

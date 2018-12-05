@@ -3,19 +3,25 @@ package com.kgate.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.Employee;
 import com.kgate.model.Skill;
+
+
 import static java.lang.Math.E;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -108,5 +114,42 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         sessionFactory.getCurrentSession().update(employee);
         return employee;
     }
+
+	
+	@Override
+	public boolean OtpInvalid(String email) {
+		String status="Not approved";
+		Session s = this.sessionFactory.getCurrentSession();
+		  String q ="UPDATE Employee SET status=? WHERE email=?";
+		  Query query=s.createQuery(q);
+		  query.setParameter(0,status);
+		  query.setParameter(1,email);
+		
+		return true;
+	}
+
+	@Override
+	public boolean Otpvalid(String email) {
+		String status="Approved";
+		Session s = this.sessionFactory.getCurrentSession();
+		  String q ="UPDATE Employee SET status=? WHERE email=?";
+		  Query query=s.createQuery(q);
+		  query.setParameter(0,status);
+		  query.setParameter(1,email);
+		  int result=query.executeUpdate();
+		return true;
+	}
+
+	@Override
+	public Employee searchByEmail(String email) {
+		 String query = "from Employee u where u.email = '" + email + "'";
+		 List<Object> emps = sessionFactory.getCurrentSession().createQuery(query).list();
+		 	if(emps != null && emps.size() > 0) {
+		 		Employee employee = (Employee)emps.get(0);
+		 		return employee;
+		 	}
+	     return null;   
+		
+	}
 
 }
