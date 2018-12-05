@@ -17,12 +17,11 @@
 
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
-        
-        
+
+
         <div align="center">
             <h1 style="color:orangered">New/Edit Employee</h1>
 
-            <%--<form:errors path="employee.*"/>--%>
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
@@ -40,13 +39,7 @@
                         <td><form:input path="otp" /></td>
                     </tr>
                     </tr>
-                    <%-- <tr>
-                       <td><input type="submit" value="Send OTP"></td>
-                    </tr>
-                    <tr>
-                       <td>Enter OTP</td>
-                       <td><form:input path="otp" /></td>
-                    </tr> --%>
+
                     <tr>
                         <td style="color:yellow">Address:</font></td>
                         <td><form:input path="address" /></td>
@@ -62,7 +55,9 @@
 
                                 <form:options items="${listSkill}" />
                             </form:select>
-                        </td>
+
+                        <td>
+
                     </tr>
 
                     <tr>
@@ -70,8 +65,8 @@
                     </tr>
                 </table>
             </form:form>
-                
-         
+
+
         </div>
     </body>
 </html>

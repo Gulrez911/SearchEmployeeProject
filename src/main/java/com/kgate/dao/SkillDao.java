@@ -17,5 +17,7 @@ public interface SkillDao {
 
     public Skill getSkillByName(String skillName);
     
+    // retrive employeeSkill list
+    public List<String> getEmployeeSkill(int empid);
     
 }

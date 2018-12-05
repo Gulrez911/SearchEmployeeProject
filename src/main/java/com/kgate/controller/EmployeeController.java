@@ -24,6 +24,7 @@ import com.kgate.model.Skill;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.SkillService;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import java.util.Map;
 import java.util.Properties;
@@ -247,15 +248,32 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
-    public ModelAndView editContact(HttpServletRequest request) {
+    public ModelAndView editEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
 
+        List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);
+        System.out.println("List of EmployeeSkill:   "+employeeSkill);
         Employee employee = employeeService.getEmployee(employeeId);
+        
+        List<String> sk = new ArrayList<>();
+           
+           for(int i=0;i<employeeSkill.size();i++){
+               Object o = employeeSkill.get(i);
+             String s = (String) o;
+               sk.add(s);
+           }
+           
+           employee.setSkills(sk);
+        
         ModelAndView model = new ModelAndView("EmployeeForm");
         List<Skill> listSkill = skillService.getAllSkills();
+      //  model.addObject("employeeSkill",employeeSkill);
+      
         model.addObject("listSkill", listSkill);
         model.addObject("employee", employee);
 
+        Skill skill = new Skill();
+        model.addObject("skill", skill);
         return model;
     }
 

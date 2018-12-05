@@ -17,4 +17,7 @@ public interface SkillService {
     public Skill getSkillByName(String skillName);
 
     public Skill updateSkill(Skill skill);
+    
+    //retrieve employeeSkill List
+    public List<String> getEmployeeSkill(int empid);
 }

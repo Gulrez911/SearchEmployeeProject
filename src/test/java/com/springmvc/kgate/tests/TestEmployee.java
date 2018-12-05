@@ -6,34 +6,48 @@
 package com.springmvc.kgate.tests;
 
 import com.kgate.dao.EmployeeDAO;
+import com.kgate.dao.SkillDao;
 import com.kgate.model.Employee;
+import com.kgate.model.Skill;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.test.annotation.Rollback;
-//import org.springframework.test.context.ContextConfiguration;
-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author user
  */
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
+//@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-servlet.xml" })
+
 @Transactional
 public class TestEmployee {
 
     @Autowired
     EmployeeDAO edao;
 
-    @Test
-//    @Rollback(value = false)
-    public void testSearchEmployees() {
-        String skill = "HTML";
-        List<Employee> emps = edao.searchEmployees(skill);
-        System.out.println("" + emps.size());
-    }
+    @Autowired
+    SkillDao skillDao;
+    
+//    @Test
+////    @Rollback(value = false)
+//    public void testSearchEmployees() {
+//        String skill = "HTML";
+//        List<Employee> emps = edao.searchEmployees(skill);
+//        System.out.println("" + emps.size());
+//    }
 
+//    @Test
+//    @Rollback(value = false)
+//    public void getEmployeeSkill(){
+//        int id = 34;
+////        List<Skill> skill = skillDao.getEmployeeSkill(id);
+////        System.out.println("Skill List:    "+skill);
+//    }
 }

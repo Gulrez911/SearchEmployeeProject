@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.Employee;
+import com.kgate.model.Skill;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -55,9 +56,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
 
         return emp;
-   
+
     }
- 
 
     @SuppressWarnings("unchecked")
     public List<Employee> searchEmployees(String txt) {
@@ -76,18 +76,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(Integer employeeId) {
 
-        String query ="delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id ="+employeeId+"";
-        
-          SQLQuery  sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
-          sqlq.executeUpdate();
-          
+        String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
+
+        SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
+        sqlq.executeUpdate();
+
 //        Employee employee = (Employee) sessionFactory.getCurrentSession().load(
 //                Employee.class,
 //                employeeId);
 //        if (null != employee) {
 //            this.sessionFactory.getCurrentSession().delete(employee);
 //        }
-
     }
 
     public Employee getEmployee(int empid) {
@@ -102,4 +101,5 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return employee;
     }
 
+   
 }
