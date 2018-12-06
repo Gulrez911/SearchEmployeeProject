@@ -251,12 +251,26 @@ public class EmployeeController {
         int employeeId = Integer.parseInt(request.getParameter("id"));
 
         Employee employee = employeeService.getEmployee(employeeId);
-        ModelAndView model = new ModelAndView("EmployeeForm");
-        List<Skill> listSkill = skillService.getAllSkills();
+        ModelAndView model = new ModelAndView("edit");
+         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
         model.addObject("employee", employee);
 
         return model;
+    }
+    
+    
+    @RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
+    public ModelAndView updateperson(@ModelAttribute Employee employee) {
+
+    	 employeeService.updateEmployee(employee);
+        String message = "Employee is successfully edited.";
+        ModelAndView mav = new ModelAndView("home");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+        return mav;
+
     }
 
     @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)

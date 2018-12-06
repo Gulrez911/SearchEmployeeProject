@@ -82,6 +82,12 @@ public class Employee implements Serializable {
     @Column
     private String telephone;
     
+    @Column
+    private String ManagerId;
+    
+    @Column
+    private String ManagerName;
+    
    /* @Transient
     private String otp;
 
