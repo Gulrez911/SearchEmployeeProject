@@ -48,7 +48,7 @@ public class Employee implements Serializable {
     @Transient
     private List<String> skills = new ArrayList<>();
 
-    @Transient
+    @Column
     private String otp;
 
     public String getOtp() {
@@ -81,6 +81,7 @@ public class Employee implements Serializable {
 
     @Column
     private String telephone;
+
     
     @Column
     private String ManagerId;
@@ -88,18 +89,14 @@ public class Employee implements Serializable {
     @Column
     private String ManagerName;
     
-   /* @Transient
-    private String otp;
 
-    public String getOtp() {
-		return otp;
-	}
+    @Column
+    private String status;
 
-	public void setOtp(String otp) {
-		this.otp = otp;
-	}*/
+    @Column
+    private String password;
 
-	public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -147,9 +144,29 @@ public class Employee implements Serializable {
         this.skills = skills;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" + "id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name=" + name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + '}';
+    public String getStatus() {
+        return status;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name="
+				+ name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + ", ManagerId="
+				+ ManagerId + ", ManagerName=" + ManagerName + ", status=" + status + ", password=" + password + "]";
+	}
+
+     
 
 }

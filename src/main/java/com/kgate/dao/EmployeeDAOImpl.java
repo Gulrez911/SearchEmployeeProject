@@ -1,14 +1,14 @@
 package com.kgate.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.Employee;
+import java.util.ArrayList;
+import org.hibernate.SQLQuery;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
@@ -55,9 +55,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         }
 
         return emp;
-   
+
     }
- 
 
     @SuppressWarnings("unchecked")
     public List<Employee> searchEmployees(String txt) {
@@ -76,17 +75,16 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(Integer employeeId) {
 
-        String query ="delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id ="+employeeId+"";
-        
-          SQLQuery  sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
-          sqlq.executeUpdate();
-          
-//        Employee employee = (Employee) sessionFactory.getCurrentSession().load(
-//                Employee.class,
-//                employeeId);
-//        if (null != employee) {
-//            this.sessionFactory.getCurrentSession().delete(employee);
-//        }
+//        String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
+//
+//        SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
+//        sqlq.executeUpdate();
+//
+//         == == ==
+        String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where  employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
+
+        SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
+        sqlq.executeUpdate();
 
     }
 
@@ -102,4 +100,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return employee;
     }
 
+	   @Override
+    public Employee searchByEmail(String email) {
+        String query = "from Employee u where u.email = '" + email + "'";
+        List<Object> emps = sessionFactory.getCurrentSession().createQuery(query).list();
+        if (emps != null && emps.size() > 0) {
+            Employee employee = (Employee) emps.get(0);
+            return employee;
+        }
+        return null;
+
+    }
+    
+    
 }

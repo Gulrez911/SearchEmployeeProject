@@ -17,12 +17,11 @@
 
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
-        
-        
+
+
         <div align="center">
             <h1 style="color:orangered">New/Edit Employee</h1>
 
-            <%--<form:errors path="employee.*"/>--%>
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
@@ -35,26 +34,37 @@
                     <tr>
                         <td style="color:yellow"> Email:</td>
                         <td><form:input path="email" type="email"  required="required"/></td>
-                    <tr>
+                        <%--   <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td><form:input path="otp" /></td>
-                    </tr>
-                    </tr>
-                    <%-- <tr>
-                       <td><input type="submit" value="Send OTP"></td>
-                    </tr>
-                    <tr>
-                       <td>Enter OTP</td>
-                       <td><form:input path="otp" /></td>
                     </tr> --%>
+
+
+
+                    </tr>
+
                     <tr>
                         <td style="color:yellow">Address:</font></td>
                         <td><form:input path="address" /></td>
                     </tr>
                     <tr>
+
                         <td style="color:yellow"> Telephone: </font></td>
                         <td><form:input path="telephone" /></td>
+
                     </tr>
+
+                    <tr>
+                        <td style="color:white">Password:</td>
+                        <td><form:input path="password" type="password" required="required"/></td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:white">OTP:</td>
+                        <td><form:input path="otp" /></td>
+                    </tr>
+
+
                     <tr>
                         <td style="color:yellow"> Skills: </font></td>
                         <td>
@@ -62,16 +72,19 @@
 
                                 <form:options items="${listSkill}" />
                             </form:select>
-                        </td>
+
+                        <td>
+
                     </tr>
 
                     <tr>
+                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>
             </form:form>
-                
-         
+
+
         </div>
     </body>
 </html>

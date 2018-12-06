@@ -14,30 +14,31 @@
 
     <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
 
-        
+
         <div align="center">
 
-            <h1>Employee List</h1>
-             <center><a href="/SpringMVCHibernateCRUD/downloadPDF"><font style="color:white" size="5">Download PDF</font></a><br></center>
-          
-         
+            <h1><font style="color:yellow" size="5">Employee List</font></h1>
+            <center><a href="/SpringMVCHibernateCRUD/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
+            <center><a href="/SpringMVCHibernateCRUD/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
+
 
             <h1 style="color:white">Employee List</h1>
 
             <form action="<s:url value="/search_employeelist"/>">
-           
+
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
-                
+
                 <button>Find</button>
             </form>
             <br>
             <form action="<s:url value="/search_employeelist_skill1"/>">
-            <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}"/>
-                <button>Find</button>
+                <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}"/>
+                    <button>Find</button>
             </form>
-         
+
             <br>
             <p>${error}</p>
+            <p style="color:white">${message}</p>
             <table border="1">
 
                 <th style="color:red">Name</th>
@@ -60,8 +61,8 @@
                     </tr>
                 </c:forEach>
             </table>
-            <h4>
-                New Employee Register <a href="newEmployee">here</a>
+            <h4><font style="color: darkorange">
+                    New Employee Register</font> <a href="newEmployee">here</a>
             </h4>
         </div>
     </body>

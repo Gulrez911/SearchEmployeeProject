@@ -123,7 +123,7 @@ public class UserController {
              /*Get all data required for Person jsp and set in ModelAndView*/
             
               
-       	  ModelAndView mav = new ModelAndView("edit");
+       	  ModelAndView mav = new ModelAndView("EditEmployee");
        	  request.setAttribute("loginuser",u.getUserName());
                List<Skill> listSkill = skillService.getAllSkills();
    	        mav.addObject("listSkill", listSkill);

@@ -1,5 +1,6 @@
 package com.kgate.service;
 
+import com.kgate.dao.EmployeeDAO;
 import com.kgate.dao.SkillDao;
 import com.kgate.model.Skill;
 import java.util.List;
@@ -13,6 +14,9 @@ public class SkillServiceImpl implements SkillService {
 
     @Autowired
     private SkillDao skillDao;
+    
+    @Autowired
+    private EmployeeDAO employeeDAO;
 
     @Override
     public void addSkill(Skill skill) {
@@ -49,4 +53,12 @@ public class SkillServiceImpl implements SkillService {
    return skillDao.getSkillByName(skillName);
     
     }
+    
+    //return employeeSkill list
+    
+    @Transactional
+     public List<String> getEmployeeSkill(int empid){
+         return skillDao.getEmployeeSkill(empid);
+     }
+    
 }

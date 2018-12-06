@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kgate.dao.EmployeeDAO;
 import com.kgate.model.Employee;
+import com.kgate.model.Skill;
 
 @Service
 @Transactional
@@ -61,5 +62,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void setEmployeeDAO(EmployeeDAO employeeDAO) {
         this.employeeDAO = employeeDAO;
     }
+  
+   
+	public Employee searchByEmail(String email) {
+		
+		return employeeDAO.searchByEmail(email);
+	}
+	
 
+    
 }
