@@ -4,7 +4,7 @@ import com.kgate.model.User;
 
 public interface LoginService2 {
 
-	public boolean checkLogin(User u);
+	public boolean checkLogin(String username, String password);
 
 	}
 

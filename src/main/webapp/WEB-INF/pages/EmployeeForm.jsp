@@ -58,6 +58,16 @@
                         <td style="color:white">Password:</td>
                         <td><form:input path="password" type="password" required="required"/></td>
                     </tr>
+                    
+                      <tr>
+                       <td style="color:white">User Type:</td>
+                        <td ><form:select path ="category" name="userTypes">
+                    
+                     <form:options items = "${userTypes}" />
+                     
+						</form:select>
+						</td>
+                    </tr>
 
                     <tr>
                         <td style="color:white">OTP:</td>

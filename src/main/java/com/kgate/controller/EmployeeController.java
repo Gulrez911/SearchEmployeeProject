@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.kgate.model.Employee;
 import com.kgate.model.Skill;
+import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.SkillService;
 import java.util.ArrayList;
@@ -127,6 +128,9 @@ public class EmployeeController {
 //        model.addObject("skill", skill);
 		Employee employee = new Employee();
 		model.addObject("employee", employee);
+		
+	    String[] userType = {"Admin", "Employee","Manager"};
+	    model.addObject("userTypes", userType);
 		model.setViewName("EmployeeForm");
 		return model;
 	}
@@ -181,6 +185,9 @@ public class EmployeeController {
 		List<Skill> listSkill = skillService.getAllSkills();
 		model.addObject("listSkill", listSkill);
 //        model.addObject("employee", employee);
+		
+		 String[] userType = {"Admin", "Employee","Manager"};
+		    model.addObject("userTypes", userType);
 		model.setViewName("EmployeeForm");
 		return model;
 	}

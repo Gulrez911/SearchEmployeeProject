@@ -60,5 +60,11 @@ public class SkillServiceImpl implements SkillService {
      public List<String> getEmployeeSkill(int empid){
          return skillDao.getEmployeeSkill(empid);
      }
+
+	@Override
+	public List<String> getEmployeeSkillByEmail(String email) {
+		
+		return skillDao.getEmployeeSkillByEmail(email);
+	}
     
 }
