@@ -10,21 +10,28 @@
 
         <!--        <a href="/SpringMVCHibernateCRUD/employeelist">EmployeeList</a>-->
         <h1 style="color:white" align="center">Login</h1>
-  
-        <form:form method="post" name="loginForm" >
-            <table>
+
+ 
+        <form:form action="authenticate" method="post" commandName="user" >
+            <table align="center">
                 <tr>
-                	<td style="color:white">User Name: </td>
-                	<td><input name="userName" type="textbox"></td>
-                </tr>
+                		<td style="color:white">User Name: </td>
+               		 <td><input name="userName" type="textbox"></td>
+               </tr>
                 <tr>
                		 <td style="color:white">Password: </td>
                 	<td><input name="password" type="password"></td>
                 </tr>
                 <tr>
-                	<td colspan="2" align="right"><input type="submit" value="LOGIN"></td>
-                	
-                </tr>
+                 <td ><form:select path ="category" name="userTypes">
+                    
+                     <form:options items = "${userTypes}" />
+                     
+						</form:select>
+						</td>
+					
+               <td colspan="2" align="right"><input type="submit" value="LOGIN"></td></tr>
+
             </table>
            			 <div style="color:red">${error}</div>
         </form:form>

@@ -82,6 +82,14 @@ public class Employee implements Serializable {
     @Column
     private String telephone;
 
+    
+    @Column
+    private String ManagerId;
+    
+    @Column
+    private String ManagerName;
+    
+
     @Column
     private String status;
 
@@ -152,11 +160,13 @@ public class Employee implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Employee [id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name="
-                + name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + ", status=" + status
-                + ", password=" + password + "]";
-    }
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name="
+				+ name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + ", ManagerId="
+				+ ManagerId + ", ManagerName=" + ManagerName + ", status=" + status + ", password=" + password + "]";
+	}
+
+     
 
 }
