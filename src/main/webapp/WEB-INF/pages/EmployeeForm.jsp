@@ -34,10 +34,13 @@
                     <tr>
                         <td style="color:yellow"> Email:</td>
                         <td><form:input path="email" type="email"  required="required"/></td>
-                    <tr>
+                        <%--   <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td><form:input path="otp" /></td>
-                    </tr>
+                    </tr> --%>
+
+
+
                     </tr>
 
                     <tr>
@@ -45,9 +48,23 @@
                         <td><form:input path="address" /></td>
                     </tr>
                     <tr>
+
                         <td style="color:yellow"> Telephone: </font></td>
                         <td><form:input path="telephone" /></td>
+
                     </tr>
+
+                    <tr>
+                        <td style="color:white">Password:</td>
+                        <td><form:input path="password" type="password" required="required"/></td>
+                    </tr>
+
+                    <tr>
+                        <td style="color:white">OTP:</td>
+                        <td><form:input path="otp" /></td>
+                    </tr>
+
+
                     <tr>
                         <td style="color:yellow"> Skills: </font></td>
                         <td>
@@ -61,6 +78,7 @@
                     </tr>
 
                     <tr>
+                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>

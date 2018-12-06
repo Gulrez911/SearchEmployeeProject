@@ -62,6 +62,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void setEmployeeDAO(EmployeeDAO employeeDAO) {
         this.employeeDAO = employeeDAO;
     }
+  
+   
+	public Employee searchByEmail(String email) {
+		
+		return employeeDAO.searchByEmail(email);
+	}
+	
 
     
 }

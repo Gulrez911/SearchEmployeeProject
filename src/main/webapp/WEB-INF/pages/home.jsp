@@ -38,6 +38,7 @@
 
             <br>
             <p>${error}</p>
+            <p style="color:white">${message}</p>
             <table border="1">
 
                 <th style="color:red">Name</th>
