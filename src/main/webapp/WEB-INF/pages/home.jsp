@@ -19,7 +19,11 @@
 
             <h1><font style="color:yellow" size="5">Employee List</font></h1>
             <center><a href="/SpringMVCHibernateCRUD/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
+<<<<<<< HEAD
 
+=======
+            <center><a href="/SpringMVCHibernateCRUD/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
 
             <h1 style="color:white">Employee List</h1>
@@ -38,6 +42,7 @@
 
             <br>
             <p>${error}</p>
+            <p style="color:white">${message}</p>
             <table border="1">
 
                 <th style="color:red">Name</th>
