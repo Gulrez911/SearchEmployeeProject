@@ -1,5 +1,6 @@
 package com.kgate.model;
 
+
 public class User {
 
     private String userName;
