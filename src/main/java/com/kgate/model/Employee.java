@@ -85,18 +85,15 @@ public class Employee implements Serializable {
     @Column
     private String category;
     
-    @Column
-    private String ManagerId;
-    
-    @Column
-    private String ManagerName;
-    
-
-    @Column
+  
+     @Column
     private String status;
 
     @Column
     private String password;
+    
+    @Column
+    private int managerId;
 
     public int getId() {
         return id;
@@ -169,14 +166,28 @@ public class Employee implements Serializable {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	
+
+	public int getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
+	}
 
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name="
 				+ name + ", email=" + email + ", address=" + address + ", telephone=" + telephone + ", category="
-				+ category + ", ManagerId=" + ManagerId + ", ManagerName=" + ManagerName + ", status=" + status
-				+ ", password=" + password + "]";
+				+ category + ", status=" + status + ", password=" + password + ", managerId=" + managerId + "]";
 	}
+
+	
+
+
+	
 
 	
 

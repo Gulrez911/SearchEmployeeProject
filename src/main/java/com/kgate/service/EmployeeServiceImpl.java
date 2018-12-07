@@ -68,6 +68,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		return employeeDAO.searchByEmail(email);
 	}
+	@Override
+	 @Transactional
+	public List<Employee> displayByManagerId(String email) {
+		
+		return employeeDAO.displayByManagerId(email);
+	}
 	
 
     

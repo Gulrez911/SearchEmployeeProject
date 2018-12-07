@@ -68,6 +68,13 @@
 						</form:select>
 						</td>
                     </tr>
+                    
+                     <tr>
+                        <td style="color:white">ManagerId</td>
+                        <td><form:input path="ManagerId" /></td>
+                    </tr>
+                    
+                  
 
                     <tr>
                         <td style="color:white">OTP:</td>

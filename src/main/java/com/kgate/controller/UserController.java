@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgate.model.Employee;
+
 import com.kgate.model.Skill;
 import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
@@ -78,14 +79,14 @@ public class UserController {
     }
     
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ModelAndView authenticate(ModelMap modelMap,@ModelAttribute("employee")Employee employee,HttpServletRequest request, Map<String, Object> map) {
+    public ModelAndView authenticate(ModelMap modelMap,@ModelAttribute("employee")Employee employee,HttpServletRequest request, Map<String, Object> map,@RequestParam("email")String email) {
            
             /* validate whether person is in database and person user and password
              are matching
             */
 
          boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword());
-
+        
          if (isValidUser) {
          if (employee.getCategory().equals("Admin")) {
                    
@@ -99,12 +100,17 @@ public class UserController {
                return mav;
                  
               }
-         
-         else if(employee.getCategory().equals("Manager"))
+         else if(employee.getCategory().equals("Manager")) 
          {
-        	 ModelAndView mav = new ModelAndView("Manager");
-        	 return mav;
+        	 ModelAndView mav = new ModelAndView("ManagerSuccess");
+        	List<Employee> elist= employeeService.displayByManagerId(email);
+        	mav.addObject("elist", elist);
+        	Employee e=new Employee();
+        	mav.addObject("employee", e);
+             return mav;
+        	 
          }
+      
          
          else if(employee.getCategory().equals("Employee"))
          {
@@ -151,7 +157,9 @@ public class UserController {
     
       }
 		return init();
-   }
+         }
+		
+
     
    
     
