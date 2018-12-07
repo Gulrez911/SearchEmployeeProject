@@ -132,7 +132,7 @@ public class EmployeeController {
 		Employee employee = new Employee();
 		model.addObject("employee", employee);
 		
-	    String[] userType = {"Admin", "Employee","Manager"};
+	    String[] userType = {"Employee", "Admin","Manager"};
 	    model.addObject("userTypes", userType);
 	 /*   
 	    String[] manageremail = managerservice.getAllManagerByEmail();
