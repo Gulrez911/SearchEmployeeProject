@@ -1,5 +1,6 @@
 package com.kgate.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,12 @@ public class Manager {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Column
 	private String name;
+	@Column
+	private long phone;
+	@Column
+	private String email;
 	public int getId() {
 		return id;
 	}
@@ -27,10 +33,23 @@ public class Manager {
 		this.name = name;
 	}
 	
+	public long getPhone() {
+		return phone;
+	}
+	public void setPhone(long phone) {
+		this.phone = phone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	@Override
 	public String toString() {
-		return "Manager [id=" + id + ", name=" + name + "]";
+		return "Manager [id=" + id + ", name=" + name + ", phone=" + phone + ", email=" + email + "]";
 	}
+	
 	
 	
 	
