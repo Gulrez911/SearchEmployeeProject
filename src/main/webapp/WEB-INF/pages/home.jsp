@@ -45,7 +45,9 @@
                 <th style="color:red">Email</th>
                 <th style="color:red">Address</th>
                 <th style="color:red">Telephone</th>
+                <th style="color:red">User Type</th>
                 <th style="color:red">Action</th>
+                
 
                 <c:forEach var="employee" items="${listEmployee}">
                     <tr style="color:white">
@@ -54,6 +56,7 @@
                         <td>${employee.email}</td>
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
+                         <td>${employee.category}</td>
                         <td ><a href="editEmployee?id=${employee.id}" style="color:greenyellow">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp; <a
                                 href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>

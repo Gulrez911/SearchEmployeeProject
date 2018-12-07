@@ -16,12 +16,14 @@ public class LoginService2Impl  implements LoginService2{
 			 {
 				this.ld=ld;
 			 }
-			 
+
 			@Override
-			public boolean checkLogin(User u) {
-				// TODO Auto-generated method stub
-				return ld.checkLogin(u);
+			public boolean checkLogin(String username, String password) {
+			
+				return ld.checkLogin(username, password);
 			}
+			 
+			
 	}
 
 			
