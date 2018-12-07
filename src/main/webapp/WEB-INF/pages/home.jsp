@@ -66,7 +66,7 @@
                 </c:forEach>
             </table>
             <h4><font style="color: darkorange">
-                    New Employee Register</font> <a href="newEmployee">here</a>
+                    New Employee Register</font> <a href="newEmployee" style="color: white;">here</a>
             </h4>
         </div>
     </body>
