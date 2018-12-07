@@ -11,8 +11,7 @@
 </head>
 
 
-<body
-	style="background-image: url('http://www.ppt123.net/beijing/UploadFiles_8374/201805/20180526063117156.jpg');">
+<body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
 	<div align="center">
 		<h1 style="color: white">New/Edit Employee</h1>
 
@@ -21,6 +20,8 @@
 			commandName="employee">
 			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
+				<form:hidden path="id" />
+				<form:hidden path="otp" />
 				<form:hidden path="id" />
 				<tr>
 					<td style="color: white">Name:</td>
@@ -48,10 +49,10 @@
 							required="required" /></td>
 				</tr>
 
-				<tr>
+				<%-- <tr>
 					<td style="color: white">OTP:</td>
 					<td><form:input path="otp" readonly="true" /></td>
-				</tr>
+				</tr> --%>
 				<tr>
 					<td style="color: white">Status:</td>
 					<td><form:input path="status" readonly="true" /></td>

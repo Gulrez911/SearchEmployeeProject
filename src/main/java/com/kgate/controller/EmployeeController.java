@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.kgate.model.Employee;
 import com.kgate.model.Skill;
+import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.SkillService;
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class EmployeeController {
 		if (skillSearch.length() > 2) {
 			for (Skill s : listSkill) {
 				String a = s.getSkill_name().toLowerCase();
-				if (a.contains(skillSearch)) {
+				if (a.contains(skillSearch) || a.equals(skillSearch)) {
 					List<Employee> listEmployee = employeeService.searchEmployeesBySkill(a);
 					model.addObject("listEmployee", listEmployee);
 					flag = 0;
@@ -94,12 +95,12 @@ public class EmployeeController {
 			}
 
 		} else {
-			model.addObject("error", "data not found");
+			model.addObject("error", "Data Not Found");
 			model.setViewName("home");
 			return model;
 		}
 		if (flag == 1) {
-			model.addObject("error", "data not found");
+			model.addObject("error", "Data Not Found");
 			model.setViewName("home");
 			return model;
 		}
@@ -127,6 +128,9 @@ public class EmployeeController {
 //        model.addObject("skill", skill);
 		Employee employee = new Employee();
 		model.addObject("employee", employee);
+		
+	    String[] userType = {"Admin", "Employee","Manager"};
+	    model.addObject("userTypes", userType);
 		model.setViewName("EmployeeForm");
 		return model;
 	}
@@ -181,6 +185,9 @@ public class EmployeeController {
 		List<Skill> listSkill = skillService.getAllSkills();
 		model.addObject("listSkill", listSkill);
 //        model.addObject("employee", employee);
+		
+		 String[] userType = {"Admin", "Employee","Manager"};
+		    model.addObject("userTypes", userType);
 		model.setViewName("EmployeeForm");
 		return model;
 	}

@@ -20,4 +20,6 @@ public interface SkillDao {
     // retrive employeeSkill list
     public List<String> getEmployeeSkill(int empid);
     
+    public List<String> getEmployeeSkillByEmail(String email);
+    
 }

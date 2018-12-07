@@ -20,4 +20,5 @@ public interface SkillService {
     
     //retrieve employeeSkill List
     public List<String> getEmployeeSkill(int empid);
+    public List<String> getEmployeeSkillByEmail(String email);
 }

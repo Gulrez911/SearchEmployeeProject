@@ -9,6 +9,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Management Screen</title>
+        <style type="text/css">
+        #bt{
+        background-image: url('/WEB-INF/images/Search-icon.png');
+         background-repeat:no-repeat;
+	background-position:left;
+	background-size: 40px; 
+        }
+        
+        </style>
     </head>
 
 
@@ -32,7 +41,7 @@
 
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
 
-                <button>Find</button>
+                <button><div id="bt">Find</div></button>
             </form>
             <br>
             <form action="<s:url value="/search_employeelist_skill1"/>">
@@ -49,7 +58,9 @@
                 <th style="color:red">Email</th>
                 <th style="color:red">Address</th>
                 <th style="color:red">Telephone</th>
+                <th style="color:red">User Type</th>
                 <th style="color:red">Action</th>
+                
 
                 <c:forEach var="employee" items="${listEmployee}">
                     <tr style="color:white">
@@ -58,6 +69,7 @@
                         <td>${employee.email}</td>
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
+                         <td>${employee.category}</td>
                         <td ><a href="editEmployee?id=${employee.id}" style="color:greenyellow">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp; <a
                                 href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>
@@ -66,7 +78,7 @@
                 </c:forEach>
             </table>
             <h4><font style="color: darkorange">
-                    New Employee Register</font> <a href="newEmployee" style="color: white;">here</a>
+                    New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
             </h4>
         </div>
     </body>
