@@ -55,5 +55,10 @@
 					<td style="color: white">Status:</td>
 					<td><input path="status" readonly="true" /></td>
 				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="center"><input type="submit" value="Edit"></td>
+				</tr>
 			</table>
 		</form:form>

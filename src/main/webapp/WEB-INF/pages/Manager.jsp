@@ -7,7 +7,7 @@
 <title>Details</title>
 
 
-
+<p>Manager successfully Log in</p>
 
 
 </head>
