@@ -71,7 +71,7 @@
                     
                      <tr>
                         <td style="color:white">ManagerId</td>
-                        <td><form:input path="ManagerId" /></td>
+                        <td><form:input path="managerId" /></td>
                     </tr>
                     
                   
