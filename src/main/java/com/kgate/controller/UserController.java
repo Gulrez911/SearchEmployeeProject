@@ -105,8 +105,8 @@ public class UserController {
         	 ModelAndView mav = new ModelAndView("ManagerSuccess");
         	List<Employee> elist= employeeService.displayByManagerId(email);
         	mav.addObject("elist", elist);
-        	Employee e=new Employee();
-        	mav.addObject("employee", e);
+        	/*Employee e=new Employee();
+        	mav.addObject("employee", e);*/
              return mav;
         	 
          }

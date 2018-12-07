@@ -282,7 +282,6 @@ public class EmployeeController {
 			String s = (String) o;
 			sk.add(s);
 		}
-
 		employee.setSkills(sk);
 
 		model.addObject("listSkill", listSkill);
