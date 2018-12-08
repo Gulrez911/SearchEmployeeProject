@@ -21,9 +21,9 @@ public class LoginService2Impl  implements LoginService2{
 
 			@Override
 			@Transactional
-			public boolean checkLogin(String username, String password) {
+			public boolean checkLogin(String username, String password,String usertype) {
 			
-				return ld.checkLogin(username, password);
+				return ld.checkLogin(username, password, usertype);
 			}
 
 		

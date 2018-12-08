@@ -116,7 +116,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@SuppressWarnings("unchecked")
 	public List<Employee> displayByManagerId(String email) {
 		
-		    String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where managerId=(select id from employee123 where email='"+email+"') ";
+		    String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='"+email+"') ";
 		
 		/*String query = "select  name,address,telephone,email,category from Employee   where managerId=(select id from Employee where email='"+email+"') "; */
 		 List<Object> data=sessionFactory.getCurrentSession().createSQLQuery(query).list();

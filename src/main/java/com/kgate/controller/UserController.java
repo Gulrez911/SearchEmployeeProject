@@ -85,10 +85,10 @@ public class UserController {
              are matching
             */
 
-         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword());
+         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword(), employee.getCategory());
         
          if (isValidUser) {
-         if (employee.getCategory().equals("Admin")) {
+         if (employee.getCategory().equals("Admin") ) {
                    
                      /*Get all data required for Person jsp and set in ModelAndView*/
                     
@@ -100,10 +100,10 @@ public class UserController {
                return mav;
                  
               }
-         else if(employee.getCategory().equals("Manager")) 
+         else  if(employee.getCategory().equals("Manager") ) 
          {
         	 ModelAndView mav = new ModelAndView("ManagerSuccess");
-        	List<Employee> elist= employeeService.displayByManagerId(email);
+        	 List<Employee> elist= employeeService.displayByManagerId(email);
         	mav.addObject("elist", elist);
         	/*Employee e=new Employee();
         	mav.addObject("employee", e);*/
@@ -112,7 +112,7 @@ public class UserController {
          }
       
          
-         else if(employee.getCategory().equals("Employee"))
+         if(employee.getCategory().equals("Employee") )
          {
              
              /*Get all data required for Person jsp and set in ModelAndView*/
@@ -123,7 +123,6 @@ public class UserController {
        	  mav.addObject("employee", emp);
        List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
 		System.out.println("List of EmployeeSkill:   " + employeeSkill);
-		
 		
 		List<Skill> listSkill = skillService.getAllSkills();
 
@@ -147,7 +146,8 @@ public class UserController {
    	        
          
       }
-         else {
+        
+    else {
        	    modelMap.put("error", "Invalid UserName / Password");
        	    ModelAndView mav = new ModelAndView("login");
                return mav;
