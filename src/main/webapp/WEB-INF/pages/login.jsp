@@ -13,31 +13,31 @@
         <!--        <a href="/SpringMVCHibernateCRUD/employeelist">EmployeeList</a>-->
         <h1 style="color:white" align="center">Login</h1>
 
- 
+
         <form:form action="authenticate" method="post" commandName="employee">
             <table align="center">
                 <tr>
-                		<td style="color:white">User Name:</td>
-               		 <td><form:input name="email" path="email" type="email" /></td>
-               </tr>
-                <tr>
-               		 <td style="color:white">Password:</td>
-                	<td><form:input name="password" path="password" type="password"/></td>
+                    <td style="color:white">User Name:</td>
+                    <td><form:input name="email" path="email" type="email" /></td>
                 </tr>
                 <tr>
-                 <td><form:select path ="category" name="userType">
-                    
-                     <form:options items ="${userTypes}" />
-                     
-						</form:select>
-						</td>
-					
-               <td colspan="2" align="right"><input type="submit" value="LOGIN"></td></tr>
+                    <td style="color:white">Password:</td>
+                    <td><form:input name="password" path="password" type="password"/></td>
+                </tr>
+                <tr>
+                    <td><form:select path ="category" name="userType">
+
+                            <form:options items ="${userTypes}" />
+
+                        </form:select>
+                    </td>
+
+                    <td colspan="2" align="right"><input type="submit" value="LOGIN"></td></tr>
 
             </table>
-           			 <div style="color:red">${error}</div>
+            <div style="color:red">${error}</div>
         </form:form>
 
-    <!--            <a href="/SpringMVCHibernateCRUD/test">Add Skill</a>-->
-</body>
+        <!--            <a href="/SpringMVCHibernateCRUD/test">Add Skill</a>-->
+    </body>
 </html>
