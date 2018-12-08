@@ -12,14 +12,18 @@ public interface EmployeeDAO {
     //search Employee
 
     public List<Employee> searchEmployees(String txt);
+  
     public Employee searchByEmail(String email);
+   
     public void deleteEmployee(Integer employeeId);
-
+    
     public Employee updateEmployee(Employee employee);
 
     public Employee getEmployee(int employeeid);
 
     public List<Employee> searchEmployeesBySkill(String skill);
+    
+    public List<Employee> displayByManagerId(String email);
    
     
 

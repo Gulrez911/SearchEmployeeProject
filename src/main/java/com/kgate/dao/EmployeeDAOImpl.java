@@ -111,6 +111,37 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return null;
 
     }
-    
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Employee> displayByManagerId(String email) {
+		
+		    String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where managerId=(select id from employee123 where email='"+email+"') ";
+		
+		/*String query = "select  name,address,telephone,email,category from Employee   where managerId=(select id from Employee where email='"+email+"') "; */
+		 List<Object> data=sessionFactory.getCurrentSession().createSQLQuery(query).list();
+		List<Employee> emp = new ArrayList<>();
+		 for (Object d : data) {
+
+	            Object arr[] = (Object[]) d;
+	            String st, st1, st2, st3,st4;
+		 
+		 Employee e = new Employee();
+		 st = (String) arr[0];
+         st1 = (String) arr[1];
+         st2 = (String) arr[2];
+         st3 = (String) arr[3];
+         st4 = (String) arr[4];
+         
+         e.setName(st);
+         e.setAddress(st1);
+         e.setTelephone(st2);
+         e.setEmail(st3);
+         e.setCategory(st4);
+         emp.add(e);       
+	}
+		 
+		 return emp;
+	}
     
 }
