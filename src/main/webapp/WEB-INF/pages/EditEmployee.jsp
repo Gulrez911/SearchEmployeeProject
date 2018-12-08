@@ -61,5 +61,10 @@
 					<td> <p style="color:white">${message}</p></td>
 					<td align="center"><input type="submit" value="Edit"></td>
 				</tr>
+				
+				<tr>
+					<td></td>
+					<td align="center"><input type="submit" value="Edit"></td>
+				</tr>
 			</table>
 		</form:form>
