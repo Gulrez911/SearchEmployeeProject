@@ -18,11 +18,11 @@ import javax.persistence.Table;
 @Table(name = "Skills")
 public class Skill {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int skill_Id;
-    @Column
-    private String skill_name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int skill_Id;
+	@Column
+	private String skill_name;
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    @JoinTable(name = "join_employee_skill",
 //            joinColumns = {
@@ -38,27 +38,26 @@ public class Skill {
 //    public void setListEmployee(List<Employee> listEmployee) {
 //        this.listEmployee = listEmployee;
 //    }
- 
 
-    public int getSkill_Id() {
-        return skill_Id;
-    }
+	public int getSkill_Id() {
+		return skill_Id;
+	}
 
-    public void setSkill_Id(int skill_Id) {
-        this.skill_Id = skill_Id;
-    }
+	public void setSkill_Id(int skill_Id) {
+		this.skill_Id = skill_Id;
+	}
 
-    public String getSkill_name() {
-        return skill_name;
-    }
+	public String getSkill_name() {
+		return skill_name;
+	}
 
-    public void setSkill_name(String skill_name) {
-        this.skill_name = skill_name;
-    }
-    
-    @Override
-    public String toString(){
-        return getSkill_name();
-    }
+	public void setSkill_name(String skill_name) {
+		this.skill_name = skill_name;
+	}
+
+	@Override
+	public String toString() {
+		return getSkill_name();
+	}
 
 }

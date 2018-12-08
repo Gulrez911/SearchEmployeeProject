@@ -1,5 +1,7 @@
 package com.kgate.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +20,13 @@ public class LoginService2Impl  implements LoginService2{
 			 }
 
 			@Override
+			@Transactional
 			public boolean checkLogin(String username, String password) {
 			
 				return ld.checkLogin(username, password);
 			}
+
+		
 			 
 			
 	}

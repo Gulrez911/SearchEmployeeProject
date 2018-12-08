@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public List<Employee> searchEmployees(String txt) {
-        return employeeDAO.searchEmployees(txt);
+        return employeeDAO. searchEmployees(txt);
     }
     //Search Employee
     @Override
@@ -67,6 +67,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee searchByEmail(String email) {
 		
 		return employeeDAO.searchByEmail(email);
+	}
+	@Override
+	 @Transactional
+	public List<Employee> displayByManagerId(String email) {
+		
+		return employeeDAO.displayByManagerId(email);
 	}
 	
 

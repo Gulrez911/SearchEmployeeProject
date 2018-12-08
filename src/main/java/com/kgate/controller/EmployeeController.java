@@ -23,6 +23,7 @@ import com.kgate.model.Employee;
 import com.kgate.model.Skill;
 import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
+
 import com.kgate.service.SkillService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,6 +52,8 @@ public class EmployeeController {
 
 	@Autowired
 	private SkillService skillService;
+	
+
 
 	public String generateOTP() {
 		Random random = new Random();
@@ -131,6 +134,9 @@ public class EmployeeController {
 		
 	    String[] userType = {"Admin", "Employee","Manager"};
 	    model.addObject("userTypes", userType);
+	 /*   
+	    String[] manageremail = managerservice.getAllManagerByEmail();
+	    model.addObject("userTypes", userType);*/
 		model.setViewName("EmployeeForm");
 		return model;
 	}
@@ -276,7 +282,6 @@ public class EmployeeController {
 			String s = (String) o;
 			sk.add(s);
 		}
-
 		employee.setSkills(sk);
 
 		model.addObject("listSkill", listSkill);

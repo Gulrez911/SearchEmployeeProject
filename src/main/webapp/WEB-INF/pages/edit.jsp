@@ -64,6 +64,8 @@
 							<form:options items="${listSkill}" />
 						</form:select></td>
 				</tr>
+				
+				
 
 				<tr>
 					<td></td>
