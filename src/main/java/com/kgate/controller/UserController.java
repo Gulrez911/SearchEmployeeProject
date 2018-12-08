@@ -94,7 +94,7 @@ public class UserController {
                     
    	               
    	                
-   	       request.setAttribute("loginuser",employee.getEmail());
+   	       //request.setAttribute("loginuser",employee.getEmail());
 
                 ModelAndView mav = new ModelAndView("success");
                return mav;
