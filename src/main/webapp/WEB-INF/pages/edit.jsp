@@ -72,16 +72,17 @@
                     </tr>
 
 
-                    <tr>
+                    <%--<tr>
                         <td style="color:white">OTP:</td>
                         <td><form:input path="otp" /></td>
-                    </tr> 
+                    </tr> --%>
+
 
 
                     <tr>
                         <td style="color:yellow"> Skills: </font></td>
                         <td>
-                            <form:select path="skills" >
+                            <form:select path="skills" required="true">
 
                                 <form:options items="${listSkill}" />
                             </form:select>
