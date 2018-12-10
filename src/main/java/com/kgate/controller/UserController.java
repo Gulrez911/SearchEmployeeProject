@@ -63,14 +63,31 @@ public class UserController {
 
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee) {
-        employeeService.updateEmployee(employee);
+    	
+    	
+    	   for (String skill : employee.getSkills()) {
+               Skill sk = skillService.getSkillByName(skill);
+               employee.getListSkill().add(sk);
+           }
+
+           employeeService.addEmployee(employee);
+           String message = "Employee is successfully edited.";
+           ModelAndView mav = new ModelAndView("EditEmployee");
+           mav.addObject("message", message);
+           List<Employee> listEmployee = employeeService.getAllEmployees();
+           mav.addObject("listEmployee", listEmployee);
+           return mav;
+    	
+    	
+    	
+    	
+      /*  employeeService.updateEmployee(employee);
         String message = "Employee is successfully edited.";
 //		ModelAndView mav = new ModelAndView("EditEmployee");
         ModelAndView mav = new ModelAndView("testfile");
 //		mav.addObject("message", message);
-
-        return mav;
-
+*/
+       
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
@@ -96,17 +113,8 @@ public class UserController {
         	 ModelAndView mav = new ModelAndView("ManagerSuccess");
         	 List<Employee> elist= employeeService.displayByManagerId(email);
         	mav.addObject("elist", elist);
-        	/*Employee e=new Employee();
-=======
-                return mav;
+     
 
-            } else if (employee.getCategory().equals("Manager")) {
-                ModelAndView mav = new ModelAndView("ManagerSuccess");
-                List<Employee> elist = employeeService.displayByManagerId(email);
-                mav.addObject("elist", elist);
-                /*Employee e=new Employee();
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
-        	mav.addObject("employee", e);*/
  
              return mav;
         	 

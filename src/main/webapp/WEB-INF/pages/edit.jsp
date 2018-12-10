@@ -71,10 +71,10 @@
                     </tr>
 
 
-                    <%--<tr>
+                    <tr>
                         <td style="color:white">OTP:</td>
                         <td><form:input path="otp" /></td>
-                    </tr> --%>
+                    </tr>
 
 
 
