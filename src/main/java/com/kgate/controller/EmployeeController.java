@@ -88,7 +88,7 @@ public class EmployeeController {
 		if (skillSearch.length() > 2) {
 			for (Skill s : listSkill) {
 				String a = s.getSkill_name().toLowerCase();
-				if (a.contains(skillSearch)) {
+				if (a.contains(skillSearch)|| a.equalsIgnoreCase(skillSearch)) {
 					List<Employee> listEmployee = employeeService.searchEmployeesBySkill(a);
 					model.addObject("listEmployee", listEmployee);
 					flag = 0;

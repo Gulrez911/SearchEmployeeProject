@@ -27,12 +27,12 @@
                 <table>
                     <form:hidden path="id"/>
                     <tr>
-                        <td style="color:yellow">Name:</td>
+                        <td style="color:white">Name:</td>
                         <td><form:input path="name"  required="required"/></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
-                        <td style="color:yellow"> Email:</td>
+                        <td style="color:white"> Email:</td>
                         <td><form:input path="email" type="email"  required="required"/></td>
                         <%--   <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
@@ -44,12 +44,12 @@
                     </tr>
 
                     <tr>
-                        <td style="color:yellow">Address:</font></td>
+                        <td style="color:white">Address:</font></td>
                         <td><form:input path="address" /></td>
                     </tr>
                     <tr>
 
-                        <td style="color:yellow"> Telephone: </font></td>
+                        <td style="color:white"> Telephone: </font></td>
                         <td><form:input path="telephone" /></td>
 
                     </tr>
@@ -57,6 +57,16 @@
                     <tr>
                         <td style="color:white">Password:</td>
                         <td><form:input path="password" type="password" required="required"/></td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">Aadhar No.:</td>
+                        <td><form:input path="aadhar"  required="required"/></td>
+                        <td><form:errors path="aadhar" cssClass="error"/></td>
+                    </tr>
+                    <tr>
+                        <td style="color:white">Pan No.:</td>
+                        <td><form:input path="pan"  required="required"/></td>
+                        <td><form:errors path="pan" cssClass="error"/></td>
                     </tr>
                     
                       <tr>
@@ -83,7 +93,7 @@
 
 
                     <tr>
-                        <td style="color:yellow"> Skills: </font></td>
+                        <td style="color:white"> Skills: </font></td>
                         <td>
                             <form:select path="skills" required ="true">
 
