@@ -80,23 +80,18 @@ public class Employee implements Serializable {
 	@Column
 	private String telephone;
 
-<<<<<<< HEAD
 	@Column
 	private String category;
-=======
+	
     @Column
     private String password;
     
-    @Column
-   
-    private int managerId;
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+    
 
 	@Column
 	private String status;
 
-	@Column
-	private String password;
+	
 
 	@Column
 	private int managerId;
