@@ -45,6 +45,7 @@
 </head>
 <body
 	background="<%=request.getContextPath()%>/resources/images/india-wallpaper.jpg">
+	
 
 	<fieldset
 		style="width: 500px; margin: 50px auto; padding: 5px; box-shadow: 5px 7px">
