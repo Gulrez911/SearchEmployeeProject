@@ -19,7 +19,7 @@ public class EmployeeRestController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/restSkillList")
+   /* @GetMapping("/restSkillList")
     public ResponseEntity<List<Skill>> skillList() {
         List<Skill> slist = skillService.getAllSkills();
         return ResponseEntity.ok().body(slist);
@@ -29,5 +29,5 @@ public class EmployeeRestController {
     public ResponseEntity<List<Employee>> employeelist() {
         List<Employee> empList = employeeService.getAllEmployees();
         return ResponseEntity.ok().body(empList);
-    }
+    }*/
 }
