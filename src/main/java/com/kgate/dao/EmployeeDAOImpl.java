@@ -75,12 +75,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(Integer employeeId) {
 
-//        String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
-//
-//        SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
-//        sqlq.executeUpdate();
-//
-//         == == ==
+
         String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where  employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
 
         SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -112,18 +107,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Employee> displayByManagerId(String email) {
 
-//        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where managerId=(select id from employee123 where email='" + email + "') ";
-        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where category='Employee' and managerId=(select ManagerId from employee123 where category='Manager')";
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Employee> displayByManagerId(String email) {
+		
+		    String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='"+email+"') ";
+		
+		/*String query = "select  name,address,telephone,email,category from Employee   where managerId=(select id from Employee where email='"+email+"') "; */
+		 List<Object> data=sessionFactory.getCurrentSession().createSQLQuery(query).list();
+		List<Employee> emp = new ArrayList<>();
+		 for (Object d : data) {
 
-        /*String query = "select  name,address,telephone,email,category from Employee   where managerId=(select id from Employee where email='"+email+"') "; */
-        List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
-        List<Employee> emp = new ArrayList<>();
-        for (Object d : data) {
-
+   
             Object arr[] = (Object[]) d;
             String st, st1, st2, st3, st4;
 

@@ -50,13 +50,14 @@
 					<td style="color: white">Status:</td>
 					<td><input path="status" readonly="true" value="${employee.status}"/></td>
 				</tr>
-					<tr>
+				<tr>
 					<td style="color: white">Skills: </font></td>
 					<td><form:select path="skills" required="required">
 
 							<form:options items="${listSkill}" />
 						</form:select></td>
 				</tr>
+				
 				<tr>
 					<td> <p style="color:white">${message}</p></td>
 					<td align="center"><input type="submit" value="Edit"></td>

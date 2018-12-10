@@ -78,16 +78,27 @@ public class UserController {
         /* validate whether person is in database and person user and password
              are matching
          */
-        boolean isValidUser = loginservice2.checkLogin(employee.getEmail(), employee.getPassword());
 
-        if (isValidUser) {
-            if (employee.getCategory().equals("Admin")) {
+    	 boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword(), employee.getCategory());
+         
+         if (isValidUser) {
+         if (employee.getCategory().equals("Admin") ) {
+                    
+                   
+ 	           request.setAttribute("loginuser",employee.getEmail());
+               ModelAndView mav = new ModelAndView("success");
 
-                /*Get all data required for Person jsp and set in ModelAndView*/
-                request.setAttribute("loginuser", employee.getEmail());
-
-
-                ModelAndView mav = new ModelAndView("success");
+               return mav;
+                 
+              }
+         else  if(employee.getCategory().equals("Manager") ) 
+         {
+        	 ModelAndView mav = new ModelAndView("ManagerSuccess");
+        	 List<Employee> elist= employeeService.displayByManagerId(email);
+        	mav.addObject("elist", elist);
+        	/*Employee e=new Employee();
+=======
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
                 return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
@@ -95,9 +106,12 @@ public class UserController {
                 List<Employee> elist = employeeService.displayByManagerId(email);
                 mav.addObject("elist", elist);
                 /*Employee e=new Employee();
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
         	mav.addObject("employee", e);*/
-                return mav;
-
+ 
+             return mav;
+        	 
+      
             } else if (employee.getCategory().equals("Employee")) {
 
                 /*Get all data required for Person jsp and set in ModelAndView*/
@@ -110,32 +124,40 @@ public class UserController {
                 List<Skill> listSkill = skillService.getAllSkills();
 
                 List<String> sk = new ArrayList<>();
-
                 for (int i = 0; i < employeeSkill.size(); i++) {
                     Object o = employeeSkill.get(i);
                     String s = (String) o;
                     sk.add(s);
                 }
-
-                employee.setSkills(sk);
+      		  employee.setSkills(sk);
 
                 mav.addObject("listSkill", listSkill);
 
-                Skill skill = new Skill();
-                mav.addObject("skill", skill);
+              
 
-                return mav;
+		Skill skill = new Skill();
+		mav.addObject("skill", skill);
+		 
 
-            } else {
-                modelMap.put("error", "Invalid UserName / Password");
-                ModelAndView mav = new ModelAndView("login");
-                return mav;
+       
 
-            }
+   	        return mav;
+   	        
+         
+      }
+        
+    else {
+       	    modelMap.put("error", "Invalid UserName / Password");
+       	    ModelAndView mav = new ModelAndView("login");
+               return mav;
+            
+       	  
+         }
+    
+      }
+		return init();
+         }
+		
 
-        }
-        modelMap.put("error", "Invalid UserName / Password");
-        return init();
-    }
 
 }
