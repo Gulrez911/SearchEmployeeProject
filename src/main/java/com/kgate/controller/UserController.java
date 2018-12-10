@@ -50,8 +50,7 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView init() {
- 
-      
+
 
         ModelAndView mav = new ModelAndView("login");
         Employee employee = new Employee();
@@ -96,6 +95,7 @@ public class UserController {
         /* validate whether person is in database and person user and password
              are matching
          */
+
     	 boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword(), employee.getCategory());
          
          if (isValidUser) {
@@ -113,13 +113,12 @@ public class UserController {
         	 ModelAndView mav = new ModelAndView("ManagerSuccess");
         	 List<Employee> elist= employeeService.displayByManagerId(email);
         	mav.addObject("elist", elist);
-     
 
  
              return mav;
         	 
-      
-            } else if (employee.getCategory().equals("Employee")) {
+         }
+        else if (employee.getCategory().equals("Employee")) {
 
                 /*Get all data required for Person jsp and set in ModelAndView*/
                 ModelAndView mav = new ModelAndView("EditEmployee");
@@ -161,10 +160,8 @@ public class UserController {
        	  
          }
     
-      }
-		return init();
+        
          }
+		return init();
 		
-
-
-}
+    }}

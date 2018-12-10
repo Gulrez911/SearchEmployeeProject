@@ -9,6 +9,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Employee Management Screen</title>
+        <style type="text/css">
+        #bt{
+        background-image: url('/WEB-INF/images/Search-icon.png');
+         background-repeat:no-repeat;
+	background-position:left;
+	background-size: 40px; 
+        }
+        
+        </style>
     </head>
 
 
@@ -19,7 +28,11 @@
 
             <h1><font style="color:yellow" size="5">Employee List</font></h1>
             <center><a href="/SpringMVCHibernateCRUD/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
+
+
+
             <center><a href="/SpringMVCHibernateCRUD/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
+
 
 
             <h1 style="color:white">Employee List</h1>
@@ -28,7 +41,7 @@
 
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
 
-                <button>Find</button>
+                <button><div id="bt">Find</div></button>
             </form>
             <br>
             <form action="<s:url value="/search_employeelist_skill1"/>">
@@ -37,7 +50,7 @@
             </form>
 
             <br>
-            <p>${error}</p>
+            <p style="color:white">${error}</p>
             <p style="color:white">${message}</p>
             <table border="1">
 
@@ -65,7 +78,7 @@
                 </c:forEach>
             </table>
             <h4><font style="color: darkorange">
-                    New Employee Register</font> <a href="newEmployee">here</a>
+                    New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
             </h4>
         </div>
     </body>
