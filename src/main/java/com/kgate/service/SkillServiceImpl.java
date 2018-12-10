@@ -62,6 +62,7 @@ public class SkillServiceImpl implements SkillService {
      }
 
 	@Override
+         @Transactional
 	public List<String> getEmployeeSkillByEmail(String email) {
 		
 		return skillDao.getEmployeeSkillByEmail(email);

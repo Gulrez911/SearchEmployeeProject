@@ -74,10 +74,14 @@ public class SkillDAOImpl implements SkillDao {
         return sessionFactory.getCurrentSession().createSQLQuery(query).list();
     }
 
-	@Override
-	 @SuppressWarnings("unchecked")
-	public List<String> getEmployeeSkillByEmail(String email) {
-		   String query ="select distinct(s.skill_name) from Skills s cross join join_employee_skill je,employee123 e1 where s.skill_id=je.skill_id and e1.email='"+email+"'";
-		   return sessionFactory.getCurrentSession().createSQLQuery(query).list();
-	}
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<String> getEmployeeSkillByEmail(String email) {
+//        String query = "select distinct(s.skill_name) from Skills s cross join join_employee_skill je,employee123 e1 where s.skill_id=je.skill_id and e1.email='" + email + "'";
+//     String query = "select skill2_.skill_name from employee123 e cross join join_employee_skill listskill1_, Skills skill2_ where  e.id=listskill1_.id  and listskill1_.skill_Id=skill2_.skill_Id  and    e.email = "+email+"";
+//     String query  ="select distinct(skill2_.skill_name) from employee123 e cross join join_employee_skill listskill1_, Skills skill2_ where e.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id and e.email = "+email+"";  
+        
+    String query = "select distinct(s.skill_name) from Skills s cross join join_employee_skill je , employee123 e1 where s.skill_id=je.skill_id and e1.id=je.id and e1.email="+email+"";
+        return sessionFactory.getCurrentSession().createSQLQuery(query).list();
+    }
 }
