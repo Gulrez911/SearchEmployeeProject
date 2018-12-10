@@ -52,16 +52,18 @@ public class UserController {
      }
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView init() {
-    	 
-    	 ModelAndView mav = new ModelAndView("login");
-        Employee employee =new Employee();
-	        mav.addObject("employee", employee);
-	        String[] userType = {"Admin", "Employee","Manager"};
-	        mav.addObject("userTypes", userType);
-			return mav;
-     }
-   
-      	
+
+      
+
+        ModelAndView mav = new ModelAndView("login");
+        Employee employee = new Employee();
+        mav.addObject("employee", employee);
+        String[] userType = {"Admin", "Employee", "Manager"};
+        mav.addObject("userTypes", userType);
+        return mav;
+    }
+
+
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee)
    {
@@ -81,32 +83,26 @@ public class UserController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ModelAndView authenticate(ModelMap modelMap,@ModelAttribute("employee")Employee employee,HttpServletRequest request, Map<String, Object> map,@RequestParam("email")String email) {
            
-            /* validate whether person is in database and person user and password
-             are matching
-            */
-
-         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword());
-        
+           
+    boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword(), employee.getCategory());
+         
          if (isValidUser) {
-         if (employee.getCategory().equals("Admin")) {
-                   
-                     /*Get all data required for Person jsp and set in ModelAndView*/
+         if (employee.getCategory().equals("Admin") ) {
                     
-   	               
-   	                
-   	       request.setAttribute("loginuser",employee.getEmail());
+                   
+ 	           request.setAttribute("loginuser",employee.getEmail());
+               ModelAndView mav = new ModelAndView("success");
 
-                ModelAndView mav = new ModelAndView("success");
                return mav;
                  
               }
-         else if(employee.getCategory().equals("Manager")) 
+         else  if(employee.getCategory().equals("Manager") ) 
          {
         	 ModelAndView mav = new ModelAndView("ManagerSuccess");
-        	List<Employee> elist= employeeService.displayByManagerId(email);
+        	 List<Employee> elist= employeeService.displayByManagerId(email);
         	mav.addObject("elist", elist);
-        	/*Employee e=new Employee();
-        	mav.addObject("employee", e);*/
+        	
+
              return mav;
         	 
          }
@@ -137,6 +133,7 @@ public class UserController {
 
 		employee.setSkills(sk);
 
+
 		mav.addObject("listSkill", listSkill);
 
 		Skill skill = new Skill();
@@ -161,12 +158,13 @@ public class UserController {
 		
 
     
-   
-    
-    
-    
 }
+    
+    
+    
 
+         
+     
 
     
     

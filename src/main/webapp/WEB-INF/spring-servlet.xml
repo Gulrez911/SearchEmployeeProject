@@ -16,10 +16,24 @@
 		id = "messageSource"> <property name = "basename" value = "message" /> -->
 
 	<!-- Getting Database properties -->
-	<context:property-placeholder
-		location="classpath:application.properties" />
+	<!-- <context:property-placeholder
+		location="classpath:application.properties" /> -->
 	<!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
 		<property name="basename" value="/WEB-INF/messages" /> </bean> -->
+
+
+    <!-- DataSource -->
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+          id="dataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver "></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/employee"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="1234"></property>
+        
+        
+        
+        
+    </bean>
 
 
 	<!-- Specifying the Resource location to load JS, CSS, Images etc -->
@@ -33,6 +47,25 @@
 		<property name="basename" value="views" />
 	</bean>
 
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.show_sql">true</prop>
+          <!--       <prop key="hibernate.min_size" >${hibernate.min_size}</prop>
+        <prop key="hibernate.max_size" >${hibernate.max_size}</prop>
+        <prop key="hibernate.timeout" >${hibernate.timeout}</prop>
+       <prop key="hibernate.max_statements">${hibernate.max_statements}</prop> -->
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.kgate.model"></property>
+    </bean>
+
 
 	<bean id="viewResolver2"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -41,30 +74,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- DataSource -->
-	<bean
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		id="dataSource">
-		<property name="driverClassName" value="${database.driver}"></property>
-		<property name="url" value="${database.url}"></property>
-		<property name="username" value="${database.user}"></property>
-		<property name="password" value="${database.password}"></property>
-	</bean>
-
-	<!-- Hibernate SessionFactory -->
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
-				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-			</props>
-		</property>
-		<property name="packagesToScan" value="com.kgate.model"></property>
-	</bean>
+	
 
 	<!-- Transaction -->
 	<bean id="transactionManager"

@@ -77,12 +77,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(Integer employeeId) {
 
-//        String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
-//
-//        SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
-//        sqlq.executeUpdate();
-//
-//         == == ==
+
         String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where  employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
 
         SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -146,11 +141,5 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		 return emp;
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Employee> searchEmployee(String txt) {
-		 String query = "from Employee u where u.name like '" + txt + "%' or u.email like '" + txt + "%' or u.address like '" + txt + "%' or u.telephone like '" + txt + "%' ";
-	        return sessionFactory.getCurrentSession().createQuery(query).list();
-		
-	}
-    
+
 }

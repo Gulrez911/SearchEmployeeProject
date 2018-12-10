@@ -22,14 +22,15 @@ public class LoginDao2Impl implements LoginDao2  {
 	     return sessionFactory.openSession();
 	 	}
 
-	  public boolean checkLogin(String userName,String userPassword) 
+	  public boolean checkLogin(String userName,String userPassword,String usertype) 
 	  	{
 		  Session session = sessionFactory.openSession();
 		  boolean userFound = false;
-		  String SQL_QUERY ="from Employee where email=? and password=?";
+		  String SQL_QUERY ="from Employee where email=? and password=? and category=?";
 		  Query query = session.createQuery(SQL_QUERY);
 		  query.setParameter(0,userName);
 		  query.setParameter(1,userPassword);
+		  query.setParameter(2,usertype);
 		  List list = query.list();
 		
 		if ((list != null) && (list.size() > 0))
