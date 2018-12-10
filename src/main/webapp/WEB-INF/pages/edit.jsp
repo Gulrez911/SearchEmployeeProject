@@ -65,13 +65,16 @@
                         <td style="color:white">ManagerId</td>
                         <td><form:input path="managerId" /></td>
                     </tr>
-
+                    <tr>
+                        <td style="color:white">Status</td>
+                        <td><form:input path="status" readonly="true" /></td>
+                    </tr>
 
 
                     <tr>
                         <td style="color:white">OTP:</td>
                         <td><form:input path="otp" /></td>
-                    </tr>
+                    </tr> 
 
 
                     <tr>

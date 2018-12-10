@@ -211,8 +211,10 @@ public class EmployeeController {
             throw new RuntimeException("cannnot be null");
         } else {
             if (employee.getOtp().equals(emp.getOtp())) {
-                emp.setStatus("Approved");
-                employeeService.addEmployee(emp);
+//                emp.setStatus("Approved");
+                employee.setStatus("Approved");
+//                employeeService.addEmployee(emp);
+                employeeService.addEmployee(employee);
             } else {
                 // send him a message that otp is invalid
                 return new ModelAndView("invalid");
