@@ -53,7 +53,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView init() {
 
-      
+
 
         ModelAndView mav = new ModelAndView("login");
         Employee employee = new Employee();
@@ -81,10 +81,12 @@ public class UserController {
     }
     
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+
     public ModelAndView authenticate(ModelMap modelMap,@ModelAttribute("employee")Employee employee,HttpServletRequest request, Map<String, Object> map,@RequestParam("email")String email) {
            
            
     boolean isValidUser = loginservice2.checkLogin(employee.getEmail(),employee.getPassword(), employee.getCategory());
+
          
          if (isValidUser) {
          if (employee.getCategory().equals("Admin") ) {
@@ -101,7 +103,6 @@ public class UserController {
         	 ModelAndView mav = new ModelAndView("ManagerSuccess");
         	 List<Employee> elist= employeeService.displayByManagerId(email);
         	mav.addObject("elist", elist);
-        	
 
              return mav;
         	 

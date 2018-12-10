@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import static javax.swing.text.StyleConstants.Size;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -79,8 +80,17 @@ public class Employee implements Serializable {
 	@Column
 	private String telephone;
 
+<<<<<<< HEAD
 	@Column
 	private String category;
+=======
+    @Column
+    private String password;
+    
+    @Column
+   
+    private int managerId;
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
 	@Column
 	private String status;
