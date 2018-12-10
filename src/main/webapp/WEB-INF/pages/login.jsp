@@ -18,7 +18,6 @@
 	background-size: 25px;
 	border-radius: 25px
 }
-
 #bt {
 	/*  border: 1px solid;
     padding: 10px;

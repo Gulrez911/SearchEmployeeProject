@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import static javax.swing.text.StyleConstants.Size;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
@@ -93,6 +94,7 @@ public class Employee implements Serializable {
     private String password;
     
     @Column
+   
     private int managerId;
 
     public int getId() {
