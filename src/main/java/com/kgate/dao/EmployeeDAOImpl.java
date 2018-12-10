@@ -75,12 +75,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void deleteEmployee(Integer employeeId) {
 
-//        String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where    employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
-//
-//        SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
-//        sqlq.executeUpdate();
-//
-//         == == ==
+
         String query = "delete employee123, join_employee_skill from employee123 inner join  join_employee_skill  where  employee123.id = join_employee_skill.id and employee123.id =" + employeeId + "";
 
         SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -100,7 +95,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return employee;
     }
 
-	   @Override
+    @Override
     public Employee searchByEmail(String email) {
         String query = "from Employee u where u.email = '" + email + "'";
         List<Object> emps = sessionFactory.getCurrentSession().createQuery(query).list();
@@ -111,6 +106,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return null;
 
     }
+
 
 	@Override
 	@SuppressWarnings("unchecked")
@@ -123,25 +119,26 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		List<Employee> emp = new ArrayList<>();
 		 for (Object d : data) {
 
-	            Object arr[] = (Object[]) d;
-	            String st, st1, st2, st3,st4;
-		 
-		 Employee e = new Employee();
-		 st = (String) arr[0];
-         st1 = (String) arr[1];
-         st2 = (String) arr[2];
-         st3 = (String) arr[3];
-         st4 = (String) arr[4];
-         
-         e.setName(st);
-         e.setAddress(st1);
-         e.setTelephone(st2);
-         e.setEmail(st3);
-         e.setCategory(st4);
-         emp.add(e);       
-	}
-		 
-		 return emp;
-	}
-    
+   
+            Object arr[] = (Object[]) d;
+            String st, st1, st2, st3, st4;
+
+            Employee e = new Employee();
+            st = (String) arr[0];
+            st1 = (String) arr[1];
+            st2 = (String) arr[2];
+            st3 = (String) arr[3];
+            st4 = (String) arr[4];
+
+            e.setName(st);
+            e.setAddress(st1);
+            e.setTelephone(st2);
+            e.setEmail(st3);
+            e.setCategory(st4);
+            emp.add(e);
+        }
+
+        return emp;
+    }
+
 }
