@@ -12,12 +12,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.kgate.model.Employee;
-
+ 
 
 @RunWith(SpringJUnit4ClassRunner.class)
+
 @ContextConfiguration(locations= {"classpath:spring-servlet.xml"})
+
 public class EmployeeControllerTest {
 
 	/*@Test

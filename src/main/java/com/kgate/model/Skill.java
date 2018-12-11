@@ -38,10 +38,13 @@ public class Skill {
 //    public void setListEmployee(List<Employee> listEmployee) {
 //        this.listEmployee = listEmployee;
 //    }
+ 
+ 
 
 	public int getSkill_Id() {
 		return skill_Id;
 	}
+ 
 
 	public void setSkill_Id(int skill_Id) {
 		this.skill_Id = skill_Id;
@@ -51,13 +54,17 @@ public class Skill {
 		return skill_name;
 	}
 
+ 
+
+    @Override
+    public String toString() {
+        return getSkill_name();
+    }
+ 
 	public void setSkill_name(String skill_name) {
 		this.skill_name = skill_name;
 	}
-
-	@Override
-	public String toString() {
-		return getSkill_name();
-	}
+ 
+ 
 
 }

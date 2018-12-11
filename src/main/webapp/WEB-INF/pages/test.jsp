@@ -32,7 +32,9 @@ th {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Skills</title>
 </head>
+
 <body background="<%=request.getContextPath()%>/resources/images/gal.jpg">
+
 	<div align="center">
 		<h1 style="color: white">Skills Tracker: Add Skill Page</h1>
 		<form:form action="saveTest" method="post" modelAttribute="skill"
