@@ -81,6 +81,14 @@ public class Employee implements Serializable {
     @Column
     private String telephone;
 
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
     @Column
     private String category;
 
@@ -147,13 +155,7 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+     
 
     public List<String> getSkills() {
         return skills;
@@ -174,6 +176,7 @@ public class Employee implements Serializable {
     public String getPassword() {
         return password;
     }
+ 
 
     public void setPassword(String password) {
         this.password = password;
@@ -182,6 +185,8 @@ public class Employee implements Serializable {
     public String getCategory() {
         return category;
     }
+
+    
 
     public void setCategory(String category) {
         this.category = category;

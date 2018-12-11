@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public List<Employee> searchEmployees(String txt) {
-        return employeeDAO.searchEmployees(txt);
+        return employeeDAO. searchEmployees(txt);
     }
     //Search Employee
     @Override

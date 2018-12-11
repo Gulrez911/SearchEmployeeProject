@@ -50,29 +50,28 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Autowired
-    private SkillService skillService;
 
-    public String generateOTP() {
-        Random random = new Random();
-        String id = String.format("%04d", random.nextInt(10000));
-        return id;
-    }
+	@Autowired
+	private SkillService skillService;
+
+
+
+
+
+	public String generateOTP() {
+		Random random = new Random();
+		String id = String.format("%04d", random.nextInt(10000));
+		return id;
+	}
+
+
+
+
 
     @RequestMapping(value = "/search_employeelist")
     public ModelAndView searchEmployee(ModelAndView model, @RequestParam("freeText") String freeText)
             throws IOException {
         List<Employee> listEmployee = employeeService.searchEmployees(freeText);
-        model.addObject("listEmployee", listEmployee);
-        model.setViewName("home");
-        return model;
-    }
-//original method for skill search
-
-    @RequestMapping(value = "/search_employeelist_skill")
-    public ModelAndView searchEmployeeBySkill(ModelAndView model, @RequestParam("skillSearch") String skillSearch)
-            throws IOException {
-        List<Employee> listEmployee = employeeService.searchEmployeesBySkill(skillSearch);
         model.addObject("listEmployee", listEmployee);
         model.setViewName("home");
         return model;
@@ -127,52 +126,25 @@ public class EmployeeController {
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
 //        model.addObject("skill", skill);
-        Employee employee = new Employee();
-        model.addObject("employee", employee);
 
-        String[] userType = {"Employee", "Admin", "Manager"};
-        model.addObject("userTypes", userType);
-        /*
-		 * String[] manageremail = managerservice.getAllManagerByEmail();
-		 * model.addObject("userTypes", userType);
-         */
-        model.setViewName("EmployeeForm");
-        return model;
-    }
+		Employee employee = new Employee();
+		model.addObject("employee", employee);
+		
+	    String[] userType = {"Admin", "Employee","Manager"};
+	    model.addObject("userTypes", userType);
+	    model.setViewName("EmployeeForm");
+		return model;
+	
 
-//     @RequestMapping(value = "/saveEmployee", method = RequestMethod.POST)
-//    public ModelAndView saveEmployee(@ModelAttribute Employee employee, BindingResult result) {
-//        if(result.hasErrors()){
-//            ModelAndView andView = new ModelAndView("EmployeeForm");
-//            return andView;
-//        }
-//        for (String skill : employee.getSkills()) {
-//            Skill sk = skillService.getSkillByName(skill);
-//            employee.getListSkill().add(sk);
-//        }
-//
-//        if (employee.getId() == 0) { // if employee id is 0 then creating the
-//            // employee other updating the employee
-//
-//            employeeService.addEmployee(employee);
-//        } else {
-//            employeeService.updateEmployee(employee);
-//        }
-//        return new ModelAndView("redirect:/employeelist");
-//    }
-//    @RequestMapping(value = "/loginsuccess", method = RequestMethod.POST)
-//	public String doLogin(@Valid @ModelAttribute("employee") Employee employee,
-//			BindingResult result, Map<String, Object> model) {
-//
-//		if (result.hasErrors()) {
-//			return "LoginForm";
-//		}
-//
-//		return "LoginSuccess";
-//
-//        }
+	
+	}
+
+
+	
+	
     @RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
     public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
+
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -189,23 +161,28 @@ public class EmployeeController {
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
-//        model.addObject("employee", employee);
+//        model.addObject("employee", employee)
+		
+		 String[] userType = {"Admin", "Employee","Manager"};
+		    model.addObject("userTypes", userType);
+		model.setViewName("EmployeeForm");
+		return model;
+	}
 
-        String[] userType = {"Admin", "Employee", "Manager"};
-        model.addObject("userTypes", userType);
-        model.setViewName("EmployeeForm");
-        return model;
-    }
 
-    @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-        /* if (employee.getOtp().equals(temp_3)) { */
-//            System.out.println("OTP: " + temp_3);
 
-        for (String skill : employee.getSkills()) {
-            Skill sk = skillService.getSkillByName(skill);
-            employee.getListSkill().add(sk);
-        }
+	@RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
+	public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
+		/* if (employee.getOtp().equals(temp_3)) { */
+
+
+
+
+		for (String skill : employee.getSkills()) {
+			Skill sk = skillService.getSkillByName(skill);
+			employee.getListSkill().add(sk);
+		}
+
 
         Employee emp = employeeService.searchByEmail(employee.getEmail());
         if (emp == null) {
@@ -215,12 +192,15 @@ public class EmployeeController {
 //                emp.setStatus("Approved");
                 employee.setStatus("Approved");
 //                employeeService.addEmployee(emp);
-                employeeService.addEmployee(employee);
-            } else {
-                // send him a message that otp is invalid
-                return new ModelAndView("invalid");
-            }
-        }
+
+				employeeService.addEmployee(employee);
+
+			} else {
+				// send him a message that otp is invalid
+				return new ModelAndView("invalid");
+			}
+		}
+
 //           String password=employee.getPassword();
         EmployeeController ec = new EmployeeController();
         ec.sendMail(employee.getEmail(), "OTP:" + employee.getOtp() + "\n password:" + employee.getPassword(),
@@ -283,14 +263,17 @@ public class EmployeeController {
 
         List<String> sk = new ArrayList<>();
 
-        for (int i = 0; i < employeeSkill.size(); i++) {
-            Object o = employeeSkill.get(i);
-            String s = (String) o;
-            sk.add(s);
-        }
-        employee.setSkills(sk);
+
+		for (int i = 0; i < employeeSkill.size(); i++) {
+			Object o = employeeSkill.get(i);
+			String s = (String) o;
+			sk.add(s);
+		}
+		employee.setSkills(sk);
+
         String[] userType = {"Employee", "Admin", "Manager"};
         model.addObject("userTypes", userType);
+
 
         model.addObject("listSkill", listSkill);
         model.addObject("employee", employee);
@@ -300,20 +283,28 @@ public class EmployeeController {
         return model;
     }
 
-    @RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
-    public ModelAndView updateperson(@ModelAttribute Employee employee) {
-        for (String skill : employee.getSkills()) {
-            Skill sk = skillService.getSkillByName(skill);
-            employee.getListSkill().add(sk);
-        }
 
-        employeeService.addEmployee(employee);
-        String message = "Employee is successfully edited.";
-        ModelAndView mav = new ModelAndView("home");
-        mav.addObject("message", message);
-        List<Employee> listEmployee = employeeService.getAllEmployees();
-        mav.addObject("listEmployee", listEmployee);
-        return mav;
+	@RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
+	public ModelAndView updateperson(@ModelAttribute Employee employee) {
+
+		for (String skill : employee.getSkills()) {
+			Skill sk = skillService.getSkillByName(skill);
+			employee.getListSkill().add(sk);
+		}
+
+
+
+
+	
+		employeeService.addEmployee(employee);
+
+		String message = "Employee is successfully edited.";
+		ModelAndView mav = new ModelAndView("home");
+		mav.addObject("message", message);
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		mav.addObject("listEmployee", listEmployee);
+		return mav;
+
 
     }
 
@@ -323,10 +314,14 @@ public class EmployeeController {
         return new ModelAndView("pdfView", "listEmployee", listEmployee);
     }
 
-    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
-    public ModelAndView downloadExcel() {
-        List<Employee> listEmployee = employeeService.getAllEmployees();
-        return new ModelAndView("excelView", "listEmployee", listEmployee);
-    }
+
+	@RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+	public ModelAndView downloadExcel() {
+		List<Employee> listEmployee = employeeService.getAllEmployees();
+		return new ModelAndView("excelView", "listEmployee", listEmployee);
+	}
+
+	
+
 
 }

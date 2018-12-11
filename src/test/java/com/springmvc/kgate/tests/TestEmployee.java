@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 package com.springmvc.kgate.tests;
-
+ 
 import com.kgate.dao.EmployeeDAO;
 import com.kgate.dao.SkillDao;
-import com.kgate.model.Employee;
 import com.kgate.model.Skill;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -36,13 +35,9 @@ public class TestEmployee {
     @Autowired
     SkillDao skillDao;
 
-    @Test
+   
 //    @Rollback(value = false)
-    public void testSearchEmployees() {
-        String skill = "HTML";
-        List<Employee> emps = edao.searchEmployees(skill);
-        System.out.println("" + emps.size());
-    }
+    
 //    @Test
 //    @Rollback(value = false)
 //    public void getEmployeeSkill(){
