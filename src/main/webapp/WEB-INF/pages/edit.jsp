@@ -49,7 +49,10 @@
                         <td><form:input path="telephone" /></td>
 
                     </tr>
-
+                    <tr>
+                        <td style="color:white">OTP:</td>
+                        <td><form:input path="otp" readonly="true"/></td>
+                    </tr>
                     <tr>
                         <td style="color: white">Password:</td>
                         <td><form:input path="password" type="password"
@@ -102,7 +105,7 @@
                     </tr>
 
                     <tr>
-                        <td><input type="submit" value="Send OTP" name="action1" /></td>
+                        
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save" name="action2"></td>
                     </tr>
