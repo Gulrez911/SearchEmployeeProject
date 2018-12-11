@@ -193,6 +193,35 @@ public class Employee implements Serializable {
 		this.managerId = managerId;
 	}
 
+	
+	
+	
+	
+	
+	public Employee( String otp, String name, String email,
+			String address, String telephone, String category, String status, String password, int managerId,
+			String aadhar, String pan) {
+		super();
+		
+		this.otp = otp;
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		this.telephone = telephone;
+		this.category = category;
+		this.status = status;
+		this.password = password;
+		this.managerId = managerId;
+		this.aadhar = aadhar;
+		this.pan = pan;
+	}
+
+	
+
+	public Employee() {
+		super();
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", listSkill=" + listSkill + ", skills=" + skills + ", otp=" + otp + ", name="

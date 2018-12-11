@@ -7,9 +7,9 @@ import com.kgate.model.Skill;
 
 public interface EmployeeService {
 	
-        //list for search employee
+        
         public List<Employee> searchEmployees(String txt);
-        //
+     
         public List<Employee> searchEmployeesBySkill(String skill);
          
     

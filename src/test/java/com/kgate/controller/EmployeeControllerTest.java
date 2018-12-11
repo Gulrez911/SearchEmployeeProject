@@ -17,7 +17,7 @@ import com.kgate.model.Employee;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"classpath:spring-mvc-servlet.xml"})
+@ContextConfiguration(locations= {"classpath:spring-servlet.xml"})
 public class EmployeeControllerTest {
 
 	/*@Test
