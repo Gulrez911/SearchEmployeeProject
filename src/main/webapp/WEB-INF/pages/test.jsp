@@ -30,7 +30,7 @@ th {
 <title>Add Skills</title>
 </head>
 <body
-	background="<%=request.getContextPath()%>/resources/images/gal.jpg">
+	background="<%=request.getContextPath()%>/resources/images/af.jpg">
 	<div align="center">
 		<h1 style="color: white">Skills Tracker: Add Skill Page</h1>
 		<form:form action="saveTest" method="post" modelAttribute="skill"

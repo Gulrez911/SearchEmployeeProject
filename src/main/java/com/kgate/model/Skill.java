@@ -38,8 +38,6 @@ public class Skill {
 //    public void setListEmployee(List<Employee> listEmployee) {
 //        this.listEmployee = listEmployee;
 //    }
- 
-
     public int getSkill_Id() {
         return skill_Id;
     }
@@ -55,9 +53,9 @@ public class Skill {
     public void setSkill_name(String skill_name) {
         this.skill_name = skill_name;
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return getSkill_name();
     }
 

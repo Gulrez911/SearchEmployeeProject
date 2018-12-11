@@ -109,12 +109,12 @@ public class UserController {
             } else if (employee.getCategory().equals("Employee")) {
 
                 /*Get all data required for Person jsp and set in ModelAndView*/
-                ModelAndView mav = new ModelAndView("EditEmployee");
+                ModelAndView mav = new ModelAndView("byEmployeeEdit");
                 Employee emp = employeeService.searchByEmail(employee.getEmail());
                 List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
-                
+
                 System.out.println("List of EmployeeSkill:   " + employeeSkill);
-                 
+
                 List<Skill> listSkill = skillService.getAllSkills();
 
                 List<String> sk = new ArrayList<>();
@@ -167,6 +167,24 @@ public class UserController {
         }
         modelMap.put("error", "Invalid UserName / Password");
         return init();
+    }
+
+    //Employee Edit by Employee 
+    @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
+    public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
+        for (String skill : employee.getSkills()) {
+            Skill sk = skillService.getSkillByName(skill);
+            employee.getListSkill().add(sk);
+        }
+
+        employeeService.addEmployee(employee);
+        String message = "Employee is successfully edited.";
+        ModelAndView mav = new ModelAndView("EmployeeSuccess");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+       return mav;
+
     }
 
 }
