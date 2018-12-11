@@ -25,6 +25,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
 //@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-servlet.xml" })
+//@ContextConfiguration({"file:WEB-INF/spring-servlet.xml"})
 
 @Transactional
 public class TestEmployee {
@@ -34,15 +35,14 @@ public class TestEmployee {
 
     @Autowired
     SkillDao skillDao;
-    
-//    @Test
-////    @Rollback(value = false)
-//    public void testSearchEmployees() {
-//        String skill = "HTML";
-//        List<Employee> emps = edao.searchEmployees(skill);
-//        System.out.println("" + emps.size());
-//    }
 
+    @Test
+//    @Rollback(value = false)
+    public void testSearchEmployees() {
+        String skill = "HTML";
+        List<Employee> emps = edao.searchEmployees(skill);
+        System.out.println("" + emps.size());
+    }
 //    @Test
 //    @Rollback(value = false)
 //    public void getEmployeeSkill(){
@@ -50,4 +50,13 @@ public class TestEmployee {
 ////        List<Skill> skill = skillDao.getEmployeeSkill(id);
 ////        System.out.println("Skill List:    "+skill);
 //    }
+//    @Test
+//    @Rollback(value = false)
+//    public void getAllSkills() {
+//
+//        List<Skill> li = skillDao.getAllSkill();
+//        System.out.println("List of Skill:  " + li.size());
+//       
+//    }
+
 }
