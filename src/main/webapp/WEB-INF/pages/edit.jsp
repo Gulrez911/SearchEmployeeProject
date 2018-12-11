@@ -85,61 +85,9 @@
 				</tr>
 
 
-				<%--<tr>
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
-                        <td style="color:white">OTP:</td>
-                        <td><form:input path="otp" /></td>
-<<<<<<< HEAD
-                    </tr>
 
-
-
-                    <tr>
-                        <td style="color:yellow"> Skills: </font></td>
-                        <td>
-                            <form:select path="skills" required="true">
-
-                                <form:options items="${listSkill}" />
-                            </form:select>
-
-                        <td>
-
-                    </tr>
-
-                    <tr>
-                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
-                        <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
-                    </tr>
-                </table>
-            </form:form>
-
-
-        </div>
+    </table>
+    </form:form>
+    </div>
     </body>
-=======
-                    </tr> --%>
-
-
-
-				<tr>
-					<td style="color: yellow">Skills: </font></td>
-					<td><form:select path="skills" required="true">
-
-							<form:options items="${listSkill}" />
-						</form:select>
-					<td>
-				</tr>
-
-				<tr>
-					<td><input type="submit" value="Send OTP" name="action1" /></td>
-					<td colspan="2" align="center"><input type="submit"
-						value="Save" name="action2"></td>
-				</tr>
-			</table>
-		</form:form>
-
-
-	</div>
-</body>
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
-</html>
+    </html>

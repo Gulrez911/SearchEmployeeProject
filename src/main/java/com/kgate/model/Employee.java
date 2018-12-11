@@ -25,7 +25,6 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 @Table(name = "employee123")
 
@@ -48,7 +47,6 @@ public class Employee implements Serializable {
 
 	@Column
 	private String otp;
-
 	public String getOtp() {
 		return otp;
 	}
@@ -128,7 +126,6 @@ public class Employee implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -152,7 +149,6 @@ public class Employee implements Serializable {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-
 	public List<String> getSkills() {
 		return skills;
 	}
@@ -180,7 +176,6 @@ public class Employee implements Serializable {
 	public String getCategory() {
 		return category;
 	}
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
