@@ -118,7 +118,8 @@ public class UserController {
              return mav;
         	 
          }
-        else if (employee.getCategory().equals("Employee")) {
+        else if (employee.getCategory().equals("Employee"))
+        {
 
                 /*Get all data required for Person jsp and set in ModelAndView*/
                 ModelAndView mav = new ModelAndView("EditEmployee");
