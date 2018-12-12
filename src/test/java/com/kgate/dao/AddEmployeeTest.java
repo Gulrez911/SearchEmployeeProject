@@ -12,36 +12,32 @@ import com.kgate.model.Employee;
 import com.kgate.service.EmployeeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"classpath:appContext.xml"})
+@ContextConfiguration(locations = {"classpath:appContext.xml"})
 
-public class AddEmployeeTest 
-{
-	@Autowired
-	EmployeeService employeeservice;
-	
-	
-	@Test
-	public void testMeth() 
-	{
-		Employee e=null;
-	//	List<Employee> e=new ArrayList<Employee>();
-	    String name="rajan singh";
-	    String telephone="483674567";
-	     String adhar="786sdcj765789";
-	    String address= "ndnmcsmcls";
-	    String category="Employee";
-	    String email="rajans2206@gmail.com";
-	    int managerid=2;
-	     String otp="6543";
-	     String pan="pkojkl7867";
-	     String password="rajan123";
-	     String status="approved";
-	   
-	  Employee e1=new Employee(otp, name, email, address, telephone, category, status, password, managerid, adhar, pan);
-	 
-	  employeeservice.addEmployee(e1);
-	
-	
-	
-	}
+public class AddEmployeeTest {
+
+    @Autowired
+    EmployeeService employeeservice;
+
+    @Test
+    public void testMeth() {
+        Employee e = null;
+        //	List<Employee> e=new ArrayList<Employee>();
+        String name = "rajan singh";
+        String telephone = "483674567";
+        String adhar = "786sdcj765789";
+        String address = "ndnmcsmcls";
+        String category = "Employee";
+        String email = "rajans2206@gmail.com";
+        int managerid = 2;
+        String otp = "6543";
+        String pan = "pkojkl7867";
+        String password = "rajan123";
+        String status = "approved";
+
+        Employee e1 = new Employee(otp, name, email, address, telephone, category, status, password, managerid, adhar, pan);
+
+        employeeservice.addEmployee(e1);
+
+    }
 }

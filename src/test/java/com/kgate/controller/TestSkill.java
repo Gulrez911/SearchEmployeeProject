@@ -1,32 +1,32 @@
 package com.kgate.controller;
 
-import com.kgate.dao.SkillDao;
-import com.kgate.model.Skill;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
+import com.kgate.model.Employee;
+import com.kgate.model.Skill;
+import com.kgate.service.EmployeeService;
+import com.kgate.service.SkillService;
+import java.util.List;
 
-@ContextConfiguration({"classpath*:spring-servlet.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:appContext.xml"})
+
 public class TestSkill {
 
-//    @Autowired(required = true)
-//    private SkillDao dao
+    @Autowired
+    SkillService skillService;
 
-//    @Test
-//    @Transactional
-//    @Rollback(true)
-//    public void test() {
-//        int skill_id = 1;
-//        Skill skill = new Skill();
-//        skill = dao.getSkill(skill_id);
-//        System.out.println("Skill Name:    " + skill);
-//    }
+    @Test
+    public void getSkillList() {
+
+//        List<Skill> list = skillService.getAllSkills();
+        System.out.println("List of Skills:  ");
+    }
 
 }
