@@ -220,6 +220,11 @@ public class UserController {
   public ModelAndView logout() 
   {
 	  ModelAndView mav = new ModelAndView("login");
+
+      Employee employee = new Employee();
+      mav.addObject("employee", employee);
+      String[] userType = {"Admin", "Employee", "Manager"};
+      mav.addObject("userTypes", userType);
 	return mav;
   }
 }
