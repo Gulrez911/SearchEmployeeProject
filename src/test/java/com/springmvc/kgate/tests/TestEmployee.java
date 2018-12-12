@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package com.springmvc.kgate.tests;
- 
+import org.springframework.beans.factory.annotation.Autowired;
 import com.kgate.dao.EmployeeDAO;
 import com.kgate.dao.SkillDao;
 import com.kgate.model.Skill;
+import com.kgate.service.EmployeeService;
+import com.kgate.service.SkillService;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.junit.Test;
@@ -22,22 +24,17 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author user
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
-//@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-servlet.xml" })
-//@ContextConfiguration({"file:WEB-INF/spring-servlet.xml"})
-
-@Transactional
+@ContextConfiguration({"classpath*:spring-servlet.xml"})
 public class TestEmployee {
 
     @Autowired
-    EmployeeDAO edao;
+    private EmployeeService employeeService;
 
-    @Autowired
-    SkillDao skillDao;
 
-   
+	@Autowired
+	private SkillService skillService;
+
 //    @Rollback(value = false)
-    
 //    @Test
 //    @Rollback(value = false)
 //    public void getEmployeeSkill(){
@@ -53,5 +50,14 @@ public class TestEmployee {
 //        System.out.println("List of Skill:  " + li.size());
 //       
 //    }
+    
+    @Test
+    @Rollback(true)
+    public void test() {
+        int skill_id = 1;
+        Skill skill = new Skill();
+        skill = skillService.getSkill(skill_id);
+        System.out.println("Skill Name:    " + skill);
+    }
 
 }
