@@ -31,7 +31,7 @@
                     <tr>
                         <td style="color: yellow">Name:</td>
                         <td><form:input path="name" required="required" /></td>
-                    <td><form:errors path="email" cssClass="error" /></td>
+                        <td><form:errors path="email" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td style="color: yellow">Email:</td>
@@ -47,7 +47,10 @@
                         <td><form:input path="telephone" /></td>
 
                     </tr>
-
+                    <tr>
+                        <td style="color:white">OTP:</td>
+                        <td><form:input path="otp" readonly="true"/></td>
+                    </tr>
                     <tr>
                         <td style="color: white">Password:</td>
                         <td><form:input path="password" type="password"
@@ -56,21 +59,21 @@
                     <tr>
                         <td style="color: white">Aadhar No.:</td>
                         <td><form:input path="aadhar" required="required" /></td>
-                    <td><form:errors path="aadhar" cssClass="error" /></td>
+                        <td><form:errors path="aadhar" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td style="color: white">Pan No.:</td>
                         <td><form:input path="pan" required="required" /></td>
-                    <td><form:errors path="pan" cssClass="error" /></td>
+                        <td><form:errors path="pan" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td style="color: white">User Type:</td>
                         <td><form:select path="category" name="userTypes"
                                      readonly="true">
 
-                        <form:options items="${userTypes}" />
+                                <form:options items="${userTypes}" />
 
-                    </form:select></td>
+                            </form:select></td>
                     </tr>
 
                     <tr>
@@ -94,13 +97,13 @@
                         <td style="color: yellow">Skills: </font></td>
                         <td><form:select path="skills" required="true">
 
-                        <form:options items="${listSkill}" />
-                    </form:select>
-                    <td>
-                        </tr>
+                                <form:options items="${listSkill}" />
+                            </form:select>
+                        <td>
+                    </tr>
 
                     <tr>
-                        <td><input type="submit" value="Send OTP" name="action1" /></td>
+
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save" name="action2"></td>
                     </tr>
