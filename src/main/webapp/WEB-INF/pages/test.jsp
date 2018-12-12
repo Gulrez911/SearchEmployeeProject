@@ -18,12 +18,13 @@ th, td {
 }
 
 tr:nth-child(even) {
-	background-color: #f2f2f2
+	color: white;
 
 }
-tr:nth-child {
-		background-color: pink
-	}
+tr:nth-child(odd){
+color: white;
+}
+ 
 th {
 	background-color: #4CAF50;
 	color: white;
@@ -67,6 +68,8 @@ th {
 				</tr>
 			</c:forEach>
 		</table>
+		<form action="success"><input type="submit" value="Back"></form>
+		
 	</div>
 </body>
 </html>

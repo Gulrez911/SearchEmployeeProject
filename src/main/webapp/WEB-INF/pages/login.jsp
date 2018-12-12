@@ -57,7 +57,8 @@
                     type="video/mp4">
             <!-- Your browser does not support HTML5 video.eeeve -->
         </video>
-        <	<div class="content"><form:form action="authenticate" method="post" commandName="employee">
+    	<div class="content">
+    	<form:form action="authenticate" method="post" commandName="employee">
                 <table align="center">
                     <tr>
                         <td style="color: white">User Name:</td>

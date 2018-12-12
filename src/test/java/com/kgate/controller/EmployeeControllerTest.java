@@ -25,12 +25,10 @@ public class EmployeeControllerTest {
 		fail("Not yet implemented");
 	}*/
 	
-	@Before
-	public  void   get(){
+	
 		
 		
-		
-	}
+	
 	@Test
 	public void search() throws IOException {
 		EmployeeController ec=new EmployeeController();
