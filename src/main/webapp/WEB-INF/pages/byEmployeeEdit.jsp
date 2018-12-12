@@ -1,5 +1,7 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -28,18 +30,20 @@
                 <form:errors path="*" cssClass="errorblock" element="div" />
                 <table>
                     <form:hidden path="id" />
+                    <form:hidden path="category" />
+                      <form:hidden path="otp" />
                     <tr>
                         <td style="color: yellow">Name:</td>
-                        <td><form:input path="name" required="required" /></td>
+                        <td><form:input path="name" required="required" readonly="true" /></td>
                         <td><form:errors path="email" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td style="color: yellow">Email:</td>
-                        <td><form:input path="email" type="email" required="required" /></td>
+                        <td><form:input path="email" type="email" required="required" readonly="true" /></td>
                     </tr>
                     <tr>
                         <td style="color: yellow">Address:</font></td>
-                        <td><form:input path="address" /></td>
+                        <td><form:input path="address" readonly="true"/></td>
                     </tr>
                     <tr>
 
@@ -47,10 +51,7 @@
                         <td><form:input path="telephone" /></td>
 
                     </tr>
-                    <tr>
-                        <td style="color:white">OTP:</td>
-                        <td><form:input path="otp" readonly="true"/></td>
-                    </tr>
+
                     <tr>
                         <td style="color: white">Password:</td>
                         <td><form:input path="password" type="password"
@@ -66,19 +67,10 @@
                         <td><form:input path="pan" required="required" /></td>
                         <td><form:errors path="pan" cssClass="error" /></td>
                     </tr>
-                    <tr>
-                        <td style="color: white">User Type:</td>
-                        <td><form:select path="category" name="userTypes"
-                                     readonly="true">
-
-                                <form:options items="${userTypes}" />
-
-                            </form:select></td>
-                    </tr>
-
+                   
                     <tr>
                         <td style="color: white">ManagerId</td>
-                        <td><form:input path="managerId" /></td>
+                        <td><form:input path="managerId" readonly="true"/></td>
                     </tr>
                     <tr>
                         <td style="color: white">Status</td>
@@ -103,7 +95,7 @@
                     </tr>
 
                     <tr>
-
+                        <!--                        <td><input type="submit" value="Send OTP" name="action1" /></td>-->
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save" name="action2"></td>
                     </tr>
