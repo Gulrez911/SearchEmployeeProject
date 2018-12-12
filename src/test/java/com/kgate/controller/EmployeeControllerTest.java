@@ -15,8 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
  
 
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations= {"classpath:spring-mvc-servlet.xml"})
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring-servlet.xml"})
+
+@ContextConfiguration(locations= {"classpath:spring-servlet.xml"})
 
 public class EmployeeControllerTest {
 
@@ -25,12 +25,10 @@ public class EmployeeControllerTest {
 		fail("Not yet implemented");
 	}*/
 	
-	@Before
-	public  void   get(){
+	
 		
 		
-		
-	}
+	
 	@Test
 	public void search() throws IOException {
 		EmployeeController ec=new EmployeeController();

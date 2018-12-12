@@ -173,18 +173,51 @@ public class Employee implements Serializable {
         this.status = status;
     }
 
-    public String getPassword() {
-        return password;
-    }
- 
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	
+	
+	
+	
+	
+	public Employee( String otp, String name, String email,
+			String address, String telephone, String category, String status, String password, int managerId,
+			String aadhar, String pan) {
+		super();
+		
+		this.otp = otp;
+		this.name = name;
+		this.email = email;
+		this.address = address;
+		this.telephone = telephone;
+		this.category = category;
+		this.status = status;
+		this.password = password;
+		this.managerId = managerId;
+		this.aadhar = aadhar;
+		this.pan = pan;
+	}
 
-    public String getCategory() {
-        return category;
-    }
+	
+
+	public Employee() {
+		super();
+	}
+
+	
+
+	 public String getPassword() {
+	        return password;
+	    }
+	 
+
+
+	    public void setPassword(String password) {
+	        this.password = password;
+	    }
+
+	    public String getCategory() {
+	        return category;
+	    }
 
     
 

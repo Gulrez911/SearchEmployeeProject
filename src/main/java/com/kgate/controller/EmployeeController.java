@@ -64,7 +64,12 @@ public class EmployeeController {
 		return id;
 	}
 
-
+	 @RequestMapping(value = "/success")
+	 public ModelAndView success()
+	 {
+		  ModelAndView mav = new ModelAndView("success");
+		return mav;
+	 }
 
 
 
