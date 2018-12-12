@@ -216,7 +216,12 @@ public class UserController {
      return mav;
 
   }
-
+  @RequestMapping(value = "/logout")
+  public ModelAndView logout() 
+  {
+	  ModelAndView mav = new ModelAndView("login");
+	return mav;
+  }
 }
  
  

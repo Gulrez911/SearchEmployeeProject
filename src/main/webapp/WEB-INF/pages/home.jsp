@@ -80,6 +80,7 @@
             <h4><font style="color: darkorange">
                     New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
             </h4>
+            <form action="logout"><input type="submit" value="LogOut"></form>
         </div>
     </body>
 </html>

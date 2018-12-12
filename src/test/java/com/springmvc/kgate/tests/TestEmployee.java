@@ -23,10 +23,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
-//@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring-servlet.xml" })
-//@ContextConfiguration({"file:WEB-INF/spring-servlet.xml"})
-
-@Transactional
 public class TestEmployee {
 
     @Autowired
@@ -45,13 +41,13 @@ public class TestEmployee {
 ////        List<Skill> skill = skillDao.getEmployeeSkill(id);
 ////        System.out.println("Skill List:    "+skill);
 //    }
-//    @Test
-//    @Rollback(value = false)
-//    public void getAllSkills() {
-//
-//        List<Skill> li = skillDao.getAllSkill();
-//        System.out.println("List of Skill:  " + li.size());
-//       
-//    }
+    @Test
+    @Rollback(value = false)
+    public void getAllSkills() {
+
+        List<Skill> li = skillDao.getAllSkill();
+        System.out.println("List of Skill:  " + li.size());
+       
+    }
 
 }
