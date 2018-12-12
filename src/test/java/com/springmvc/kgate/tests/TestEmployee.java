@@ -26,7 +26,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
  
 @ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
- 
+
 public class TestEmployee {
 
     @Autowired
@@ -44,32 +44,14 @@ public class TestEmployee {
 ////        List<Skill> skill = skillDao.getEmployeeSkill(id);
 ////        System.out.println("Skill List:    "+skill);
 //    }
- 
-//    @Test
-//    @Rollback(value = false)
-//    public void getAllSkills() {
-//
-//        List<Skill> li = skillDao.getAllSkill();
-//        System.out.println("List of Skill:  " + li.size());
-//       
-//    }
-//    
-//    @Test
-//    @Rollback(true)
-//    public void test() {
-//        int skill_id = 1;
-//        Skill skill = new Skill();
-//        skill = skillService.getSkill(skill_id);
-//        System.out.println("Skill Name:    " + skill);
- 
+
     @Test
     @Rollback(value = false)
     public void getAllSkills() {
 
         List<Skill> li = skillService.getAllSkills();
         System.out.println("List of Skill:  " + li.size());
-       
- 
+     
     }
 
 }
