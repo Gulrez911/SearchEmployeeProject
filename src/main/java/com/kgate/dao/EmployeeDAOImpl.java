@@ -110,21 +110,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public List<Employee> displayByManagerId(String email) {
 
 
-<<<<<<< HEAD
+
+
 	    String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='"+email+"') ";
 //       String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where category='Employee' and managerId=(select ManagerId from employee123 where category='Manager' and email='"+email+"')";
+ //        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='" + email + "') ";
 
-=======
->>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
-//        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='" + email + "') ";
-<<<<<<< HEAD
        
 
-=======
-        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where category='Employee' and managerId=(select id from employee123 where category='Manager' and email='" + email + "')";
 
-        /*String query = "select  name,address,telephone,email,category from Employee   where managerId=(select id from Employee where email='"+email+"') "; */
->>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
+       
+ 
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
         List<Employee> emp = new ArrayList<>();
         for (Object d : data) {
