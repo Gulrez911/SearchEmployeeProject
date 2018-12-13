@@ -12,7 +12,7 @@ import com.kgate.model.Employee;
 import com.kgate.service.EmployeeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations= {"file:E://eclips//Nikita//SearchEmployeeProject//src//main//webapp//WEB-INF//spring-servlet.xml"})
+@ContextConfiguration(locations= {"classpath:appContext.xml"})
 public class EmployeeServiceTest 
 {
 	@Autowired
