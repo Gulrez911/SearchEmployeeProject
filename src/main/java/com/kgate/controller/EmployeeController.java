@@ -85,30 +85,33 @@ public class EmployeeController {
     @RequestMapping(value = "/search_employeelist_skill1")
     public ModelAndView searchEmployeeBySkill1(ModelAndView model, @RequestParam("skillSearch") String skillSearch)
             throws IOException {
-
-        int flag = 1;
+int flag=1;
+    	List<Employee> listEmployee=null;
 
         List<Skill> listSkill = skillService.getAllSkills();
-        if (skillSearch.length() > 2) {
-            for (Skill s : listSkill) {
+    
+            for (Skill s : listSkill)
+        {
                 String a = s.getSkill_name().toLowerCase();
-                if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch)) {
-                    List<Employee> listEmployee = employeeService.searchEmployeesBySkill(a);
+                if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch)) 
+                {
+                    listEmployee = employeeService.searchEmployeesBySkill(a);
                     model.addObject("listEmployee", listEmployee);
-                    flag = 0;
+                 flag=0;
+                    
                 }
-            }
+        }
+            if(flag==1)
+            {
+            	
+                    model.addObject("error", "data not found");
+                    model.setViewName("home");
+                    return model;
+        
 
-        } else {
-            model.addObject("error", "data not found");
-            model.setViewName("home");
-            return model;
-        }
-        if (flag == 1) {
-            model.addObject("error", "data not found");
-            model.setViewName("home");
-            return model;
-        }
+                
+            }
+            model.addObject("listEmployee", listEmployee);
         model.setViewName("home");
         return model;
 
