@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.springmvc.kgate.tests;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import com.kgate.dao.EmployeeDAO;
 import com.kgate.dao.SkillDao;
@@ -24,17 +25,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author user
  */
 @RunWith(SpringJUnit4ClassRunner.class)
- 
-@ContextConfiguration(locations = {"classpath:spring-servlet.xml"})
+
+@ContextConfiguration(locations = {"classpath:appContext.xml"})
 
 public class TestEmployee {
 
     @Autowired
     private EmployeeService employeeService;
 
-
-	@Autowired
-	private SkillService skillService;
+    @Autowired
+    private SkillService skillService;
 
 //    @Rollback(value = false)
 //    @Test
@@ -44,14 +44,12 @@ public class TestEmployee {
 ////        List<Skill> skill = skillDao.getEmployeeSkill(id);
 ////        System.out.println("Skill List:    "+skill);
 //    }
-
     @Test
     @Rollback(value = false)
     public void getAllSkills() {
-
         List<Skill> li = skillService.getAllSkills();
-        System.out.println("List of Skill:  " + li.size());
-     
+      
+
     }
 
 }

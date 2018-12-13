@@ -1,4 +1,4 @@
-package com.kgate.dao;
+package com.springmvc.kgate.tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -20,13 +20,8 @@ import java.util.List;
 public class TestSkill {
 
     @Autowired
-    SkillService skillService;
+    EmployeeService employeeservice;
 
-    @Test
-    public void getSkillList() {
-
-//        List<Skill> list = skillService.getAllSkills();
-        System.out.println("List of Skills:  ");
-    }
+   
 
 }
