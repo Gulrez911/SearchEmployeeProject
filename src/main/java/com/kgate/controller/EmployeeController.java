@@ -104,7 +104,7 @@ int flag=1;
             if(flag==1)
             {
             	
-                    model.addObject("error", "data not found");
+                    model.addObject("error", "Data not found");
                     model.setViewName("home");
                     return model;
         
