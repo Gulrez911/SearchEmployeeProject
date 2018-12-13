@@ -87,26 +87,17 @@ public class UserController {
 
                 return mav;
 
-            } else if (employee.getCategory().equals("Manager")) {
+            }
+            else if (employee.getCategory().equals("Manager")) {
                 ModelAndView mav = new ModelAndView("ManagerSuccess");
                 List<Employee> elist = employeeService.displayByManagerId(email);
                 mav.addObject("elist", elist);
-                /*Employee e=new Employee();
-=======
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
-                return mav;
-
-            } else if (employee.getCategory().equals("Manager")) {
-                ModelAndView mav = new ModelAndView("ManagerSuccess");
-                List<Employee> elist = employeeService.displayByManagerId(email);
-                mav.addObject("elist", elist);
-                /*Employee e=new Employee();
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
-        	mav.addObject("employee", e);*/
+             
 
                 return mav;
 
-            } else if (employee.getCategory().equals("Employee")) {
+            }
+            else if (employee.getCategory().equals("Employee")) {
 
                 /*Get all data required for Person jsp and set in ModelAndView*/
                 ModelAndView mav = new ModelAndView("byEmployeeEdit");
@@ -135,28 +126,7 @@ public class UserController {
                 mav.addObject("skill", skill);
                 return mav;
 
-//                ModelAndView mav = new ModelAndView("EditEmployee");
-//                Employee emp = employeeService.searchByEmail(employee.getEmail());
-//                mav.addObject("employee", emp);
-//                List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
-//                System.out.println("List of EmployeeSkill:   " + employeeSkill);
-//
-//                List<Skill> listSkill = skillService.getAllSkills();
-//
-//                List<String> sk = new ArrayList<>();
-//                for (int i = 0; i < employeeSkill.size(); i++) {
-//                    Object o = employeeSkill.get(i);
-//                    String s = (String) o;
-//                    sk.add(s);
-//                }
-//                employee.setSkills(sk);
-//
-//                mav.addObject("listSkill", listSkill);
-//
-//                Skill skill = new Skill();
-//                mav.addObject("skill", skill);
-//
-//                return mav;
+
             } else {
                 modelMap.put("error", "Invalid UserName / Password");
                 ModelAndView mav = new ModelAndView("login");

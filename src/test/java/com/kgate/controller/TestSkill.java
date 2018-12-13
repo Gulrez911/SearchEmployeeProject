@@ -1,4 +1,4 @@
-package com.kgate.dao;
+package com.kgate.controller;
 
 import static org.junit.Assert.assertEquals;
 
