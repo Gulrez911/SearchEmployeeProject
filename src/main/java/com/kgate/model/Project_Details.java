@@ -11,16 +11,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Project_Details")
-public class Project_Details
-{
-	  @Id
+public class Project_Details {
+
+	 @Id
 	  @GeneratedValue(strategy = GenerationType.AUTO)
 	  private int project_id;
 	  
 	  @Column
 	  private String project_Name;
 	  @Column
-	  private String desc;
+	  private String project_desc;
 	  @Column
 	  private Date pstart_Time;
 	  @Column
@@ -37,11 +37,12 @@ public class Project_Details
 	public void setProject_Name(String project_Name) {
 		this.project_Name = project_Name;
 	}
-	public String getDesc() {
-		return desc;
+	
+	public String getProject_desc() {
+		return project_desc;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setProject_desc(String project_desc) {
+		this.project_desc = project_desc;
 	}
 	public Date getPstart_Time() {
 		return pstart_Time;
@@ -57,11 +58,14 @@ public class Project_Details
 	}
 	@Override
 	public String toString() {
-		return "Project_Details [project_id=" + project_id + ", project_Name=" + project_Name + ", desc=" + desc
-				+ ", pstart_Time=" + pstart_Time + ", pEnd_Time=" + pEnd_Time + "]";
+		return "Project_Details [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
+				+ project_desc + ", pstart_Time=" + pstart_Time + ", pEnd_Time=" + pEnd_Time + "]";
 	}
-	  
-	  
-	  
+	
 
+	  
+	  
+	
+	
+	
 }
