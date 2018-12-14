@@ -1,5 +1,18 @@
 package com.kgate.service;
 
-public class ProjectServiceImpl {
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.kgate.dao.ProjectDao;
+import com.kgate.model.Project_Details;
+
+public class ProjectServiceImpl implements ProjectService
+{
+  
+
+@Override
+public void createProject(Project_Details project) {
+	
+	
+}
 }
