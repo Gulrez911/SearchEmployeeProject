@@ -1,8 +1,8 @@
 package com.kgate.service;
 
-import com.kgate.model.Project_Details;
+import com.kgate.model.ProjectDetails;
 
 public interface ProjectService 
 {
-    public void createProject(Project_Details project);
+    public void createProject(ProjectDetails project);
 }
