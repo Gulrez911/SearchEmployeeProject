@@ -8,8 +8,7 @@ import com.kgate.model.Project_Details;
 
 public class ProjectServiceImpl implements ProjectService
 {
-   @Autowired	
-   private SessionFactory sessionFactory;
+  
 
 @Override
 public void createProject(Project_Details project) {
