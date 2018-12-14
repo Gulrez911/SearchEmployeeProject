@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Task_Details")
-public class Task_Details {
+public class TaskDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
