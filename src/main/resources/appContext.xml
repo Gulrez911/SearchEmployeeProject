@@ -28,13 +28,12 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver "></property>
   
 
-        <property name="url" value="jdbc:mysql://localhost:3306/employee"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/gul"></property>
 
-     
 
         <property name="username" value="root"></property>
 
-        <property name="password" value="k-gate"></property>
+        <property name="password" value="7326"></property>
    
     </bean>
  
