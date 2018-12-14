@@ -1,8 +1,8 @@
 package com.kgate.dao;
 
-import com.kgate.model.Project_Details;
+import com.kgate.model.ProjectDetails;
 
 public interface ProjectDao 
 {
-	  public void createProject(Project_Details project);
+	  public void createProject(ProjectDetails project);
 }
