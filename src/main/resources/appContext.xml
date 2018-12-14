@@ -27,19 +27,14 @@
           id="dataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver "></property>
   
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         <property name="url" value="jdbc:mysql://localhost:3306/employee"></property>
-=======
-        <property name="url" value="jdbc:mysql://localhost:3306/gul"></property>
->>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
-=======
-        <property name="url" value="jdbc:mysql://localhost:3306/gul"></property>
->>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
+
+     
 
         <property name="username" value="root"></property>
 
-        <property name="password" value="7326"></property>
+        <property name="password" value="k-gate"></property>
    
     </bean>
  
