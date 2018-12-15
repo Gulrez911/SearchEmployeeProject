@@ -1,5 +1,12 @@
 package com.kgate.service;
 
-public interface ProjectService {
+import java.util.List;
 
+import com.kgate.model.ProjectDetails;
+
+public interface ProjectService 
+{
+    public void createProject(ProjectDetails project);
+    
+    List<ProjectDetails> dispalyProjects();
 }

@@ -1,5 +1,12 @@
 package com.kgate.dao;
 
-public interface ProjectDao {
+import java.util.List;
 
+import com.kgate.model.ProjectDetails;
+
+public interface ProjectDao 
+{
+	  public void createProject(ProjectDetails project);
+	  
+	  List<ProjectDetails> dispalyProjects();
 }

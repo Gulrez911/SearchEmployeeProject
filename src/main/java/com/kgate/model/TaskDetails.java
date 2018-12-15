@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Task_Details")
-public class Task_Details {
+public class TaskDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,12 +27,11 @@ public class Task_Details {
     private Date tStart_Time;
     @Column
     private Date tEnd_Time;
-
     @Column
     private String Emp_Email;
     @Column
     private Date tSub_Date;
- 
+
     public int getTask_id() {
         return task_id;
     }
