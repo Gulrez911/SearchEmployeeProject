@@ -11,6 +11,8 @@ public interface TaskDao {
 	
 	public void addTask(Task task);
 	
+	
+	
 	 public List<TaskDetails> getAllTask();
 	 
 	

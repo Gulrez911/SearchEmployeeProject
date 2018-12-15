@@ -21,6 +21,8 @@ import com.kgate.service.EmployeeService;
 import com.kgate.service.LoginService2;
 import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
+import com.kgate.service.TaskService;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +52,9 @@ public class UserController {
     
     @Autowired
     private ProjectService projectservice;
+    
+    @Autowired
+    private TaskService taskservice;
 
     public void setloginService1(LoginService2 loginservice2) {
         this.loginservice2 = loginservice2;
@@ -70,17 +75,24 @@ public class UserController {
         return mav;
     }
 
-    public ModelAndView ct() {
+    /*public ModelAndView ct() {
     	ModelAndView mav=new ModelAndView("createtask");
     	TaskDetails TaskDetails=new TaskDetails();
     	mav.addObject("task",TaskDetails);
     	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
     	mav.addObject("task_Type",Tasktype);
+    	return mav;*/
+    
+  /*  @RequestMapping(value=    ,method = RequestMethod.GET)
+    public ModelAndView addingtask() {
+    	ModelAndView mav=new ModelAndView("createtask");
+    	taskservice.addTask();
+    	String message ="Task is successfully added";
     	return mav;
+    	
     }
     
-    
-    
+    */ 
     
     
     
@@ -121,6 +133,19 @@ public class UserController {
                 List<ProjectDetails> pdlist=projectservice.dispalyProjects();
                  mav.addObject("projectdetails", projectdetails);
                  mav.addObject("pdlist", pdlist);
+                 
+                 
+                /* ModelAndView mav = new ModelAndView("createtask");
+                 TaskDetails taskdetails=new TaskDetails();
+                 List<TaskDetails> tdlist=taskservice.getAllTask();
+                 mav.addObject("taskdetails",taskdetails);
+                
+                 String[] task_Type= {"Coding","Design","Integration","Quality","Testing"};
+               	mav.addObject("task_Type",task_Type);
+               	
+               	List<TaskDetails> tdlist=taskservice.getAllTask();
+              
+               	mav.addObject("tdlist",tdlist);*/
              
 
                 return mav;
