@@ -48,7 +48,7 @@
 			</table>
 		</form:form>
 	</div>
-	<%-- <div>
+	<div>
 		<div align="right" style="size: 50%">
 			<h1>Right</h1>
 		</div>
@@ -76,6 +76,6 @@
 
 
 
-	</div> --%>
+	</div>
 </body>
 </html>

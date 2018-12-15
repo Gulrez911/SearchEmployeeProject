@@ -1,5 +1,7 @@
 package com.kgate.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,9 +21,18 @@ public class ProjectController {
 	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
 		ModelAndView model = new ModelAndView("success");
 		projectservice.createProject(projectDetails);
-
+		projectDetails = new ProjectDetails();
+			List<ProjectDetails> pdlist = projectservice.dispalyProjects();
+			 model.addObject("projectdetails", projectDetails);
+			 model.addObject("pdlist", pdlist);
 		return model;
 
 	}
 
+	@RequestMapping(value = "/showproject", method = RequestMethod.POST)
+	public ModelAndView showProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) 
+	{
+		return null;
+	
+	}
 }

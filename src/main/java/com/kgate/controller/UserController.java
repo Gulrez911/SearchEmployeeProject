@@ -76,7 +76,7 @@ public class UserController {
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ModelAndView authenticate(ModelMap modelMap, @ModelAttribute("employee") Employee employee,
-			HttpServletRequest request, Map<String, Object> map, @RequestParam("email") String email) {
+			HttpServletRequest request, Map<String, Object> map, @RequestParam("email") String email, @ModelAttribute("projectDetails") ProjectDetails projectDetails) {
 
 		/*
 		 * validate whether person is in database and person user and password are
@@ -95,9 +95,9 @@ public class UserController {
 
 			} else if (employee.getCategory().equals("Manager")) {
 				ModelAndView mav = new ModelAndView("CreateProject");
-				ProjectDetails projectdetails = new ProjectDetails();
+				projectDetails = new ProjectDetails();
 				List<ProjectDetails> pdlist = projectservice.dispalyProjects();
-				mav.addObject("projectdetails", projectdetails);
+				mav.addObject("projectDetails", projectDetails);
 				mav.addObject("pdlist", pdlist);
 
 				return mav;

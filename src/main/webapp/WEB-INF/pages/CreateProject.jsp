@@ -25,22 +25,22 @@
 		<h1 style="color: orangered">Create Project</h1>
 
 		<form:form action="cproject" method="post"
-			modelAttribute="projectdetails" commandName="projectdetails">
+			modelAttribute="projectDetails" commandName="projectDetails">
 			<table>
 				<form:hidden path="project_id" />
 				<tr>
 					<td>Project Name:</td>
-					<td><form:input type="text" path="project_Name" /></td>
+					<td><form:input type="text" path="project_Name" name="project_Name"/></td>
 				</tr>
 				<tr>
 					<td>Description:</td>
-					<td><form:textarea path="project_desc" rows="5" cols="5" /></td>
+					<td><form:textarea path="project_desc" rows="5" cols="5" name="project_Name"/></td>
 				</tr>
 
 
 				<tr>
 					<td>Project Start Date:</td>
-					<td><form:input path="pstart_Date" /></td>
+					<td><form:input path="pstart_Date"  name="pstart_Date"/></td>
 				</tr>
 				
 				<tr>
@@ -55,9 +55,48 @@
 
 				</tr>
 			</table>
-		</form:form>
+			
+			
+			<br>
+			
+			<table border="1">
+					<th>PROJECTS</th>
+					
+					<c:forEach var="projectDetails" items="${pdlist}">
+						<tr>
+						<td>${projectDetails.project_Name}</td>
+							
+						</tr>
+					</c:forEach>
+				</table>
+	
+	</form:form>
+
+	<%-- </div>
+	
+	<!-- <div>
+		<div align="right" style="size: 50%">
+			<h1>Right</h1>
+		</div> -->
+
+		<div align="left" style="size: 50%">
+			<h1>left</h1>
+			<form:form action=""  commandName="projectDetails">
+				
+			</form:form>
+		</div>
 
 
-	</div>
+
+
+<!-- 	</div>
+	 -->
+	
+	
+	
+	 --%>
+	
+	
+	
 </body>
 </html>

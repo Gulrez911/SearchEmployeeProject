@@ -25,11 +25,13 @@ public class ProjectDetails {
 
     @Column
     private String project_Name;
+    
     @Column
     private String project_desc;
 
     @Column
     private Date pstart_Date;
+    
     @Column
     private Date pEnd_Date;
 
