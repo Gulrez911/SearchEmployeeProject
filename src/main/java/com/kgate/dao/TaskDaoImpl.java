@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Repository;
 
+
 import com.kgate.model.TaskDetails;
 
 @Repository

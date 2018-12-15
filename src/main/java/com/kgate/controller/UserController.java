@@ -1,31 +1,37 @@
 package com.kgate.controller;
 
-import com.kgate.model.User;
 
-import javax.validation.Valid;
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgate.model.Employee;
-
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
 import com.kgate.model.TaskDetails;
 import com.kgate.model.User;
+
 import com.kgate.service.EmployeeService;
 import com.kgate.service.LoginService2;
+import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.scheduling.config.Task;
+
 import org.springframework.web.servlet.ModelAndView;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +47,9 @@ public class UserController {
 
     @Autowired
     private EmployeeService employeeService;
+    
+    @Autowired
+    private ProjectService projectservice;
 
     public void setloginService1(LoginService2 loginservice2) {
         this.loginservice2 = loginservice2;
@@ -90,7 +99,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ModelAndView authenticate(ModelMap modelMap, @ModelAttribute("employee") Employee employee, HttpServletRequest request, Map<String, Object> map, @RequestParam("email") String email) {
+    public ModelAndView authenticate(ModelMap modelMap, @ModelAttribute("employee") Employee employee, HttpServletRequest request, Map<String, Object> map, @RequestParam("email") String email)  {
 
         /* validate whether person is in database and person user and password
              are matching
@@ -107,9 +116,11 @@ public class UserController {
 
             }
             else if (employee.getCategory().equals("Manager")) {
-                ModelAndView mav = new ModelAndView("ManagerSuccess");
-                List<Employee> elist = employeeService.displayByManagerId(email);
-                mav.addObject("elist", elist);
+                ModelAndView mav = new ModelAndView("DashBordManager");
+                ProjectDetails projectdetails=new ProjectDetails();
+                List<ProjectDetails> pdlist=projectservice.dispalyProjects();
+                 mav.addObject("projectdetails", projectdetails);
+                 mav.addObject("pdlist", pdlist);
              
 
                 return mav;
