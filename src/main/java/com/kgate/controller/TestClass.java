@@ -32,8 +32,9 @@ public class TestClass {
 	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
 		// ModelAndView model = new ModelAndView();
 		ModelAndView model = new ModelAndView("success");
-		projectservice.createProject(projectDetails);
-
+		 projectservice.createProject(projectDetails);
+		
+		   
 		// List<ProjectDetails> pdlist = projectservice.dispalyProjects();
 
 		// model.addObject("projectdetails", projectdetails);
