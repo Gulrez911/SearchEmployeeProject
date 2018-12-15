@@ -1,5 +1,9 @@
 package com.kgate.dao;
 
-public class TaskDaoImpl {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class TaskDaoImpl 
+{
 
 }

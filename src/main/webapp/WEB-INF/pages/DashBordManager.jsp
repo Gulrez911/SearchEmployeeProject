@@ -12,23 +12,27 @@
 <body>
 <center><h1>CREATE PROJECT</h1></center>
 <div>
-	<form action="">
-		<table>
+	<form:form action="createproject"  commandName="projectdetails">
+	
+		<table align="center">
+		
+	           <form:hidden path="project_id"/>
             <tr>
            		 <td>Project Name:</td>
-            	<td><input type="text" path="project_Name"></td>
+            	<td><form:input type="text" path="project_Name"/></td>
             </tr>
             <tr>
             	 <td>Description:</td>
              	 <td><textarea rows="5" cols="5" path="project_desc"></textarea></td>
             </tr>
             <tr>
+            
             	<td>Project Start Date:</td>
-           		 <td></td>
+           		 <td><form:input type="Date" size="12" path="pstart_Date" id="startDate" name="startDate" /></td>
             </tr>
             <tr>
             	<td>Project End Date:</td>
-            	<td></td>
+            	<td><form:input type="Date" size="12" path="pEnd_Date" id="startDate" name="startDate" /></td>
             </tr>
             <tr>
                <td><input type="submit" value="Create Project"></td>
@@ -37,7 +41,31 @@
 
 
 		</table>
-	</form>
+	</form:form>
+</div>
+<div>
+<div align="right" style="size: 50% "><h1>Right</h1></div>
+
+	<div align="left" style="size: 50% "><h1>left</h1>
+		<form action="showproject" commandName="projectdetails">
+			<table border="1">
+				<th>PROJECTS</th>
+   <c:forEach var="projectdetails" items="${pdlist}">
+   <tr>
+ <td ><a href="showproject?name=${projectdetails.project_Name}" style="color:greenyellow">${projectdetails.project_Name}</a></td>
+     </tr>
+   </c:forEach>
+			</table>
+		</form>
+
+</div>
+
+
+
+
+
+
+
 </div>
 </body>
 </html>

@@ -15,26 +15,28 @@ public class ProjectDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int project_id;
+    private Integer project_id;
 
     @Column
     private String project_Name;
     @Column
     private String project_desc;
     @Column
-    private Date pstart_Time;
+    private Date pstart_Date;
     @Column
-    private Date pEnd_Time;
+    private Date pEnd_Date;
 
-    public int getProject_id() {
-        return project_id;
-    }
+    
 
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
-    }
+    public Integer getProject_id() {
+		return project_id;
+	}
 
-    public String getProject_Name() {
+	public void setProject_id(Integer project_id) {
+		this.project_id = project_id;
+	}
+
+	public String getProject_Name() {
         return project_Name;
     }
 
@@ -50,26 +52,30 @@ public class ProjectDetails {
         this.project_desc = project_desc;
     }
 
-    public Date getPstart_Time() {
-        return pstart_Time;
-    }
+	public Date getPstart_Date() {
+		return pstart_Date;
+	}
 
-    public void setPstart_Time(Date pstart_Time) {
-        this.pstart_Time = pstart_Time;
-    }
+	public void setPstart_Date(Date pstart_Date) {
+		this.pstart_Date = pstart_Date;
+	}
 
-    public Date getpEnd_Time() {
-        return pEnd_Time;
-    }
+	public Date getpEnd_Date() {
+		return pEnd_Date;
+	}
 
-    public void setpEnd_Time(Date pEnd_Time) {
-        this.pEnd_Time = pEnd_Time;
-    }
+	public void setpEnd_Date(Date pEnd_Date) {
+		this.pEnd_Date = pEnd_Date;
+	}
 
-    @Override
-    public String toString() {
-        return "Project_Details [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
-                + project_desc + ", pstart_Time=" + pstart_Time + ", pEnd_Time=" + pEnd_Time + "]";
-    }
+	@Override
+	public String toString() {
+		return "ProjectDetails [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
+				+ project_desc + ", pstart_Date=" + pstart_Date + ", pEnd_Date=" + pEnd_Date + "]";
+	}
+
+  
+
+   
 
 }
