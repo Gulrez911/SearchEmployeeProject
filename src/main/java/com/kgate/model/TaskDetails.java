@@ -31,6 +31,12 @@ public class TaskDetails {
     private String Emp_Email;
     @Column
     private Date tSub_Date;
+    @Column
+    private int managerId;
+    @Column
+    private int projectId;
+    @Column
+    private String taskallocation;
 
     public int getTask_id() {
         return task_id;
@@ -96,11 +102,39 @@ public class TaskDetails {
         this.tSub_Date = tSub_Date;
     }
 
-    @Override
-    public String toString() {
-        return "Task_Details [task_id=" + task_id + ", task_Type=" + task_Type + ", task_Name=" + task_Name
-                + ", status=" + status + ", tStart_Time=" + tStart_Time + ", tEnd_Time=" + tEnd_Time + ", Emp_Email="
-                + Emp_Email + ", tSub_Date=" + tSub_Date + "]";
-    }
+    
+    
+    public int getManagerId() {
+		return managerId;
+	}
+
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
+	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getTaskallocation() {
+		return taskallocation;
+	}
+
+	public void setTaskallocation(String taskallocation) {
+		this.taskallocation = taskallocation;
+	}
+
+	@Override
+	public String toString() {
+		return "TaskDetails [task_id=" + task_id + ", task_Type=" + task_Type + ", task_Name=" + task_Name + ", status="
+				+ status + ", tStart_Time=" + tStart_Time + ", tEnd_Time=" + tEnd_Time + ", Emp_Email=" + Emp_Email
+				+ ", tSub_Date=" + tSub_Date + ", managerId=" + managerId + ", projectId=" + projectId
+				+ ", taskallocation=" + taskallocation + "]";
+	}
+
 
 }
