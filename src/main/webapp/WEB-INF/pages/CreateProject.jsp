@@ -24,7 +24,7 @@
         <div align="center">
             <h1 style="color: orangered">Create Project</h1>
 
-<<<<<<< HEAD
+
             <form:form action="cproject" method="post"
                        modelAttribute="projectdetails" commandName="projectdetails">
                 <table>
@@ -39,57 +39,34 @@
                     </tr>
                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date"></form:input></td>
+                        <td><form:input path="pstart_Date" /></td>
                     </tr>
                     <tr>
                         <td>Project End Date:</td>
-                       <td><form:input path="pEnd_Date"/></td>
-                    </tr>
-=======
-		<form:form action="cproject" method="post"
-			modelAttribute="projectdetails" commandName="projectdetails">
-			<table>
-				<form:hidden path="project_id" />
-				<tr>
-					<td>Project Name:</td>
-					<td><form:input type="text" path="project_Name" /></td>
-				</tr>
-				<tr>
-					<td>Description:</td>
-					<td><form:textarea path="project_desc" rows="5" cols="5" /></td>
-				</tr>
->>>>>>> origin/master
-
-<<<<<<< HEAD
+                        <td><form:input type="text" path="pEnd_Date" id="endDate"
+                                    name="endDate" /></td>
+                    </tr> 
                     <tr>
                         <td><input type="submit" value="Create Project"></td>
-=======
-
-				<tr>
-					<td>Project Start Date:</td>
-					<td><form:input path="pstart_Date" /></td>
-				</tr>
-				
-				<tr>
-					<td>Project End Date:</td>
-					<td><form:input type="text" path="pEnd_Date" id="endDate"
-							name="endDate" /></td>
-				</tr> 
->>>>>>> origin/master
-
-<<<<<<< HEAD
                     </tr>
                 </table>
             </form:form>
-=======
-				<tr>
 
-					<td><input type="submit" value="Create Project"></td>
+            <table border="1">
 
-				</tr>
-			</table>
-		</form:form>
->>>>>>> origin/master
+
+                <th>Project Name</th>
+                <th>Create Task</th>
+                    <c:forEach var="pd" items="${listProject}">
+                    <tr>
+
+                        <td>${pd.project_Name}</td>
+                        <td>
+                            <a href="Create Task?project_id=${pd.project_id}">Create Task</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
 
 
         </div>

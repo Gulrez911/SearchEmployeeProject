@@ -10,24 +10,21 @@ import org.springframework.stereotype.Repository;
 import com.kgate.model.ProjectDetails;
 
 @Repository
-public class ProjectDaoImpl implements ProjectDao
-{
-	 @Autowired	
-	   private SessionFactory sessionFactory;
+public class ProjectDaoImpl implements ProjectDao {
 
-	@Override
-	public void createProject(ProjectDetails project) {
-		  Session s = this.sessionFactory.getCurrentSession();
-		  s.saveOrUpdate(project);
-	}
+    @Autowired
+    private SessionFactory sessionFactory;
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<ProjectDetails> dispalyProjects() {
-		Session s = this.sessionFactory.getCurrentSession();
-		String Query="select project_Name from Project_Details";
-		
-		
-		return s.createSQLQuery(Query).list();
-	}
+    @Override
+    public void createProject(ProjectDetails project) {
+        Session s = this.sessionFactory.getCurrentSession();
+        s.saveOrUpdate(project);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<ProjectDetails> dispalyProjects() {
+        return sessionFactory.getCurrentSession().createQuery("from ProjectDetails")
+                .list();
+    }
 }
