@@ -14,10 +14,10 @@
                 <table align="center">
                     <tr>
                         <td style="color: black">Task Name:</td>
-                        <td><form:input name="task_Name" path="task_Name" type="task_Name" id="nm" /></td>
+                        <td><form:input name="task_Name" path="task_Name" type="task_Name" id="tn" /></td>
                     </tr>
                     <tr>
-                        <td><form:select path="Tasktype" name="task_Type">
+                        <td><form:select path="Tasktype" name="task_Type" >
 
                                 <form:options items="${task_Type}" />
                     </tr>            

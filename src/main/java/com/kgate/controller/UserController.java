@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kgate.model.Employee;
 
 import com.kgate.model.Skill;
+import com.kgate.model.TaskDetails;
 import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.LoginService2;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -59,6 +61,22 @@ public class UserController {
         return mav;
     }
 
+    public ModelAndView ct() {
+    	ModelAndView mav=new ModelAndView("createtask");
+    	TaskDetails TaskDetails=new TaskDetails();
+    	mav.addObject("task",TaskDetails);
+    	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
+    	mav.addObject("task_Type",Tasktype);
+    	return mav;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee) {
         employeeService.updateEmployee(employee);
