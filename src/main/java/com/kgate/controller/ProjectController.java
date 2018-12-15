@@ -11,12 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.ProjectDetails;
 import com.kgate.service.ProjectService;
+import java.util.List;
 
 @Controller
 public class ProjectController {
-	@Autowired
-	ProjectService projectservice;
 
+/*<<<<<<< HEAD
 	@RequestMapping(value = "/cproject", method = RequestMethod.POST)
 	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
 		ModelAndView model = new ModelAndView("success");
@@ -26,8 +26,36 @@ public class ProjectController {
 			 model.addObject("projectdetails", projectDetails);
 			 model.addObject("pdlist", pdlist);
 		return model;
+=======*/
+    @Autowired
+    ProjectService projectservice;
 
-	}
+    @RequestMapping(value = "/cproject", method = RequestMethod.POST)
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+        ModelAndView model = new ModelAndView("redirect:/cproject2");
+        projectservice.createProject(projectDetails);
+        ProjectDetails pd = new ProjectDetails();
+        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        model.addObject("listProject ", listProject);
+        model.addObject("pd", pd);
+        return model;
+
+
+    }
+
+    @RequestMapping(value = "/cproject2", method = RequestMethod.GET)
+    public ModelAndView createProject2(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+        ModelAndView mav = new ModelAndView("CreateProject");
+        ProjectDetails projectdetails = new ProjectDetails();
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("projectdetails", projectdetails);
+        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        System.out.println("List of Project:  " + listProject);
+        mav.addObject("pd", pd);
+        mav.addObject("listProject", listProject);
+        return mav;
+
+    }
 
 	@RequestMapping(value = "/showproject", method = RequestMethod.POST)
 	public ModelAndView showProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) 

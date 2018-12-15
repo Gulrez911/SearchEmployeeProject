@@ -1,24 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>New/Edit Contact</title>
-<style>
-.error {
-	color: red;
-	font-weight: bold;
-}
-</style>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>New/Edit Contact</title>
+        <style>
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
 
-</head>
-<body
-	background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+    </head>
+    <body
+        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
 
 
 	<div align="center">
@@ -38,6 +38,8 @@
 				</tr>
 
 
+
+
 				<tr>
 					<td>Project Start Date:</td>
 					<td><form:input path="pstart_Date"  name="pstart_Date"/></td>
@@ -49,6 +51,8 @@
 							name="endDate" /></td>
 				</tr> 
 
+
+
 				<tr>
 
 					<td><input type="submit" value="Create Project"></td>
@@ -57,7 +61,7 @@
 			</table>
 			
 			
-			<br>
+		<%-- 	<br>
 			
 			<table border="1">
 					<th>PROJECTS</th>
@@ -69,7 +73,7 @@
 						</tr>
 					</c:forEach>
 				</table>
-	
+	 --%>
 	</form:form>
 
 	<%-- </div>
@@ -86,7 +90,11 @@
 			</form:form>
 		</div>
 
+       
 
+
+
+<<<<<<< HEAD
 
 
 <!-- 	</div>
@@ -96,7 +104,23 @@
 	
 	 --%>
 	
-	
-	
-</body>
+	     <table border="1">
+
+        <th>Project Name</th>
+                <th>Create Task</th>
+                    <c:forEach var="pd" items="${listProject}">
+                    <tr>
+
+                        <td>${pd.project_Name}</td>
+                        <td>
+                            <a href="Create Task?project_id=${pd.project_id}">Create Task</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+
+
+        </div>
+    </body>
+
 </html>
