@@ -36,25 +36,21 @@
 					<td>Description:</td>
 					<td><form:textarea path="project_desc" rows="5" cols="5" /></td>
 				</tr>
-			<tr>
 
+
+				<tr>
 					<td>Project Start Date:</td>
-					<td><form:input type="text" path="pstart_Date" id="startDate"
-							name="startDate" /></td>
-				</tr> 
+					<td><form:input path="pstart_Date" /></td>
+				</tr>
+				
 				<tr>
 					<td>Project End Date:</td>
 					<td><form:input type="text" path="pEnd_Date" id="endDate"
 							name="endDate" /></td>
-				</tr>
+				</tr> 
 
- 
- 
- 
- 
- 
-				<tr> 
-				
+				<tr>
+
 					<td><input type="submit" value="Create Project"></td>
 
 				</tr>
