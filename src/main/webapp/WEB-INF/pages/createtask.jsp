@@ -25,10 +25,35 @@
                                 <form:options items="${task_Type}" />
                                 
                                 </form:select></td>
+                                
+                                <tr>
+                       
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
 
                         <td colspan="2" align="right"><input type="submit"
                                                              value="CREATE" id="bt"></td>
                     </tr>
+                    
+                     
+                    
+                    
+                    
+                    
 
                 </table>
                 
