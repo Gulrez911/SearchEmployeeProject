@@ -5,8 +5,6 @@
  */
 package com.kgate.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.service.ProjectService;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 /**
  *
@@ -25,22 +28,24 @@ import com.kgate.service.ProjectService;
 @Controller
 public class TestClass {
 
-	@Autowired
-	ProjectService projectservice;
+    @Autowired
+    ProjectService projectservice;
 
-	@RequestMapping(value = "/cproject", method = RequestMethod.POST)
-	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
-		// ModelAndView model = new ModelAndView();
-		ModelAndView model = new ModelAndView("success");
-		projectservice.createProject(projectDetails);
+//    @InitBinder("projectDetails")
+//    public void initBinder(WebDataBinder binder) {
+//        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+//        dateFormat.setLenient(false);
+//        binder.registerCustomEditor(Date.class,"pstart_Date" ,new CustomDateEditor(
+//                dateFormat, false));
+//    }
 
-		// List<ProjectDetails> pdlist = projectservice.dispalyProjects();
+    @RequestMapping(value = "/cproject", method = RequestMethod.POST)
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+        // ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView("success");
+        projectservice.createProject(projectDetails);
 
-		// model.addObject("projectdetails", projectdetails);
-		// model.addObject("pdlist", pdlist);
-		// model.setViewName("DashBordManager");
+        return model;
 
-		return model;
-
-	}
+    }
 }
