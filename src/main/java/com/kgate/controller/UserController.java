@@ -11,14 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
+import com.kgate.model.TaskDetails;
+import com.kgate.model.User;
 
 import com.kgate.service.EmployeeService;
 import com.kgate.service.LoginService2;
 import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
+import com.kgate.service.TaskService;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.scheduling.config.Task;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,28 +45,62 @@ public class UserController {
 
     @Autowired
     private EmployeeService employeeService;
-
+    
     @Autowired
     private ProjectService projectservice;
+    
+    @Autowired
+    private TaskService taskservice;
+
+
+
+
 
     public void setloginService1(LoginService2 loginservice2) {
         this.loginservice2 = loginservice2;
     }
 
+
     public void setemployeeservice(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView init() {
 
-        ModelAndView mav = new ModelAndView("login");
-        Employee employee = new Employee();
-        mav.addObject("employee", employee);
-        String[] userType = {"Admin", "Employee", "Manager"};
-        mav.addObject("userTypes", userType);
-        return mav;
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public ModelAndView init() {	
+		ModelAndView mav = new ModelAndView("login");
+	Employee employee = new Employee();
+	mav.addObject("employee", employee);
+	String[] userType = { "Admin", "Employee", "Manager" };
+	mav.addObject("userTypes", userType);
+	return mav;
+}
+	
+    /*public ModelAndView ct() {
+    	ModelAndView mav=new ModelAndView("createtask");
+    	TaskDetails TaskDetails=new TaskDetails();
+    	mav.addObject("task",TaskDetails);
+    	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
+    	mav.addObject("task_Type",Tasktype);
+    	return mav;*/
+    
+  /*  @RequestMapping(value=    ,method = RequestMethod.GET)
+    public ModelAndView addingtask() {
+    	ModelAndView mav=new ModelAndView("createtask");
+    	taskservice.addTask();
+    	String message ="Task is successfully added";
+    	return mav;
+    	
     }
+    
+    */ 
+    
+    
+    
+    
+    
+    
+
 
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee) {
@@ -93,8 +133,11 @@ public class UserController {
                 request.setAttribute("loginuser", employee.getEmail());
                 ModelAndView mav = new ModelAndView("success");
 
-                return mav;
-   } else if (employee.getCategory().equals("Manager")) {
+
+
+
+            } else if (employee.getCategory().equals("Manager")) {
+
                 ModelAndView mav = new ModelAndView("CreateProject");
                 ProjectDetails projectdetails = new ProjectDetails();
                 ProjectDetails pd = new ProjectDetails();
@@ -103,6 +146,7 @@ public class UserController {
                 System.out.println("List of Project:  "+listProject);
                 mav.addObject("pd", pd);
                 mav.addObject("listProject", listProject);
+                projectservice.getManagerid(email);
                 return mav;
 
 

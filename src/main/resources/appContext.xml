@@ -36,8 +36,9 @@
 
         <property name="username" value="root"></property>
 
+
         <property name="password" value="k-gate"></property>
-   
+
     </bean>
  
     <!-- Hibernate SessionFactory -->

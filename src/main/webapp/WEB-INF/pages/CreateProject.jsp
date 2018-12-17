@@ -74,7 +74,7 @@
 
                         <td>${pd.project_Name}</td>
                         <td>
-                            <a href="Create Task?project_id=${pd.project_id}">Create Task</a>
+                            <a href="showtask?project_id=${pd.project_id}">Create Task</a>
                         </td>
                     </tr>
                 </c:forEach>
