@@ -12,9 +12,12 @@
 <body
        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
 <div class="content">
+
+<h1 style="color: orangered" align="center">Create Task</h1>
             <form:form action="createtask" method="post" commandName="taskdetails">  
                 <table align="center">
                <form:hidden path="projectId" />
+                <form:hidden path="managerId" />
                     <tr>
                         <td style="color: black">Task Name:</td>
                         <td><form:input name="task_Name" path="task_Name" type="text" id="tn" /></td>
@@ -41,10 +44,10 @@
 
                 </table>
                  </form:form>
-               // List copy from home.jsp //
+  
                 
                
-            <table border="1">
+            <table border="1"  align="center">
 
                 <th style="color:red">Task Type</th>
                 <th style="color:red">Task Name</th>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.ProjectDetails;
@@ -76,9 +77,8 @@ public class ProjectController {
     {
     	int pId = Integer.parseInt(request.getParameter("project_id"));
     	taskdetails.setProjectId(pId);
-    	
-    	
-    	
+    	int mId = Integer.parseInt(request.getParameter("mgrid"));
+    	taskdetails.setManagerId(mId);
     	ModelAndView mav=new ModelAndView("createtask");
     	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
     	mav.addObject("task_Type",Tasktype);

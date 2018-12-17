@@ -25,9 +25,9 @@
 		<h1 style="color: orangered">Create Project</h1>
 
 		<form:form action="cproject" method="post"
-			modelAttribute="projectDetails" commandName="projectdetails">
+			modelAttribute="pd" commandName="pd">
 			<table>
-				<form:hidden path="project_id" />
+				     <form:hidden path="project_id" />
 				<tr>
 					<td>Project Name:</td>
 					<td><form:input type="text" path="project_Name" name="project_Name"/></td>
@@ -59,14 +59,15 @@
 
 				</tr>
 			</table>
-	
-</form:form>
+
 		
-        </div>
-<form:form action="">
+<%-- <form:form action="showtask" commandName="taskdetails">
+<form:hidden path=" managerId" name="managerid"/>
+</form:form> --%>
 	
 	     <table border="1">
-
+	
+    
         <th>Project Name</th>
                 <th>Create Task</th>
                     <c:forEach var="pd" items="${listProject}">
@@ -74,13 +75,15 @@
 
                         <td>${pd.project_Name}</td>
                         <td>
-                            <a href="showtask?project_id=${pd.project_id}">Create Task</a>
+                            <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
+	
 </form:form>
 
+        </div>
     </body>
 
 </html>

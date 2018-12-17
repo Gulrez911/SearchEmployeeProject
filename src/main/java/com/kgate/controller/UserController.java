@@ -139,14 +139,19 @@ public class UserController {
             } else if (employee.getCategory().equals("Manager")) {
 
                 ModelAndView mav = new ModelAndView("CreateProject");
+      
+                Integer mid=projectservice.getManagerid(employee.getEmail());
+                mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
+                TaskDetails taskdetails = new TaskDetails();
                 ProjectDetails pd = new ProjectDetails();
                 mav.addObject("projectdetails", projectdetails);
+                mav.addObject("taskdetails", taskdetails);
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
                 System.out.println("List of Project:  "+listProject);
                 mav.addObject("pd", pd);
                 mav.addObject("listProject", listProject);
-                projectservice.getManagerid(email);
+               
                 return mav;
 
 
