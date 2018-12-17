@@ -111,9 +111,11 @@ public class UserController {
 
     }
 
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ModelAndView authenticate(ModelMap modelMap, @ModelAttribute("employee") Employee employee,
             HttpServletRequest request, Map<String, Object> map, @RequestParam("email") String email) {
+
 
         /*
 		 * validate whether person is in database and person user and password are
@@ -130,35 +132,25 @@ public class UserController {
 
 
 
-                 
-                 
-                /* ModelAndView mav = new ModelAndView("createtask");
-                 TaskDetails taskdetails=new TaskDetails();
-                 List<TaskDetails> tdlist=taskservice.getAllTask();
-                 mav.addObject("taskdetails",taskdetails);
-                
-                 String[] task_Type= {"Coding","Design","Integration","Quality","Testing"};
-               	mav.addObject("task_Type",task_Type);
-               	
-               	List<TaskDetails> tdlist=taskservice.getAllTask();
-              
-               	mav.addObject("tdlist",tdlist);*/
-             
-
-				return mav;
-
 
             } else if (employee.getCategory().equals("Manager")) {
+
                 ModelAndView mav = new ModelAndView("CreateProject");
+      
+                Integer mid=projectservice.getManagerid(employee.getEmail());
+                mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
+                TaskDetails taskdetails = new TaskDetails();
                 ProjectDetails pd = new ProjectDetails();
                 mav.addObject("projectdetails", projectdetails);
+                mav.addObject("taskdetails", taskdetails);
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
                 System.out.println("List of Project:  "+listProject);
                 mav.addObject("pd", pd);
                 mav.addObject("listProject", listProject);
-                projectservice.getManagerid(email);
+               
                 return mav;
+
 
             } else if (employee.getCategory().equals("Employee")) {
 

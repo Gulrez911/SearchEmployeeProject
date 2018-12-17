@@ -21,6 +21,7 @@ public class ProjectDetails {
 
     @Column
     private String project_Name;
+    
     @Column
     private String project_desc;
 
@@ -28,6 +29,7 @@ public class ProjectDetails {
    
 //    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date pstart_Date;
+    
     @Column
 //    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date pEnd_Date;

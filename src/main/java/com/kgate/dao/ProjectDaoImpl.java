@@ -2,6 +2,7 @@ package com.kgate.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,12 @@ public class ProjectDaoImpl implements ProjectDao {
 
 	@Override
 	public int getManagerid(String email) {
-		String s=sessionFactory.getCurrentSession().createQuery("select id from  employee123 where email='"+email+"'").getQueryString();
+		Query q=sessionFactory.getCurrentSession().createQuery(" select id from  Employee where email='"+email+"'");
 		
-		 int id=Integer.parseInt(s);
-		 return id;
+	/*	 int id=Integer.parseInt(s);
+		 return id;*/
+		int id=(int)q.uniqueResult();
+		return id;
 		
 	}
 }
