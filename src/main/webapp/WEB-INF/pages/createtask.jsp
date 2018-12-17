@@ -12,8 +12,9 @@
 <body
        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
 <div class="content">
-            <form:form action="" method="post" commandName="taskdetails">  
+            <form:form action="createtask" method="post" commandName="taskdetails">  
                 <table align="center">
+               <form:hidden path="projectId" />
                     <tr>
                         <td style="color: black">Task Name:</td>
                         <td><form:input name="task_Name" path="task_Name" type="text" id="tn" /></td>
@@ -28,24 +29,7 @@
                                 
                                 <tr>
                        
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-
-                        <td colspan="2" align="right"><input type="submit"
+                                   <td colspan="2" align="right"><input type="submit"
                                                              value="CREATE" id="bt"></td>
                     </tr>
                     
@@ -56,11 +40,10 @@
                     
 
                 </table>
+                 </form:form>
+               // List copy from home.jsp //
                 
-             <%--   // List copy from home.jsp //
-                
-                 <p style="color:white">${error}</p>
-            <p style="color:black">${message}</p>
+               
             <table border="1">
 
                 <th style="color:red">Task Type</th>
@@ -69,18 +52,18 @@
                 
 
                 
-                 <c:forEach var="taskdetails" items="${tdlist}">
+                 <c:forEach var="td" items="${listtask}">
                     <tr style="color:black">
 
-                        <td>${taskdetails.task_Type}</td>
-                        <td>${taskdetails.task_Name}</td>
-                        <td>${taskdetails.status}</td>
+                        <td>${td.task_Type}</td>
+                        <td>${td.task_Name}</td>
+                        <td> <a href="asssign?task_id=${pd.task_id}">Assign</a></td>
                  </c:forEach>     
-                     --%>
+                    
                        
                 
-            <div style="color: red">${error}</div> 
-            </form:form>
+          
+           
         </div> 
 
 

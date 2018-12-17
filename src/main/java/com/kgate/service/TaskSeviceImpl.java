@@ -18,7 +18,7 @@ public class TaskSeviceImpl implements TaskService
     
 	
     @Override
-	public void addTask(Task task)
+	public void addTask(TaskDetails task)
     {
 		taskdao.addTask(task);
 		

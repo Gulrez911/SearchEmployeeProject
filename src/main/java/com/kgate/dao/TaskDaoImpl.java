@@ -18,7 +18,7 @@ public class TaskDaoImpl implements TaskDao {
 
 
 	 @Override
-	public void addTask(Task task) {
+	public void addTask(TaskDetails task) {
 		sessionFactory.getCurrentSession().saveOrUpdate(task);
     }
 
@@ -26,9 +26,8 @@ public class TaskDaoImpl implements TaskDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TaskDetails> getAllTask() {
-		  Session s = this.sessionFactory.getCurrentSession();
-		  String query="select task_Type,task_Name,status from task_details";
-		return sessionFactory.getCurrentSession().createSQLQuery(query).list();
+		return sessionFactory.getCurrentSession().createQuery("from TaskDetails")
+                .list();
 	}
 		
 }

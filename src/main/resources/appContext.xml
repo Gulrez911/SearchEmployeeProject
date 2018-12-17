@@ -11,6 +11,11 @@
     <!-- Specifying base package of the Components like Controller, Service, 
     DAO -->
     <context:component-scan base-package="com" />
+    <!--Date conversion Service-->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
 
     <!-- <bean class = "org.springframework.context.support.ResourceBundleMessageSource" 
     id = "messageSource"> <property name = "basename" value = "message" /> -->

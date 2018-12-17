@@ -8,7 +8,7 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskService {
 	
-	public void addTask(Task task);
+	public void addTask(TaskDetails task);
 	
 	public List<TaskDetails> getAllTask();
 	 

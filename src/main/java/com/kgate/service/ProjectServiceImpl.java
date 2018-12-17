@@ -31,4 +31,9 @@ public List<ProjectDetails> dispalyProjects() {
 	
 	return projectDao.dispalyProjects();
 }
+
+@Override
+public int getManagerid(String email) {
+	return projectDao.getManagerid(email);
+}
 }

@@ -27,4 +27,13 @@ public class ProjectDaoImpl implements ProjectDao {
         return sessionFactory.getCurrentSession().createQuery("from ProjectDetails")
                 .list();
     }
+
+	@Override
+	public int getManagerid(String email) {
+		String s=sessionFactory.getCurrentSession().createQuery("select id from  employee123 where email='"+email+"'").getQueryString();
+		
+		 int id=Integer.parseInt(s);
+		 return id;
+		
+	}
 }
