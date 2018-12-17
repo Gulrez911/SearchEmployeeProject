@@ -53,9 +53,6 @@ public class UserController {
     private TaskService taskservice;
 
 
-
-
-
     public void setloginService1(LoginService2 loginservice2) {
         this.loginservice2 = loginservice2;
     }
