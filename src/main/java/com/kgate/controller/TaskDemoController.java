@@ -48,7 +48,8 @@ public class TaskDemoController {
 //        int mId = Integer.parseInt(request.getParameter("mgrid"));
 //        taskdetails.setManagerId(mId);
 //        ModelAndView mav = new ModelAndView("redirect:/showtask?project_id=" + pId + "&mgrid=" + mId + "");
-        ModelAndView mav = new ModelAndView("success");
+        ModelAndView mav = new ModelAndView("redirect:/showtask");
+//        ModelAndView mav = new ModelAndView("success");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         td.setStatus("Assigned");
         taskService.addTask(td);
@@ -67,5 +68,5 @@ public class TaskDemoController {
         return mav;
 //        return new ModelAndView("success");
     }
- 
+
 }

@@ -21,6 +21,7 @@
                 <table align="cproject">
 
                     <form:hidden path="project_id" />
+                     <form:hidden path="project_id" />
                     <tr>
                         <td>Project Name:</td>
                         <td><form:input type="text" path="project_Name" /></td>

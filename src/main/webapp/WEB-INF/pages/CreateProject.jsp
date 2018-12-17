@@ -61,8 +61,7 @@
                 </table>
 
                 <table border="1">
-
-
+ 
                     <th>Project Name</th>
                     <th>Create Task</th>
                         <c:forEach var="pd" items="${listProject}">
