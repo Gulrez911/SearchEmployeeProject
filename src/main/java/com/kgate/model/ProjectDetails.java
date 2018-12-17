@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Project_Details")
@@ -23,12 +26,14 @@ public class ProjectDetails {
     @Column
     private String project_desc;
 
-     
-//    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @Column
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date pstart_Date;
 
     @Column
-//    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date pEnd_Date;
 
     public Integer getProject_id() {

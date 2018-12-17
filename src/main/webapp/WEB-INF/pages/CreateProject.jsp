@@ -36,18 +36,14 @@
                         <td>Description:</td>
                         <td><form:textarea path="project_desc" rows="5" cols="5" name="project_Name"/></td>
                     </tr>
-
-
-
-
                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date"  name="pstart_Date"/></td>
+                        <td><form:input path="pstart_Date" type="date" name="pstart_Date"/></td>
                     </tr>
 
                     <tr>
                         <td>Project End Date:</td>
-                        <td><form:input type="text" path="pEnd_Date" id="endDate"
+                        <td><form:input path="pEnd_Date" type="date" id="endDate"
                                     name="endDate" /></td>
                     </tr> 
 
@@ -61,7 +57,7 @@
                 </table>
 
                 <table border="1">
- 
+
                     <th>Project Name</th>
                     <th>Create Task</th>
                         <c:forEach var="pd" items="${listProject}">
