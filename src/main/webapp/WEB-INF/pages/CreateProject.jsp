@@ -25,7 +25,7 @@
 		<h1 style="color: orangered">Create Project</h1>
 
 		<form:form action="cproject" method="post"
-			modelAttribute="projectDetails" commandName="projectDetails">
+			modelAttribute="projectDetails" commandName="projectdetails">
 			<table>
 				<form:hidden path="project_id" />
 				<tr>
@@ -59,50 +59,11 @@
 
 				</tr>
 			</table>
-			
-			
-		<%-- 	<br>
-			
-			<table border="1">
-					<th>PROJECTS</th>
-					
-					<c:forEach var="projectDetails" items="${pdlist}">
-						<tr>
-						<td>${projectDetails.project_Name}</td>
-							
-						</tr>
-					</c:forEach>
-				</table>
-	 --%>
-	</form:form>
-
-	<%-- </div>
 	
-	<!-- <div>
-		<div align="right" style="size: 50%">
-			<h1>Right</h1>
-		</div> -->
-
-		<div align="left" style="size: 50%">
-			<h1>left</h1>
-			<form:form action=""  commandName="projectDetails">
-				
-			</form:form>
-		</div>
-
-       
-
-
-
-<<<<<<< HEAD
-
-
-<!-- 	</div>
-	 -->
-	
-	
-	
-	 --%>
+</form:form>
+		
+        </div>
+<form:form action="">
 	
 	     <table border="1">
 
@@ -118,9 +79,8 @@
                     </tr>
                 </c:forEach>
             </table>
+</form:form>
 
-
-        </div>
     </body>
 
 </html>
