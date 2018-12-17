@@ -6,16 +6,12 @@ import org.springframework.scheduling.config.Task;
 
 import com.kgate.model.TaskDetails;
 
-
 public interface TaskDao {
-	
-	public void addTask(TaskDetails task);
-	
 
-	
-	 public List<TaskDetails> getAllTask();
-	 
-	
-	
+    public void addTask(TaskDetails task);
 
+    public List<TaskDetails> getAllTask();
+
+    //return employee name from manager email
+    public List<String> getEmployeeEmail(String email);
 }
