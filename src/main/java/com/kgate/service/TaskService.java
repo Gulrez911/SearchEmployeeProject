@@ -14,4 +14,6 @@ public interface TaskService {
 
     //return employee name from manager email
     public List<String> getEmployeeEmail(String email);
+    //return task 
+     public TaskDetails getTask(int task_id);
 }

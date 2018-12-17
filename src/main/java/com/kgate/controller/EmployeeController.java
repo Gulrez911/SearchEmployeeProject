@@ -236,6 +236,7 @@ public class EmployeeController {
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
     public ModelAndView editEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
+        
 
         List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);
         System.out.println("List of EmployeeSkill:   " + employeeSkill);

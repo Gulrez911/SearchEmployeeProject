@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.kgate.dao.TaskDao;
 import com.kgate.model.TaskDetails;
+import java.util.ArrayList;
 
 @Service
 @Transactional
@@ -30,7 +31,16 @@ public class TaskSeviceImpl implements TaskService {
     @Override
     @Transactional
     public List<String> getEmployeeEmail(String email) {
-        return taskdao.getEmployeeEmail(email);
+        List<String> li = new ArrayList<String>();
+        li = taskdao.getEmployeeEmail(email);
+        System.out.println("List of EmployeeEMail:::::::::::"+li);
+        return li;
+    }
+
+    @Override
+    public TaskDetails getTask(int task_id) {
+
+        return  taskdao.getTask(task_id);
     }
 
 }

@@ -1,10 +1,13 @@
 package com.kgate.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.ProjectDetails;
@@ -20,6 +23,17 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class ProjectController {
 
+    /*<<<<<<< HEAD
+	@RequestMapping(value = "/cproject", method = RequestMethod.POST)
+	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+		ModelAndView model = new ModelAndView("success");
+		projectservice.createProject(projectDetails);
+		projectDetails = new ProjectDetails();
+			List<ProjectDetails> pdlist = projectservice.dispalyProjects();
+			 model.addObject("projectdetails", projectDetails);
+			 model.addObject("pdlist", pdlist);
+		return model;
+=======*/
     @Autowired
     ProjectService projectservice;
 
@@ -59,7 +73,8 @@ public class ProjectController {
     public ModelAndView showtask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         int pId = Integer.parseInt(request.getParameter("project_id"));
         taskdetails.setProjectId(pId);
-
+        int mId = Integer.parseInt(request.getParameter("mgrid"));
+        taskdetails.setManagerId(mId);
         ModelAndView mav = new ModelAndView("createtask");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
@@ -73,6 +88,7 @@ public class ProjectController {
     @RequestMapping(value = "/createtask", method = RequestMethod.POST)
     public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
         ModelAndView mav = new ModelAndView("createtask");
+        taskdetails.setStatus("Not Assigned");
         taskservice.addTask(taskdetails);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);

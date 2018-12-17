@@ -33,6 +33,7 @@ public List<ProjectDetails> dispalyProjects() {
 }
 
 @Override
+@Transactional
 public int getManagerid(String email) {
 	return projectDao.getManagerid(email);
 }

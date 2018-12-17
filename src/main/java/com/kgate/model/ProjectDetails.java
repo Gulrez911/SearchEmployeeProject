@@ -1,5 +1,5 @@
 package com.kgate.model;
- 
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,8 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
- 
- 
 
 @Entity
 @Table(name = "Project_Details")
@@ -21,13 +19,14 @@ public class ProjectDetails {
 
     @Column
     private String project_Name;
+
     @Column
     private String project_desc;
 
-    @Column
-   
+     
 //    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date pstart_Date;
+
     @Column
 //    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date pEnd_Date;
