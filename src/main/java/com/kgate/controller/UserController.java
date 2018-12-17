@@ -160,7 +160,7 @@ public class UserController {
                 System.out.println("List of Project:  "+listProject);
                 mav.addObject("pd", pd);
                 mav.addObject("listProject", listProject);
-                projectservice.getManagerid(email);
+//                projectservice.getManagerid(email);
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {

@@ -22,7 +22,7 @@ public class TaskDemoController {
         ModelAndView model = new ModelAndView("AllocateTask");
         TaskDetails td = new TaskDetails();
         model.addObject("td", td);
-        List<String> employeeEmail = taskService.getEmployeeEmail("surkhab@gmail.com");
+        List<String> employeeEmail = taskService.getEmployeeEmail("");
 
         System.out.println("Lis of Emloyee Email::: " + employeeEmail);
 //        List<String> sk = new ArrayList<>();
