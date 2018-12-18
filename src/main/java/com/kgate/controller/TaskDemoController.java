@@ -42,8 +42,8 @@ public class TaskDemoController {
         List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
         model.addObject("td", td2);
         model.addObject("employeeEmail", employeeEmail);
-
         return model;
+
     }
 
     
@@ -71,30 +71,13 @@ public class TaskDemoController {
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("td") TaskDetails td, @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
-//        int pId = Integer.parseInt(request.getParameter("project_id"));
-//        taskdetails.setProjectId(pId);
-//        int mId = Integer.parseInt(request.getParameter("mgrid"));
-//        taskdetails.setManagerId(mId);
-////        ModelAndView mav = new ModelAndView("redirect:/showtask?project_id=" + pId + "&mgrid=" + mId + "");
-//        ModelAndView mav = new ModelAndView("redirect:/showtask");
-//
-//        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-//        td.setStatus("Assigned");
-//        taskService.addTask(td);
-//
-//        List<TaskDetails> listtask = taskService.getAllTask();
-//        System.out.println("List of task:  " + listtask);
-//        mav.addObject("task_Type", Tasktype);
-//        mav.addObject("taskdetails", taskdetails);
-//
-//        return mav;
         int pId = taskdetails.getProjectId();
         taskdetails.setStatus("Assigned");
         taskdetails.setProjectId(pId);
         int mId = taskdetails.getManagerId();
         taskdetails.setManagerId(mId);
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-        ModelAndView mav = new ModelAndView("success");
+        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
         List<TaskDetails> listtask = taskService.getAllTask();
@@ -107,14 +90,17 @@ public class TaskDemoController {
     }
 
     @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-    public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
+    public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        int pId = taskdetails.getProjectId();
+        taskdetails.setProjectId(pId);
+        int mId = taskdetails.getManagerId();
+        taskdetails.setManagerId(mId);
         ModelAndView mav = new ModelAndView("createtask");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-//        mav.addObject("task_Type", Tasktype);
-//        int pId = Integer.parseInt(request.getParameter("project_id"));
-//        List<TaskDetails> listtask = taskService.getByProjectId(pId);
+        mav.addObject("task_Type", Tasktype);
+        List<TaskDetails> listtask = taskService.getByProjectId(pId);
+        mav.addObject("listtask", listtask);
         mav.addObject("taskdetails", taskdetails);
-//        mav.addObject("listtask", listtask);
         return mav;
     }
 

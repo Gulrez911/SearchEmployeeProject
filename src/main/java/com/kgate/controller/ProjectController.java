@@ -160,6 +160,24 @@ public class ProjectController {
         return mav;
     }
 
+//    @RequestMapping(value = "/createtask2", method = RequestMethod.GET)
+//    public ModelAndView taskcreatee(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+//        int pId = taskdetails.getProjectId();
+//        taskdetails.setProjectId(pId);
+//        int mId = taskdetails.getManagerId();
+//        taskdetails.setManagerId(mId);
+//        ModelAndView mav = new ModelAndView("createtask");
+//        taskdetails.setStatus("Not Assigned");
+//        taskservice.addTask(taskdetails);
+//        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+//        mav.addObject("task_Type", Tasktype);
+//        List<TaskDetails> listtask = taskservice.getByProjectId(pId);
+//        System.out.println("List of task:  " + listtask);
+//        mav.addObject("td", taskdetails);
+//        mav.addObject("listtask", listtask);
+//        return mav;
+//    }
+
     //CEO Project related
     @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
     public ModelAndView displayProjectDetails(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
