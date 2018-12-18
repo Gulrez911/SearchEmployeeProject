@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -35,18 +34,8 @@
                                    <td colspan="2" align="right"><input type="submit"
                                                              value="CREATE" id="bt"></td>
                     </tr>
-                    
-                     
-                    
-                    
-                    
-                    
-
-                </table>
-                 </form:form>
-  
-                
-               
+                  </table>
+                 </form:form>          
             <table border="1"  align="center">
 
                 <th style="color:red">Task Type</th>
@@ -61,19 +50,7 @@
                         <td>${td.task_Type}</td>
                         <td>${td.task_Name}</td>
                         <td> <a href="asssign?task_id=${pd.task_id}">Assign</a></td>
-                 </c:forEach>     
-                    
-                       
-                
-          
-           
-        </div> 
-
-
-
-
-
-
-
+                 </c:forEach>                
+        </div>        
 </body>
 </html>
