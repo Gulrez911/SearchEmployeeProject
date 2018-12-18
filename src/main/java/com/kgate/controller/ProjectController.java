@@ -4,6 +4,7 @@ import com.kgate.model.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 public class ProjectController {
@@ -107,8 +109,50 @@ public class ProjectController {
          mav.addObject("listtask", listtask);
 		return mav;
     }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView deleteTask(HttpServletRequest request) {
+        int task_id = Integer.parseInt(request.getParameter("task_id"));
+        taskservice.deleteTask(task_id);
+        /*tring[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
+    	mav.addObject("task_Type",Tasktype);
+    	 List<TaskDetails> listtask =taskservice.getByProjectId(pId);
+         System.out.println("List of task:  " + listtask);
+         mav.addObject("td", taskdetails);
+         mav.addObject("listtask", listtask);*/
+        return new ModelAndView("deletetask");
+    }
+    
+    @RequestMapping(value = "/backtoproject", method = RequestMethod.POST)
+    public ModelAndView back( @ModelAttribute("employee") Employee employee) {
    
- 
+    	ModelAndView mav = new ModelAndView("CreateProject");
+        
+        Integer mid = projectservice.getManagerid(employee.getEmail());
+        mav.addObject("mid", mid);
+        
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("pd", pd);
+        
+        TaskDetails taskdetails = new TaskDetails();
+        mav.addObject("taskdetails", taskdetails);
+       
+        Employee e = new Employee();
+        e=employeeService.searchByEmail(employee.getEmail());
+        mav.addObject("e", e);
+        
+       
+        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        System.out.println("List of Project:  " + listProject);
+         mav.addObject("listProject", listProject);
+      
+        return mav;
+		
+    	
+    }	
+    
+    }  
+    
+    	
+   
 
-  
-}

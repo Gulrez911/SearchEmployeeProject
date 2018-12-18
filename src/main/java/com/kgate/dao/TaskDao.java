@@ -8,12 +8,10 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskDao {
 
-    
-    public void deleteTask(int task_id );
-
-
-	
 	public void addTask(TaskDetails task);
+	
+    public void deleteTask(int task_id );
+	
 	public List<TaskDetails> getByProjectId(int id);
 
 

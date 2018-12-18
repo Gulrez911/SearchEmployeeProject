@@ -35,13 +35,27 @@
                                                              value="CREATE" id="bt"></td>
                     </tr>
                     
+                      
                     
+                    
+                    </form:form></div>
 
-                  </table>
-                 </form:form>          
+<div align="right">
+			<form:form action="backtoproject" method="post" commandName="e">
+
+			<table>
+				<tr>
+					<td>
+						<input type="submit" value="Back">
+
+					</td>
 
 
+				</tr>
 
+
+</table>
+</form:form>
 
             <table border="1"  align="center">
 
@@ -62,7 +76,9 @@
 
                         <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
 
-                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>
+                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a>
+                        
+                          <a href="delete?task_id=${td.task_id}">delete</a></td>
                          </tr> 
                         </c:forEach>   
                         
@@ -77,6 +93,6 @@
 
 
 
-                    </body>
-                    </html>
+ </body>
+ </html>
 

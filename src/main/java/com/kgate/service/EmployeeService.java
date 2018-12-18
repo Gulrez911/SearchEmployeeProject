@@ -27,4 +27,7 @@ public interface EmployeeService {
 	public Employee searchByEmail(String email);
 	
 	public List<Employee> displayByManagerId(String email);
+
+	public String getEmail();
+	
 }
