@@ -11,4 +11,7 @@ public interface ProjectDao
 	  List<ProjectDetails> dispalyProjects();
 	  
 	  public int getManagerid(String email);
+          
+          //return projectName for CEO
+//          public List<String> getProjectName();
 }

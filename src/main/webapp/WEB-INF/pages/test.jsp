@@ -48,8 +48,6 @@
                 </table>
             </form:form>
             <table border="1">
-
-
                 <th>Skills</th>
                 <th>Action</th>
 
