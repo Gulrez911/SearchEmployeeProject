@@ -70,15 +70,17 @@
 
                        <%--  <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a> --%>
                         
-                          <a href="delete?task_id=${td.task_id}">delete</a></td>
-                         <%-- </tr> 
+                         
+                         
                            
                         
                         
-                 </table> --%>
+                 
                         <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
                         <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>
+                        
+                        <td> <a href="assign?taskid=${taskdetails.task_id}">delete</a></td>
                         </c:forEach>     
 
 

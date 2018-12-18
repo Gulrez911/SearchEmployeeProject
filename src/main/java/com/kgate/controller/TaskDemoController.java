@@ -34,7 +34,7 @@ public class TaskDemoController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
     }
 
-    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+   @RequestMapping(value = "/asssign", method = RequestMethod.GET)
     public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));
@@ -46,6 +46,28 @@ public class TaskDemoController {
         return model;
     }
 
+    
+   /* @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+        ModelAndView model = new ModelAndView("AllocateTask");
+        int task_Id = Integer.parseInt(request.getParameter("taskid"));
+        int taskId = Integer.parseInt(request.getParameter("task_id"));
+        TaskDetails td =taskService.deleteTask(task_Id);
+        TaskDetails td2 = taskService.getTask(taskId);
+        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
+        model.addObject("td", td2);
+        model.addObject("employeeEmail", employeeEmail);
+
+        return model;
+    }*/
+    
+    
+    
+    
+    
+    
+    
+    
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("td") TaskDetails td, @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
