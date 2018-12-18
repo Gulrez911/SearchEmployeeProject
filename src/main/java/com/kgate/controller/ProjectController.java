@@ -111,4 +111,12 @@ public class ProjectController {
         mav.addObject("listtask", listtask);
         return mav;
     }
+
+    //CEO Project related
+    @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
+    public ModelAndView displayProjectDetails(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("projectDetailsStatus");
+        
+        return mav;
+    }
 }

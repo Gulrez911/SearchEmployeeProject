@@ -22,15 +22,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import java.util.List;
 import java.util.Map;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
@@ -66,7 +64,7 @@ public class UserController {
         ModelAndView mav = new ModelAndView("login");
         Employee employee = new Employee();
         mav.addObject("employee", employee);
-        String[] userType = {"Admin", "Employee", "Manager"};
+        String[] userType = {"Admin", "Employee", "Manager", "CEO"};
         mav.addObject("userTypes", userType);
         return mav;
     }
@@ -121,7 +119,7 @@ public class UserController {
             } else if (employee.getCategory().equals("Manager")) {
 
                 ModelAndView mav = new ModelAndView("CreateProject");
-              
+
                 Integer mid = projectservice.getManagerid(employee.getEmail());
                 mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
@@ -133,7 +131,7 @@ public class UserController {
                 System.out.println("List of Project:  " + listProject);
                 mav.addObject("pd", pd);
                 mav.addObject("listProject", listProject);
-              
+
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
@@ -165,6 +163,14 @@ public class UserController {
                 mav.addObject("skill", skill);
                 return mav;
 
+            } else if (employee.getCategory().equals("CEO")) {
+                ModelAndView model = new ModelAndView("CEODashboard");
+                List<ProjectDetails> listProject = projectservice.dispalyProjects();
+                ProjectDetails pd = new ProjectDetails();
+                model.addObject("pd", pd);
+                model.addObject("listProject", listProject);
+
+                return model;
             } else {
                 modelMap.put("error", "Invalid UserName / Password");
                 ModelAndView mav = new ModelAndView("login");
@@ -195,5 +201,4 @@ public class UserController {
 
     }
 
-   
 }
