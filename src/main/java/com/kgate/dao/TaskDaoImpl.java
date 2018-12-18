@@ -1,10 +1,14 @@
 package com.kgate.dao;
 
 import java.util.List;
+
+import javax.mail.Session;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgate.model.Skill;
 import com.kgate.model.TaskDetails;
 import org.springframework.scheduling.config.Task;
 
@@ -18,6 +22,28 @@ public class TaskDaoImpl implements TaskDao {
     public void addTask(TaskDetails task) {
         sessionFactory.getCurrentSession().saveOrUpdate(task);
     }
+    
+
+   /*@Override
+    private void deleteTask(TaskDetails task) {
+    	Session s = this.sessionFactory.getCurrentSession();
+        TaskDetails task = (TaskDetails) s.load(TaskDetails.class, new Integer(task_id));
+        if (null != task) {
+            this.sessionFactory.getCurrentSession().delete(task);
+        }
+    }	
+    */
+    @Override
+    public void deleteTask(int task_id) {
+        TaskDetails task = (TaskDetails) sessionFactory.getCurrentSession().load(
+        		TaskDetails.class, task_id);
+        if (null != task) {
+            this.sessionFactory.getCurrentSession().delete(task);
+        }
+    }
+
+        
+    
 
     @SuppressWarnings("unchecked")
     @Override
@@ -40,5 +66,7 @@ public class TaskDaoImpl implements TaskDao {
 
         return (TaskDetails) sessionFactory.getCurrentSession().get(TaskDetails.class, task_id);
     }
+
+
 
 }

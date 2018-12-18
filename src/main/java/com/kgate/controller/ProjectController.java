@@ -28,17 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @Controller
 public class ProjectController {
 
-    /*<<<<<<< HEAD
-	@RequestMapping(value = "/cproject", method = RequestMethod.POST)
-	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
-		ModelAndView model = new ModelAndView("success");
-		projectservice.createProject(projectDetails);
-		projectDetails = new ProjectDetails();
-			List<ProjectDetails> pdlist = projectservice.dispalyProjects();
-			 model.addObject("projectdetails", projectDetails);
-			 model.addObject("pdlist", pdlist);
-		return model;
-=======*/
+    
     @Autowired
     ProjectService projectservice;
 

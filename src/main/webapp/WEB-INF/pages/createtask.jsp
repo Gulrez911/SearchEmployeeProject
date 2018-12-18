@@ -34,13 +34,15 @@
                         <td colspan="2" align="right"><input type="submit"
                                                              value="CREATE" id="bt"></td>
                     </tr>
+                    
+                    
 
                   </table>
                  </form:form>          
 
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
             <table border="1"  align="center">
 
                 <th style="color:red">Task Type</th>
@@ -53,6 +55,7 @@
                     <tr style="color:black">
 
                         <td>${td.task_Type}</td>
+                        <td>${td.task_Name }</td>
                <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
                         <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>
                         </c:forEach>     
