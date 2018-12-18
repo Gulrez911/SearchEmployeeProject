@@ -10,7 +10,7 @@ import com.kgate.model.TaskDetails;
 public interface TaskDao {
 	
 	public void addTask(TaskDetails task);
-	
+	public List<TaskDetails> getByProjectId(int id);
 
 	
 	 public List<TaskDetails> getAllTask();

@@ -146,6 +146,8 @@ public class UserController {
                 TaskDetails taskdetails = new TaskDetails();
                 ProjectDetails pd = new ProjectDetails();
                 mav.addObject("projectdetails", projectdetails);
+               Employee e = new Employee();
+                mav.addObject("e", e);
                 mav.addObject("taskdetails", taskdetails);
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
                 System.out.println("List of Project:  "+listProject);

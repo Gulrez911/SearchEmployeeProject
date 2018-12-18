@@ -60,7 +60,7 @@
 
                         <td>${td.task_Type}</td>
                         <td>${td.task_Name}</td>
-                        <td> <a href="asssign?task_id=${pd.task_id}">Assign</a></td>
+                        <td><a href="asssign?task_id=${pd.task_id}">Assign</a></td>
                  </c:forEach>     
                     
                        

@@ -29,7 +29,18 @@ public class TaskDaoImpl implements TaskDao {
 		return sessionFactory.getCurrentSession().createQuery("from TaskDetails")
                 .list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TaskDetails> getByProjectId(int id) {
+	
+		return sessionFactory.getCurrentSession().createQuery("from TaskDetails where projectId='"+id+"'")
+                .list();
 		
+	}
+
+
+	
 }
 	
 	

@@ -65,24 +65,25 @@
 <form:hidden path=" managerId" name="managerid"/>
 </form:form> --%>
 	
-	     <table border="1">
+	     <table border="1" align="left" style="height: 25%; width: 25%; border-color: white">
 	
     
-        <th>Project Name</th>
-                <th>Create Task</th>
+        <th style="color:white">Project Name</th>
+              
                     <c:forEach var="pd" items="${listProject}">
                     <tr>
 
-                        <td>${pd.project_Name}</td>
-                        <td>
-                            <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>
-                        </td>
+                        <td> <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color:white">${pd.project_Name}</a></td>
+                   
                     </tr>
                 </c:forEach>
             </table>
 	
 </form:form>
-
+<form:form action="managerpage" method="post" commandName="e">
+<form:hidden path="email" name="email"/>
+<input type="submit" value="Employee List">
+</form:form>
         </div>
     </body>
 

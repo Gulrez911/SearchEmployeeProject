@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.EmployeeService;
@@ -80,12 +81,15 @@ public class ProjectController {
     	int mId = Integer.parseInt(request.getParameter("mgrid"));
     	taskdetails.setManagerId(mId);
     	ModelAndView mav=new ModelAndView("createtask");
+    	
     	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
     	mav.addObject("task_Type",Tasktype);
-    	 List<TaskDetails> listtask =taskservice.getAllTask();
+    	
+    	 List<TaskDetails> listtask =taskservice.getByProjectId(pId);
          System.out.println("List of task:  " + listtask);
          mav.addObject("td", taskdetails);
          mav.addObject("listtask", listtask);
+    	
 		return mav;
     }
     
@@ -102,6 +106,7 @@ public class ProjectController {
          mav.addObject("listtask", listtask);
 		return mav;
     }
+   
     }
 
 

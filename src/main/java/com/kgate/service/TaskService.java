@@ -11,6 +11,7 @@ public interface TaskService {
 	public void addTask(TaskDetails task);
 	
 	public List<TaskDetails> getAllTask();
+	public List<TaskDetails> getByProjectId(int id);
 	 
 
 }
