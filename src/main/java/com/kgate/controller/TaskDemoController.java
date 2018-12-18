@@ -39,11 +39,7 @@ public class TaskDemoController {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));
         TaskDetails td2 = taskService.getTask(taskId);
-        System.out.println("List of Task:::: " + td2);
-        System.out.println("Email: " + employee.getEmail());
         List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
-
-        System.out.println("List of Emloyee Email::: " + employeeEmail);
         model.addObject("td", td2);
         model.addObject("employeeEmail", employeeEmail);
 
@@ -57,26 +53,47 @@ public class TaskDemoController {
 //        taskdetails.setProjectId(pId);
 //        int mId = Integer.parseInt(request.getParameter("mgrid"));
 //        taskdetails.setManagerId(mId);
-//        ModelAndView mav = new ModelAndView("redirect:/showtask?project_id=" + pId + "&mgrid=" + mId + "");
-        ModelAndView mav = new ModelAndView("redirect:/showtask");
-//        ModelAndView mav = new ModelAndView("success");
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        td.setStatus("Assigned");
-        taskService.addTask(td);
-
-        List<TaskDetails> listtask = taskService.getAllTask();
-        System.out.println("List of task:  " + listtask);
-        mav.addObject("task_Type", Tasktype);
-        mav.addObject("td", taskdetails);
-        mav.addObject("td", taskdetails);
+////        ModelAndView mav = new ModelAndView("redirect:/showtask?project_id=" + pId + "&mgrid=" + mId + "");
+//        ModelAndView mav = new ModelAndView("redirect:/showtask");
+//
 //        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-//        mav.addObject("task_Type", Tasktype);
+//        td.setStatus("Assigned");
+//        taskService.addTask(td);
+//
 //        List<TaskDetails> listtask = taskService.getAllTask();
 //        System.out.println("List of task:  " + listtask);
-//        mav.addObject("td", taskdetails);
+//        mav.addObject("task_Type", Tasktype);
+//        mav.addObject("taskdetails", taskdetails);
+//
+//        return mav;
+        int pId = taskdetails.getProjectId();
+        taskdetails.setStatus("Assigned");
+        taskdetails.setProjectId(pId);
+        int mId = taskdetails.getManagerId();
+        taskdetails.setManagerId(mId);
+        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+        ModelAndView mav = new ModelAndView("success");
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        mav.addObject("task_Type", Tasktype);
+        List<TaskDetails> listtask = taskService.getAllTask();
+        System.out.println("List of task:  " + listtask);
+        taskService.addTask(taskdetails);
+        mav.addObject("taskdetails", taskdetails);
+        mav.addObject("listtask", listtask);
+        return mav;
+
+    }
+
+    @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
+    public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
+        ModelAndView mav = new ModelAndView("createtask");
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+//        mav.addObject("task_Type", Tasktype);
+//        int pId = Integer.parseInt(request.getParameter("project_id"));
+//        List<TaskDetails> listtask = taskService.getByProjectId(pId);
+        mav.addObject("taskdetails", taskdetails);
 //        mav.addObject("listtask", listtask);
         return mav;
-//        return new ModelAndView("success");
     }
 
 }

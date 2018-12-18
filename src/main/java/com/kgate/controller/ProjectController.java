@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @Controller
 public class ProjectController {
 
-    
     @Autowired
     ProjectService projectservice;
 
@@ -74,41 +73,50 @@ public class ProjectController {
 
     }
 
-   @RequestMapping(value = "/showtask", method = RequestMethod.GET)
- public ModelAndView showtask(@ModelAttribute("taskdetails")TaskDetails taskdetails,HttpServletRequest request) 
-    {
-    	int pId = Integer.parseInt(request.getParameter("project_id"));
-    	taskdetails.setProjectId(pId);
-    	int mId = Integer.parseInt(request.getParameter("mgrid"));
-    	taskdetails.setManagerId(mId);
-    	ModelAndView mav=new ModelAndView("createtask");
-    	
-    	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
-    	mav.addObject("task_Type",Tasktype);
-    	
-    	 List<TaskDetails> listtask =taskservice.getByProjectId(pId);
-         System.out.println("List of task:  " + listtask);
-         mav.addObject("td", taskdetails);
-         mav.addObject("listtask", listtask);
-    	
-		return mav;
+    @RequestMapping(value = "/showtask", method = RequestMethod.GET)
+    public ModelAndView showtask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        int pId = Integer.parseInt(request.getParameter("project_id"));
+//        int pId = taskdetails.getProjectId();
+//        int mId = taskdetails.getManagerId();
+        taskdetails.setProjectId(pId);
+        int mId = Integer.parseInt(request.getParameter("mgrid"));
+        taskdetails.setManagerId(mId);
+        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+        ModelAndView mav = new ModelAndView("createtask");
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        mav.addObject("task_Type", Tasktype);
+//        List<TaskDetails> listtask = taskservice.getAllTask();
+        List<TaskDetails> listtask = taskservice.getByProjectId(pId);
+        System.out.println("List of task:  " + listtask);
+        mav.addObject("taskdetails", taskdetails);
+        mav.addObject("listtask", listtask);
+        return mav;
     }
-    
-    @RequestMapping(value = "/createtask", method = RequestMethod.POST)
-    public ModelAndView taskcreate(@ModelAttribute("taskdetails")TaskDetails taskdetails) 
-    {
-    	ModelAndView mav=new ModelAndView("createtask");
-    	taskservice.addTask(taskdetails);
-    	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
-    	mav.addObject("task_Type",Tasktype);
-    	 List<TaskDetails> listtask =taskservice.getAllTask();
-         System.out.println("List of task:  " + listtask);
-         mav.addObject("td", taskdetails);
-         mav.addObject("listtask", listtask);
-		return mav;
-    }
-   
- 
 
-  
+    @RequestMapping(value = "/createtask", method = RequestMethod.POST)
+    public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        int pId = taskdetails.getProjectId();
+        taskdetails.setProjectId(pId);
+        int mId = taskdetails.getManagerId();
+        taskdetails.setManagerId(mId);
+        ModelAndView mav = new ModelAndView("createtask");
+        taskdetails.setStatus("Not Assigned");
+        taskservice.addTask(taskdetails);
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        mav.addObject("task_Type", Tasktype);
+        List<TaskDetails> listtask = taskservice.getByProjectId(pId);
+        System.out.println("List of task:  " + listtask);
+        mav.addObject("td", taskdetails);
+        mav.addObject("listtask", listtask);
+        return mav;
+    }
+
+    //CEO Project related
+    @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
+    public ModelAndView displayProjectDetails(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("projectDetailsStatus");
+
+        return mav;
+    }
+
 }

@@ -21,15 +21,14 @@
         background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
 
 
-
         <div align="center">
-        <div>
             <h1 style="color: orangered">Create Project</h1>
 
             <form:form action="cproject" method="post"
                        modelAttribute="pd" commandName="pd">
                 <table>
                     <form:hidden path="project_id" />
+                    
                     <tr>
                         <td>Project Name:</td>
                         <td><form:input type="text" path="project_Name" name="project_Name"/></td>
@@ -50,28 +49,25 @@
                     </tr> 
 
 
+
                     <tr>
 
-					<td><input type="submit" value="Create Project"></td>
+                        <td><input type="submit" value="Create Project"></td>
 
-				</tr>
-			</table>
+                    </tr>
+                </table>
 
-		
-<%-- <form:form action="showtask" commandName="taskdetails">
-<form:hidden path=" managerId" name="managerid"/>
-</form:form> --%>
-	
-	     <table border="1" align="left" style="height: 25%; width: 25%; border-color: white">
-	
-    
-        <th style="color:white">Project Name</th>
-              
-                    <c:forEach var="pd" items="${listProject}">
+                <table border="1" align="left">
 
-<tr>
-                <td> <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color:white">${pd.project_Name}</a></td>
+                    <th style="color: white">Project Name</th>
+                   
+                        <c:forEach var="pd" items="${listProject}">
+                        <tr>
+
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            
                         </tr>
+
 
                 </c:forEach>
             </table>
@@ -89,13 +85,14 @@
 					<td>
 						<a href="managerpage?email=${e.email}" >Employee List</a>
 
-					</td>
-				</tr>
+                 
+                </table>
 
 
-		</table>
+            </form:form>
 
-</form:form></div>
+
+</div>
 
 <div align="right">
 			<form:form action="back" method="post" commandName="e">
@@ -119,6 +116,9 @@
 
 </div>
         
+
+        </div>
+
     </body>
 
 </html>

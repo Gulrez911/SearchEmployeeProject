@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <html>
     <head>
         <meta charset="ISO-8859-1">
@@ -13,7 +14,7 @@
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
-            <form:form action="createtask" method="post" commandName="taskdetails">  
+            <form:form action="createtask" method="post" modelAttribute="taskdetails" commandName="taskdetails">  
                 <table align="center">
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
@@ -34,12 +35,9 @@
                         <td colspan="2" align="right"><input type="submit"
                                                              value="CREATE" id="bt"></td>
                     </tr>
-                    
-                    
 
-                  </table>
-                 </form:form>          
-
+                </table>
+            </form:form>
 
 
 
@@ -51,25 +49,18 @@
 
 
 
-                <c:forEach var="td" items="${listtask}">
+                <c:forEach var="taskdetails" items="${listtask}">
                     <tr style="color:black">
 
-                        <td>${td.task_Type}</td>
-
-                        <td>${td.task_Name }</td>
-
-
-
+                        <td>${taskdetails.task_Type}</td>
+                        <td>${taskdetails.task_Name}</td>
                         <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
+                        <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
-                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>
-                         </tr> 
-                        </c:forEach>   
-                        
-                        
-                 </table>
+                        <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>
+                        </c:forEach>     
+
                     </div> 
-
 
 
 
@@ -79,4 +70,3 @@
 
                     </body>
                     </html>
-
