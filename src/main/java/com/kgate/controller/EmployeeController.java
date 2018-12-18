@@ -226,10 +226,10 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(value = "/managerpage", method = RequestMethod.POST)
-    public ModelAndView taskcreate(@ModelAttribute("employee")Employee employee,@RequestParam("email")String email) 
+    @RequestMapping(value = "/managerpage", method = RequestMethod.GET)
+    public ModelAndView taskcreate(@ModelAttribute("employee")Employee employee,HttpServletRequest request) 
     {
-//    	String email=request.getParameter("email");
+    	String email=request.getParameter("email");
     	ModelAndView mav = new ModelAndView("ManagerSuccess");
     	 employee=new Employee();
     	mav.addObject("employee", employee);

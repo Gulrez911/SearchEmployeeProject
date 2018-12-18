@@ -78,14 +78,16 @@
 	
 </form:form>
 </div>
+<br>
+</div>
 	<div align="right">
 		<div align="right">
-			<form:form action="managerpage" method="post" commandName="e">
-				<form:hidden path="email" name="email"/>
+			<form:form action="managerpage"  commandName="e">
+				<%-- <form:hidden path="email" name="email"/> --%>
 				<table>
 				<tr>
 					<td>
-						<input type="submit" value="Employee List">
+						<a href="managerpage?email=${e.email}" >Employee List</a>
 
 					</td>
 				</tr>
@@ -116,7 +118,7 @@
 </div>
 
 </div>
-        </div>
+        
     </body>
 
 </html>
