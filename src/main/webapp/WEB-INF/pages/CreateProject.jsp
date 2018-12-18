@@ -22,6 +22,7 @@
 
 
         <div align="center">
+        <div>
             <h1 style="color: orangered">Create Project</h1>
 
             <form:form action="cproject" method="post"
@@ -74,11 +75,45 @@
             </table>
 	
 </form:form>
-<form:form action="managerpage" method="post" commandName="e">
-<form:hidden path="email" name="email"/>
-<input type="submit" value="Employee List">
+</div>
+	<div align="right">
+		<div align="right">
+			<form:form action="managerpage" method="post" commandName="e">
+				<form:hidden path="email" name="email"/>
+				<table>
+				<tr>
+					<td>
+						<input type="submit" value="Employee List">
+
+					</td>
+				</tr>
+
+
+		</table>
+
+</form:form></div>
+
+<div align="right">
+			<form:form action="back" method="post" commandName="e">
+
+			<table>
+				<tr>
+					<td>
+						<input type="submit" value="Back">
+
+					</td>
+
+
+				</tr>
+
+
+</table>
 </form:form>
 
+
+</div>
+
+</div>
         </div>
     </body>
 

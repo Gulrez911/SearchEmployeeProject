@@ -124,17 +124,21 @@ public class UserController {
               
                 Integer mid = projectservice.getManagerid(employee.getEmail());
                 mav.addObject("mid", mid);
-                ProjectDetails projectdetails = new ProjectDetails();
-                TaskDetails taskdetails = new TaskDetails();
+                
                 ProjectDetails pd = new ProjectDetails();
-                mav.addObject("projectdetails", projectdetails);
-               Employee e = new Employee();
-                mav.addObject("e", e);
+                mav.addObject("pd", pd);
+                
+                TaskDetails taskdetails = new TaskDetails();
                 mav.addObject("taskdetails", taskdetails);
+               
+                Employee e = new Employee();
+                e=employeeService.searchByEmail(employee.getEmail());
+                mav.addObject("e", e);
+                
+               
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
                 System.out.println("List of Project:  " + listProject);
-                mav.addObject("pd", pd);
-                mav.addObject("listProject", listProject);
+                 mav.addObject("listProject", listProject);
               
                 return mav;
 
