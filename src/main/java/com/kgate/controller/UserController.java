@@ -121,25 +121,18 @@ public class UserController {
                 ModelAndView mav = new ModelAndView("CreateProject");
 
                 Integer mid = projectservice.getManagerid(employee.getEmail());
+//                System.out.println("Manager ID:::: " + mid);
                 mav.addObject("mid", mid);
-                
-                ProjectDetails pd = new ProjectDetails();
-                mav.addObject("pd", pd);
-                
+                ProjectDetails projectdetails = new ProjectDetails();
                 TaskDetails taskdetails = new TaskDetails();
+                ProjectDetails pd = new ProjectDetails();
+                mav.addObject("projectdetails", projectdetails);
                 mav.addObject("taskdetails", taskdetails);
-               
-                Employee e = new Employee();
-                e=employeeService.searchByEmail(employee.getEmail());
-                mav.addObject("e", e);
-                
-               
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
-                System.out.println("List of Project:  " + listProject);
- 
- 
-                 mav.addObject("listProject", listProject);
- 
+//                System.out.println("List of Project:  " + listProject);
+                mav.addObject("pd", pd);
+                mav.addObject("listProject", listProject);
+
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
@@ -149,7 +142,7 @@ public class UserController {
                 Employee emp = employeeService.searchByEmail(employee.getEmail());
                 List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
 
-                System.out.println("List of EmployeeSkill:   " + employeeSkill);
+//                System.out.println("List of EmployeeSkill:   " + employeeSkill);
 
                 List<Skill> listSkill = skillService.getAllSkills();
 

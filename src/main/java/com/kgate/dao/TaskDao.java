@@ -8,9 +8,14 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskDao {
 
+    
+    public void deleteTask(int task_id );
+
+
 	
 	public void addTask(TaskDetails task);
 	public List<TaskDetails> getByProjectId(int id);
+
 
     public List<TaskDetails> getAllTask();
 
@@ -18,4 +23,6 @@ public interface TaskDao {
     public List<String> getEmployeeEmail(String email);
     //return task 
      public TaskDetails getTask(int task_id);
+
+	
 }

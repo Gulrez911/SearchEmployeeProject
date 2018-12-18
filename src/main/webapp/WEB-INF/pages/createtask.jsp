@@ -14,7 +14,7 @@
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
-            <form:form action="createtask" method="post" commandName="taskdetails">  
+            <form:form action="createtask" method="post" modelAttribute="taskdetails" commandName="taskdetails">  
                 <table align="center">
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
@@ -49,21 +49,18 @@
 
 
 
-                <c:forEach var="td" items="${listtask}">
+                <c:forEach var="taskdetails" items="${listtask}">
                     <tr style="color:black">
 
-                        <td>${td.task_Type}</td>
-                        <td>${td.task_Name}</td>
-
+                        <td>${taskdetails.task_Type}</td>
+                        <td>${taskdetails.task_Name}</td>
                         <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
-                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>
-                         </tr> 
-                        </c:forEach>   
-                        
-                        
-                 </table>
-                    </div> 
+                        <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
+                        <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>
+                        </c:forEach>     
+
+                    </div> 
 
 
 
