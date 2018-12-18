@@ -55,12 +55,21 @@
                     <tr style="color:black">
 
                         <td>${td.task_Type}</td>
-                        <td>${td.task_Name }</td>
-               <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
-                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>
-                        </c:forEach>     
 
+                        <td>${td.task_Name }</td>
+
+
+
+                        <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
+
+                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>
+                         </tr> 
+                        </c:forEach>   
+                        
+                        
+                 </table>
                     </div> 
+
 
 
 

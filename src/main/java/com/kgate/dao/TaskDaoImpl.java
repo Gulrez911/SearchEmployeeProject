@@ -50,9 +50,25 @@ public class TaskDaoImpl implements TaskDao {
     public List<TaskDetails> getAllTask() {
         return sessionFactory.getCurrentSession().createQuery("from TaskDetails")
                 .list();
-    }
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TaskDetails> getByProjectId(int id) {
+	
+		return sessionFactory.getCurrentSession().createQuery("from TaskDetails where projectId='"+id+"'")
+                .list();
+		
+	}
+
+
+	
+
+   
 
     //return employee name from manager email
+	@SuppressWarnings("unchecked")
     @Override
     public List<String> getEmployeeEmail(String email) {
 
@@ -69,4 +85,9 @@ public class TaskDaoImpl implements TaskDao {
 
 
 
+
+
+
+
 }
+

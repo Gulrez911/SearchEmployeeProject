@@ -23,6 +23,7 @@
 
 
         <div align="center">
+        <div>
             <h1 style="color: orangered">Create Project</h1>
 
             <form:form action="cproject" method="post"
@@ -49,32 +50,72 @@
                     </tr> 
 
 
-
                     <tr>
 
-                        <td><input type="submit" value="Create Project"></td>
+					<td><input type="submit" value="Create Project"></td>
 
-                    </tr>
-                </table>
+				</tr>
+			</table>
 
-                <table border="1">
+		
+<%-- <form:form action="showtask" commandName="taskdetails">
+<form:hidden path=" managerId" name="managerid"/>
+</form:form> --%>
+	
+	     <table border="1" align="left" style="height: 25%; width: 25%; border-color: white">
+	
+    
+        <th style="color:white">Project Name</th>
+              
+                    <c:forEach var="pd" items="${listProject}">
 
-                    <th>Project Name</th>
-                    <th>Create Task</th>
-                        <c:forEach var="pd" items="${listProject}">
-                        <tr>
-
-                            <td>${pd.project_Name}</td>
-                            <td>
-                                <!--<a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>-->
-                                <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>
-                            </td>
+<tr>
+                <td> <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color:white">${pd.project_Name}</a></td>
                         </tr>
-                    </c:forEach>
-                </table>
 
-            </form:form>
+                </c:forEach>
+            </table>
+	
+</form:form>
+</div>
+	<div align="right">
+		<div align="right">
+			<form:form action="managerpage" method="post" commandName="e">
+				<form:hidden path="email" name="email"/>
+				<table>
+				<tr>
+					<td>
+						<input type="submit" value="Employee List">
 
+					</td>
+				</tr>
+
+
+		</table>
+
+</form:form></div>
+
+<div align="right">
+			<form:form action="back" method="post" commandName="e">
+
+			<table>
+				<tr>
+					<td>
+						<input type="submit" value="Back">
+
+					</td>
+
+
+				</tr>
+
+
+</table>
+</form:form>
+
+
+</div>
+
+</div>
         </div>
     </body>
 

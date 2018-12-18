@@ -22,6 +22,15 @@ public class TaskSeviceImpl implements TaskService {
 
     }
 
+
+	@Override
+	public List<TaskDetails> getByProjectId(int id) {
+		
+		return taskdao.getByProjectId(id);
+	}
+		
+		
+
     @Override
     public List<TaskDetails> getAllTask() {
         return taskdao.getAllTask();
@@ -42,5 +51,6 @@ public class TaskSeviceImpl implements TaskService {
 
         return  taskdao.getTask(task_id);
     }
+
 
 }

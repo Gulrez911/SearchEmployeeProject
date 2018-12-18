@@ -226,6 +226,24 @@ public class EmployeeController {
 
     }
 
+    @RequestMapping(value = "/managerpage", method = RequestMethod.POST)
+    public ModelAndView taskcreate(@ModelAttribute("employee")Employee employee,@RequestParam("email")String email) 
+    {
+//    	String email=request.getParameter("email");
+    	ModelAndView mav = new ModelAndView("ManagerSuccess");
+    	 employee=new Employee();
+    	mav.addObject("employee", employee);
+    	List<Employee> elist=employeeService.displayByManagerId(email);
+    	  
+    	 mav.addObject("elist", elist);
+         
+		return mav;
+    	
+    }
+    
+    
+    
+    
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
@@ -295,5 +313,29 @@ public class EmployeeController {
         List<Employee> listEmployee = employeeService.getAllEmployees();
         return new ModelAndView("excelView", "listEmployee", listEmployee);
     }
+    
+    
+    @RequestMapping(value = "/back", method = RequestMethod.POST)
+    public ModelAndView back() {
+   
+    	  ModelAndView mav = new ModelAndView("login");
+          Employee employee = new Employee();
+          mav.addObject("employee", employee);
+          String[] userType = {"Admin", "Employee", "Manager"};
+          mav.addObject("userTypes", userType);
+		return mav;
+    	
+    	
+    }
+    
+ 
+    
+   
+   
+    
+    
+    
+    
+    
 
 }
