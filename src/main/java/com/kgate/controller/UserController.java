@@ -118,6 +118,7 @@ public class UserController {
 
                 request.setAttribute("loginuser", employee.getEmail());
                 ModelAndView mav = new ModelAndView("success");
+                return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
 
