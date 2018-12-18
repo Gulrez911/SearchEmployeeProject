@@ -2,7 +2,6 @@ package com.kgate.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +11,6 @@ import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
 import com.kgate.model.TaskDetails;
-import com.kgate.model.User;
 
 import com.kgate.service.EmployeeService;
 import com.kgate.service.LoginService2;
@@ -24,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.scheduling.config.Task;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,9 +29,13 @@ import java.util.ArrayList;
 
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 // @RequestMapping(value = ("/"))
+@SessionAttributes("employee")
 public class UserController {
 
     @Autowired
@@ -45,10 +46,10 @@ public class UserController {
 
     @Autowired
     private EmployeeService employeeService;
-    
+
     @Autowired
     private ProjectService projectservice;
-    
+
     @Autowired
     private TaskService taskservice;
 
@@ -57,22 +58,20 @@ public class UserController {
         this.loginservice2 = loginservice2;
     }
 
-
     public void setemployeeservice(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView init() {
+        ModelAndView mav = new ModelAndView("login");
+        Employee employee = new Employee();
+        mav.addObject("employee", employee);
+        String[] userType = {"Admin", "Employee", "Manager"};
+        mav.addObject("userTypes", userType);
+        return mav;
+    }
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView init() {	
-		ModelAndView mav = new ModelAndView("login");
-	Employee employee = new Employee();
-	mav.addObject("employee", employee);
-	String[] userType = { "Admin", "Employee", "Manager" };
-	mav.addObject("userTypes", userType);
-	return mav;
-}
-	
     /*public ModelAndView ct() {
     	ModelAndView mav=new ModelAndView("createtask");
     	TaskDetails TaskDetails=new TaskDetails();
@@ -80,8 +79,7 @@ public class UserController {
     	String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
     	mav.addObject("task_Type",Tasktype);
     	return mav;*/
-    
-  /*  @RequestMapping(value=    ,method = RequestMethod.GET)
+ /*  @RequestMapping(value=    ,method = RequestMethod.GET)
     public ModelAndView addingtask() {
     	ModelAndView mav=new ModelAndView("createtask");
     	taskservice.addTask();
@@ -90,15 +88,7 @@ public class UserController {
     	
     }
     
-    */ 
-    
-    
-    
-    
-    
-    
-
-
+     */
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee) {
         employeeService.updateEmployee(employee);
@@ -110,7 +100,6 @@ public class UserController {
         return mav;
 
     }
-
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ModelAndView authenticate(ModelMap modelMap, @ModelAttribute("employee") Employee employee,
@@ -130,14 +119,11 @@ public class UserController {
                 request.setAttribute("loginuser", employee.getEmail());
                 ModelAndView mav = new ModelAndView("success");
 
-
-
-
             } else if (employee.getCategory().equals("Manager")) {
 
                 ModelAndView mav = new ModelAndView("CreateProject");
-      
-                Integer mid=projectservice.getManagerid(employee.getEmail());
+              
+                Integer mid = projectservice.getManagerid(employee.getEmail());
                 mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
                 TaskDetails taskdetails = new TaskDetails();
@@ -145,12 +131,11 @@ public class UserController {
                 mav.addObject("projectdetails", projectdetails);
                 mav.addObject("taskdetails", taskdetails);
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
-                System.out.println("List of Project:  "+listProject);
+                System.out.println("List of Project:  " + listProject);
                 mav.addObject("pd", pd);
                 mav.addObject("listProject", listProject);
-               
+              
                 return mav;
-
 
             } else if (employee.getCategory().equals("Employee")) {
 
@@ -211,4 +196,5 @@ public class UserController {
 
     }
 
+   
 }

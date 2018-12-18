@@ -22,40 +22,43 @@
         <div align="center">
             <h1 style="color:orangered">Allocate Task</h1>
 
-            <form:form action="saveEmployee" method="post" commandName="td">
+            <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
+                    <form:hidden path="projectId" />
+                    <form:hidden path="managerId" />
+                    <form:hidden path="task_id" />
                     <tr>
                         <td style="color:white">Task Type: </td>
-                        <td><form:input path="task_Type"  required="required"/></td>
+                        <td><form:input path="task_Type"  /></td>
                         <td><form:errors path="task_Type" cssClass="error"/></td>
                     </tr>
                     <tr>
-                        <td style="color:white">Task Name: </td>
-                        <td><form:input path="task_Name" /></td>
-
+                        <td style="color: black">Task Name:</td>
+                        <td><form:input name="task_Name" path="task_Name" type="text" id="tn" /></td>
                     </tr>
 
                     <tr>
-                        <td style="color:white">Start Date: </font></td>
-                        <td><form:input path="tStart_Time" type="date" /></td>
+                        <td>Task Start Date:</td>
+                        <td><form:input path="tStart_Time" type="date"/></td>
                     </tr>
+
                     <tr>
-                        <td style="color:white">End Date: </font></td>
+                        <td>Task End Date:</td>
                         <td><form:input path="tEnd_Time" type="date"/></td>
                     </tr>
 
-                    <!--                    <tr>
-                                            <td style="color:white"> Assign: </font></td>
-                                            <td>
-                    <%--<form:select path="emp_email" required ="true">--%>
+                    <tr>
+                        <td style="color:white"> Assign: </font></td>
+                        <td>
+                            <form:select path="Emp_Email" required ="true">
 
-                    <%--<form:options items="${listEmail}" />--%>
-                    <%--</form:select>--%>
+                                <form:options items="${employeeEmail}" />
+                            </form:select>
 
-                <td>
+                        <td>
 
-            </tr>-->
+                    </tr>  
 
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
