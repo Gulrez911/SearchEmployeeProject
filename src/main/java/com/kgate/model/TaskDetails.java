@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Task_Details")
@@ -24,8 +27,12 @@ public class TaskDetails {
     @Column
     private String status;
     @Column
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date tStart_Time;
     @Column
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date tEnd_Time;
     @Column
     private String Emp_Email;
@@ -102,39 +109,36 @@ public class TaskDetails {
         this.tSub_Date = tSub_Date;
     }
 
-    
-    
     public int getManagerId() {
-		return managerId;
-	}
+        return managerId;
+    }
 
-	public void setManagerId(int managerId) {
-		this.managerId = managerId;
-	}
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
+    }
 
-	public int getProjectId() {
-		return projectId;
-	}
+    public int getProjectId() {
+        return projectId;
+    }
 
-	public void setProjectId(int projectId) {
-		this.projectId = projectId;
-	}
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
 
-	public String getTaskallocation() {
-		return taskallocation;
-	}
+    public String getTaskallocation() {
+        return taskallocation;
+    }
 
-	public void setTaskallocation(String taskallocation) {
-		this.taskallocation = taskallocation;
-	}
+    public void setTaskallocation(String taskallocation) {
+        this.taskallocation = taskallocation;
+    }
 
-	@Override
-	public String toString() {
-		return "TaskDetails [task_id=" + task_id + ", task_Type=" + task_Type + ", task_Name=" + task_Name + ", status="
-				+ status + ", tStart_Time=" + tStart_Time + ", tEnd_Time=" + tEnd_Time + ", Emp_Email=" + Emp_Email
-				+ ", tSub_Date=" + tSub_Date + ", managerId=" + managerId + ", projectId=" + projectId
-				+ ", taskallocation=" + taskallocation + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "TaskDetails [task_id=" + task_id + ", task_Type=" + task_Type + ", task_Name=" + task_Name + ", status="
+                + status + ", tStart_Time=" + tStart_Time + ", tEnd_Time=" + tEnd_Time + ", Emp_Email=" + Emp_Email
+                + ", tSub_Date=" + tSub_Date + ", managerId=" + managerId + ", projectId=" + projectId
+                + ", taskallocation=" + taskallocation + "]";
+    }
 
 }

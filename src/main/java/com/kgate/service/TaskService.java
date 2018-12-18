@@ -7,6 +7,7 @@ import org.springframework.scheduling.config.Task;
 import com.kgate.model.TaskDetails;
 
 public interface TaskService {
+
 	
 	public void addTask(TaskDetails task);
 	
@@ -14,4 +15,9 @@ public interface TaskService {
 	public List<TaskDetails> getByProjectId(int id);
 	 
 
+
+    //return employee name from manager email
+    public List<String> getEmployeeEmail(String email);
+    //return task 
+     public TaskDetails getTask(int task_id);
 }

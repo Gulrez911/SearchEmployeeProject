@@ -50,28 +50,20 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private SkillService skillService;
 
-	@Autowired
-	private SkillService skillService;
+    public String generateOTP() {
+        Random random = new Random();
+        String id = String.format("%04d", random.nextInt(10000));
+        return id;
+    }
 
-
-
-
-
-	public String generateOTP() {
-		Random random = new Random();
-		String id = String.format("%04d", random.nextInt(10000));
-		return id;
-	}
-
-	 @RequestMapping(value = "/success")
-	 public ModelAndView success()
-	 {
-		  ModelAndView mav = new ModelAndView("success");
-		return mav;
-	 }
-
-
+    @RequestMapping(value = "/success")
+    public ModelAndView success() {
+        ModelAndView mav = new ModelAndView("success");
+        return mav;
+    }
 
     @RequestMapping(value = "/search_employeelist")
     public ModelAndView searchEmployee(ModelAndView model, @RequestParam("freeText") String freeText)
@@ -85,33 +77,28 @@ public class EmployeeController {
     @RequestMapping(value = "/search_employeelist_skill1")
     public ModelAndView searchEmployeeBySkill1(ModelAndView model, @RequestParam("skillSearch") String skillSearch)
             throws IOException {
-int flag=1;
-    	List<Employee> listEmployee=null;
+        int flag = 1;
+        List<Employee> listEmployee = null;
 
         List<Skill> listSkill = skillService.getAllSkills();
-    
-            for (Skill s : listSkill)
-        {
-                String a = s.getSkill_name().toLowerCase();
-                if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch)) 
-                {
-                    listEmployee = employeeService.searchEmployeesBySkill(a);
-                    model.addObject("listEmployee", listEmployee);
-                 flag=0;
-                    
-                }
-        }
-            if(flag==1)
-            {
-            	
-                    model.addObject("error", "data not found");
-                    model.setViewName("home");
-                    return model;
-        
 
-                
+        for (Skill s : listSkill) {
+            String a = s.getSkill_name().toLowerCase();
+            if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch)) {
+                listEmployee = employeeService.searchEmployeesBySkill(a);
+                model.addObject("listEmployee", listEmployee);
+                flag = 0;
+
             }
-            model.addObject("listEmployee", listEmployee);
+        }
+        if (flag == 1) {
+
+            model.addObject("error", "data not found");
+            model.setViewName("home");
+            return model;
+
+        }
+        model.addObject("listEmployee", listEmployee);
         model.setViewName("home");
         return model;
 
@@ -135,24 +122,18 @@ int flag=1;
         model.addObject("listSkill", listSkill);
 //        model.addObject("skill", skill);
 
-		Employee employee = new Employee();
-		model.addObject("employee", employee);
-		
-	    String[] userType = {"Admin", "Employee","Manager"};
-	    model.addObject("userTypes", userType);
-	    model.setViewName("EmployeeForm");
-		return model;
-	
+        Employee employee = new Employee();
+        model.addObject("employee", employee);
 
-	
-	}
+        String[] userType = {"Admin", "Employee", "Manager"};
+        model.addObject("userTypes", userType);
+        model.setViewName("EmployeeForm");
+        return model;
 
+    }
 
-	
-	
     @RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
     public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
-
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -170,27 +151,21 @@ int flag=1;
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
 //        model.addObject("employee", employee)
-		
-		 String[] userType = {"Admin", "Employee","Manager"};
-		    model.addObject("userTypes", userType);
-		model.setViewName("EmployeeForm");
-		return model;
-	}
 
+        String[] userType = {"Admin", "Employee", "Manager"};
+        model.addObject("userTypes", userType);
+        model.setViewName("EmployeeForm");
+        return model;
+    }
 
+    @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
+        /* if (employee.getOtp().equals(temp_3)) { */
 
-	@RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-	public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-		/* if (employee.getOtp().equals(temp_3)) { */
-
-
-
-
-		for (String skill : employee.getSkills()) {
-			Skill sk = skillService.getSkillByName(skill);
-			employee.getListSkill().add(sk);
-		}
-
+        for (String skill : employee.getSkills()) {
+            Skill sk = skillService.getSkillByName(skill);
+            employee.getListSkill().add(sk);
+        }
 
         Employee emp = employeeService.searchByEmail(employee.getEmail());
         if (emp == null) {
@@ -201,13 +176,13 @@ int flag=1;
                 employee.setStatus("Approved");
 //                employeeService.addEmployee(emp);
 
-				employeeService.addEmployee(employee);
+                employeeService.addEmployee(employee);
 
-			} else {
-				// send him a message that otp is invalid
-				return new ModelAndView("invalid");
-			}
-		}
+            } else {
+                // send him a message that otp is invalid
+                return new ModelAndView("invalid");
+            }
+        }
 
 //           String password=employee.getPassword();
         EmployeeController ec = new EmployeeController();
@@ -279,6 +254,7 @@ int flag=1;
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
     public ModelAndView editEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
+        
 
         List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);
         System.out.println("List of EmployeeSkill:   " + employeeSkill);
@@ -289,17 +265,15 @@ int flag=1;
 
         List<String> sk = new ArrayList<>();
 
-
-		for (int i = 0; i < employeeSkill.size(); i++) {
-			Object o = employeeSkill.get(i);
-			String s = (String) o;
-			sk.add(s);
-		}
-		employee.setSkills(sk);
+        for (int i = 0; i < employeeSkill.size(); i++) {
+            Object o = employeeSkill.get(i);
+            String s = (String) o;
+            sk.add(s);
+        }
+        employee.setSkills(sk);
 
         String[] userType = {"Employee", "Admin", "Manager"};
         model.addObject("userTypes", userType);
-
 
         model.addObject("listSkill", listSkill);
         model.addObject("employee", employee);
@@ -309,28 +283,22 @@ int flag=1;
         return model;
     }
 
+    @RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
+    public ModelAndView updateperson(@ModelAttribute Employee employee) {
 
-	@RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
-	public ModelAndView updateperson(@ModelAttribute Employee employee) {
+        for (String skill : employee.getSkills()) {
+            Skill sk = skillService.getSkillByName(skill);
+            employee.getListSkill().add(sk);
+        }
 
-		for (String skill : employee.getSkills()) {
-			Skill sk = skillService.getSkillByName(skill);
-			employee.getListSkill().add(sk);
-		}
+        employeeService.addEmployee(employee);
 
-
-
-
-	
-		employeeService.addEmployee(employee);
-
-		String message = "Employee is successfully edited.";
-		ModelAndView mav = new ModelAndView("home");
-		mav.addObject("message", message);
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		mav.addObject("listEmployee", listEmployee);
-		return mav;
-
+        String message = "Employee is successfully edited.";
+        ModelAndView mav = new ModelAndView("home");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+        return mav;
 
     }
 
@@ -340,14 +308,10 @@ int flag=1;
         return new ModelAndView("pdfView", "listEmployee", listEmployee);
     }
 
-
-	@RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
-	public ModelAndView downloadExcel() {
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		return new ModelAndView("excelView", "listEmployee", listEmployee);
-	}
-
-	
-
+    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+    public ModelAndView downloadExcel() {
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        return new ModelAndView("excelView", "listEmployee", listEmployee);
+    }
 
 }
