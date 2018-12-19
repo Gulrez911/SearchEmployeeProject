@@ -42,6 +42,7 @@ public class TaskDemoController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
     }
 
+//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
     public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("AllocateTask");
@@ -80,16 +81,22 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
     public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-        int pId = taskdetails.getProjectId();
-        taskdetails.setProjectId(pId);
+//        int pId = Integer.parseInt(request.getParameter("project_id"));
+//        int pId = taskdetails.getProjectId();
+//        int mId = Integer.parseInt(request.getParameter("mgrid"));
+//        taskdetails.setProjectId(pId);
         int mId = taskdetails.getManagerId();
         taskdetails.setManagerId(mId);
+//        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+//        ModelAndView mav = new ModelAndView("createtask");
         ModelAndView mav = new ModelAndView("createtask");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
-        List<TaskDetails> listtask = taskService.getByProjectId(pId);
-        mav.addObject("listtask", listtask);
-        mav.addObject("taskdetails", taskdetails);
+//        List<TaskDetails> listtask = taskService.getByProjectId(pId);
+//        mav.addObject("listtask", listtask);
+        TaskDetails td = new TaskDetails();
+        mav.addObject("td", td);
+//        mav.addObject("taskdetails", taskdetails);
         return mav;
     }
 

@@ -22,11 +22,11 @@ public class TaskDetails {
 
     @Column
     private String task_Type;
-    @Column 
+    @Column
     private String task_Name;
-    @Column 
+    @Column
     private String status;
-    @Column 
+    @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     @Temporal(TemporalType.DATE)
     private Date tStart_Time;
