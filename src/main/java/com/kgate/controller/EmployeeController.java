@@ -81,28 +81,6 @@ public class EmployeeController {
         List<Employee> listEmployee = null;
 
         List<Skill> listSkill = skillService.getAllSkills();
-<<<<<<< HEAD
-    
-            for (Skill s : listSkill)
-        {
-                String a = s.getSkill_name().toLowerCase();
-                if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch)) 
-                {
-                    listEmployee = employeeService.searchEmployeesBySkill(a);
-                    model.addObject("listEmployee", listEmployee);
-                 flag=0;
-                    
-                }
-        }
-            if(flag==1)
-            {
-            	
-                    model.addObject("error", "Data not found");
-                    model.setViewName("home");
-                    return model;
-        
-=======
->>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
 
         for (Skill s : listSkill) {
             String a = s.getSkill_name().toLowerCase();
@@ -172,17 +150,9 @@ public class EmployeeController {
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
-<<<<<<< HEAD
+
 //        model.addObject("employee", employee)
-		
-		 String[] userType = {"Admin", "Employee","Manager"};
-		    model.addObject("userTypes", userType);
-		model.setViewName("EmployeeForm");
-		return model;
-	}
-=======
-//        model.addObject("employee", employee)
->>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
+
 
         String[] userType = {"Admin", "Employee", "Manager"};
         model.addObject("userTypes", userType);
