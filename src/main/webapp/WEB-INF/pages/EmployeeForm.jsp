@@ -60,12 +60,12 @@
                     </tr>
                     <tr>
                         <td style="color:white">Aadhar No.:</td>
-                        <td><form:input path="aadhar"  required="required"/></td>
+                        <td><form:input path="aadhar"  /></td>
                         <td><form:errors path="aadhar" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:white">Pan No.:</td>
-                        <td><form:input path="pan"  required="required"/></td>
+                        <td><form:input path="pan"  /></td>
                         <td><form:errors path="pan" cssClass="error"/></td>
                     </tr>
                     
@@ -86,10 +86,7 @@
                     
                   
 
-                    <tr>
-                        <td style="color:white">OTP:</td>
-                        <td><form:input path="otp" /></td>
-                    </tr>
+                 
 
 
                     <tr>
@@ -105,8 +102,8 @@
                     </tr>
 
                     <tr>
-                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
-                        <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
+                        <td><input type="submit" value="send mail" name="action1"/></td>     
+                       <!--  <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td> -->
                     </tr>
                 </table>
             </form:form>

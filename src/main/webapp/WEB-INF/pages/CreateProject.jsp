@@ -57,25 +57,68 @@
                     </tr>
                 </table>
 
-                <table border="1">
+                <table border="1" align="left">
 
-                    <th>Project Name</th>
-                    <th>Create Task</th>
+                    <th style="color: white">Project Name</th>
+                   
                         <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td>${pd.project_Name}</td>
-                            <td>
-                                <!--<a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>-->
-                                <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>
-                            </td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            
                         </tr>
-                    </c:forEach>
+
+
+                </c:forEach>
+            </table>
+	
+</form:form>
+</div>
+<br>
+</div>
+	<div align="right">
+		<div align="right">
+			<form:form action="managerpage"  commandName="e">
+				<%-- <form:hidden path="email" name="email"/> --%>
+				<table>
+				<tr>
+					<td>
+						<a href="managerpage?email=${e.email}" >Employee List</a>
+
+                 
                 </table>
+
 
             </form:form>
 
+
+</div>
+
+<div align="right">
+			<form:form action="back" method="post" commandName="e">
+
+			<table>
+				<tr>
+					<td>
+						<input type="submit" value="Back">
+
+					</td>
+
+
+				</tr>
+
+
+</table>
+</form:form>
+
+
+</div>
+
+</div>
+        
+
         </div>
+
     </body>
 
 </html>

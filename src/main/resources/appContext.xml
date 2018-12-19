@@ -39,6 +39,7 @@
 
 
         <property name="username" value="root"></property>
+
         <property name="password" value="1234"></property>
  
     </bean>
@@ -61,7 +62,6 @@
         </property>
         <property name="packagesToScan" value="com.kgate.model"></property>
     </bean>
-
 
 	<bean id="viewResolver2"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

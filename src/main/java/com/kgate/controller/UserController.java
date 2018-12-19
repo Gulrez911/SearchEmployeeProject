@@ -116,12 +116,13 @@ public class UserController {
                 ModelAndView mav = new ModelAndView("success");
                 return mav;
 
+			
 			} else if (employee.getCategory().equals("Manager")) {
 
 				ModelAndView mav = new ModelAndView("CreateProject");
 
 				Integer mid = projectservice.getManagerid(employee.getEmail());
-//                System.out.println("Manager ID:::: " + mid);
+				// System.out.println("Manager ID:::: " + mid);
 				mav.addObject("mid", mid);
 				ProjectDetails projectdetails = new ProjectDetails();
 				TaskDetails taskdetails = new TaskDetails();
@@ -129,7 +130,7 @@ public class UserController {
 				mav.addObject("projectdetails", projectdetails);
 				mav.addObject("taskdetails", taskdetails);
 				List<ProjectDetails> listProject = projectservice.dispalyProjects();
-//                System.out.println("List of Project:  " + listProject);
+				// System.out.println("List of Project: " + listProject);
 				mav.addObject("pd", pd);
 				mav.addObject("listProject", listProject);
 
@@ -138,13 +139,14 @@ public class UserController {
 			} else if (employee.getCategory().equals("Employee")) {
 
 				/* Get all data required for Person jsp and set in ModelAndView */
-//                ModelAndView mav = new ModelAndView("byEmployeeEdit");
-//                Employee emp = employeeService.searchByEmail(employee.getEmail());
-//                List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
+				// ModelAndView mav = new ModelAndView("byEmployeeEdit");
+				// Employee emp = employeeService.searchByEmail(employee.getEmail());
+				// List<String> employeeSkill =
+				// skillService.getEmployeeSkillByEmail(employee.getEmail());
 
 				ModelAndView mav = new ModelAndView("EmployeeDashboard1");
 
-//                System.out.println("List of EmployeeSkill:   " + employeeSkill);
+				// System.out.println("List of EmployeeSkill: " + employeeSkill);
 
 				TaskDetails taskdetails = new TaskDetails();
 				mav.addObject("taskdetails", taskdetails);
@@ -156,32 +158,33 @@ public class UserController {
 				mav.addObject("employee", employee);
 				return mav;
 
-//            		ModelAndView mav = new ModelAndView("byEmployeeEdit");
+				// ModelAndView mav = new ModelAndView("byEmployeeEdit");
 
-//            		Employee emp = employeeService.searchByEmail(employee.getEmail());
-//                    List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
-//
-//                    System.out.println("List of EmployeeSkill:   " + employeeSkill);
-//
-//                    List<Skill> listSkill = skillService.getAllSkills();
-//
-//                    List<String> sk = new ArrayList<>();
-//
-//                    for (int i = 0; i < employeeSkill.size(); i++) {
-//                        Object o = employeeSkill.get(i);
-//                        String s = (String) o;
-//                        sk.add(s);
-//                    }
-//                    emp.setSkills(sk);
-//                    String[] userType = {"Employee", "Admin", "Manager"};
-//                    mav.addObject("userTypes", userType);
-//
-//                    mav.addObject("listSkill", listSkill);
-//                    mav.addObject("employee", emp);
-//
-//                    Skill skill = new Skill();
-//                    mav.addObject("skill", skill);
-//                    return mav;
+				// Employee emp = employeeService.searchByEmail(employee.getEmail());
+				// List<String> employeeSkill =
+				// skillService.getEmployeeSkillByEmail(employee.getEmail());
+				//
+				// System.out.println("List of EmployeeSkill: " + employeeSkill);
+				//
+				// List<Skill> listSkill = skillService.getAllSkills();
+				//
+				// List<String> sk = new ArrayList<>();
+				//
+				// for (int i = 0; i < employeeSkill.size(); i++) {
+				// Object o = employeeSkill.get(i);
+				// String s = (String) o;
+				// sk.add(s);
+				// }
+				// emp.setSkills(sk);
+				// String[] userType = {"Employee", "Admin", "Manager"};
+				// mav.addObject("userTypes", userType);
+				//
+				// mav.addObject("listSkill", listSkill);
+				// mav.addObject("employee", emp);
+				//
+				// Skill skill = new Skill();
+				// mav.addObject("skill", skill);
+				// return mav;
 
 			} else if (employee.getCategory().equals("CEO")) {
 				ModelAndView model = new ModelAndView("CEODashboard");
@@ -204,21 +207,21 @@ public class UserController {
 	}
 
 	// Employee Edit by Employee
-	@RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
-	public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
-		for (String skill : employee.getSkills()) {
-			Skill sk = skillService.getSkillByName(skill);
-			employee.getListSkill().add(sk);
-		}
-
-		employeeService.addEmployee(employee);
-		String message = "Employee is successfully edited.";
-		ModelAndView mav = new ModelAndView("EmployeeSuccess");
-		mav.addObject("message", message);
-		List<Employee> listEmployee = employeeService.getAllEmployees();
-		mav.addObject("listEmployee", listEmployee);
-		return mav;
-
-	}
+//	@RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
+//	public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
+//		for (String skill : employee.getSkills()) {
+//			Skill sk = skillService.getSkillByName(skill);
+//			employee.getListSkill().add(sk);
+//		}
+//
+//		employeeService.addEmployee(employee);
+//		String message = "Employee is successfully edited.";
+//		ModelAndView mav = new ModelAndView("EmployeeSuccess");
+//		mav.addObject("message", message);
+//		List<Employee> listEmployee = employeeService.getAllEmployees();
+//		mav.addObject("listEmployee", listEmployee);
+//		return mav;
+//
+//	}
 
 }
