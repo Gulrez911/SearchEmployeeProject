@@ -76,14 +76,15 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/showtask", method = RequestMethod.GET)
-    public ModelAndView showtask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+    public ModelAndView showtask(@SessionAttribute("employee") Employee employee, @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         int pId = Integer.parseInt(request.getParameter("project_id"));
 //        int pId = taskdetails.getProjectId();
 //        int mId = taskdetails.getManagerId();
         taskdetails.setProjectId(pId);
-        int mId = Integer.parseInt(request.getParameter("mgrid"));
-        taskdetails.setManagerId(mId);
-        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+        Integer mid = projectservice.getManagerid(employee.getEmail());
+//        int mId = Integer.parseInt(request.getParameter("mgrid"));
+        taskdetails.setManagerId(mid);
+        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mid);
         ModelAndView mav = new ModelAndView("createtask");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
@@ -91,6 +92,8 @@ public class ProjectController {
         List<TaskDetails> listtask = taskservice.getByProjectId(pId);
         System.out.println("List of task:  " + listtask);
         mav.addObject("taskdetails", taskdetails);
+        TaskDetails td = new TaskDetails();
+        mav.addObject("td",td);
         mav.addObject("listtask", listtask);
         return mav;
     }
@@ -172,7 +175,6 @@ public class ProjectController {
 //        mav.addObject("listtask", listtask);
 //        return mav;
 //    }
-
     //CEO Project related
     @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
     public ModelAndView displayProjectDetails(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {

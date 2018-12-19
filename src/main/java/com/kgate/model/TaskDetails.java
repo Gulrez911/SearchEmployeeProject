@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,11 +23,12 @@ public class TaskDetails {
 
     @Column
     private String task_Type;
-    @Column 
+
+    @Column
     private String task_Name;
-    @Column 
+    @Column
     private String status;
-    @Column 
+    @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     @Temporal(TemporalType.DATE)
     private Date tStart_Time;
@@ -44,6 +46,16 @@ public class TaskDetails {
     private int projectId;
     @Column
     private String taskallocation;
+    @Column
+    private String taskStatus;
+
+    public String getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
     
 	
@@ -116,7 +128,7 @@ public class TaskDetails {
     }
 
     public void setEmp_Email(String emp_Email) {
-        Emp_Email = emp_Email;
+        this.Emp_Email = emp_Email;
     }
 
     public Date gettSub_Date() {

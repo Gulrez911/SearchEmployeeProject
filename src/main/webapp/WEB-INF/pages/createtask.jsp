@@ -60,11 +60,11 @@
 
 
 
-                <c:forEach var="taskdetails" items="${listtask}">
+                <c:forEach var="td" items="${listtask}">
                     <tr style="color:black">
 
-                        <td>${taskdetails.task_Type}</td>
-                        <td>${taskdetails.task_Name}</td>
+                        <td>${td.task_Type}</td>
+                        <td>${td.task_Name}</td>
                         <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
 
 
@@ -78,10 +78,13 @@
                  
                         <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
+
                         <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>
                         
                         <td> <a href="delete?taskid=${taskdetails.task_id}">delete</a></td>
-                        </c:forEach>     
+                        
+                       <%--  <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> --%>
+                    </c:forEach>     
 
 
                     </div> 

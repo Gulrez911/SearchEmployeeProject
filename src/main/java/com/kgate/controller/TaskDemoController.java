@@ -8,6 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +42,19 @@ public class TaskDemoController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
     }
 
-   @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+
+//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+//    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+//        ModelAndView model = new ModelAndView("AllocateTask");
+//        int taskId = Integer.parseInt(request.getParameter("task_id"));
+//        TaskDetails td2 = taskService.getTask(taskId);
+//        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
+//        model.addObject("td", td2);
+//        model.addObject("employeeEmail", employeeEmail);
+//        return model;
+    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+
     public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));
@@ -43,7 +63,6 @@ public class TaskDemoController {
         model.addObject("td", td2);
         model.addObject("employeeEmail", employeeEmail);
         return model;
-
     }
 
     
@@ -57,39 +76,83 @@ public class TaskDemoController {
     
     
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
-    public ModelAndView success(@ModelAttribute("td") TaskDetails td, @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-
-        int pId = taskdetails.getProjectId();
+    public ModelAndView success(@ModelAttribute("td") TaskDetails td,
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         taskdetails.setStatus("Assigned");
-        taskdetails.setProjectId(pId);
-        int mId = taskdetails.getManagerId();
+        taskdetails.setTaskStatus("W .I. P");
+        int mId = td.getManagerId();
         taskdetails.setManagerId(mId);
-        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
+        int pId = td.getProjectId();
+        taskdetails.setProjectId(pId);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        List<TaskDetails> listtask = taskService.getTaskList(pId);
+        /* int pId = taskdetails.getProjectId(); */
+
+ /* int mId = taskdetails.getManagerId(); */
+        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+        ModelAndView mav = new ModelAndView("createtask");
+//		ModelAndView mav = new ModelAndView("createtask");
+
         mav.addObject("task_Type", Tasktype);
-        List<TaskDetails> listtask = taskService.getAllTask();
+//		List<TaskDetails> listtask = taskService.getAllTask();
+
         System.out.println("List of task:  " + listtask);
         taskService.addTask(taskdetails);
         mav.addObject("taskdetails", taskdetails);
         mav.addObject("listtask", listtask);
+        TaskDemoController tdc = new TaskDemoController();
+        System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
+        tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details::::  \nTask Type:  " + taskdetails.getTask_Type()
+                + "\nTaskName::: " + taskdetails.getTask_Name(), "You have assigned Task");
         return mav;
-
     }
 
     @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-    public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-        int pId = taskdetails.getProjectId();
-        taskdetails.setProjectId(pId);
-        int mId = taskdetails.getManagerId();
-        taskdetails.setManagerId(mId);
+    public ModelAndView taskSubmit(@ModelAttribute("td") TaskDetails td,
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request
+    ) {
         ModelAndView mav = new ModelAndView("createtask");
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        mav.addObject("task_Type", Tasktype);
-        List<TaskDetails> listtask = taskService.getByProjectId(pId);
+
+        int pId = td.getProjectId();
+        taskdetails.setProjectId(pId);
+        List<TaskDetails> listtask = taskService.getTaskList(pId);
         mav.addObject("listtask", listtask);
-        mav.addObject("taskdetails", taskdetails);
         return mav;
+    }
+
+    public void sendMail(String to, String message, String subject) {
+        final Employee e = new Employee();
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
+            }
+        });
+
+        Message message1 = new MimeMessage(session);
+
+        try {
+
+            message1.setFrom(new InternetAddress("test@gmail.com"));
+            message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message1.setSubject(subject);
+            message1.setText(message);
+
+            Transport.send(message1);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e1) {
+            throw new RuntimeException(e1);
+        }
+        // return "employeelist";
+
     }
 
 }
