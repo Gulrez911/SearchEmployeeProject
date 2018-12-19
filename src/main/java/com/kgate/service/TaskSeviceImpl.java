@@ -70,27 +70,20 @@ public class TaskSeviceImpl implements TaskService {
 
 	@Override
 	public TaskDetails getTask(int task_id) {
+		return taskdao.getTask(task_id);
+	}
 
-<<<<<<< HEAD
 
 	@Override
 	public void deleteTask(int task_id) {
 		taskdao.deleteTask(task_id);
+	}
 		
-	}
-
-
-
-
-
-=======
-		return taskdao.getTask(task_id);
-	}
 
 	@Override
 	public List<TaskDetails> getTaskList(int mgrId) {
 		return taskdao.getTaskList(mgrId);
 	}
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 }
