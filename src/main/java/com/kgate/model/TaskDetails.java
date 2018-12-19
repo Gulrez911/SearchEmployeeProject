@@ -1,6 +1,8 @@
 package com.kgate.model;
 
-import java.util.Date;
+
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+<<<<<<< HEAD
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
+=======
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
+>>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
 
 @Entity
 @Table(name = "Task_Details")
@@ -24,11 +32,21 @@ public class TaskDetails {
     private String task_Type;
     @Column 
     private String task_Name;
+<<<<<<< HEAD
+    @Column
+    
+=======
     @Column 
+>>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
     private String status;
+<<<<<<< HEAD
+    @Column
+  
+=======
     @Column 
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     @Temporal(TemporalType.DATE)
+>>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
     private Date tStart_Time;
     @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
@@ -98,7 +116,7 @@ public class TaskDetails {
     }
 
     public void setEmp_Email(String emp_Email) {
-        Emp_Email = emp_Email;
+        this.Emp_Email = emp_Email;
     }
 
     public Date gettSub_Date() {

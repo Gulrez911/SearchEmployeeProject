@@ -1,5 +1,9 @@
 package com.kgate.service;
 
+<<<<<<< HEAD
+import java.sql.Date;
+import java.util.List;
+=======
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.Task;
@@ -8,7 +12,52 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kgate.dao.TaskDao;
 import com.kgate.model.TaskDetails;
 import java.util.ArrayList;
+>>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
 
+<<<<<<< HEAD
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kgate.dao.TaskDao;
+import com.kgate.model.TaskDetails;
+
+@Service
+@Transactional
+public class TaskSeviceImpl implements TaskService {
+
+	@Autowired
+	private TaskDao taskdao;
+
+	@Override
+	@Transactional
+	public List<TaskDetails> getalltaskdetails(String email) {
+		return taskdao.getalltaskdetails(email);
+	}
+
+	@Override
+	@Transactional
+	public void updateTask(TaskDetails taskDetails) {
+		taskdao.updateTask(taskDetails);
+
+	}
+
+	@Override
+	@Transactional
+	public void updatetask1(Date date, String email,int tid,String st) {
+		taskdao.updatetask1(date, email,tid,st);
+		
+	}
+
+	
+	public TaskDetails getEmployeeTask(int taskid) {
+		return taskdao.getEmployeeTask(taskid);
+	}
+
+
+   
+	
+=======
 @Service
 @Transactional
 public class TaskSeviceImpl implements TaskService {
@@ -53,4 +102,5 @@ public class TaskSeviceImpl implements TaskService {
     }
 
 
+>>>>>>> branch 'master' of https://Gulrez911@github.com/Gulrez911/SearchEmployeeProject.git
 }
