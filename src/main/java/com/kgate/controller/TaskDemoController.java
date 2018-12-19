@@ -47,19 +47,7 @@ public class TaskDemoController {
     }
 
     
-   /* @RequestMapping(value = "/asssign", method = RequestMethod.GET)
-    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
-        ModelAndView model = new ModelAndView("AllocateTask");
-        int task_Id = Integer.parseInt(request.getParameter("taskid"));
-        int taskId = Integer.parseInt(request.getParameter("task_id"));
-        TaskDetails td =taskService.deleteTask(task_Id);
-        TaskDetails td2 = taskService.getTask(taskId);
-        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
-        model.addObject("td", td2);
-        model.addObject("employeeEmail", employeeEmail);
-
-        return model;
-    }*/
+   
     
     
     
