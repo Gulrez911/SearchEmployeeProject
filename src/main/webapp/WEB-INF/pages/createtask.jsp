@@ -57,8 +57,8 @@
                         <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
                         <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
-                        <td>  <a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}">${td.status}</a></td>
-                        </c:forEach>     
+                        <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td>
+                    </c:forEach>     
 
                     </div> 
 
