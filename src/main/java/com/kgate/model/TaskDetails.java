@@ -46,6 +46,16 @@ public class TaskDetails {
     private int projectId;
     @Column
     private String taskallocation;
+    @Column
+    private String taskStatus;
+
+    public String getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
     public int getTask_id() {
         return task_id;

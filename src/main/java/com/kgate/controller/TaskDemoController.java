@@ -67,6 +67,7 @@ public class TaskDemoController {
     public ModelAndView success(@ModelAttribute("td") TaskDetails td,
             @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         taskdetails.setStatus("Assigned");
+        taskdetails.setTaskStatus("W .I. P");
         int mId = td.getManagerId();
         taskdetails.setManagerId(mId);
         int pId = td.getProjectId();
