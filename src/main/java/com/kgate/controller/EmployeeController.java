@@ -150,7 +150,9 @@ public class EmployeeController {
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
+
 //        model.addObject("employee", employee)
+
 
         String[] userType = {"Admin", "Employee", "Manager"};
         model.addObject("userTypes", userType);
