@@ -141,12 +141,12 @@ public class EmployeeController {
         }
 
         EmployeeController ec = new EmployeeController();
-        String temp_otp = ec.generateOTP();
-        employee.setOtp(temp_otp);
+       
         employee.setStatus("Not Approved");
         employeeService.addEmployee(employee);
 //        System.out.println("otp: " + temp_otp);
-        ec.sendMail("pawarvihan5@gmail.com", temp_otp, "confirm message");
+        ec.sendMail(employee.getEmail(), "Temporary Password="+employee.getPassword()+"\n click on below mention link use temporary password and"
+        		+ "\n Reset Your details"+"href=\\\"http://localhost:8080/SpringMVCHibernateCRUD\">\"", "confirm message");
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
@@ -158,9 +158,9 @@ public class EmployeeController {
         return model;
     }
 
-    @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
+  /*  @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
     public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-        /* if (employee.getOtp().equals(temp_3)) { */
+         if (employee.getOtp().equals(temp_3)) { 
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -189,7 +189,7 @@ public class EmployeeController {
         ec.sendMail(employee.getEmail(), "OTP:" + employee.getOtp() + "\n password:" + employee.getPassword(),
                 "confirm message");
         return new ModelAndView("redirect:/employeelist");
-    }
+    }*/
 
     public void sendMail(String to, String message, String subject) {
         final Employee e = new Employee();
@@ -329,7 +329,25 @@ public class EmployeeController {
     }
     
  
-    
+    @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
+    public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
+        for (String skill : employee.getSkills()) {
+            Skill sk = skillService.getSkillByName(skill);
+            employee.getListSkill().add(sk);
+        }
+        employee.setStatus("Approved");
+        employeeService.addEmployee(employee);
+        String message = "Employee is successfully edited.";
+        ModelAndView mav = new ModelAndView("EmployeeSuccess");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+        EmployeeController ec = new EmployeeController();
+        ec.sendMail(employee.getEmail(), "Details are Successfully save", "confirm message");
+        
+        return mav;
+
+    }
    
    
     

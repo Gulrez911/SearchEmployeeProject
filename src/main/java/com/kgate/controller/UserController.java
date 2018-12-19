@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 // @RequestMapping(value = ("/"))
-@SessionAttributes("employee")
+//@SessionAttributes("employee")
 public class UserController {
 
     @Autowired
@@ -194,21 +194,6 @@ public class UserController {
     }
 
     // Employee Edit by Employee
-    @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
-    public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
-        for (String skill : employee.getSkills()) {
-            Skill sk = skillService.getSkillByName(skill);
-            employee.getListSkill().add(sk);
-        }
-
-        employeeService.addEmployee(employee);
-        String message = "Employee is successfully edited.";
-        ModelAndView mav = new ModelAndView("EmployeeSuccess");
-        mav.addObject("message", message);
-        List<Employee> listEmployee = employeeService.getAllEmployees();
-        mav.addObject("listEmployee", listEmployee);
-        return mav;
-
-    }
+   
 
 }
