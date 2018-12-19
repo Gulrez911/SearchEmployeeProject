@@ -97,8 +97,8 @@ public class ProjectController {
 
     
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteTask(HttpServletRequest request) {
-        int task_id = Integer.parseInt(request.getParameter("task_id"));
+    public ModelAndView deleteTask(HttpServletRequest request,@SessionAttribute("employee") Employee employee) {
+        int task_id = Integer.parseInt(request.getParameter("taskid"));
         taskservice.deleteTask(task_id);
         /*tring[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
     	mav.addObject("task_Type",Tasktype);
