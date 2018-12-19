@@ -1,10 +1,6 @@
 package com.kgate.model;
 
-
-
 import java.util.Date;
-
-/*import java.sql.Date;*/
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 @Table(name = "Task_Details")
 public class TaskDetails {
@@ -28,11 +23,12 @@ public class TaskDetails {
 
     @Column
     private String task_Type;
-    @Column 
+
+    @Column
     private String task_Name;
-    @Column 
+    @Column
     private String status;
-    @Column 
+    @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     @Temporal(TemporalType.DATE)
     private Date tStart_Time;
@@ -50,6 +46,16 @@ public class TaskDetails {
     private int projectId;
     @Column
     private String taskallocation;
+    @Column
+    private String taskStatus;
+
+    public String getTaskStatus() {
+        return taskStatus;
+    }
+
+    public void setTaskStatus(String taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
     public int getTask_id() {
         return task_id;

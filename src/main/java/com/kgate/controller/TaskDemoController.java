@@ -34,102 +34,113 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TaskDemoController {
 
-	@Autowired
-	TaskService taskService;
+    @Autowired
+    TaskService taskService;
 
-	@InitBinder
-	public void initConverter(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
-	}
+    @InitBinder
+    public void initConverter(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+    }
 
-	@RequestMapping(value = "/asssign", method = RequestMethod.GET)
-	public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
-		ModelAndView model = new ModelAndView("AllocateTask");
-		int taskId = Integer.parseInt(request.getParameter("task_id"));
-		TaskDetails td2 = taskService.getTask(taskId);
-		List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
-		model.addObject("td", td2);
-		model.addObject("employeeEmail", employeeEmail);
-		return model;
+//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+//    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+//        ModelAndView model = new ModelAndView("AllocateTask");
+//        int taskId = Integer.parseInt(request.getParameter("task_id"));
+//        TaskDetails td2 = taskService.getTask(taskId);
+//        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
+//        model.addObject("td", td2);
+//        model.addObject("employeeEmail", employeeEmail);
+//        return model;
+    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+        ModelAndView model = new ModelAndView("AllocateTask");
+        int taskId = Integer.parseInt(request.getParameter("task_id"));
+        TaskDetails td2 = taskService.getTask(taskId);
+        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
+        model.addObject("td", td2);
+        model.addObject("employeeEmail", employeeEmail);
+        return model;
+    }
 
-	}
+    @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
+    public ModelAndView success(@ModelAttribute("td") TaskDetails td,
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        taskdetails.setStatus("Assigned");
+        taskdetails.setTaskStatus("W .I. P");
+        int mId = td.getManagerId();
+        taskdetails.setManagerId(mId);
+        int pId = td.getProjectId();
+        taskdetails.setProjectId(pId);
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        List<TaskDetails> listtask = taskService.getTaskList(pId);
+        /* int pId = taskdetails.getProjectId(); */
 
-	@RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
-	public ModelAndView success(@ModelAttribute("td") TaskDetails td,
-			@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-
-		/* int pId = taskdetails.getProjectId(); */
-		int pId = td.getProjectId();
-		taskdetails.setStatus("Assigned");
-		taskdetails.setProjectId(pId);
-		/* int mId = taskdetails.getManagerId(); */
-		int mId = td.getManagerId();
-		taskdetails.setManagerId(mId);
-		System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-		ModelAndView mav = new ModelAndView("createtask");
+ /* int mId = taskdetails.getManagerId(); */
+        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+        ModelAndView mav = new ModelAndView("createtask");
 //		ModelAndView mav = new ModelAndView("createtask");
 
-		String[] Tasktype = { "Coding", "Design", "Integration", "Quality", "Testing" };
-		mav.addObject("task_Type", Tasktype);
+        mav.addObject("task_Type", Tasktype);
 //		List<TaskDetails> listtask = taskService.getAllTask();
-		List<TaskDetails> listtask = taskService.getTaskList(pId);
-		System.out.println("List of task:  " + listtask);
-		taskService.addTask(taskdetails);
-		mav.addObject("taskdetails", taskdetails);
-		mav.addObject("listtask", listtask);
-		TaskDemoController tdc = new TaskDemoController();
-		System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
-		tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details::::  \nTask Type:  " + taskdetails.getTask_Type()
-				+ "\nTaskName::: " + taskdetails.getTask_Name(), "You have assigned Task");
-		return mav;
 
-	}
+        System.out.println("List of task:  " + listtask);
+        taskService.addTask(taskdetails);
+        mav.addObject("taskdetails", taskdetails);
+        mav.addObject("listtask", listtask);
+        TaskDemoController tdc = new TaskDemoController();
+        System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
+        tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details::::  \nTask Type:  " + taskdetails.getTask_Type()
+                + "\nTaskName::: " + taskdetails.getTask_Name(), "You have assigned Task");
+        return mav;
+    }
 
-	@RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-	public ModelAndView taskSubmit(@ModelAttribute("td") TaskDetails td,
-			@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("createtask");
+    @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
+    public ModelAndView taskSubmit(@ModelAttribute("td") TaskDetails td,
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request
+    ) {
+        ModelAndView mav = new ModelAndView("createtask");
 
-		int pId = td.getProjectId();
-		taskdetails.setProjectId(pId);
-		List<TaskDetails> listtask = taskService.getTaskList(pId);
-		mav.addObject("listtask", listtask);
-		return mav;
-	}
+        int pId = td.getProjectId();
+        taskdetails.setProjectId(pId);
+        List<TaskDetails> listtask = taskService.getTaskList(pId);
+        mav.addObject("listtask", listtask);
+        return mav;
+    }
 
-	public void sendMail(String to, String message, String subject) {
-		final Employee e = new Employee();
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.socketFactory.port", "465");
-		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.port", "465");
+    public void sendMail(String to, String message, String subject) {
+        final Employee e = new Employee();
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
 
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
-			}
-		});
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
+            }
+        });
 
-		Message message1 = new MimeMessage(session);
+        Message message1 = new MimeMessage(session);
 
-		try {
+        try {
 
-			message1.setFrom(new InternetAddress("test@gmail.com"));
-			message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message1.setSubject(subject);
-			message1.setText(message);
+            message1.setFrom(new InternetAddress("test@gmail.com"));
+            message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message1.setSubject(subject);
+            message1.setText(message);
 
-			Transport.send(message1);
+            Transport.send(message1);
 
-			System.out.println("Done");
+            System.out.println("Done");
 
-		} catch (MessagingException e1) {
-			throw new RuntimeException(e1);
-		}
-		// return "employeelist";
+        } catch (MessagingException e1) {
+            throw new RuntimeException(e1);
+        }
+        // return "employeelist";
 
-	}
+    }
 
 }
