@@ -45,7 +45,25 @@ public class TaskDetails {
     @Column
     private String taskallocation;
 
-    public int getTask_id() {
+    
+	
+
+	
+
+	
+
+	public TaskDetails() {
+		super();
+	}
+
+	public TaskDetails(String task_Type, String task_Name, String status) {
+		super();
+		this.task_Type = task_Type;
+		this.task_Name = task_Name;
+		this.status = status;
+	}
+
+	public int getTask_id() {
         return task_id;
     }
 

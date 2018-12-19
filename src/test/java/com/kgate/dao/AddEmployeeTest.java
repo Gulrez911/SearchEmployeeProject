@@ -1,7 +1,4 @@
 package com.kgate.dao;
-
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ public class AddEmployeeTest {
     @Autowired
     EmployeeService employeeservice;
 
-    @Test
+    /*@Test
     public void testMeth() {
         Employee e = null;
         //	List<Employee> e=new ArrayList<Employee>();
@@ -38,6 +35,69 @@ public class AddEmployeeTest {
         Employee e1 = new Employee(otp, name, email, address, telephone, category, status, password, managerid, adhar, pan);
 
         employeeservice.addEmployee(e1);
+        
+        
 
+    }*/
+    
+   /* @Test Check Once
+    public void testMeth() {
+        
+        System.out.println(employeeservice.searchByEmail("pawarvihan05@gmail.com"));
+    	
+    }  
+    
+    */
+    /*@Test Check Once
+    public void testMeth() {
+    	Employee e = null;
+    	int id=2;
+    	e=employeeservice.getEmployee(id);
+    	System.out.println(e);
+    	
     }
+    */
+   /* @Test Check Once
+    public void testMeth() {
+    	Employee e = null;
+    	employeeId=
+    	 System.out.println(employeeservice.deleteEmployee(employeeId);
+     }*/
+   /* @Test
+    public void testMeth() {
+    	Employee e = null;
+    	System.out.println(employeeservice.displayByManagerId("rajans2206@gmail.com"));
+    }
+    	*/
+    
+   /* @Test
+    public void testMeth() {
+    	Employee e = null;
+    	System.out.println(employeeservice.getAllEmployees());
+    }*/
+    
+    /*@Test
+    public void testMeth() {
+    	Employee e = null;
+    	String skill="Java";
+    	System.out.println(employeeservice.searchEmployeesBySkill(skill));
+    }*/
+   /* @Test Check
+    public void testMeth() {
+    	Employee e = null;
+    	
+    	System.out.println(employeeservice.updateEmployee(employee));
+    }
+    */
+    @Test
+    public void testMeth() {
+    	int empid=2;
+    	System.out.println(employeeservice.getEmployee(empid));
+    }
+    
 }
+
+
+
+
+

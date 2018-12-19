@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 // @RequestMapping(value = ("/"))
-@SessionAttributes("employee")
+/*@SessionAttributes("employee")*/
 public class UserController {
 
     @Autowired
@@ -115,6 +115,7 @@ public class UserController {
 
                 request.setAttribute("loginuser", employee.getEmail());
                 ModelAndView mav = new ModelAndView("success");
+                return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
 
