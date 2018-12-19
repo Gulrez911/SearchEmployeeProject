@@ -8,6 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -63,6 +71,9 @@ public class TaskDemoController {
         taskService.addTask(taskdetails);
         mav.addObject("taskdetails", taskdetails);
         mav.addObject("listtask", listtask);
+        TaskDemoController tdc = new TaskDemoController();
+        System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
+        tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details::::  \nTask Type:  " + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(), "You have assigned Task");
         return mav;
 
     }
@@ -80,6 +91,41 @@ public class TaskDemoController {
         mav.addObject("listtask", listtask);
         mav.addObject("taskdetails", taskdetails);
         return mav;
+    }
+
+    public void sendMail(String to, String message, String subject) {
+        final Employee e = new Employee();
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.port", "465");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.port", "465");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
+            }
+        });
+
+        Message message1 = new MimeMessage(session);
+
+        try {
+
+            message1.setFrom(new InternetAddress("test@gmail.com"));
+            message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message1.setSubject(subject);
+            message1.setText(message);
+
+            Transport.send(message1);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e1) {
+            throw new RuntimeException(e1);
+        }
+        // return "employeelist";
+
     }
 
 }
