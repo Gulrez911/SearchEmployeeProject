@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 // @RequestMapping(value = ("/"))
-/*@SessionAttributes("employee")*/
+@SessionAttributes("employee")
 public class UserController {
 
 	@Autowired
