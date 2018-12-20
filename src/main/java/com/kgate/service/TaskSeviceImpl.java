@@ -11,7 +11,6 @@ import com.kgate.model.TaskDetails;
 import java.util.ArrayList;
 
 @Service
-@Transactional
 public class TaskSeviceImpl implements TaskService {
 
 	@Autowired
@@ -36,24 +35,28 @@ public class TaskSeviceImpl implements TaskService {
 		taskdao.updatetask1(date, email, tid, st);
 
 	}
-
+	@Override
+	@Transactional
 	public TaskDetails getEmployeeTask(int taskid) {
 		return taskdao.getEmployeeTask(taskid);
 	}
 
 	@Override
+	@Transactional
 	public void addTask(TaskDetails task) {
 		taskdao.addTask(task);
 
 	}
 
 	@Override
+	@Transactional
 	public List<TaskDetails> getByProjectId(int id) {
 
 		return taskdao.getByProjectId(id);
 	}
 
 	@Override
+	@Transactional
 	public List<TaskDetails> getAllTask() {
 		return taskdao.getAllTask();
 	}
@@ -69,18 +72,21 @@ public class TaskSeviceImpl implements TaskService {
 	}
 
 	@Override
+	@Transactional
 	public TaskDetails getTask(int task_id) {
 		return taskdao.getTask(task_id);
 	}
 
 
 	@Override
+	@Transactional
 	public void deleteTask(int task_id) {
 		taskdao.deleteTask(task_id);
 	}
 		
 
 	@Override
+	@Transactional
 	public List<TaskDetails> getTaskList(int mgrId) {
 		return taskdao.getTaskList(mgrId);
 	}

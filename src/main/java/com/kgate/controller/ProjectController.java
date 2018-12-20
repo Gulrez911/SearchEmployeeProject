@@ -99,13 +99,29 @@ public class ProjectController {
     }
 
     
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request,@SessionAttribute("employee") Employee employee) {
+    /*@RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request, Employee employee) {
         int task_id = Integer.parseInt(request.getParameter("taskid"));
         taskservice.deleteTask(task_id);
       ModelAndView mav = new ModelAndView("deletetask");
         return mav ;
-    }
+    }*/
+    
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView deleteTask(HttpServletRequest request) {
+        int task_id = Integer.parseInt(request.getParameter("task_id"));
+        taskservice.deleteTask(task_id);
+        /*tring[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
+    	mav.addObject("task_Type",Tasktype);
+    	 List<TaskDetails> listtask =taskservice.getByProjectId(pId);
+         System.out.println("List of task:  " + listtask);
+         mav.addObject("td", taskdetails);
+         mav.addObject("listtask", listtask);*/
+        return new ModelAndView("deletetask");
+    } 
+    
+    
     
     @RequestMapping(value = "/backtoproject", method = RequestMethod.POST)
     public ModelAndView back( @ModelAttribute("employee") Employee employee) {
