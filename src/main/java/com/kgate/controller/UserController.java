@@ -128,6 +128,7 @@ public class UserController {
 				TaskDetails taskdetails = new TaskDetails();
 				ProjectDetails pd = new ProjectDetails();
 				mav.addObject("projectdetails", projectdetails);
+				taskdetails.setEmp_Email(employee.getEmail());
 				mav.addObject("taskdetails", taskdetails);
 				Employee e = new Employee();
 				 mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));

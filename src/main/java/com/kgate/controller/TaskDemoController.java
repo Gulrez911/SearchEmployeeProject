@@ -64,17 +64,7 @@ public class TaskDemoController {
         model.addObject("employeeEmail", employeeEmail);
         return model;
     }
-
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("td") TaskDetails td,
             @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {

@@ -157,12 +157,16 @@ public class ProjectController {
     
 
     @RequestMapping(value = "/createtask", method = RequestMethod.POST)
-    public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-        int pId = taskdetails.getProjectId();
+    public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,@SessionAttribute("employee") Employee employee) {
+    	  ModelAndView mav = new ModelAndView("createtask");
+    
+     
+    	 int pId = taskdetails.getProjectId();
         taskdetails.setProjectId(pId);
+        
         int mId = taskdetails.getManagerId();
         taskdetails.setManagerId(mId);
-        ModelAndView mav = new ModelAndView("createtask");
+      
         taskdetails.setStatus("Not Assigned");
         taskservice.addTask(taskdetails);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
@@ -171,6 +175,11 @@ public class ProjectController {
         System.out.println("List of task:  " + listtask);
         mav.addObject("td", taskdetails);
         mav.addObject("listtask", listtask);
+      Employee e = new Employee();
+      e.setEmail(taskdetails.getEmp_Email());
+     mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+       
+        
         return mav;
     }
 

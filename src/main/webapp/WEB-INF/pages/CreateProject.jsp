@@ -77,21 +77,14 @@
 <br>
 </div>
 	<div align="right">
-		<div align="right">
 			<form:form action="managerpage"  commandName="e">
 				<%-- <form:hidden path="email" name="email"/> --%>
 				<table>
 				<tr>
 					<td>
-						<a href="managerpage?email=${e.email}" >Employee List</a>
-
-                 
-                </table>
-
-
-            </form:form>
-
-
+						<a href="managerpage?email=${e.email}">Employee List</a>
+				 </table>
+      </form:form>
 </div>
 
 <div align="right">
@@ -103,22 +96,12 @@
 						<input type="submit" value="Back">
 
 					</td>
-
-
-				</tr>
+               </tr>
 
 
 </table>
 </form:form>
-
-
 </div>
-
-</div>
-        
-
-        </div>
-
-    </body>
+</body>
 
 </html>
