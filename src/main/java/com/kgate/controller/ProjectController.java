@@ -135,7 +135,7 @@ public class ProjectController {
     @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
     public ModelAndView displayProjectDetails(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("projectDetailsStatus");
-
+          
         return mav;
     }
 

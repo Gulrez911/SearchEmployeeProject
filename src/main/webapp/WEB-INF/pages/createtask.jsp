@@ -60,6 +60,32 @@
                         <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status}</a></td>
                     </c:forEach>     
 
+                 
+                 </table>
+                 
+                 <form:form action="">
+                 
+                 <table>
+                 
+                 <tr>
+                 <td>
+                 
+                 <input type="submit" Value="Back">
+                 
+                 </td>
+                 
+                 
+                 </tr>
+                 
+                 </table>
+                 
+                 
+                 
+                 </form:form>
+                 
+                 
+                 
+                 
                     </div> 
 
 

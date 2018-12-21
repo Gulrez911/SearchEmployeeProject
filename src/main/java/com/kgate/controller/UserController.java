@@ -129,6 +129,7 @@ public class UserController {
 				mav.addObject("taskdetails", taskdetails);
 				Employee e = new Employee();
 				 mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+				 
 				List<ProjectDetails> listProject = projectservice.dispalyProjects();
 				// System.out.println("List of Project: " + listProject);
 				mav.addObject("pd", pd);

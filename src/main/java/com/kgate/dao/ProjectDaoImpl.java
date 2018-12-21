@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.ProjectDetails;
+import com.kgate.model.TaskDetails;
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
@@ -38,5 +39,12 @@ public class ProjectDaoImpl implements ProjectDao {
 		int id=(int)q.uniqueResult();
 		return id;
 		
+	}
+
+	@Override
+	public List<TaskDetails> displayAllProjectTaskDetails() {
+		/* Session s = this.sessionFactory.getCurrentSession();
+		 s.createQuery("from");*/
+		return null;
 	}
 }
