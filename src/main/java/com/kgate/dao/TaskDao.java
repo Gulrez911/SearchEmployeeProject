@@ -23,19 +23,13 @@ public interface TaskDao {
 	 
 	 public TaskDetails getEmployeeTask(int taskid);
 
-    
-    public void deleteTask(int task_id );
+     public void deleteTask(int task_id );
 
-
-	
 	public void addTask(TaskDetails task);
 	
-   
-	
-	public List<TaskDetails> getByProjectId(int id);
+   	public List<TaskDetails> getByProjectId(int id);
 
-
-    public List<TaskDetails> getAllTask();
+   	public List<TaskDetails> getAllTask();
 
     //return employee name from manager email
     public List<String> getEmployeeEmail(String email);

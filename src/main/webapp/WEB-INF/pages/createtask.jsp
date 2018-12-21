@@ -85,7 +85,7 @@
                         
                         <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
                         
-                        <td> <a href="delete?taskid=${taskdetails.task_id}">delete</a></td>
+                        <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
                     </c:forEach>     
 
 

@@ -17,7 +17,6 @@ public interface TaskService {
 
 	public void addTask(TaskDetails task);
 
-	
 	public void deleteTask(int task_id );
 	
 
