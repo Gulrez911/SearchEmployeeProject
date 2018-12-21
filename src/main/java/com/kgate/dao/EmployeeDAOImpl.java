@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.Employee;
+import com.kgate.model.Skill;
 import java.util.ArrayList;
 import org.hibernate.SQLQuery;
 
