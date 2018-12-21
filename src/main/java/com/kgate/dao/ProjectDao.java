@@ -16,10 +16,12 @@ public interface ProjectDao
           //return projectName for CEO
 //          public List<String> getProjectName();
 	  
+
 	  public List<TaskDetails> displayAllProjectTaskDetails();
 	  
 	  
 	  
 	  
 	  
+
 }
