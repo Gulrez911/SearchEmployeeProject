@@ -18,6 +18,7 @@
                 <table align="center">
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
+                  
                     <tr>
                         <td style="color: black">Task Name:</td>
                         <td><form:input name="task_Name" path="task_Name" type="text" id="tn" /></td>
@@ -39,14 +40,17 @@
                     </form:form></div>
 
 <div align="right">
-			<form:form action="backtoproject" method="post" commandName="e">
+			<form:form action="backtoproject"  commandName="e">
 
 			<table>
 				<tr>
 					<td>
-						<input type="submit" value="Back">
-
+					 
+						<form:hidden path="email" name="email" />
+<input type="submit" value="Back">
 					</td>
+					
+					</tr>
 
                 </table>
             </form:form>

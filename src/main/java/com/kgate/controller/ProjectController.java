@@ -95,6 +95,10 @@ public class ProjectController {
         TaskDetails td = new TaskDetails();
         mav.addObject("td",td);
         mav.addObject("listtask", listtask);
+        Employee e = new Employee();
+		 mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+        
+        
         return mav;
     }
 
@@ -123,14 +127,14 @@ public class ProjectController {
     
     
     
-    @RequestMapping(value = "/backtoproject", method = RequestMethod.POST)
-    public ModelAndView back( @ModelAttribute("employee") Employee employee) {
+    @RequestMapping(value = "/backtoproject", method = RequestMethod.GET)
+    public ModelAndView back( @ModelAttribute("employee") Employee employee,@RequestParam("email")String email) {
    
     	ModelAndView mav = new ModelAndView("CreateProject");
         
-        Integer mid = projectservice.getManagerid(employee.getEmail());
-        mav.addObject("mid", mid);
-        
+      Integer mid = projectservice.getManagerid(email);
+       mav.addObject("mid", mid);
+       
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("pd", pd);
         
@@ -151,10 +155,6 @@ public class ProjectController {
     	
     }	
     
-     
-    
-    	
-   
 
     @RequestMapping(value = "/createtask", method = RequestMethod.POST)
     public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {

@@ -57,14 +57,7 @@ public class TaskDetails {
         this.taskStatus = taskStatus;
     }
 
-    
-	
-
-	
-
-	
-
-	public TaskDetails() {
+ 		public TaskDetails() {
 		super();
 	}
 
