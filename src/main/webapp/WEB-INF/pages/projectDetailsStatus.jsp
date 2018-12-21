@@ -22,7 +22,6 @@
                 <th>End Date</th>
                 <th>Status</th>
                 <th>Delay</th>
-                <th>Delay</th>
                 <c:forEach var="pd" items="${listProject}">
                     
                 </c:forEach> 
