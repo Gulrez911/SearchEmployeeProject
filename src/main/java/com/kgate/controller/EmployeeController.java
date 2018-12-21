@@ -125,7 +125,7 @@ public class EmployeeController {
         Employee employee = new Employee();
         model.addObject("employee", employee);
 
-        String[] userType = {"Admin", "Employee", "Manager"};
+        String[] userType = {"Admin", "Employee", "Manager","CEO"};
         model.addObject("userTypes", userType);
         model.setViewName("EmployeeForm");
         return model;
@@ -160,9 +160,15 @@ public class EmployeeController {
         return model;
     }
 
-  /*  @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-         if (employee.getOtp().equals(temp_3)) { 
+    @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee,ModelAndView model) {
+		
+    	 List<Employee> listEmployee = employeeService.getAllEmployees();
+         model.addObject("listEmployee", listEmployee);
+         List<Skill> listSkill = skillService.getAllSkills();
+         model.addObject("listSkill", listSkill);
+         model.setViewName("home");
+        /* if (employee.getOtp().equals(temp_3)) { 
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -192,6 +198,7 @@ public class EmployeeController {
                 "confirm message");
         return new ModelAndView("redirect:/employeelist");
     }*/
+		return model;}
 
     public void sendMail(String to, String message, String subject) {
         final Employee e = new Employee();
