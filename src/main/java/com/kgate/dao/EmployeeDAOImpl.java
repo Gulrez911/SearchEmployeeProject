@@ -109,7 +109,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @SuppressWarnings("unchecked")
     public List<Employee> displayByManagerId(String email) {
 
-        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='" + email + "') ";
+        String query = "select  name,address,telephone,email,status,managerId,password,category from employee123 where managerId=(select id from employee123 where email='" + email + "') ";
 //       String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123   where category='Employee' and managerId=(select ManagerId from employee123 where category='Manager' and email='"+email+"')";
         //        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee123 where managerId=(select id from employee123 where email='" + email + "') ";
 
