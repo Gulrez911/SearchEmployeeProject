@@ -27,7 +27,7 @@
             <form:hidden path="tEnd_Time" /> --%>
             <%-- <form:input path="task_Name" /> --%>
             <table border="1">
-
+                <th style="color: red">Project Name</th>
                 <th style="color: red">Task Type</th>
                 <th style="color: red">Task Name</th>
                 <th style="color: red">Start Date</th>
@@ -35,38 +35,32 @@
                 <th style="color: red">Manager Name</th>
                 <th style="color: red">Status</th>
                 <th style="color: red">Action</th>
+                    <%--                <td><input type="submit" value="Save Changes"></td>  
+                                    <td><a href="editlink1?tid=${tlist.task_id}&mail=${mail}">Edit</a></td> --%>
+            </tr>
 
+            <%--</c:forEach>--%>
+            <c:forEach var="taskObj" items="${tobj}">
+                <tr style="color: black">
 
+                    <td>${taskObj.project_Name}</td>
+                    <td>${taskObj.task_Type}</td>
+                    <td>${taskObj.task_Name}</td>
+                    <td>${taskObj.tStartDate}</td>
+                    <td>${taskObj.tEndDate}</td>
+                    <td>${taskObj.name}</td>
+                    <td>${taskObj.status}</td>
 
-                <c:forEach var="tlist" items="${tlist}">
-                    <tr style="color: black">
-
-<%--					<td>${tlist.task_Type}</td>
-                                        <td>${tlist.task_Name}</td>
-                                        <td>${tlist.tStart_Time}</td>
-                                        <td>${tlist.tEnd_Time}</td>
-                                        <td></td>
-                                        <td>${tlist.status}</td>--%>
-                        <td>   <c:out value="${tlist}" /></td>
-
-
-
-                        <%--  String s="${tlist.task_id}";
-                         Cookie cookie=new Cookie("tid",s);
-                         response.addCookie( cookie );
-                       
-
-                                        <td><input type="submit" value="Save Changes"></td> --%>
-<%--                        <td><a href="editlink1?tid=${tlist.task_id}&mail=${mail}">Edit</a></td>--%>
-                    </tr>
-
-                </c:forEach>
-                <tr>
-
-                    <!--  <td><input type="submit" value="Done"></td> -->
+                    <td><a href="editlink1?tid=${taskObj.id}&mail=${taskObj.email}">Edit</a></td>  
                 </tr>
 
-            </table>
-        </form:form>
-    </body>
+            </c:forEach>
+            <tr>
+
+                <!--  <td><input type="submit" value="Done"></td> -->
+            </tr>
+
+        </table>
+    </form:form>
+</body>
 </html>

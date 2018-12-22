@@ -103,7 +103,7 @@
 
                     <tr>
                         <td><input type="submit" value="send mail" name="action1"/></td>     
-                       <!--  <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td> -->
+                        <td colspan="2" align="center"><input type="submit" value="BACK" name="action2"></td>
                     </tr>
                 </table>
             </form:form>

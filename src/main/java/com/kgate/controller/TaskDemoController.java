@@ -53,6 +53,7 @@ public class TaskDemoController {
 //        model.addObject("employeeEmail", employeeEmail);
 //        return model;
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+
     public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));

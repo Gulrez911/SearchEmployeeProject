@@ -63,8 +63,6 @@
         <property name="packagesToScan" value="com.kgate.model"></property>
     </bean>
 
-
-
     <bean id="viewResolver2"
               class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="order" value="2" />

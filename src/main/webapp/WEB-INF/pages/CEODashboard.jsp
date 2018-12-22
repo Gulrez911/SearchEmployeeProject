@@ -14,12 +14,12 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/wood.jpg">
-       
+        <h1>CEO Dashboard</h1>
         <div align="center">
             <table border="1">
                 <th>Project Name</th>
                 <th>Delay</th>
-                   <c:forEach var="pd" items="${listProject}">
+                    <c:forEach var="pd" items="${listProject}">
                     <tr>
                         <td><a href="displayProjectDetails">${pd.project_Name}</td>
                         <td>

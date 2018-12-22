@@ -36,7 +36,23 @@ public class ProjectDetails {
     @Temporal(TemporalType.DATE)
     private Date pEnd_Date;
 
-    public Integer getProject_id() {
+   public ProjectDetails() {
+	   super();
+   }
+
+	
+
+	public ProjectDetails(String project_Name, String project_desc, Date pstart_Date, Date pEnd_Date) {
+	super();
+	this.project_Name = project_Name;
+	this.project_desc = project_desc;
+	this.pstart_Date = pstart_Date;
+	this.pEnd_Date = pEnd_Date;
+}
+
+
+
+	public Integer getProject_id() {
         return project_id;
     }
 

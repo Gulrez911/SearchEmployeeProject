@@ -33,6 +33,8 @@ public class ProjectDaoImpl implements ProjectDao {
 	public int getManagerid(String email) {
 		Query q=sessionFactory.getCurrentSession().createQuery(" select id from  Employee where email='"+email+"'");
 		
+		
+		
 	/*	 int id=Integer.parseInt(s);
 		 return id;*/
 		int id=(int)q.uniqueResult();

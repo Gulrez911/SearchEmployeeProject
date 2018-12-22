@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.kgate.model.Employee;
+import com.kgate.model.TaskDTO;
 
 import org.springframework.scheduling.config.Task;
 
@@ -11,7 +12,7 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskDao {
 
-    public List<String> getalltaskdetails(String email);
+    public List<TaskDetails> getalltaskdetails(String email);
 
     public void updateTask(TaskDetails taskDetails);
 
@@ -35,4 +36,5 @@ public interface TaskDao {
 
     public List<TaskDetails> getTaskList(int mgrId);
 
+    public List<TaskDTO> getEmpTasklist(String email);
 }

@@ -18,6 +18,7 @@
                 <table align="center">
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
+                   <form:hidden path="Emp_Email"/>
                     <tr>
                         <td style="color: black">Task Name:</td>
                         <td><form:input name="task_Name" path="task_Name" type="text" id="tn" /></td>
@@ -32,13 +33,29 @@
 
                     <tr>
 
-                        <td colspan="2" align="right"><input type="submit"
-                                                             value="CREATE" id="bt"></td>
+                        <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
                     </tr>
+
+                    </form:form></div>
+
+<div align="right">
+			<form:form action="backtoproject" commandName="e">
+
+			<table>
+				<tr>
+					<td>
+					 <%--  	<form:hidden path="email" name="email"/>
+						 
+						 <input type="submit" value="Back">
+						  --%>
+						   <a href="backtoproject?email=${e.email}">Back</a>
+						  
+					</td>
+					
+		    	</tr>
 
                 </table>
             </form:form>
-
 
 
             <table border="1"  align="center">
@@ -55,18 +72,24 @@
                         <td>${td.task_Type}</td>
                         <td>${td.task_Name}</td>
                         <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
+
+
+                       <%--  <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a> --%>
+                        
+                         
                         <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
-                        <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td>
+    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
+                         
+                        
+                        
+                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
+                        
+                     <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
                     </c:forEach>     
+                     </div> 
 
-                    </div> 
-
-
-
-
+ </body>
+ </html>
 
 
-
-                    </body>
-                    </html>
