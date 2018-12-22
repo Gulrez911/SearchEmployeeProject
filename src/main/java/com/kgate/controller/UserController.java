@@ -51,7 +51,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @Controller
 
 // @RequestMapping(value = ("/"))
-@SessionAttributes("employee")
+//@SessionAttributes("employee")
 
 public class UserController {
 
@@ -217,7 +217,7 @@ public class UserController {
 
                 mav.addObject("taskdetails", taskdetails);
 
-                List<TaskDetails> tlist = taskservice.getalltaskdetails(email);
+                List<String> tlist = taskservice.getalltaskdetails(email);
 
                 mav.addObject("mail", email);
 

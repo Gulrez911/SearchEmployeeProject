@@ -7,7 +7,7 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskService {
 
-	public List<TaskDetails> getalltaskdetails(String email);
+	public List<String> getalltaskdetails(String email);
 
 	public void updateTask(TaskDetails taskDetails);
 
