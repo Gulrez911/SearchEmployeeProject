@@ -2,15 +2,24 @@ package com.kgate.model;
 
 public class TaskDTO {
 
-    String project_Name;
-    String task_Type;
-    String task_Name;
-    String name;
-    String tStartDate;
-    String tEndDate;
-    String status;
-    int id;
-    String email;
+    private String project_Name;
+    private String task_Type;
+    private String task_Name;
+    private String name;
+    private String tStartDate;
+    private String tEndDate;
+    private String status;
+    private int id;
+    private String email;
+    private String emp_name;
+
+    public String getEmp_name() {
+        return emp_name;
+    }
+
+    public void setEmp_name(String emp_name) {
+        this.emp_name = emp_name;
+    }
 
     public int getId() {
         return id;

@@ -116,18 +116,8 @@ public class TaskDaoImpl implements TaskDao {
             Object arr[] = (Object[]) d;
             String st, st1, st2, st3, st4, st5, st6, st8;
             int i;
-//          String s[] = null;
-//          for (int i = 0; i <= arr.length; i++) {
-//              s[i] = (String) arr[i];
-//
-//          }
 
             TaskDTO tdto = new TaskDTO();
-
-            List<TaskDetails> tlist = new ArrayList<TaskDetails>();
-            List<Employee> listemp = new ArrayList<Employee>();
-            Employee emp = new Employee();
-            TaskDetails td = new TaskDetails();
 
             st = (String) arr[0];
             st1 = (String) arr[1];
@@ -150,7 +140,8 @@ public class TaskDaoImpl implements TaskDao {
             tdto.setEmail(st8);
 
             listdto.add(tdto);
-            System.out.println("List of object::::   " + tdto);
+            System.out.println("List of Name::::   " + tdto);
+            System.out.println("List of Object::::   " + listdto);
 
         }
         return listdto;

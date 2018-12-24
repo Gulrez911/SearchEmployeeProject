@@ -126,15 +126,15 @@ public class TaskController {
         if (status.equals("Approved")) {
             taskdetails = new TaskDetails();
             mav.addObject("taskdetails", taskdetails);
-            List<TaskDetails> tlist = taskservice.getalltaskdetails(email);
-            System.out.println("From Controller:::: list of :::   " + tlist);
+//            List<TaskDetails> tlist = taskservice.getalltaskdetails(email);
+//            System.out.println("From Controller:::: list of :::   " + tlist);
             List<TaskDTO> tobj = new ArrayList<TaskDTO>();
             tobj = taskservice.getEmpTasklist(email);
             System.out.println("From Controller:::: list of Object:::   " + tobj);
             mav.addObject("tobj", tobj);
             TaskDTO taskObj = new TaskDTO();
             mav.addObject("taskObj", taskObj);
-            mav.addObject("tlist", tlist);
+//            mav.addObject("tlist", tlist);
             mav.addObject("mail", email);
             String[] taskStatus = {"W.I.P.", "Complete"};
             mav.addObject("taskStatus", taskStatus);
