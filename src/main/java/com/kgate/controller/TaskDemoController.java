@@ -1,5 +1,6 @@
 package com.kgate.controller;
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.kgate.model.Employee;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.TaskService;
@@ -37,9 +38,10 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
-    @InitBinder
+        @InitBinder
     public void initConverter(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        binder.registerCustomEditor(Date.class, dateEditor);
     }
 
 
