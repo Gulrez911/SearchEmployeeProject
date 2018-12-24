@@ -179,7 +179,7 @@ public class UserController {
 				 sk.add(s);
 				 }
 				 emp.setSkills(sk);
-				 String[] userType = {"Employee", "Admin", "Manager"};
+				 String[] userType = {"Employee", "Admin", "Manager","CEO"};
 				 mav.addObject("userTypes", userType);
 				
 				 mav.addObject("listSkill", listSkill);

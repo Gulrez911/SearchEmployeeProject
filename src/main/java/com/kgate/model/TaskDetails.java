@@ -60,13 +60,25 @@ public class TaskDetails {
  		public TaskDetails() {
 		super();
 	}
+ 		
+ 	public TaskDetails(String task_Type,String task_Name,String status)	{
+ 		super();
+ 		this.task_Type = task_Type;
+		this.task_Name = task_Name;
+		this.status = status;
+ 	}
 
-	public TaskDetails(String task_Type, String task_Name, String status) {
+	/*public TaskDetails(String task_Type, String task_Name, String status, Date tStart_Time2, Date tEnd_Time2, String emp_Email2) {
 		super();
 		this.task_Type = task_Type;
 		this.task_Name = task_Name;
 		this.status = status;
-	}
+		this.tStart_Time=tStart_Time;
+		this.tEnd_Time=tEnd_Time;
+		this.Emp_Email=Emp_Email;
+	}*/
+
+
 
 	public int getTask_id() {
         return task_id;
