@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kgate.dao.ProjectDao;
 import com.kgate.model.ProjectDetails;
-import java.util.ArrayList;
-import java.util.Iterator;
+import com.kgate.model.TaskDTO;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
@@ -35,5 +34,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public int getManagerid(String email) {
         return projectDao.getManagerid(email);
+    }
+
+    @Override
+    @Transactional
+    public List<TaskDTO> displayAllStatus(int id) {
+        return projectDao.displayAllStatus(id);
     }
 }

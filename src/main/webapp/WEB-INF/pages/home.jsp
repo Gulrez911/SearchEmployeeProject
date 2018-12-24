@@ -19,14 +19,14 @@
 
         </style>
         <script type="text/javascript">
-function chk()
-{
-	  var x = document.forms["skillform"]["skillSearch"].value;
-	  if (x == "" || x.length < 3) {
-	    alert("Skill is empty or Atleast require 3 character ");
-	    return false;
-	}
-}
+            function chk()
+            {
+                var x = document.forms["skillform"]["skillSearch"].value;
+                if (x == "" || x.length < 3) {
+                    alert("Skill is empty or Atleast require 3 character ");
+                    return false;
+                }
+            }
         </script>
     </head>
 
@@ -49,13 +49,13 @@ function chk()
 
             <form action="<s:url value="/search_employeelist"/>">
 
-                  <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
+                <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
 
                 <button><div id="bt">Find</div></button>
             </form>
             <br>
             <form action="<s:url value="/search_employeelist_skill1"/>" onsubmit="return chk()" name="skillform">
-                  <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}" />
+                <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}" />
                     <button>Find</button>
             </form>
 

@@ -1,31 +1,31 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- Specifying base package of the Components like Controller, Service, 
-		DAO -->
-	<context:component-scan base-package="com" />
-	<!--Date conversion Service -->
-	<mvc:annotation-driven
-		conversion-service="conversionService" />
+    <!-- Specifying base package of the Components like Controller, Service, 
+    DAO -->
+    <context:component-scan base-package="com" />
+    <!--Date conversion Service -->
+    <mvc:annotation-driven
+        conversion-service="conversionService" />
 
-	<bean id="conversionService"
-		class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+    <bean id="conversionService"
+              class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
-	<!-- <bean class = "org.springframework.context.support.ResourceBundleMessageSource" 
-		id = "messageSource"> <property name = "basename" value = "message" /> -->
+    <!-- <bean class = "org.springframework.context.support.ResourceBundleMessageSource" 
+    id = "messageSource"> <property name = "basename" value = "message" /> -->
 
-	<!-- Getting Database properties -->
-	<!-- <context:property-placeholder location="classpath:application.properties" 
-		/> -->
-	<!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
-		<property name="basename" value="/WEB-INF/messages" /> </bean> -->
+    <!-- Getting Database properties -->
+    <!-- <context:property-placeholder location="classpath:application.properties" 
+    /> -->
+    <!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
+    <property name="basename" value="/WEB-INF/messages" /> </bean> -->
 
 
 
@@ -34,13 +34,13 @@
           id="dataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver "></property>
   
-        <property name="url" value="jdbc:mysql://localhost:3306/employee"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/anil"></property>
 
 
 
         <property name="username" value="root"></property>
 
-        <property name="password" value="1234"></property>
+        <property name="password" value="7326"></property>
  
     </bean>
  
@@ -63,30 +63,30 @@
         <property name="packagesToScan" value="com.kgate.model"></property>
     </bean>
 
-	<bean id="viewResolver2"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="2" />
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
+    <bean id="viewResolver2"
+              class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="2" />
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
 
 
 
-	<!-- Transaction -->
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+    <!-- Transaction -->
+    <bean id="transactionManager"
+              class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
 
-	<tx:annotation-driven
-		transaction-manager="transactionManager" />
+    <tx:annotation-driven
+        transaction-manager="transactionManager" />
 
-	<!-- Jackson <mvc:annotation-driven> <mvc:message-converters> <bean class="org.springframework.http.converter.StringHttpMessageConverter"/> 
-		<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/> 
-		<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
-		<property name="objectMapper" ref="jacksonObjectMapper" /> </bean> </mvc:message-converters> 
-		</mvc:annotation-driven> <bean id="jacksonObjectMapper" class="de.Company.backend.web.CompanyObjectMapper" 
-		/> -->
+    <!-- Jackson <mvc:annotation-driven> <mvc:message-converters> <bean class="org.springframework.http.converter.StringHttpMessageConverter"/> 
+    <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/> 
+    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
+    <property name="objectMapper" ref="jacksonObjectMapper" /> </bean> </mvc:message-converters> 
+    </mvc:annotation-driven> <bean id="jacksonObjectMapper" class="de.Company.backend.web.CompanyObjectMapper" 
+    /> -->
 
 
 </beans>
