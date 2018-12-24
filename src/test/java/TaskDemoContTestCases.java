@@ -28,7 +28,7 @@ public class TaskDemoContTestCases {
 	public void setUp() throws Exception {
 	}
 
-	/*@Test
+	@Test
 	public void testtaskdemocont() {
 		
 		TaskDetails task1=null;
@@ -52,7 +52,7 @@ public class TaskDemoContTestCases {
 		
 		 System.out.println(task1);
 		
-	}*/
+	}
 	/*
 	@Test
 	public void testtaskdemocont() {
@@ -62,7 +62,7 @@ public class TaskDemoContTestCases {
 	}*/
 	
 	
-	@Test
+	/*@Test
 	public void testtaskdemocont() {
 		TaskDetails task1=null;
 		String status="Assigned";
@@ -71,7 +71,8 @@ public class TaskDemoContTestCases {
 		int projectId=1;
 		
 		System.out.println(taskservice.getByProjectId(projectId));
+
 			
 	}
-				
+				*/
 }
