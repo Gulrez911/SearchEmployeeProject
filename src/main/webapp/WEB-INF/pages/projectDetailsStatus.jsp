@@ -22,10 +22,7 @@
                 <th>End Date</th>
                 <th>Status</th>
                 <th>Delay</th>
-<<<<<<< HEAD
-        
-=======
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                 <c:forEach var="pd" items="${listProject}">
                     
                 </c:forEach> 
