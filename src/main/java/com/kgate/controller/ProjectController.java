@@ -44,12 +44,13 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)
-    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,@SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("redirect:/cproject2");
 //        ModelAndView model = new ModelAndView("CreateProject");
+        projectDetails.setManageremail(employee.getEmail());
         projectservice.createProject(projectDetails);
         ProjectDetails pd = new ProjectDetails();
-        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         model.addObject("listProject ", listProject);
         model.addObject("pd", pd);
         return model;
@@ -63,7 +64,7 @@ public class ProjectController {
         ProjectDetails projectdetails = new ProjectDetails();
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("projectdetails", projectdetails);
-        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("mid", mid);
         mav.addObject("pd", pd);
@@ -188,11 +189,6 @@ public class ProjectController {
 //    }
     //CEO Project related
     @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
-<<<<<<< HEAD
-    public ModelAndView displayProjectDetails(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("projectDetailsStatus");
-          
-=======
     public ModelAndView displayProjectDetails(HttpServletRequest request) {
         int project_id = Integer.parseInt(request.getParameter("project_id"));
 //        System.out.println("Project Name::::    " + projectName);
@@ -204,7 +200,7 @@ public class ProjectController {
         System.out.println("EmployeeName;::::::::  " + listProject.get(0).getEmp_name());
         System.out.println("List of Project::::::   " + listProject);
         mav.addObject("d", d);
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
         return mav;
     }
 

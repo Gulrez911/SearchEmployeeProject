@@ -41,4 +41,11 @@ public class ProjectServiceImpl implements ProjectService {
     public List<TaskDTO> displayAllStatus(int id) {
         return projectDao.displayAllStatus(id);
     }
+
+	@Override
+	 @Transactional
+	public List<ProjectDetails> getProjectByEmail(String email) {
+		
+		return projectDao.getProjectByEmail(email);
+	}
 }

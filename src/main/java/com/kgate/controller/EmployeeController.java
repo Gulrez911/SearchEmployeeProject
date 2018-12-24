@@ -330,7 +330,7 @@ public class EmployeeController {
     	  ModelAndView mav = new ModelAndView("login");
           Employee employee = new Employee();
           mav.addObject("employee", employee);
-          String[] userType = {"Admin", "Employee", "Manager"};
+          String[] userType = {"Admin", "Employee", "Manager","CEO"};
           mav.addObject("userTypes", userType);
 		return mav;
     	

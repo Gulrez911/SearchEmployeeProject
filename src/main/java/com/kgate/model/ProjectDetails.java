@@ -35,6 +35,9 @@ public class ProjectDetails {
     @DateTimeFormat(pattern = "dd-mm-yyyy")
     @Temporal(TemporalType.DATE)
     private Date pEnd_Date;
+    
+    @Column
+    private String manageremail;
 
    public ProjectDetails() {
 	   super();
@@ -92,10 +95,27 @@ public class ProjectDetails {
         this.pEnd_Date = pEnd_Date;
     }
 
-    @Override
-    public String toString() {
-        return "ProjectDetails [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
-                + project_desc + ", pstart_Date=" + pstart_Date + ", pEnd_Date=" + pEnd_Date + "]";
-    }
+    public String getManageremail() {
+		return manageremail;
+	}
+
+
+
+	public void setManageremail(String manageremail) {
+		this.manageremail = manageremail;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "ProjectDetails [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
+				+ project_desc + ", pstart_Date=" + pstart_Date + ", pEnd_Date=" + pEnd_Date + ", manageremail="
+				+ manageremail + "]";
+	}
+
+
+
+	
 
 }

@@ -18,6 +18,7 @@ import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import com.kgate.service.TaskService;
 
+import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -124,6 +125,7 @@ public class UserController {
                 // System.out.println("Manager ID:::: " + mid);
                 mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
+              projectdetails.setManageremail(employee.getEmail());
                 TaskDetails taskdetails = new TaskDetails();
                 ProjectDetails pd = new ProjectDetails();
                 mav.addObject("projectdetails", projectdetails);
@@ -131,9 +133,10 @@ public class UserController {
                 mav.addObject("taskdetails", taskdetails);
                 Employee e = new Employee();
                 mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-                List<ProjectDetails> listProject = projectservice.dispalyProjects();
+                List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
                 // System.out.println("List of Project: " + listProject);
                 mav.addObject("pd", pd);
+                
                 mav.addObject("listProject", listProject);
 
 

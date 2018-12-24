@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.ProjectDetails;
-<<<<<<< HEAD
-import com.kgate.model.TaskDetails;
-=======
+
 import com.kgate.model.TaskDTO;
 import java.util.ArrayList;
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
@@ -42,23 +40,14 @@ public class ProjectDaoImpl implements ProjectDao {
 
         /*	 int id=Integer.parseInt(s);
 		 return id;*/
-<<<<<<< HEAD
+
 		int id=(int)q.uniqueResult();
 		return id;
 		
 	}
 
-	@Override
-	public List<TaskDetails> displayAllProjectTaskDetails() {
-		/* Session s = this.sessionFactory.getCurrentSession();
-		 s.createQuery("from");*/
-		return null;
-	}
-=======
-        int id = (int) q.uniqueResult();
-        return id;
+	
 
-    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -97,5 +86,13 @@ public class ProjectDaoImpl implements ProjectDao {
  
         return listtsk;
     }
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProjectDetails> getProjectByEmail(String email) {
+		
+	    return sessionFactory.getCurrentSession().createQuery("from ProjectDetails where manageremail='"+email+"'")
+                .list();
+	}
+
 }
