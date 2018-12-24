@@ -64,7 +64,7 @@ public class TaskController {
          */
  /*String s = request.getParameter("tid");
 		int tid3 = Integer.parseInt(s);*/
-        taskservice.updatetask1(date1, taskdetails.getEmp_Email(), taskdetails.getTask_id(), st1);
+        taskservice.updatetask1(date1, taskdetails.getEmp_Email(), taskdetails.getTask_id(), st);
         return mav;
 
     }
@@ -143,8 +143,9 @@ public class TaskController {
         } else {
 
             modelMap.put("error", "Please Edit Details For Make Status Approved");
+            mav = new ModelAndView("byEmployeeEdit");
 
-            Employee emp = employeeService.searchByEmail(email);
+            Employee emp = employeeService.searchByEmail(employee.getEmail());
             List<String> employeeSkill
                     = skillService.getEmployeeSkillByEmail(employee.getEmail());
 
@@ -160,7 +161,7 @@ public class TaskController {
                 sk.add(s);
             }
             emp.setSkills(sk);
-            String[] userType = {"Employee", "Admin", "Manager", "CEO"};
+            String[] userType = {"Employee", "Admin", "Manager"};
             mav.addObject("userTypes", userType);
 
             mav.addObject("listSkill", listSkill);
@@ -168,7 +169,8 @@ public class TaskController {
 
             Skill skill = new Skill();
             mav.addObject("skill", skill);
-            return new ModelAndView("byEmployeeEdit");
+
+            return mav; 
         }
 
         return mav;
