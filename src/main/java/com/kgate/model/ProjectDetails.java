@@ -27,12 +27,12 @@ public class ProjectDetails {
     private String project_desc;
 
     @Column
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @DateTimeFormat(pattern = "mm-dd-yyyy")
     @Temporal(TemporalType.DATE)
     private Date pstart_Date;
 
     @Column
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @DateTimeFormat(pattern = "mm-dd-yyyy")
     @Temporal(TemporalType.DATE)
     private Date pEnd_Date;
     
