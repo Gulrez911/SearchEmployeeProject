@@ -28,7 +28,7 @@ public class TaskDemoContTestCases {
 	public void setUp() throws Exception {
 	}
 
-	@Test
+	/*@Test
 	public void testtaskdemocont() {
 		
 		TaskDetails task1=null;
@@ -36,12 +36,14 @@ public class TaskDemoContTestCases {
 		ProjectDetails project=null;
 		
 		
-		String task_Type="coding";
-		String task_Name="edit";
+		String task_Type="integration";
+		String task_Name="update";
 		String status="Assigned";
+	
 		@SuppressWarnings("deprecation")
 		Date d1=new Date(2018,12,19);
 		Date tStart_Time=d1;
+		@SuppressWarnings("deprecation")
 		Date d2=new Date(2018,12,14);
 		Date tEnd_Time=d2;
 		
@@ -52,7 +54,7 @@ public class TaskDemoContTestCases {
 		
 		 System.out.println(task1);
 		
-	}
+	}*/
 	/*
 	@Test
 	public void testtaskdemocont() {
@@ -62,7 +64,7 @@ public class TaskDemoContTestCases {
 	}*/
 	
 	
-	/*@Test
+	@Test
 	public void testtaskdemocont() {
 		TaskDetails task1=null;
 		String status="Assigned";
@@ -74,5 +76,5 @@ public class TaskDemoContTestCases {
 
 			
 	}
-				*/
+				
 }

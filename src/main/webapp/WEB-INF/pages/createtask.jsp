@@ -48,13 +48,24 @@
 						 
 						 <input type="submit" value="Back">
 						  --%>
-						   <a href="backtoproject?email=${e.email}">Back</a>
+						  
+						   <a href="backtoproject?email=${e.email}"><font style="color:white">Back</font></a>
 						  
 					</td>
 					
-		    	</tr>
-
+					
+					 
+                    
+	
                 </table>
+                
+                <tr>
+                           <div align="right"><td>
+   
+                           <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+                              </div>
+                    </tr> 
+                
             </form:form>
 
 
@@ -86,6 +97,8 @@
                      <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
                         
                      <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
+                     
+                     
                     </c:forEach>     
                      </div> 
 

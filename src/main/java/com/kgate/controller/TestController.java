@@ -1,15 +1,20 @@
 package com.kgate.controller;
 
+import com.kgate.model.Employee;
 import com.kgate.model.Skill;
 import com.kgate.service.SkillService;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -64,5 +69,17 @@ public class TestController
 
 		return model;
 	}
-    
+       
+        
+        @RequestMapping(value = "/backtosuccess", method = RequestMethod.POST)
+        
+        public ModelAndView backtosuccess()
+        {
+           	  
+                ModelAndView mav = new ModelAndView("success");
+               return mav;
+        	     	
+        }
+        
+
 }

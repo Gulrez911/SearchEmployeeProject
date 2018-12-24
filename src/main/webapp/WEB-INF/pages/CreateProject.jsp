@@ -100,6 +100,14 @@
 
 
 </table>
+ <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr> 
+
 </form:form>
 </div>
 </body>

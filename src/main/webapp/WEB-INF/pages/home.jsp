@@ -85,8 +85,15 @@
                                 href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>
 
                     </tr>
-                </c:forEach>
-            </table>
+                </c:forEach>                
+         </table>
+          <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr> 
             <h4><font style="color: darkorange">
                     New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
             </h4>
