@@ -218,22 +218,25 @@ public class ProjectController {
 //    }
     //CEO Project related
     @RequestMapping(value = "/displayProjectDetails", method = RequestMethod.GET)
-    public ModelAndView displayProjectDetails(HttpServletRequest request) {
-        int project_id = Integer.parseInt(request.getParameter("project_id"));
+    public ModelAndView displayProjectDetails(@RequestParam("project_id") String project_id, HttpServletRequest request) {
+        int id = Integer.parseInt(request.getParameter("project_id"));
 //        System.out.println("Project Name::::    " + projectName);
+        System.out.println("Project Id :: " + project_id);
         ModelAndView mav = new ModelAndView("projectStatus");
 
-        List<TaskDTO> listProject = projectservice.displayAllStatus(project_id);
-        TaskDTO d = new TaskDTO();
-        mav.addObject("listProject", listProject);
+        List<TaskDTO> listProject = projectservice.displayAllStatus(id);
         System.out.println("EmployeeName;::::::::  " + listProject.get(0).getEmp_name());
         System.out.println("List of Project::::::   " + listProject);
+        TaskDTO d = new TaskDTO();
+        mav.addObject("listProject", listProject);
+
+        mav.addObject("Pid", project_id);
         mav.addObject("d", d);
 
         return mav;
     }
 
-    @RequestMapping(value = "/downloadReport", method = RequestMethod.GET)
+    @RequestMapping(value = "/downloadReport", method = RequestMethod.POST)
     public ModelAndView downloadReport(@RequestParam("project_id") String project_id, HttpServletRequest request) {
 //         int project_id = Integer.parseInt(request.getParameter("project_id"));
 //        int project_id = (Integer.BYTES).project_id;

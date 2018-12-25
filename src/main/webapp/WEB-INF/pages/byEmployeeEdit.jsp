@@ -25,9 +25,9 @@
         <div align="center">
             <h1 style="color: orangered">Edit Employee</h1>
             <h3> <p style="color: green" >${msg}</p></h3>
-            <form:form action="byEmployeeEdit" method="post"
-                       modelAttribute="employee" commandName="employee">
-                <form:errors path="*" cssClass="errorblock" element="div" />
+                <form:form action="byEmployeeEdit" method="post"
+                           modelAttribute="employee" commandName="employee">
+                    <form:errors path="*" cssClass="errorblock" element="div" />
                 <table>
                     <form:hidden path="id" />
                     <form:hidden path="category" />

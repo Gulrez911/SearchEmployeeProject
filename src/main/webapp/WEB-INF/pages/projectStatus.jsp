@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>  
 <!DOCTYPE html>
 <html>
@@ -16,8 +16,12 @@
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/natureFlower.jpg">
         <div align="center">
-            <center><a href="/SpringMVCHibernateCRUD/downloadReport"><font style="color:blue" size="4">Download Task Report</font></a><br></center>
 
+            <form action="downloadReport" method="post">
+                <input type="hidden" name="project_id" value="${Pid}">
+                <input type="submit" value="Download Task Report" > 
+            </form>
+                
             <table border="1">
 
                 <th style="color:red">Employee Name</th>
