@@ -224,12 +224,18 @@ public class ProjectController {
         System.out.println("Project Id :: " + project_id);
         ModelAndView mav = new ModelAndView("projectStatus");
 
-        List<TaskDTO> listProject = projectservice.displayAllStatus(id);
-        System.out.println("EmployeeName;::::::::  " + listProject.get(0).getEmp_name());
-        System.out.println("List of Project::::::   " + listProject);
-        TaskDTO d = new TaskDTO();
-        mav.addObject("listProject", listProject);
+        List<TaskDTO> listProject = null;
 
+        try {
+            listProject = projectservice.displayAllStatus(id);
+            System.out.println("EmployeeName;::::::::  " + listProject.get(0).getEmp_name());
+            System.out.println("List of Project::::::   " + listProject);
+
+            mav.addObject("listProject", listProject);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Index Out of Bound Exception Occured::: " + e);
+        }
+        TaskDTO d = new TaskDTO();
         mav.addObject("Pid", project_id);
         mav.addObject("d", d);
 
