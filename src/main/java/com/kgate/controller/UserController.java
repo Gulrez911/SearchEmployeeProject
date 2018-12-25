@@ -76,15 +76,15 @@ public class UserController {
 	 * String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
 	 * mav.addObject("task_Type",Tasktype); return mav;
      */
- /*
+     /*
 	 * @RequestMapping(value= ,method = RequestMethod.GET) public ModelAndView
 	 * addingtask() { ModelAndView mav=new ModelAndView("createtask");
 	 * taskservice.addTask(); String message ="Task is successfully added"; return
 	 * mav;
 	 * 
 	 * }
-	 * 
-     */
+	 
+        */
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee) {
         employeeService.updateEmployee(employee);
@@ -207,9 +207,9 @@ public class UserController {
         return init();
     }
 
-    // Employee Edit by Employee
-//	@RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
-//	public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
+//               Employee Edit by Employee
+//              @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
+//              public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
 //		for (String skill : employee.getSkills()) {
 //			Skill sk = skillService.getSkillByName(skill);
 //			employee.getListSkill().add(sk);

@@ -37,6 +37,7 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 public class EmployeeController {
@@ -320,15 +321,12 @@ public class EmployeeController {
     @RequestMapping(value = "/back", method = RequestMethod.POST)
     public ModelAndView back() {
 
-   
-    	  ModelAndView mav = new ModelAndView("login");
-          Employee employee = new Employee();
-          mav.addObject("employee", employee);
-          String[] userType = {"Admin", "Employee", "Manager","CEO"};
-          mav.addObject("userTypes", userType);
-		return mav;
-    	
-    	
+        ModelAndView mav = new ModelAndView("login");
+        Employee employee = new Employee();
+        mav.addObject("employee", employee);
+        String[] userType = {"Admin", "Employee", "Manager", "CEO"};
+        mav.addObject("userTypes", userType);
+        return mav;
 
     }
 
@@ -341,7 +339,9 @@ public class EmployeeController {
         employee.setStatus("Approved");
         employeeService.addEmployee(employee);
         String message = "Employee is successfully edited.";
-        ModelAndView mav = new ModelAndView("EmployeeSuccess");
+//        ModelAndView mav = new ModelAndView("EmployeeSuccess");
+
+        ModelAndView mav = new ModelAndView("redirect:/byEmployeeSuccess");
         mav.addObject("message", message);
         List<Employee> listEmployee = employeeService.getAllEmployees();
         mav.addObject("listEmployee", listEmployee);
@@ -349,6 +349,37 @@ public class EmployeeController {
         ec.sendMail(employee.getEmail(), "Details are Successfully save", "confirm message");
 
         return mav;
+
+    }
+      @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
+    public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee) {
+        ModelAndView mav = new ModelAndView("byEmployeeEdit");
+
+//                Employee emp = employeeService.searchByEmail(employee.getEmail());
+//                List<String> employeeSkill
+//                        = skillService.getEmployeeSkillByEmail(employee.getEmail());
+//
+//                System.out.println("List of EmployeeSkill: " + employeeSkill);
+//
+//                List<Skill> listSkill = skillService.getAllSkills();
+//
+//                List<String> sk = new ArrayList<>();
+//
+//                for (int i = 0; i < employeeSkill.size(); i++) {
+//                    Object o = employeeSkill.get(i);
+//                    String s = (String) o;
+//                    sk.add(s);
+//                }
+//                emp.setSkills(sk);
+//                String[] userType = {"Employee", "Admin", "Manager"};
+//                mav.addObject("userTypes", userType);
+//
+//                mav.addObject("listSkill", listSkill);
+//                mav.addObject("employee", emp);
+//
+//                Skill skill = new Skill();
+//                mav.addObject("skill", skill);
+                return mav;
 
     }
 
