@@ -253,7 +253,7 @@ public class ProjectController {
     @RequestMapping(value = "/downloadProjectReport", method = RequestMethod.POST)
     public ModelAndView downloadProjectReport(HttpServletRequest request) {
        List<ProjectDetails> listProject = projectservice.dispalyProjects();
-        return new ModelAndView("pdfReport", "listProject", listProject);
+        return new ModelAndView("pdfProjectReport", "listProject", listProject);
     }
 
 }
