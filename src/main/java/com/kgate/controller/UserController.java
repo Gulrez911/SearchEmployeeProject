@@ -111,10 +111,12 @@ public class UserController {
 		if (isValidUser) {
 			if (employee.getCategory().equals("Admin")) {
 
-				request.setAttribute("loginuser", employee.getEmail());
-				ModelAndView mav = new ModelAndView("success");
 
-				return mav;
+                request.setAttribute("loginuser", employee.getEmail());
+                ModelAndView mav = new ModelAndView("success");
+                return mav;
+
+			
 			} else if (employee.getCategory().equals("Manager")) {
 
 				ModelAndView mav = new ModelAndView("CreateProject");
@@ -126,6 +128,7 @@ public class UserController {
 				TaskDetails taskdetails = new TaskDetails();
 				ProjectDetails pd = new ProjectDetails();
 				mav.addObject("projectdetails", projectdetails);
+				taskdetails.setEmp_Email(employee.getEmail());
 				mav.addObject("taskdetails", taskdetails);
 				Employee e = new Employee();
 				 mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));

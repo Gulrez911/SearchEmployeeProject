@@ -43,7 +43,7 @@ public class TaskController {
 		String st = taskdetails.getStatus();
 	String st1 = st.split(",")[0];
 
-//		mav.addObject("taskdetails",taskdetails);
+	/*mav.addObject("taskdetails",taskdetails);*/
 	/*	List<TaskDetails> tlist = taskservice.getalltaskdetails(employee.getEmail());*/
 	List<TaskDetails> tlist = taskservice.getalltaskdetails(taskdetails.getEmp_Email());
 		String[] taskStatus = { "W.I.P.", "complete" };
@@ -160,7 +160,7 @@ public class TaskController {
 			 sk.add(s);
 			 }
 			 emp.setSkills(sk);
-			 String[] userType = {"Employee", "Admin", "Manager"};
+			 String[] userType = {"Employee", "Admin", "Manager","CEO"};
 			 mav.addObject("userTypes", userType);
 			
 			 mav.addObject("listSkill", listSkill);

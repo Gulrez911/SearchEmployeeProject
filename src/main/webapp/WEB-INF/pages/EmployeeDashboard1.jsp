@@ -40,7 +40,7 @@
 
 			<c:forEach var="tlist" items="${tlist}">
 				<tr style="color: black">
-
+                                   
 					<td>${tlist.task_Type}</td>
 					<td>${tlist.task_Name}</td>
 					<td>${tlist.tStart_Time}</td>
