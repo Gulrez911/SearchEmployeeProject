@@ -244,10 +244,15 @@ public class ProjectController {
 
     @RequestMapping(value = "/downloadReport", method = RequestMethod.POST)
     public ModelAndView downloadReport(@RequestParam("project_id") String project_id, HttpServletRequest request) {
-//         int project_id = Integer.parseInt(request.getParameter("project_id"));
-//        int project_id = (Integer.BYTES).project_id;
+
         int id = Integer.parseInt(project_id);
         List<TaskDTO> listProject = projectservice.displayAllStatus(id);
+        return new ModelAndView("pdfReport", "listProject", listProject);
+    }
+
+    @RequestMapping(value = "/downloadProjectReport", method = RequestMethod.POST)
+    public ModelAndView downloadProjectReport(HttpServletRequest request) {
+       List<ProjectDetails> listProject = projectservice.dispalyProjects();
         return new ModelAndView("pdfReport", "listProject", listProject);
     }
 
