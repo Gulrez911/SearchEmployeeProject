@@ -18,4 +18,6 @@ public interface ProjectService {
     
     //list of ProjectStatus
     public List<TaskDTO> displayAllStatus(int id);
+
+    
 }

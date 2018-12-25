@@ -21,13 +21,11 @@
     <!-- <bean class = "org.springframework.context.support.ResourceBundleMessageSource" 
     id = "messageSource"> <property name = "basename" value = "message" /> -->
 
-
-	<!-- Getting Database properties -->
-	<!-- <context:property-placeholder location="classpath:application.properties" 
-		/> -->
-	<!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
-		<property name="basename" value="/WEB-INF/messages" /> </bean> -->
-
+    <!-- Getting Database properties -->
+    <!-- <context:property-placeholder location="classpath:application.properties" 
+    /> -->
+    <!-- <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> 
+    <property name="basename" value="/WEB-INF/messages" /> </bean> -->
 
 	<!-- DataSource -->
 	<bean

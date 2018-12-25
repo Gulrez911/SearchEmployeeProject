@@ -101,6 +101,7 @@ public class TaskSeviceImpl implements TaskService {
     }
 
 	@Override
+    @Transactional
 	public void updatetask1(String date, String email, int tid, String st) {
 		taskdao.updatetask1(date, email, tid, st);
 	}

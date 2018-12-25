@@ -153,7 +153,4 @@ public class TaskDaoImpl implements TaskDao {
         }
         return listdto;
     }
-
-	
-
 }

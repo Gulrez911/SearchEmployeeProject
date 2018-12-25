@@ -33,7 +33,7 @@
                    <c:forEach var="pd" items="${listProject}">
                  
                     <tr>
-                        <td><a href="displayProjectDetails">${pd.project_Name}</td>
+                        <td><a href="displayProjectDetails?project_id=${pd.project_id}">${pd.project_Name}</td>
                         <td>
                        <c:set value="${pd.pstart_Date.time/(1000*60*60*24)}" var="datediff"/>
                          <c:set value="${pd.pEnd_Date.time/(1000*60*60*24)}" var="datediff1" />
