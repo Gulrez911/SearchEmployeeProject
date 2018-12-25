@@ -107,7 +107,7 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 
 
 
