@@ -1,5 +1,6 @@
 package com.kgate.controller;
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.kgate.model.Employee;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.TaskService;
@@ -37,22 +38,13 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
-    @InitBinder
+        @InitBinder
     public void initConverter(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        binder.registerCustomEditor(Date.class, dateEditor);
     }
 
 
-//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
-//    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
-//    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
-//        ModelAndView model = new ModelAndView("AllocateTask");
-//        int taskId = Integer.parseInt(request.getParameter("task_id"));
-//        TaskDetails td2 = taskService.getTask(taskId);
-//        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
-//        model.addObject("td", td2);
-//        model.addObject("employeeEmail", employeeEmail);
-//        return model;
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
 
     public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
@@ -64,7 +56,7 @@ public class TaskDemoController {
         model.addObject("employeeEmail", employeeEmail);
         return model;
     }
- 
+
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("td") TaskDetails td,
             @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {

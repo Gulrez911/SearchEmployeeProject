@@ -3,6 +3,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%-- <%@ page import="com.kgate.service.SkillService;" %> --%>
 
 <html>
@@ -19,14 +20,14 @@
 
         </style>
         <script type="text/javascript">
-function chk()
-{
-	  var x = document.forms["skillform"]["skillSearch"].value;
-	  if (x == "" || x.length < 3) {
-	    alert("Skill is empty or Atleast require 3 character ");
-	    return false;
-	}
-}
+            function chk()
+            {
+                var x = document.forms["skillform"]["skillSearch"].value;
+                if (x == "" || x.length < 3) {
+                    alert("Skill is empty or Atleast require 3 character ");
+                    return false;
+                }
+            }
         </script>
     </head>
 
@@ -49,13 +50,13 @@ function chk()
 
             <form action="<s:url value="/search_employeelist"/>">
 
-                  <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
+                <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
 
                 <button><div id="bt">Find</div></button>
             </form>
             <br>
             <form action="<s:url value="/search_employeelist_skill1"/>" onsubmit="return chk()" name="skillform">
-                  <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}" />
+                <td>    <input type="text" name="skillSearch" placeholder="Enter Skill To Search" value="${param.skillSearch}" />
                     <button>Find</button>
             </form>
 
@@ -85,11 +86,24 @@ function chk()
                                 href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>
 
                     </tr>
-                </c:forEach>
-            </table>
+                </c:forEach>                
+         </table>
+          <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+    
+  </div>
+   </tr> 
+
+ 
             <h4><font style="color: darkorange">
                     New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
             </h4>
+            
+              <form:form action="backtosuccess" method="post">
+   
+   <input type="submit" value="Back"></form:form>
         </div>
     </body>
 </html>

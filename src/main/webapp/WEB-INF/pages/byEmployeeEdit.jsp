@@ -24,14 +24,14 @@
 
         <div align="center">
             <h1 style="color: orangered">Edit Employee</h1>
-
-            <form:form action="byEmployeeEdit" method="post"
-                       modelAttribute="employee" commandName="employee">
-                <form:errors path="*" cssClass="errorblock" element="div" />
+            <h3> <p style="color: green" >${msg}</p></h3>
+                <form:form action="byEmployeeEdit" method="post"
+                           modelAttribute="employee" commandName="employee">
+                    <form:errors path="*" cssClass="errorblock" element="div" />
                 <table>
                     <form:hidden path="id" />
                     <form:hidden path="category" />
-                      <form:hidden path="otp" />
+                    <form:hidden path="otp" />
                     <tr>
                         <td style="color: yellow">Name:</td>
                         <td><form:input path="name" required="required" readonly="true" /></td>
@@ -53,27 +53,27 @@
                     </tr>
 
                     <tr>
-                        <td style="color: white">Password:</td>
+                        <td style="color: yellow">Password:</td>
                         <td><form:input path="password" type="password"
                                     required="required" /></td>
                     </tr>
                     <tr>
-                        <td style="color: white">Aadhar No.:</td>
+                        <td style="color: yellow">Aadhar No.:</td>
                         <td><form:input path="aadhar" required="required" /></td>
                         <td><form:errors path="aadhar" cssClass="error" /></td>
                     </tr>
                     <tr>
-                        <td style="color: white">Pan No.:</td>
+                        <td style="color: yellow">Pan No.:</td>
                         <td><form:input path="pan" required="required" /></td>
                         <td><form:errors path="pan" cssClass="error" /></td>
                     </tr>
-                   
+
                     <tr>
-                        <td style="color: white">ManagerId</td>
+                        <td style="color: yellow">ManagerId</td>
                         <td><form:input path="managerId" readonly="true"/></td>
                     </tr>
                     <tr>
-                        <td style="color: white">Status</td>
+                        <td style="color: yellow">Status</td>
                         <td><form:input path="status" readonly="true" /></td>
                     </tr>
 
@@ -98,19 +98,28 @@
                         <!--                        <td><input type="submit" value="Send OTP" name="action1" /></td>-->
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save" name="action2"></td>
-                                                              
+
                     </tr>
                 </table>
             </form:form>
-<form:form action="etasklist" method="post" commandName="employee">
+            <form:form action="etasklist" method="post" commandName="employee">
 
-<form:hidden path="email" name="email" />
-<form:hidden path="status" name="status" />
-<input type="submit" Value="Task Details">
-  <div style="color: red">${error}</div> 
-</form:form>
+                <form:hidden path="email" name="email" />
+                <form:hidden path="status" name="status" />
+                <input type="submit" Value="Task Details">
+                <div style="color: red">${error}</div> 
+                <tr>
+                <div align="right"><td>
 
-        </div>
-    </body>
+                        <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+
+                </div>
+            </tr>
+
+
+        </form:form>
+
+    </div>
+</body>
 
 </html>
