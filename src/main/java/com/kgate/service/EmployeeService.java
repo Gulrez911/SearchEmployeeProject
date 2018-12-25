@@ -23,8 +23,10 @@ public interface EmployeeService {
 
 	public Employee updateEmployee(Employee employee);
 	  
-	
 	public Employee searchByEmail(String email);
 	
 	public List<Employee> displayByManagerId(String email);
+
+	
+	
 }

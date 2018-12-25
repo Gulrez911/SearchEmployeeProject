@@ -27,16 +27,45 @@ public class ProjectDetails {
     private String project_desc;
 
     @Column
+
     @DateTimeFormat(pattern = "dd-mm-yyyy")
  /*   @Temporal(TemporalType.DATE)*/
+
+  /*  @DateTimeFormat(pattern = "mm-dd-yyyy")
+    @Temporal(TemporalType.DATE)*/
+
     private Date pstart_Date;
 
     @Column
+
     @DateTimeFormat(pattern = "dd-mm-yyyy")
 /*    @Temporal(TemporalType.DATE)*/
-    private Date pEnd_Date;
 
-    public Integer getProject_id() {
+ /*   @DateTimeFormat(pattern = "mm-dd-yyyy")
+    @Temporal(TemporalType.DATE)*/
+
+    private Date pEnd_Date;
+    
+    @Column
+    private String manageremail;
+
+   public ProjectDetails() {
+	   super();
+   }
+
+	
+
+	public ProjectDetails(String project_Name, String project_desc, Date pstart_Date, Date pEnd_Date) {
+	super();
+	this.project_Name = project_Name;
+	this.project_desc = project_desc;
+	this.pstart_Date = pstart_Date;
+	this.pEnd_Date = pEnd_Date;
+}
+
+
+
+	public Integer getProject_id() {
         return project_id;
     }
 
@@ -76,10 +105,27 @@ public class ProjectDetails {
         this.pEnd_Date = pEnd_Date;
     }
 
-    @Override
-    public String toString() {
-        return "ProjectDetails [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
-                + project_desc + ", pstart_Date=" + pstart_Date + ", pEnd_Date=" + pEnd_Date + "]";
-    }
+    public String getManageremail() {
+		return manageremail;
+	}
+
+
+
+	public void setManageremail(String manageremail) {
+		this.manageremail = manageremail;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "ProjectDetails [project_id=" + project_id + ", project_Name=" + project_Name + ", project_desc="
+				+ project_desc + ", pstart_Date=" + pstart_Date + ", pEnd_Date=" + pEnd_Date + ", manageremail="
+				+ manageremail + "]";
+	}
+
+
+
+	
 
 }

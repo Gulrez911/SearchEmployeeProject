@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
@@ -32,7 +31,7 @@
                 <table>
                     <form:hidden path="id" />
                     <form:hidden path="category" />
-                      <form:hidden path="otp" />
+                    <form:hidden path="otp" />
                     <tr>
                         <td style="color: yellow">Name:</td>
                         <td><form:input path="name" required="required" readonly="true" /></td>
@@ -68,7 +67,7 @@
                         <td><form:input path="pan" required="required" /></td>
                         <td><form:errors path="pan" cssClass="error" /></td>
                     </tr>
-                   
+
                     <tr>
                         <td style="color: white">ManagerId</td>
                         <td><form:input path="managerId" readonly="true"/></td>
@@ -99,13 +98,28 @@
                         <!--                        <td><input type="submit" value="Send OTP" name="action1" /></td>-->
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save" name="action2"></td>
+
                     </tr>
                 </table>
             </form:form>
+            <form:form action="etasklist" method="post" commandName="employee">
 
+                <form:hidden path="email" name="email" />
+                <form:hidden path="status" name="status" />
+                <input type="submit" Value="Task Details">
+                <div style="color: red">${error}</div> 
+                <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr>
+                
+                
+            </form:form>
 
         </div>
-       
     </body>
 
 </html>

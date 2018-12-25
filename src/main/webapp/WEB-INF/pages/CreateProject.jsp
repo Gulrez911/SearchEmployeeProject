@@ -28,7 +28,7 @@
                        modelAttribute="pd" commandName="pd">
                 <table>
                     <form:hidden path="project_id" />
-
+                    <form:hidden path="manageremail" />
                     <tr>
                         <td>Project Name:</td>
                         <td><form:input type="text" path="project_Name" name="project_Name"/></td>
@@ -48,8 +48,6 @@
                                     name="endDate" /></td>
                     </tr> 
 
-
-
                     <tr>
 
                         <td><input type="submit" value="Create Project"></td>
@@ -57,25 +55,60 @@
                     </tr>
                 </table>
 
-                <table border="1">
+                <table border="1" align="left">
 
-                    <th>Project Name</th>
-                    <th>Create Task</th>
-                        <c:forEach var="pd" items="${listProject}">
+                    <th style="color: white">Project Name</th>
+
+                    <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td>${pd.project_Name}</td>
-                            <td>
-                                <!--<a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>-->
-                                <a href="showtask?project_id=${pd.project_id}&mgrid=${mid}">Create Task</a>
-                            </td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+
                         </tr>
+
+
                     </c:forEach>
                 </table>
 
             </form:form>
-
         </div>
-    </body>
+        <br>
+    </div>
+    <div align="right">
+        <form:form action="managerpage"  commandName="e">
+            <%-- <form:hidden path="email" name="email"/> --%>
+            <table>
+                <tr>
+                    <td>
+                        <a href="managerpage?email=${e.email}">Employee List</a>
+            </table>
+        </form:form>
+    </div>
+
+    <div align="right">
+        <form:form action="back" method="post" commandName="e">
+
+            <table>
+                <tr>
+                    <td>
+                        <input type="submit" value="Back">
+
+                    </td>
+                </tr>
+
+
+</table>
+ <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr> 
+
+</form:form>
+</div>
+
+</body>
 
 </html>

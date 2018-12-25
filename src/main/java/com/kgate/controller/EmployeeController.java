@@ -125,7 +125,7 @@ public class EmployeeController {
         Employee employee = new Employee();
         model.addObject("employee", employee);
 
-        String[] userType = {"Admin", "Employee", "Manager"};
+        String[] userType = {"Admin", "Employee", "Manager", "CEO"};
         model.addObject("userTypes", userType);
         model.setViewName("EmployeeForm");
         return model;
@@ -141,19 +141,17 @@ public class EmployeeController {
         }
 
         EmployeeController ec = new EmployeeController();
-        String temp_otp = ec.generateOTP();
-        employee.setOtp(temp_otp);
+
         employee.setStatus("Not Approved");
         employeeService.addEmployee(employee);
 //        System.out.println("otp: " + temp_otp);
-        ec.sendMail("pawarvihan5@gmail.com", temp_otp, "confirm message");
+        ec.sendMail(employee.getEmail(), "Temporary Password=" + employee.getPassword() + "\n click on below mention link use temporary password and"
+                + "\n Reset Your details" + "href=\\\"http://localhost:8080/SpringMVCHibernateCRUD\">\"", "confirm message");
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
 
 //        model.addObject("employee", employee)
-
-
         String[] userType = {"Admin", "Employee", "Manager"};
         model.addObject("userTypes", userType);
         model.setViewName("EmployeeForm");
@@ -161,8 +159,14 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee) {
-        /* if (employee.getOtp().equals(temp_3)) { */
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
+
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        model.addObject("listEmployee", listEmployee);
+        List<Skill> listSkill = skillService.getAllSkills();
+        model.addObject("listSkill", listSkill);
+        model.setViewName("home");
+        /* if (employee.getOtp().equals(temp_3)) { 
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -191,6 +195,8 @@ public class EmployeeController {
         ec.sendMail(employee.getEmail(), "OTP:" + employee.getOtp() + "\n password:" + employee.getPassword(),
                 "confirm message");
         return new ModelAndView("redirect:/employeelist");
+    }*/
+        return model;
     }
 
     public void sendMail(String to, String message, String subject) {
@@ -228,24 +234,20 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(value = "/managerpage", method = RequestMethod.POST)
-    public ModelAndView taskcreate(@ModelAttribute("employee")Employee employee,@RequestParam("email")String email) 
-    {
-//    	String email=request.getParameter("email");
-    	ModelAndView mav = new ModelAndView("ManagerSuccess");
-    	 employee=new Employee();
-    	mav.addObject("employee", employee);
-    	List<Employee> elist=employeeService.displayByManagerId(email);
-    	  
-    	 mav.addObject("elist", elist);
-         
-		return mav;
-    	
+    @RequestMapping(value = "/managerpage", method = RequestMethod.GET)
+    public ModelAndView taskcreate(@ModelAttribute("employee") Employee employee, HttpServletRequest request) {
+        String email = request.getParameter("email");
+        ModelAndView mav = new ModelAndView("ManagerSuccess");
+        employee = new Employee();
+        mav.addObject("employee", employee);
+        List<Employee> elist = employeeService.displayByManagerId(email);
+
+        mav.addObject("elist", elist);
+
+        return mav;
+
     }
-    
-    
-    
-    
+
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
     public ModelAndView deleteEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
@@ -256,7 +258,6 @@ public class EmployeeController {
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
     public ModelAndView editEmployee(HttpServletRequest request) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
-        
 
         List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);
         System.out.println("List of EmployeeSkill:   " + employeeSkill);
@@ -315,29 +316,40 @@ public class EmployeeController {
         List<Employee> listEmployee = employeeService.getAllEmployees();
         return new ModelAndView("excelView", "listEmployee", listEmployee);
     }
-    
-    
+
     @RequestMapping(value = "/back", method = RequestMethod.POST)
     public ModelAndView back() {
+
    
     	  ModelAndView mav = new ModelAndView("login");
           Employee employee = new Employee();
           mav.addObject("employee", employee);
-          String[] userType = {"Admin", "Employee", "Manager"};
+          String[] userType = {"Admin", "Employee", "Manager","CEO"};
           mav.addObject("userTypes", userType);
 		return mav;
     	
     	
+
     }
-    
- 
-    
-   
-   
-    
-    
-    
-    
-    
+
+    @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
+    public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
+        for (String skill : employee.getSkills()) {
+            Skill sk = skillService.getSkillByName(skill);
+            employee.getListSkill().add(sk);
+        }
+        employee.setStatus("Approved");
+        employeeService.addEmployee(employee);
+        String message = "Employee is successfully edited.";
+        ModelAndView mav = new ModelAndView("EmployeeSuccess");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+        EmployeeController ec = new EmployeeController();
+        ec.sendMail(employee.getEmail(), "Details are Successfully save", "confirm message");
+
+        return mav;
+
+    }
 
 }
