@@ -120,12 +120,11 @@ public class UserController {
 
                 ModelAndView mav = new ModelAndView("CreateProject");
 
-
                 Integer mid = projectservice.getManagerid(employee.getEmail());
                 // System.out.println("Manager ID:::: " + mid);
                 mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
-              projectdetails.setManageremail(employee.getEmail());
+                projectdetails.setManageremail(employee.getEmail());
                 TaskDetails taskdetails = new TaskDetails();
                 ProjectDetails pd = new ProjectDetails();
                 mav.addObject("projectdetails", projectdetails);
@@ -136,9 +135,8 @@ public class UserController {
                 List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
                 // System.out.println("List of Project: " + listProject);
                 mav.addObject("pd", pd);
-                
-                mav.addObject("listProject", listProject);
 
+                mav.addObject("listProject", listProject);
 
                 return mav;
 
@@ -227,33 +225,33 @@ public class UserController {
 //
 //	}
     @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
-	public ModelAndView Empedit(@ModelAttribute Employee employee) {
-		 ModelAndView mav = new ModelAndView("byEmployeeEdit");
-         Employee emp = employeeService.searchByEmail(employee.getEmail());
-         List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
+    public ModelAndView Empedit(@ModelAttribute Employee employee) {
+        ModelAndView mav = new ModelAndView("byEmployeeEdit");
+        Employee emp = employeeService.searchByEmail(employee.getEmail());
+        List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
 
-         System.out.println("List of EmployeeSkill:   " + employeeSkill);
+        System.out.println("List of EmployeeSkill:   " + employeeSkill);
 
-         List<Skill> listSkill = skillService.getAllSkills();
+        List<Skill> listSkill = skillService.getAllSkills();
 
-         List<String> sk = new ArrayList<>();
+        List<String> sk = new ArrayList<>();
 
-         for (int i = 0; i < employeeSkill.size(); i++) {
-             Object o = employeeSkill.get(i);
-             String s = (String) o;
-             sk.add(s);
-         }
-         emp.setSkills(sk);
-         String[] userType = {"Employee", "Admin", "Manager"};
-         mav.addObject("userTypes", userType);
+        for (int i = 0; i < employeeSkill.size(); i++) {
+            Object o = employeeSkill.get(i);
+            String s = (String) o;
+            sk.add(s);
+        }
+        emp.setSkills(sk);
+        String[] userType = {"Employee", "Admin", "Manager"};
+        mav.addObject("userTypes", userType);
 
-         mav.addObject("listSkill", listSkill);
-         mav.addObject("employee", emp);
+        mav.addObject("listSkill", listSkill);
+        mav.addObject("employee", emp);
 
-         Skill skill = new Skill();
-         mav.addObject("skill", skill);
-         return mav;
+        Skill skill = new Skill();
+        mav.addObject("skill", skill);
+        return mav;
 
-	}   
-	
+    }
+
 }
