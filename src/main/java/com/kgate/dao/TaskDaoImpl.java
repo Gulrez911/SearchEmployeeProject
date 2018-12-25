@@ -1,6 +1,9 @@
 package com.kgate.dao;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+
 import java.util.List;
 
 import org.hibernate.Query;
@@ -8,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDetails;
 
 @Repository
@@ -68,7 +72,7 @@ public class TaskDaoImpl implements TaskDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<TaskDetails> getalltaskdetails(String email) {
+	public List<String> getalltaskdetails(String email) {
 		return sessionFactory.getCurrentSession().createQuery("from TaskDetails where Emp_Email='" + email + "'")
 				.list();
 	}
@@ -80,9 +84,9 @@ public class TaskDaoImpl implements TaskDao {
 	}
 
 	@Override
-	public void updatetask1(Date date, String email, int tid, String st) {
+	public void updatetask1(String date, String email, int tid, String st) {
 		Query query = sessionFactory.getCurrentSession().createQuery("update TaskDetails set tSub_Date='" + date
-				+ "',status='" + st + "' where Emp_Email='" + email + "' and task_id='" + tid + "'");
+				+ "',taskStatus='" + st + "' where Emp_Email='" + email + "' and task_id='" + tid + "'");
 		query.executeUpdate();
 
 	}
@@ -97,6 +101,16 @@ public class TaskDaoImpl implements TaskDao {
 	public List<TaskDetails> getTaskList(int mgrId) {
 		return sessionFactory.getCurrentSession().createQuery("from TaskDetails where projectId='" + mgrId + "'")
 				.list();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<ProjectDetails> getempTaskList(String email) {
+
+		String query = "select project_details.project_Name from project_details where project_details.project_id IN (select task_details.projectId from task_details where task_details.Emp_Email='"
+				+ email + "')";
+
+		return sessionFactory.getCurrentSession().createSQLQuery(query).list();
 	}
 
 }

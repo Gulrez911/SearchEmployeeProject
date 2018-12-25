@@ -1,5 +1,6 @@
 package com.kgate.controller;
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.kgate.model.Employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,8 @@ public class ProjectController {
 
     @InitBinder
     public void initConverter(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        binder.registerCustomEditor(Date.class, dateEditor);
     }
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)

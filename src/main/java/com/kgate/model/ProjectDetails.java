@@ -28,12 +28,12 @@ public class ProjectDetails {
 
     @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
-    @Temporal(TemporalType.DATE)
+ /*   @Temporal(TemporalType.DATE)*/
     private Date pstart_Date;
 
     @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
-    @Temporal(TemporalType.DATE)
+/*    @Temporal(TemporalType.DATE)*/
     private Date pEnd_Date;
 
     public Integer getProject_id() {

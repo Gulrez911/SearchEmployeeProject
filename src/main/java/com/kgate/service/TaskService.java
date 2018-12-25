@@ -1,17 +1,21 @@
 package com.kgate.service;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+
 import java.util.List;
-import org.springframework.scheduling.config.Task;
+
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDetails;
 
 public interface TaskService {
 
-	public List<TaskDetails> getalltaskdetails(String email);
+	public List<String> getalltaskdetails(String email);
 
 	public void updateTask(TaskDetails taskDetails);
 
-	public void updatetask1(Date date, String email, int tid, String st);
+	public void updatetask1(String date, String email, int tid, String st);
 
 	public TaskDetails getEmployeeTask(int taskid);
 
@@ -28,5 +32,7 @@ public interface TaskService {
 	public TaskDetails getTask(int task_id);
 
 	public List<TaskDetails> getTaskList(int mgrId);
+
+	public List<ProjectDetails> getempTaskList(String email);
 
 }

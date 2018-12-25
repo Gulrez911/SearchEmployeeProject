@@ -113,6 +113,7 @@ public class UserController {
 
 				request.setAttribute("loginuser", employee.getEmail());
 				ModelAndView mav = new ModelAndView("success");
+				return mav;
 
 			} else if (employee.getCategory().equals("Manager")) {
 
@@ -146,7 +147,11 @@ public class UserController {
 
 				TaskDetails taskdetails = new TaskDetails();
 				mav.addObject("taskdetails", taskdetails);
-				List<TaskDetails> tlist = taskservice.getalltaskdetails(email);
+				List<String> tlist = taskservice.getalltaskdetails(email);
+				
+				List<ProjectDetails> li = new ArrayList<ProjectDetails>();
+				li = taskservice.getempTaskList(email);
+				System.out.println("List of Projec task::::: "+li);
 				mav.addObject("mail", email);
 				String[] taskStatus = { "W.I.P.", "Complete" };
 				mav.addObject("taskStatus", taskStatus);
@@ -182,11 +187,14 @@ public class UserController {
 //                    return mav;
 
 			} else if (employee.getCategory().equals("CEO")) {
-				ModelAndView model = new ModelAndView("CEODashboard");
+				ModelAndView model = new ModelAndView("CEODashboard1");
 				List<ProjectDetails> listProject = projectservice.dispalyProjects();
 				ProjectDetails pd = new ProjectDetails();
 				model.addObject("pd", pd);
 				model.addObject("listProject", listProject);
+				
+			List<TaskDetails> tasklist=taskservice.getAllTask();
+			model.addObject("tasklist",tasklist);
 
 				return model;
 			} else {

@@ -27,26 +27,27 @@
 		<form:hidden path="tEnd_Time" /> --%>
 		<%-- <form:input path="task_Name" /> --%>
 		<table border="1">
-
+             <th style="color: red">Project Name</th>
 			<th style="color: red">Task Type</th>
 			<th style="color: red">Task Name</th>
 			<th style="color: red">Start Date</th>
 			<th style="color: red">End Date</th>
 			<th style="color: red">Manager Name</th>
-			<th style="color: red">Status</th>
+			<th style="color: red">TaskStatus</th>
+			
 			<th style="color: red">Action</th>
 
 
 
-			<c:forEach var="tlist" items="${tlist}">
+			<c:forEach var="tlist" items="${tlist}" >
 				<tr style="color: black">
-
+<td></td>
 					<td>${tlist.task_Type}</td>
 					<td>${tlist.task_Name}</td>
 					<td>${tlist.tStart_Time}</td>
 					<td>${tlist.tEnd_Time}</td>
 					<td></td>
-					<td>${tlist.status}</td>
+					<td>${tlist.taskStatus}</td>
 
 					
 
