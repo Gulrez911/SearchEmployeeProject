@@ -1,8 +1,10 @@
 package com.kgate.dao;
 
+import java.util.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import com.kgate.model.Employee;
 import com.kgate.model.TaskDTO;
-import java.sql.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDetails;
 import java.util.ArrayList;
 
@@ -70,11 +73,13 @@ public class TaskDaoImpl implements TaskDao {
         return (TaskDetails) sessionFactory.getCurrentSession().get(TaskDetails.class, task_id);
     }
 
+
     @SuppressWarnings("unchecked")
     public List<TaskDetails> getalltaskdetails(String email) {
         return sessionFactory.getCurrentSession().createQuery("from TaskDetails where Emp_Email='" + email + "'")
                 .list();
     }
+
 
     @Override
     public void updateTask(TaskDetails taskDetails) {
@@ -82,11 +87,13 @@ public class TaskDaoImpl implements TaskDao {
         sessionFactory.getCurrentSession().saveOrUpdate(taskDetails);
     }
 
-    @Override
-    public void updatetask1(Date date, String email, int tid, String st) {
-        Query query = sessionFactory.getCurrentSession().createQuery("update TaskDetails set tSub_Date='" + date
-                + "',status='" + st + "' where Emp_Email='" + email + "' and task_id='" + tid + "'");
-        query.executeUpdate();
+	@Override
+	public void updatetask1(String date, String email, int tid, String st) {
+		Query query = sessionFactory.getCurrentSession().createQuery("update TaskDetails set tSub_Date='" + date
+				+ "',taskStatus='" + st + "' where Emp_Email='" + email + "' and task_id='" + tid + "'");
+		query.executeUpdate();
+
+   
 
     }
 

@@ -24,7 +24,7 @@
 
             <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
-                <table>
+                 <table>
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="task_id" />

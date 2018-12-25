@@ -1,13 +1,18 @@
 package com.kgate.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.io.*;
-import javax.servlet.http.Cookie;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.kgate.model.Employee;
 import com.kgate.model.Skill;
 import com.kgate.model.TaskDTO;
@@ -27,25 +33,27 @@ import com.kgate.service.TaskService;
 @Controller
 public class TaskController {
 
-    @Autowired
-    TaskService taskservice;
+	@Autowired
+	TaskService taskservice;
+	 @Autowired
+	    SkillService skillService;
+	 @Autowired
+	    EmployeeService employeeService;
+	
+    @InitBinder
+    public void initConverter(WebDataBinder binder) {
+        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        binder.registerCustomEditor(Date.class, dateEditor);
+    }
 
-    @Autowired
-    SkillService skillService;
+	@RequestMapping(value = "/editTask", method = RequestMethod.POST)
+	public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
-    @Autowired
-    EmployeeService employeeService;
-
-    @RequestMapping(value = "/editTask", method = RequestMethod.POST)
-    public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails,
-            HttpServletRequest request) {
-
-        ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-        String st = taskdetails.getStatus();
-        String st1 = st.split(",")[0];
-
-        /*mav.addObject("taskdetails",taskdetails);*/
- /*	List<TaskDetails> tlist = taskservice.getalltaskdetails(employee.getEmail());*/
+		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
+		String st = taskdetails.getStatus();
+		String st1 = st.split(",")[0];
+    
+	
         List<TaskDetails> tlist = taskservice.getalltaskdetails(taskdetails.getEmp_Email());
         List<TaskDTO> tdto = taskservice.getEmpTasklist(taskdetails.getEmp_Email());
         String[] taskStatus = {"W.I.P.", "complete"};
@@ -55,20 +63,46 @@ public class TaskController {
         Employee employee = new Employee();
         employee.setEmail(taskdetails.getEmp_Email());
         mav.addObject(employee);
-        long millis = System.currentTimeMillis();
-        java.sql.Date date1 = new java.sql.Date(millis);
-        /* int tid1=Integer.parseInt(tid); */
- /*
-		 * Cookie ck[]=request.getCookies(); String tid2=ck[0].getValue(); int
-		 * tid3=Integer.parseInt(tid2);
-         */
- /*String s = request.getParameter("tid");
-		int tid3 = Integer.parseInt(s);*/
-        taskservice.updatetask1(date1, taskdetails.getEmp_Email(), taskdetails.getTask_id(), st);
-        return mav;
+		Date d1=new Date();
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String date1=sdf.format(d1);
+		
+	taskservice.updatetask1(date1, taskdetails.getEmp_Email(), taskdetails.getTask_id(), st1);
+		return mav;
 
-    }
+	}
 
+	/*
+	 * @RequestMapping(value = "/editlink", method = RequestMethod.GET) public
+	 * ModelAndView updateTask1(@ModelAttribute("taskdetails") TaskDetails
+	 * taskdetails,
+	 * 
+	 * @ModelAttribute("employee") Employee employee, @RequestParam("tid") int tid,
+	 * HttpServletRequest request) {
+	 * 
+	 * ModelAndView mav = new ModelAndView("EmployeeDashboard1");
+	 * 
+	 * 
+	 * String st=taskdetails.getStatus(); String st1=st.split(",")[0];
+	 * 
+	 * String st1 = "complete"; String mail = request.getParameter("mail"); //
+	 * mav.addObject("taskdetails",taskdetails); List<TaskDetails> tlist =
+	 * taskservice.getalltaskdetails(mail); String[] taskStatus = { "W.I.P.",
+	 * "complete" }; mav.addObject("taskStatus", taskStatus); mav.addObject("tlist",
+	 * tlist);
+	 * 
+	 * mav.addObject(employee); Employee emp = new Employee(); emp.setEmail(mail);
+	 * mav.addObject("employee", emp); long millis = System.currentTimeMillis();
+	 * java.sql.Date date1 = new java.sql.Date(millis); int
+	 * tid1=Integer.parseInt(tid);
+	 * 
+	 * Cookie ck[]=request.getCookies(); String tid2=ck[0].getValue(); int
+	 * tid3=Integer.parseInt(tid2);
+	 * 
+	 * String s = request.getParameter("tid"); int tid3 = Integer.parseInt(s);
+	 * taskservice.updatetask1(date1, mail, tid3, st1); return mav; return new
+	 * ModelAndView("redirect:/EmployeeDashboard"); }
+	 */
     /*@RequestMapping(value = "/editlink", method = RequestMethod.GET)
 	public ModelAndView updateTask1(@ModelAttribute("taskdetails") TaskDetails taskdetails,
 			@ModelAttribute("employee") Employee employee, @RequestParam("tid") int tid, HttpServletRequest request) {

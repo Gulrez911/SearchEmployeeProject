@@ -19,6 +19,7 @@
         <form:form action="/SpringMVCHibernateCRUD/editTask" method="POST"
                    commandName="taskdetails" modelAttribute="employee">
 
+
             <form:hidden path="email" />
             <%-- <form:hidden path="task_id" />
             <form:hidden path="task_Type" />
@@ -43,6 +44,7 @@
             <c:forEach var="taskObj" items="${tobj}">
                 <tr style="color: black">
 
+
                     <td>${taskObj.project_Name}</td>
                     <td>${taskObj.task_Type}</td>
                     <td>${taskObj.task_Name}</td>
@@ -53,6 +55,7 @@
 
                     <td><a href="editlink1?tid=${taskObj.id}&mail=${taskObj.email}">Edit</a></td>  
                 </tr>
+
 
             </c:forEach>
             <tr>
