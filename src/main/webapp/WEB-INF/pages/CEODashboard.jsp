@@ -22,9 +22,7 @@
                     <c:forEach var="pd" items="${listProject}">
                     <tr>
                         <td><a href="displayProjectDetails?project_id=${pd.project_id}">${pd.project_Name}</td>
-                        <td>
-
-                        </td>
+                       
                     </tr>
                 </c:forEach> 
             </table>

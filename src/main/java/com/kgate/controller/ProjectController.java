@@ -100,13 +100,7 @@ public class ProjectController {
         return mav;
     }
 
-    /*@RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request,@SessionAttribute("employee") Employee employee) {
-        int task_id = Integer.parseInt(request.getParameter("taskid"));
-        taskservice.deleteTask(task_id);
-      ModelAndView mav = new ModelAndView("deletetask");
-        return mav ;
-    }*/
+   
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteTask(HttpServletRequest request) {
         int task_id = Integer.parseInt(request.getParameter("taskid"));

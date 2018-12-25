@@ -51,11 +51,7 @@
 						  
 						   <a href="backtoproject?email=${e.email}"><font style="color:white">Back</font></a>
 						  
-					</td>
-					
-					
-					 
-                    
+					</td>      
 	
                 </table>
                 
@@ -100,45 +96,7 @@
                      
                      
                     </c:forEach>     
-                     </div> 
-
-
-                 
-                 </table>
-                 
-                 <form:form action="">
-                 
-                 <table>
-                 
-                 <tr>
-                 <td>
-                 
-                 <input type="submit" Value="Back">
-                 
-                 </td>
-                 
-                 
-                 </tr>
-                 
-                 </table>
-                 
-                 
-                 
-                 </form:form>
-                 
-                 
-                 
-                 
-                    </div> 
-
-
-
-
-
-
-
-                    </body>
-                    </html>
+                     
 
  </body>
  </html>
