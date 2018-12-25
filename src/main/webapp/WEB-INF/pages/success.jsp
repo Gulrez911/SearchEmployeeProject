@@ -15,6 +15,12 @@
         <h3 style="color:white" align="center">You have successfully Login</h3>
     <center><a href="/SpringMVCHibernateCRUD/test"><font style="color:white" size="5">Add Skill</font></a><br></center>
  <center><a href="/SpringMVCHibernateCRUD/employeelist"><font style="color:white" size="5">Employee List</font></a></center>
-
+   <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr>
 </body>
 </html>

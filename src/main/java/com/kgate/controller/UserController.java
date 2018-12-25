@@ -20,7 +20,10 @@ import com.kgate.service.TaskService;
 
 import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -165,7 +168,9 @@ public class UserController {
                 List<String> employeeSkill
                         = skillService.getEmployeeSkillByEmail(employee.getEmail());
 
+
                 System.out.println("List of EmployeeSkill: " + employeeSkill);
+
 
                 List<Skill> listSkill = skillService.getAllSkills();
 
@@ -206,6 +211,18 @@ public class UserController {
         modelMap.put("error", "Invalid UserName / Password");
         return init();
     }
+    
+    
+ 
+
+        @RequestMapping(value="/logout",method = RequestMethod.GET)
+        public String logout(HttpServletRequest request){
+            HttpSession httpSession = request.getSession();
+            httpSession.invalidate();
+            return "redirect:/";
+        }
+
+    
 
 //               Employee Edit by Employee
 //              @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
@@ -224,6 +241,7 @@ public class UserController {
 //		return mav;
 //
 //	}
+
     @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
     public ModelAndView Empedit(@ModelAttribute Employee employee) {
         ModelAndView mav = new ModelAndView("byEmployeeEdit");
@@ -255,3 +273,4 @@ public class UserController {
     }
 
 }
+

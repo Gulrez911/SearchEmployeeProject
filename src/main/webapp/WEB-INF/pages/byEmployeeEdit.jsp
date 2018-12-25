@@ -108,6 +108,15 @@
                 <form:hidden path="status" name="status" />
                 <input type="submit" Value="Task Details">
                 <div style="color: red">${error}</div> 
+                <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr>
+                
+                
             </form:form>
 
         </div>
