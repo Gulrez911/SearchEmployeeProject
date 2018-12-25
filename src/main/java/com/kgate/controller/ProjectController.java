@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
@@ -45,7 +46,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)
-    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,@SessionAttribute("employee") Employee employee) {
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails, @SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("redirect:/cproject2");
 //        ModelAndView model = new ModelAndView("CreateProject");
         projectDetails.setManageremail(employee.getEmail());
@@ -107,7 +108,7 @@ public class ProjectController {
       ModelAndView mav = new ModelAndView("deletetask");
         return mav ;
     }*/
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete1", method = RequestMethod.GET)
     public ModelAndView deleteTask(HttpServletRequest request) {
         int task_id = Integer.parseInt(request.getParameter("taskid"));
         taskservice.deleteTask(task_id);
@@ -117,7 +118,7 @@ public class ProjectController {
          System.out.println("List of task:  " + listtask);
          mav.addObject("td", taskdetails);
          mav.addObject("listtask", listtask);*/
-        return new ModelAndView("deletetask");
+        return new ModelAndView("redirect:/deleteTask");
     }
 
     @RequestMapping(value = "/backtoproject", method = RequestMethod.GET)
@@ -144,6 +145,32 @@ public class ProjectController {
 
         return mav;
 
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("createtask");
+        int task_id = Integer.parseInt(request.getParameter("taskid"));
+        taskservice.deleteTask(task_id);
+        int pId = taskdetails.getProjectId();
+        taskdetails.setProjectId(pId);
+
+        int mId = taskdetails.getManagerId();
+        taskdetails.setManagerId(mId);
+
+        taskdetails.setStatus("Not Assigned");
+        taskservice.addTask(taskdetails);
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        mav.addObject("task_Type", Tasktype);
+        List<TaskDetails> listtask = taskservice.getByProjectId(pId);
+        System.out.println("List of task:  " + listtask);
+        mav.addObject("td", taskdetails);
+        mav.addObject("listtask", listtask);
+        Employee e = new Employee();
+        e.setEmail(taskdetails.getEmp_Email());
+        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+
+        return mav;
     }
 
     @RequestMapping(value = "/createtask", method = RequestMethod.POST)
@@ -203,6 +230,15 @@ public class ProjectController {
         mav.addObject("d", d);
 
         return mav;
+    }
+
+    @RequestMapping(value = "/downloadReport", method = RequestMethod.GET)
+    public ModelAndView downloadReport(@RequestParam("project_id") String project_id, HttpServletRequest request) {
+//         int project_id = Integer.parseInt(request.getParameter("project_id"));
+//        int project_id = (Integer.BYTES).project_id;
+        int id = Integer.parseInt(project_id);
+        List<TaskDTO> listProject = projectservice.displayAllStatus(id);
+        return new ModelAndView("pdfReport", "listProject", listProject);
     }
 
 }

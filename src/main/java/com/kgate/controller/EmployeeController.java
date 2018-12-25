@@ -33,6 +33,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import javax.validation.Valid;
+import org.springframework.ui.ModelMap;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -351,35 +352,35 @@ public class EmployeeController {
         return mav;
 
     }
-      @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
-    public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee) {
+
+    @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
+    public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, @SessionAttribute("employee") Employee employee1, ModelMap modelMap) {
         ModelAndView mav = new ModelAndView("byEmployeeEdit");
 
-//                Employee emp = employeeService.searchByEmail(employee.getEmail());
-//                List<String> employeeSkill
-//                        = skillService.getEmployeeSkillByEmail(employee.getEmail());
-//
-//                System.out.println("List of EmployeeSkill: " + employeeSkill);
-//
-//                List<Skill> listSkill = skillService.getAllSkills();
-//
-//                List<String> sk = new ArrayList<>();
-//
-//                for (int i = 0; i < employeeSkill.size(); i++) {
-//                    Object o = employeeSkill.get(i);
-//                    String s = (String) o;
-//                    sk.add(s);
-//                }
-//                emp.setSkills(sk);
-//                String[] userType = {"Employee", "Admin", "Manager"};
-//                mav.addObject("userTypes", userType);
-//
-//                mav.addObject("listSkill", listSkill);
-//                mav.addObject("employee", emp);
-//
-//                Skill skill = new Skill();
-//                mav.addObject("skill", skill);
-                return mav;
+        Employee emp = employeeService.searchByEmail(employee1.getEmail());
+        List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee1.getEmail());
+
+        System.out.println("List of EmployeeSkill: " + employeeSkill);
+
+        List<Skill> listSkill = skillService.getAllSkills();
+
+        List<String> sk = new ArrayList<>();
+
+        for (int i = 0; i < employeeSkill.size(); i++) {
+            Object o = employeeSkill.get(i);
+            String s = (String) o;
+            sk.add(s);
+        }
+        emp.setSkills(sk);
+        String[] userType = {"Employee", "Admin", "Manager"};
+        mav.addObject("userTypes", userType);
+
+        mav.addObject("listSkill", listSkill);
+        mav.addObject("employee", emp);
+        modelMap.addAttribute("msg", "You have successfully edited");
+        Skill skill = new Skill();
+        mav.addObject("skill", skill);
+        return mav;
 
     }
 

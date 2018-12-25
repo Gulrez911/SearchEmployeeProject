@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kgate.dao.TaskDao;
 import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
@@ -18,18 +17,14 @@ import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import com.kgate.service.TaskService;
 
-import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import java.util.List;
 import java.util.Map;

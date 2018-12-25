@@ -16,6 +16,7 @@
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/natureFlower.jpg">
         <div align="center">
+            <center><a href="/SpringMVCHibernateCRUD/downloadReport"><font style="color:blue" size="4">Download Task Report</font></a><br></center>
 
             <table border="1">
 
@@ -50,10 +51,10 @@
                             Delay Days ${days}
                             <c:set value="${total+days}" var="total"/>
                         </td>
-                        
+
                     </tr>
                 </c:forEach>
-                    <p align="right">  Total Delay days::${total}</p>
+                <p align="right">  Total Delay days::${total}</p>
             </table>
 
         </div>
