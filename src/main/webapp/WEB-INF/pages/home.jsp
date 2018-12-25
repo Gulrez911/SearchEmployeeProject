@@ -3,6 +3,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%-- <%@ page import="com.kgate.service.SkillService;" %> --%>
 
 <html>
@@ -91,12 +92,18 @@
    <div align="right"><td>
    
     <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-   
-   </div>
-</tr> 
+    
+  </div>
+   </tr> 
+
+ 
             <h4><font style="color: darkorange">
                     New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
             </h4>
+            
+              <form:form action="backtosuccess" method="post">
+   
+   <input type="submit" value="Back"></form:form>
         </div>
     </body>
 </html>
