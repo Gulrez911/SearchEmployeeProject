@@ -138,7 +138,7 @@ public class ProjectController {
         e = employeeService.searchByEmail(employee.getEmail());
         mav.addObject("e", e);
 
-        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("listProject", listProject);
 

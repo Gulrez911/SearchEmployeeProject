@@ -48,7 +48,7 @@
 						 
 						 <input type="submit" value="Back">
 						  --%>
-						   <a href="backtoproject?email=${e.email}">Back</a>
+						   <a href="backtoproject?email=${e.email}" style="color: white">Back</a>
 						  
 					</td>
 					
@@ -92,26 +92,6 @@
 
                  
                  </table>
-                 
-                 <form:form action="">
-                 
-                 <table>
-                 
-                 <tr>
-                 <td>
-                 
-                 <input type="submit" Value="Back">
-                 
-                 </td>
-                 
-                 
-                 </tr>
-                 
-                 </table>
-                 
-                 
-                 
-                 </form:form>
                  
                  
                  
