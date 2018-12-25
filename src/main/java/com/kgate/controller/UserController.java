@@ -18,6 +18,7 @@ import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import com.kgate.service.TaskService;
 
+import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -126,6 +127,7 @@ public class UserController {
                 // System.out.println("Manager ID:::: " + mid);
                 mav.addObject("mid", mid);
                 ProjectDetails projectdetails = new ProjectDetails();
+                projectdetails.setManageremail(employee.getEmail());
                 TaskDetails taskdetails = new TaskDetails();
                 ProjectDetails pd = new ProjectDetails();
                 mav.addObject("projectdetails", projectdetails);
@@ -133,9 +135,10 @@ public class UserController {
                 mav.addObject("taskdetails", taskdetails);
                 Employee e = new Employee();
                 mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-                List<ProjectDetails> listProject = projectservice.dispalyProjects();
+                List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
                 // System.out.println("List of Project: " + listProject);
                 mav.addObject("pd", pd);
+
                 mav.addObject("listProject", listProject);
 
                 return mav;
@@ -219,7 +222,7 @@ public class UserController {
             return "redirect:/";
         }
 
-    }
+    
 
     // Employee Edit by Employee
 //	@RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
@@ -238,4 +241,36 @@ public class UserController {
 //		return mav;
 //
 //	}
+
+    @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
+    public ModelAndView Empedit(@ModelAttribute Employee employee) {
+        ModelAndView mav = new ModelAndView("byEmployeeEdit");
+        Employee emp = employeeService.searchByEmail(employee.getEmail());
+        List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
+
+        System.out.println("List of EmployeeSkill:   " + employeeSkill);
+
+        List<Skill> listSkill = skillService.getAllSkills();
+
+        List<String> sk = new ArrayList<>();
+
+        for (int i = 0; i < employeeSkill.size(); i++) {
+            Object o = employeeSkill.get(i);
+            String s = (String) o;
+            sk.add(s);
+        }
+        emp.setSkills(sk);
+        String[] userType = {"Employee", "Admin", "Manager"};
+        mav.addObject("userTypes", userType);
+
+        mav.addObject("listSkill", listSkill);
+        mav.addObject("employee", emp);
+
+        Skill skill = new Skill();
+        mav.addObject("skill", skill);
+        return mav;
+
+    }
+
+}
 

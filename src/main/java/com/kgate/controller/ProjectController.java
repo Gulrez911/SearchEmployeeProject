@@ -1,5 +1,6 @@
 package com.kgate.controller;
 
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.Employee;
-import com.kgate.model.ProjectDTO;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDTO;
 import com.kgate.model.TaskDetails;
@@ -40,16 +40,18 @@ public class ProjectController {
 
     @InitBinder
     public void initConverter(WebDataBinder binder) {
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-mm-dd"), true));
+        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        binder.registerCustomEditor(Date.class, dateEditor);
     }
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)
-    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,@SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("redirect:/cproject2");
 //        ModelAndView model = new ModelAndView("CreateProject");
+        projectDetails.setManageremail(employee.getEmail());
         projectservice.createProject(projectDetails);
         ProjectDetails pd = new ProjectDetails();
-        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         model.addObject("listProject ", listProject);
         model.addObject("pd", pd);
         return model;
@@ -63,7 +65,7 @@ public class ProjectController {
         ProjectDetails projectdetails = new ProjectDetails();
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("projectdetails", projectdetails);
-        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("mid", mid);
         mav.addObject("pd", pd);
@@ -199,6 +201,7 @@ public class ProjectController {
         System.out.println("EmployeeName;::::::::  " + listProject.get(0).getEmp_name());
         System.out.println("List of Project::::::   " + listProject);
         mav.addObject("d", d);
+
         return mav;
     }
 

@@ -13,6 +13,9 @@ public interface ProjectService {
 
     public int getManagerid(String email);
 
+    
+    List<ProjectDetails> getProjectByEmail(String email);
+    
     //list of ProjectStatus
     public List<TaskDTO> displayAllStatus(int id);
 }

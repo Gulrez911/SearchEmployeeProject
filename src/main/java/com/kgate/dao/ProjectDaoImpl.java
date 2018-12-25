@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.ProjectDetails;
+
 import com.kgate.model.TaskDTO;
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus(int id) {
 
-        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.status from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='"+id+"'";
+        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.status from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -66,7 +67,7 @@ public class ProjectDaoImpl implements ProjectDao {
             st4 = arr[4].toString();
             st5 = arr[5].toString();
             st6 = (String) arr[6];
-            
+
             tdto.setEmp_name(st);
             tdto.setName(st1);
             tdto.setTask_Name(st2);
@@ -74,10 +75,19 @@ public class ProjectDaoImpl implements ProjectDao {
             tdto.settStartDate(st4);
             tdto.settEndDate(st5);
             tdto.setStatus(st6);
-            
+
             listtsk.add(tdto);
         }
- 
+
         return listtsk;
     }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<ProjectDetails> getProjectByEmail(String email) {
+
+        return sessionFactory.getCurrentSession().createQuery("from ProjectDetails where manageremail='" + email + "'")
+                .list();
+    }
+
 }

@@ -38,7 +38,13 @@
 
         <property name="username" value="root"></property>
 
+<<<<<<< HEAD
         <property name="password" value="1234"></property>
+=======
+
+        <property name="password" value="7326"></property>
+
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
  
     </bean>
  

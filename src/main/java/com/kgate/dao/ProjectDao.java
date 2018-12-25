@@ -3,7 +3,9 @@ package com.kgate.dao;
 import java.util.List;
 
 import com.kgate.model.ProjectDetails;
+
 import com.kgate.model.TaskDTO;
+
 
 public interface ProjectDao {
 
@@ -15,7 +17,12 @@ public interface ProjectDao {
 
     //return projectName for CEO
 //          public List<String> getProjectName();
-    //List project details and Status
+
+	  
+List<ProjectDetails> getProjectByEmail(String email);
+	
+	   //List project details and Status
     public List<TaskDTO> displayAllStatus(int id);
+
 
 }
