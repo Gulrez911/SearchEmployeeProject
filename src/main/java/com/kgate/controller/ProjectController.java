@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
+import com.kgate.model.ProjectReportDTO;
 import com.kgate.model.TaskDTO;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.EmployeeService;
@@ -42,7 +43,7 @@ public class ProjectController {
 
     @InitBinder
     public void initConverter(WebDataBinder binder) {
-        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 
@@ -252,8 +253,19 @@ public class ProjectController {
 
     @RequestMapping(value = "/downloadProjectReport", method = RequestMethod.POST)
     public ModelAndView downloadProjectReport(HttpServletRequest request) {
-       List<ProjectDetails> listProject = projectservice.dispalyProjects();
-        return new ModelAndView("pdfProjectReport", "listProject", listProject);
+        List<ProjectReportDTO> listProjectStatus = projectservice.listProjectReport();
+        System.out.println("List::::   " + listProjectStatus);
+//        for (ProjectReportDTO listProjectStatu : listProjectStatus) {
+//            String projectName = listProjectStatu.getProject_name();
+//            System.out.println("ProjectName::::::::::::::::::::::::::::::::" + projectName);
+//    }
+//        System.out.println("List of Project Status:::" + listProjectStatus.get(0));
+//        System.out.println("List project Details::::   " + listProjectStatus.get(0).getProject_name());
+//        System.out.println("List project Details::::   " + listProjectStatus.get(0).getpStartDate());
+//        System.out.println("List project Details::::   " + listProjectStatus.get(0).getpEndDate());
+        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        return new ModelAndView("pdfProjectReport", "listProject", listProjectStatus);
+
     }
 
 }

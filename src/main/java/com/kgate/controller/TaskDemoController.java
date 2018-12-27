@@ -38,12 +38,11 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
-        @InitBinder
+    @InitBinder
     public void initConverter(WebDataBinder binder) {
-        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
-
 
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
 
@@ -125,7 +124,6 @@ public class TaskDemoController {
             message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message1.setSubject(subject);
             message1.setText(message);
-
             Transport.send(message1);
 
             System.out.println("Done");

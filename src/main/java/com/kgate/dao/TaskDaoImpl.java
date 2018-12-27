@@ -112,7 +112,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<TaskDTO> getEmpTasklist(String email) {
-        String query = "select project_details.project_Name, task_details.task_Type, task_details.task_Name, task_details.tStart_Time, task_details.tEnd_Time,employee123.name, task_details.status, task_details.task_id, task_details.Emp_Email  from task_details cross join employee123, project_details where task_details.projectId = project_details.project_id and task_details.managerId=employee123.id and task_details.Emp_Email ='" + email + "'";
+        String query = "select project_details.project_Name, task_details.task_Type, task_details.task_Name, task_details.tStart_Time, task_details.tEnd_Time,employee123.name, task_details.taskStatus, task_details.task_id, task_details.Emp_Email  from task_details cross join employee123, project_details where task_details.projectId = project_details.project_id and task_details.managerId=employee123.id and task_details.Emp_Email ='" + email + "'";
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
         System.out.println("List of Object::::   " + data);
 

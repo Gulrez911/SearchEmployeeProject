@@ -3,6 +3,7 @@ package com.kgate.service;
 import java.util.List;
 
 import com.kgate.model.ProjectDetails;
+import com.kgate.model.ProjectReportDTO;
 import com.kgate.model.TaskDTO;
 
 public interface ProjectService {
@@ -19,5 +20,6 @@ public interface ProjectService {
     //list of ProjectStatus
     public List<TaskDTO> displayAllStatus(int id);
 
-    
+    //List ProjectReport Details
+     public List<ProjectReportDTO> listProjectReport();
 }
