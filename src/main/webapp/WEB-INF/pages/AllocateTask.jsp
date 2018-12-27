@@ -24,7 +24,7 @@
 
             <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
-                 <table>
+                <table>
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="task_id" />
@@ -40,12 +40,12 @@
 
                     <tr>
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" type="date" required="true"/></td>
+                        <td><form:input path="tStart_Time" type="date"/></td>
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" type="date" required="true"/></td>
+                        <td><form:input path="tEnd_Time" type="date"/></td>
                     </tr>
 
                     <tr>
