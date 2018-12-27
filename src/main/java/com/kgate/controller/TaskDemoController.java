@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+//@SessionAttributes("taskDetails")
 public class TaskDemoController {
 
     @Autowired
@@ -58,13 +60,13 @@ public class TaskDemoController {
     }
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
-    public ModelAndView success(@ModelAttribute("td") TaskDetails td,
+    public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
             @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
-        int mId = td.getManagerId();
+        int mId = TaskDetails.getManagerId();
         taskdetails.setManagerId(mId);
-        int pId = td.getProjectId();
+        int pId = TaskDetails.getProjectId();
         taskdetails.setProjectId(pId);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         List<TaskDetails> listtask = taskService.getTaskList(pId);
@@ -73,6 +75,7 @@ public class TaskDemoController {
  /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
         ModelAndView mav = new ModelAndView("createtask");
+//        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
 //		int projectId = taskdetails.getProjectId();
         String ProjectName = projectService.displayProjectName(pId);
         System.out.println("Project Name::::::::::::" + ProjectName);
@@ -108,13 +111,18 @@ public class TaskDemoController {
     }
 
     @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-    public ModelAndView taskSubmit(@ModelAttribute("td") TaskDetails td,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("createtask");
+    public ModelAndView taskSubmit(@ModelAttribute("taskDetails") TaskDetails taskDetails, HttpServletRequest request) {
 
-        int pId = td.getProjectId();
-        taskdetails.setProjectId(pId);
+        ModelAndView mav = new ModelAndView("createtask");
+//       int pId = Integer.parseInt(request.getParameter("project_id"));
+        int pId = taskDetails.getProjectId();
+        System.out.println("ProjectID:::"+pId);
+        taskDetails.setProjectId(pId);
         List<TaskDetails> listtask = taskService.getTaskList(pId);
+        TaskDetails td = new TaskDetails();
+        mav.addObject("td",td);
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        mav.addObject("task_Type", Tasktype);
         mav.addObject("listtask", listtask);
         return mav;
     }
