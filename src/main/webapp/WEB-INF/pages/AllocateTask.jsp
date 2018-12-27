@@ -40,12 +40,12 @@
 
                     <tr>
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" type="date"/></td>
+                        <td><form:input path="tStart_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" type="date"/></td>
+                        <td><form:input path="tEnd_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
@@ -55,31 +55,19 @@
 
                                 <form:options items="${employeeEmail}" />
                             </form:select>
-
-                        <td>
-
-                    </tr>  
-
-
-			</table>
-
-			<a href="logout"><font style="color: white" size="5">LogOut</font></a>
-
-
-		</form:form>
-		<%-- <form:form action="backtotask" commandName="td">
-
-			<a href="backtotask?email=${td.email}"><font style="color: white">Back</font></a>
-		</form:form> --%>
-	</div>
-
+                            </td>
+                   </tr>  
 
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>
-            
+                
+                <tr>
+			    <a href="logout"><font style="color: white" size="5">LogOut</font></a>
+		        </tr>	
+            </form:form>
         </div>
     </body>
-
 </html>
+
