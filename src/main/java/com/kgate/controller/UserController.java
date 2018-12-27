@@ -135,6 +135,9 @@ public class UserController {
                 mav.addObject("pd", pd);
 
                 mav.addObject("listProject", listProject);
+                
+                String s=employee.getEmail();
+                mav.addObject("bk",s);
 
                 return mav;
 

@@ -23,7 +23,7 @@
                 color: red;
             }
         </style>
-    </head>
+        </head>
     <body background="<%=request.getContextPath()%>/resources/images/wood.jpg">
 
         <div align="center">
@@ -48,8 +48,7 @@
                             <c:set var="date14" value="0" scope="session"/>
                             <c:set var="a" value="0"/>
                             <c:forEach var="tl" items="${tasklist}">
-
-                                <c:if test="${pd.project_id==tl.projectId }">
+                            <c:if test="${pd.project_id==tl.projectId }">
                                     <c:choose>
                                         <c:when test="${  empty tl.tSub_Date  }">
                                             <c:set var="Datee1" value="<%=new java.util.Date()%>" />  
@@ -67,7 +66,6 @@
                                 </c:if>
 
                             </c:forEach>
-
                             <c:choose>
                                 <c:when test="${a eq 0 }">
                                     <c:set var="j1" value="0"/>

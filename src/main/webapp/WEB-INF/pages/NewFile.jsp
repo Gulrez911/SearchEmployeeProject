@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Delete Task</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1><font style="color:red" size="5">Task Successfully Deleted</font></h1>
+
 </body>
 </html>

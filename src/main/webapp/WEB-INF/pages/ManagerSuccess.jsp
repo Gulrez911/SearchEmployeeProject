@@ -12,8 +12,11 @@
 <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
 <!-- <form:form action="/" method="post" > -->
  <form:form action="back" method="post" commandName="employee">
+ 
 
  <table border="1">
+ 
+                  
 
                 <th style="color:red">Name</th>
                 <th style="color:red">Email</th>
@@ -35,17 +38,18 @@
 
                     </tr>
                 </c:forEach>
-                
+                     
             </table>
            <!--  </form:form> -->
-           
-        
+               
            <table>
           
 				<tr>
 					<td>
+					
 					<input type="submit" value="Back">
-					</td>
+				
+				</td>
 				</tr>
 			</table>
            

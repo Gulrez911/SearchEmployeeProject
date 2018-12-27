@@ -19,22 +19,22 @@
                     <form:hidden path="task_id" />
                     <tr>
                         <td style="color: white">Task Type:</td>
-                        <td><form:input path="task_Type" /></td>
+                        <td><form:input path="task_Type" readonly="true"/></td>
                     </tr>
                     <tr>
                         <td style="color: black">Task Name:</td>
                         <td><form:input name="task_Name" path="task_Name" type="text"
-                                    id="tn" /></td>
+                                    id="tn" readonly="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" /></td>
+                        <td><form:input path="tStart_Time" readonly="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" /></td>
+                        <td><form:input path="tEnd_Time" readonly="true"/></td>
                     </tr>
                     <tr>
 

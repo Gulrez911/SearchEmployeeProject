@@ -14,7 +14,7 @@
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
-            <form:form action="createtask" method="post" modelAttribute="taskdetails" commandName="taskdetails">  
+            <form:form action="createtask" method="post" modelAttribute="e" commandName="taskdetails">  
                 <table align="center">
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
@@ -41,6 +41,7 @@
         <div align="right">
             <form:form action="backtoproject" commandName="e">
 
+ 
                 <table>
                     <tr>
                         <td>
@@ -56,10 +57,7 @@
                         </td>
 
 
-
-
-
-                </table>
+   </table>
 
                 <tr>
                 <div align="right"><td>
@@ -87,7 +85,21 @@
                     <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
 
 
-                    <%--  <td>  <a href="asssign?task_id=${td.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a> --%>
+    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
+                         
+                        
+                     <%--    
+                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
+                        
+                     <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
+                     
+                     
+                    </c:forEach>     
+                     
+
+ </body>	
+ </html> --%>
+
 
 
 <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
@@ -104,26 +116,11 @@
                 </c:forEach>     
                 </div> 
 
-
-
         </table>
-
-
-
 
     </div> 
 
-
-
-
-
-
-
 </body>
 </html>
-
-</body>
-</html>
-
 
 

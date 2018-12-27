@@ -31,7 +31,7 @@
                     <form:hidden path="manageremail" />
                     <tr>
                         <td>Project Name:</td>
-                        <td><form:input type="text" path="project_Name" name="project_Name"/></td>
+                        <td><form:input type="text" path="project_Name" name="project_Name" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Description:</td>
@@ -39,13 +39,13 @@
                     </tr>
                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date" type="date" name="pstart_Date"/></td>
+                        <td><form:input path="pstart_Date" type="date" name="pstart_Date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Project End Date:</td>
                         <td><form:input path="pEnd_Date" type="date" id="endDate"
-                                    name="endDate" /></td>
+                                    name="endDate" required="true"/></td>
                     </tr> 
 
                     <tr>
@@ -62,7 +62,7 @@
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}&bk=${bk}" style="color: white">${pd.project_Name}</a></td>
 
                         </tr>
 
