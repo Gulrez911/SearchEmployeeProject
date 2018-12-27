@@ -1,71 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>New/Edit Contact</title>
-<style>
-.error {
-	color: red;
-	font-weight: bold;
-}
-</style>
+<html> 
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>New/Edit Contact</title>
+        <style>
+            .error { 
+                color: red; font-weight: bold; 
+            }
+        </style>
 
-</head>
-<body
-	background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+    </head>
+    <body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
 
 
-	<div align="center">
-		<h1 style="color: orangered">Allocate Task</h1>
+        <div align="center">
+            <h1 style="color:orangered">Allocate Task</h1>
 
-		<form:form action="taskAllocated" method="post" modelAttribute="bk"
-			commandName="td">
-			<form:errors path="*" cssClass="errorblock" element="div" />
-			<table>
-				<form:hidden path="Emp_Email" value="${bk }" />
-				<form:hidden path="projectId" />
-				<form:hidden path="managerId" />
-				<form:hidden path="task_id" />
-				<tr>
-					<td style="color: white">Task Type:</td>
-					<td><form:input path="task_Type" /></td>
-					<td><form:errors path="task_Type" cssClass="error" /></td>
-				</tr>
-				<tr>
-					<td style="color: black">Task Name:</td>
-					<td><form:input name="task_Name" path="task_Name" type="text"
-							id="tn" /></td>
-				</tr>
+            <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
+                <form:errors path = "*" cssClass = "errorblock" element = "div" />
+                 <table>
+                    <form:hidden path="projectId" />
+                    <form:hidden path="managerId" />
+                    <form:hidden path="task_id" />
+                    <tr>
+                        <td style="color:white">Task Type: </td>
+                        <td><form:input path="task_Type"  /></td>
+                        <td><form:errors path="task_Type" cssClass="error"/></td>
+                    </tr>
+                    <tr>
+                        <td style="color: black">Task Name:</td>
+                        <td><form:input name="task_Name" path="task_Name" type="text" id="tn" /></td>
+                    </tr>
 
-				<tr>
-					<td>Task Start Date:</td>
-					<td><form:input path="tStart_Time" type="date" required="true" /></td>
-				</tr>
+                    <tr>
+                        <td>Task Start Date:</td>
+                        <td><form:input path="tStart_Time" type="date"/></td>
+                    </tr>
 
-				<tr>
-					<td>Task End Date:</td>
-					<td><form:input path="tEnd_Time" type="date" required="true" /></td>
-				</tr>
+                    <tr>
+                        <td>Task End Date:</td>
+                        <td><form:input path="tEnd_Time" type="date"/></td>
+                    </tr>
 
-				<tr>
-					<td style="color: white">Assign: </font></td>
-					<td><form:select path="Emp_Email" required="true">
+                    <tr>
+                        <td style="color:white"> Assign: </font></td>
+                        <td>
+                            <form:select path="Emp_Email" required ="true">
 
-							<form:options items="${employeeEmail}" />
-						</form:select>
-					<td>
-				</tr>
+                                <form:options items="${employeeEmail}" />
+                            </form:select>
 
-				<tr>
-					<td colspan="2" align="center"><input type="submit"
-						value="Save" name="action2"></td>
-				</tr>
+                        <td>
+
+                    </tr>  
 
 
 			</table>
@@ -79,5 +72,14 @@
 			<a href="backtotask?email=${td.email}"><font style="color: white">Back</font></a>
 		</form:form> --%>
 	</div>
-</body>
+
+
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
+                    </tr>
+                </table>
+            
+        </div>
+    </body>
+
 </html>

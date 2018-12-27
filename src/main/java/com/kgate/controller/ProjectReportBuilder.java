@@ -15,6 +15,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.kgate.model.ProjectDetails;
+import com.kgate.model.ProjectReportDTO;
 import com.kgate.model.TaskDTO;
 import java.util.List;
 import java.util.Map;
@@ -32,17 +33,17 @@ public class ProjectReportBuilder extends AbstractITextPdfView {
             PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         // get data model which is passed by the Spring container
-        List<ProjectDetails> listProject = (List<ProjectDetails>) model.get("listProject");
-
+//        List<ProjectDetails> listProject = (List<ProjectDetails>) model.get("listProject");
+        List<ProjectReportDTO> listProject = (List<ProjectReportDTO>) model.get("listProject");
         doc.add(new Paragraph("List of  Project Details  in PDF"));
 
-        PdfPTable table = new PdfPTable(1);
+        PdfPTable table = new PdfPTable(6);
         table.setWidthPercentage(100.0f);
-        table.setWidths(new float[]{2.0f});
+        table.setWidths(new float[]{2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f});
         table.setSpacingBefore(10);
 
         // define font for table header row
-        Font font = FontFactory.getFont(FontFactory.HELVETICA);
+        Font font = FontFactory.getFont(FontFactory.TIMES);
         font.setColor(BaseColor.WHITE);
 
         // define table header cell
@@ -53,9 +54,24 @@ public class ProjectReportBuilder extends AbstractITextPdfView {
         // write table header 
         cell.setPhrase(new Phrase("Project Name", font));
         table.addCell(cell);
+        cell.setPhrase(new Phrase("Start Date", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("End Date", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Expected Days", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Completed Days", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Deviation Days", font));
+        table.addCell(cell);
 
-        for (ProjectDetails dTO : listProject) {
-            table.addCell(dTO.getProject_Name());
+        for (ProjectReportDTO dTO : listProject) {
+            table.addCell(dTO.getProject_name());
+            table.addCell(dTO.getpStartDate());
+            table.addCell(dTO.getpEndDate());
+            table.addCell(dTO.getExpectDate());
+            table.addCell(dTO.getCompleteTime());
+            table.addCell(dTO.getVariationTime());
 
         }
 

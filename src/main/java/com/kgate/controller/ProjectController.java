@@ -1,9 +1,6 @@
 package com.kgate.controller;
 
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-import com.kgate.model.Employee;
-
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
+import com.kgate.model.ProjectReportDTO;
 import com.kgate.model.TaskDTO;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.EmployeeService;
@@ -27,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
@@ -42,12 +39,6 @@ public class ProjectController {
 	@Autowired
 	private EmployeeService employeeService;
 
-	/*@InitBinder
-	public void initConverter(WebDataBinder binder) {
-		CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
-		binder.registerCustomEditor(Date.class, dateEditor);
-	}*/
-	
 	@InitBinder
     public void initConverter(WebDataBinder binder) {
         CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
@@ -170,7 +161,7 @@ public class ProjectController {
 
 	}
 
-	/*@RequestMapping(value = "/backtotask", method = RequestMethod.GET)
+	@RequestMapping(value = "/backtotask", method = RequestMethod.GET)
 	public ModelAndView backtotask(@SessionAttribute("employee") Employee emp,
 			@ModelAttribute("employee") Employee employee, @RequestParam("email") String email) {
 		ModelAndView mav = new ModelAndView("createtask");
@@ -190,16 +181,16 @@ public class ProjectController {
 		e = employeeService.searchByEmail(emp.getEmail());
 		System.out.println("Email:::::    "+e);
 		mav.addObject("td", e);
-*/
-	/*	String[] Tasktype = { "Coding", "Design", "Integration", "Quality", "Testing" };
+
+		String[] Tasktype = { "Coding", "Design", "Integration", "Quality", "Testing" };
 		mav.addObject("task_Type", Tasktype);
 		List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
 		System.out.println("List of Project:  " + listProject);
 		mav.addObject("listProject", listProject);
-		List<TaskDetails> listtask = taskservice.getByProjectId(pId);
+		/*List<TaskDetails> listtask = taskservice.getByProjectId(pId);
 		System.out.println("List of task:  " + listtask);
 		mav.addObject("td", taskdetails);
-		mav.addObject("listtask", listtask);
+		mav.addObject("listtask", listtask);*/
 //		List<TaskDetails> listTask = taskservice.getTaskList(mid);
 //		System.out.println("List of Task:" + listTask);
 //		mav.addObject("listTask", listTask);
@@ -207,7 +198,7 @@ public class ProjectController {
 		return mav;
 
 	}
-*/
+
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,
 			@SessionAttribute("employee") Employee employee) {
@@ -306,18 +297,30 @@ public class ProjectController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/downloadReport", method = RequestMethod.POST)
-	public ModelAndView downloadReport(@RequestParam("project_id") String project_id, HttpServletRequest request) {
+    @RequestMapping(value = "/downloadReport", method = RequestMethod.POST)
+    public ModelAndView downloadReport(@RequestParam("project_id") String project_id, HttpServletRequest request) {
 
-		int id = Integer.parseInt(project_id);
-		List<TaskDTO> listProject = projectservice.displayAllStatus(id);
-		return new ModelAndView("pdfReport", "listProject", listProject);
-	}
+        int id = Integer.parseInt(project_id);
+        List<TaskDTO> listProject = projectservice.displayAllStatus(id);
+        return new ModelAndView("pdfReport", "listProject", listProject);
+    }
 
-	@RequestMapping(value = "/downloadProjectReport", method = RequestMethod.POST)
-	public ModelAndView downloadProjectReport(HttpServletRequest request) {
-		List<ProjectDetails> listProject = projectservice.dispalyProjects();
-		return new ModelAndView("pdfProjectReport", "listProject", listProject);
-	}
+    @RequestMapping(value = "/downloadProjectReport", method = RequestMethod.POST)
+    public ModelAndView downloadProjectReport(HttpServletRequest request) {
+        List<ProjectReportDTO> listProjectStatus = projectservice.listProjectReport();
+        System.out.println("List::::   " + listProjectStatus);
+//        for (ProjectReportDTO listProjectStatu : listProjectStatus) {
+//            String projectName = listProjectStatu.getProject_name();
+//            System.out.println("ProjectName::::::::::::::::::::::::::::::::" + projectName);
+//    }
+//        System.out.println("List of Project Status:::" + listProjectStatus.get(0));
+//        System.out.println("List project Details::::   " + listProjectStatus.get(0).getProject_name());
+//        System.out.println("List project Details::::   " + listProjectStatus.get(0).getpStartDate());
+//        System.out.println("List project Details::::   " + listProjectStatus.get(0).getpEndDate());
+        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        return new ModelAndView("pdfProjectReport", "listProject", listProjectStatus);
+
+    }
 
 }
+
