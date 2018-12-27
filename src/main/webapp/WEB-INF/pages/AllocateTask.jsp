@@ -40,12 +40,12 @@
 
                     <tr>
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" type="date"/></td>
+                        <td><form:input path="tStart_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" type="date"/></td>
+                        <td><form:input path="tEnd_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>

@@ -37,11 +37,12 @@ public class TaskDemoController {
     @Autowired
     ProjectService projectService;
 
-   @InitBinder
+    @InitBinder
     public void initConverter(WebDataBinder binder) {
         CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
+
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
 
     public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
@@ -89,8 +90,9 @@ public class TaskDemoController {
 
         String tskName = taskdetails.getTask_Name();
         String tskType = taskdetails.getTask_Type();
-        String tStartDate = taskdetails.gettStart_Time().toString();
-        String tEndDate = taskdetails.gettEnd_Time().toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
+        String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
         System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
 
         /*
