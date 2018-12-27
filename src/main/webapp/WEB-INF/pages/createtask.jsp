@@ -35,7 +35,9 @@
 
                         <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
                     </tr>
+                 <form:form action="backtoprj" method="post">
 
+				<input type="submit" value="Back"></form:form>
             </form:form></div>
 
         <div align="right">
@@ -56,7 +58,6 @@
 
                         </td>
 
-
    </table>
 
                 <tr>
@@ -65,7 +66,7 @@
                         <a href="logout"><font style="color:white" size="5">LogOut</font></a>
                 </div>
             </tr> 
-
+              
         </form:form>
 
 
@@ -85,34 +86,12 @@
                     <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
 
 
-    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
-                         
-                        
-                     <%--    
-                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
-                        
-                     <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
-                     
-                     
-                    </c:forEach>     
-                     
-
- </body>	
- </html> --%>
-
-
-
-<!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
-
-                    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
-
-
-
+  
                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&bk=${bk}"> ${td.status} </a></td> 
 
                     <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
 
-
+                   
                 </c:forEach>     
                 </div> 
 

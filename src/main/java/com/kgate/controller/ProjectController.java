@@ -102,10 +102,6 @@ public class ProjectController {
 		mav.addObject("listtask", listtask);
 		Employee e = new Employee();
 		mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-
-		String bk = request.getParameter("bk");
-		mav.addObject("bk", bk);
-
 		return mav;
 	}
 
@@ -161,7 +157,7 @@ public class ProjectController {
 
 	}
 
-	@RequestMapping(value = "/backtotask", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/backtotask", method = RequestMethod.GET)
 	public ModelAndView backtotask(@SessionAttribute("employee") Employee emp,
 			@ModelAttribute("employee") Employee employee, @RequestParam("email") String email) {
 		ModelAndView mav = new ModelAndView("createtask");
@@ -187,18 +183,16 @@ public class ProjectController {
 		List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
 		System.out.println("List of Project:  " + listProject);
 		mav.addObject("listProject", listProject);
-		/*List<TaskDetails> listtask = taskservice.getByProjectId(pId);
+		List<TaskDetails> listtask = taskservice.getByProjectId(pId);
 		System.out.println("List of task:  " + listtask);
 		mav.addObject("td", taskdetails);
-		mav.addObject("listtask", listtask);*/
+		mav.addObject("listtask", listtask);
 //		List<TaskDetails> listTask = taskservice.getTaskList(mid);
 //		System.out.println("List of Task:" + listTask);
 //		mav.addObject("listTask", listTask);
-
-		return mav;
-
-	}
-
+		return mav;	
+		}
+*/
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,
 			@SessionAttribute("employee") Employee employee) {
@@ -320,6 +314,27 @@ public class ProjectController {
         List<ProjectDetails> listProject = projectservice.dispalyProjects();
         return new ModelAndView("pdfProjectReport", "listProject", listProjectStatus);
 
+    }
+    
+    
+    @RequestMapping(value = "/backtotask", method = RequestMethod.POST)
+    
+    public ModelAndView backtotask()
+    {
+       	  
+            ModelAndView mav = new ModelAndView("createtask");
+           return mav;
+    	     	
+    }
+    
+  @RequestMapping(value = "/backtoprj", method = RequestMethod.POST)
+    
+    public ModelAndView backtoprj()
+    {
+       	  
+            ModelAndView mav = new ModelAndView("CreateProject");
+           return mav;
+    	     	
     }
 
 }

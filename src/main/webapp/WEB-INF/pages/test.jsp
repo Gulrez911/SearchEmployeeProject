@@ -10,7 +10,7 @@
         <style>
             table {
                 border-collapse: collapse;
-            }
+              }
 
             th, td {
                 text-align: left;
@@ -31,11 +31,13 @@
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/af.jpg">
+          <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
         <div align="center">
             <h1 style="color: white">Skills Tracker: Add Skill Page</h1>
             <form:form action="saveTest" method="post" modelAttribute="skill"
                        commandName="skill">
                 <table>
+                 
                     <form:hidden path="skill_Id" />
                     <tr>
                         <td style="color: white">Name:</td>
@@ -44,8 +46,12 @@
                     <br>
                     <td colspan="2" align="center"><input type="submit"
                                                           value="Add"></td>
+                                                          
                     </tr>
+                    
+                    
                 </table>
+                 
             </form:form>
             <table border="1">
                 <th>Skills</th>
@@ -61,10 +67,7 @@
                     </tr>
                 </c:forEach>
             </table>
-           <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form>
-						
-
-				
+       			
         </div>
     </body>
 </html>
