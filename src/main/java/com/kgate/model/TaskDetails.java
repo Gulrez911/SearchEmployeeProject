@@ -32,10 +32,10 @@ public class TaskDetails {
 	private String status;
 	@Column
 	@DateTimeFormat(pattern = "dd-mm-yyyy")
-	@Temporal(TemporalType.DATE)
+@Temporal(TemporalType.DATE)
 	private Date tStart_Time;
 	@Column
-	@DateTimeFormat(pattern = "dd-mm-yyyy")
+@DateTimeFormat(pattern = "dd-mm-yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date tEnd_Time;
 	@Column

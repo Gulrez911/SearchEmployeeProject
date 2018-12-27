@@ -29,7 +29,7 @@ public class ProjectDetails {
     @Column
 
     @DateTimeFormat(pattern = "dd-mm-yyyy")
- /*   @Temporal(TemporalType.DATE)*/
+  @Temporal(TemporalType.DATE)
 
   /*  @DateTimeFormat(pattern = "mm-dd-yyyy")
     @Temporal(TemporalType.DATE)*/
@@ -39,7 +39,7 @@ public class ProjectDetails {
     @Column
 
     @DateTimeFormat(pattern = "dd-mm-yyyy")
-/*    @Temporal(TemporalType.DATE)*/
+ @Temporal(TemporalType.DATE)
 
  /*   @DateTimeFormat(pattern = "mm-dd-yyyy")
     @Temporal(TemporalType.DATE)*/

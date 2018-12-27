@@ -42,44 +42,59 @@
                           <fmt:parseNumber var="j" integerOnly="true" type="number" value="${datediff2}" />  
                         Expected time:${j} Days
                       </br>
-                 <c:set var="date14" value="0" scope="session"/>
-                 <c:set var="a" value="0"/>
+                 <c:set var="date14" value="0"/>
+                 <c:set var="k" value="0"/>
                       <c:forEach var="tl" items="${tasklist}">
                       
-                       <c:if test="${pd.project_id==tl.projectId }">
+                       <c:if test="${pd.project_id eq tl.projectId }">
                        <c:choose>
                        <c:when test="${  empty tl.tSub_Date  }">
                        <c:set var="Datee1" value="<%=new java.util.Date()%>" />  
-                          <c:set value="${Datee1.time/(1000*60*60*24)}" var="date14" scope="session"/>
+                        <c:set value="${Datee1.time/(1000*60*60*24)}" var="d"/>
+                          <c:set value=" ${tl.tEnd_Time.time/(1000*60*60*24) } "  var="d1"/>
+                          <c:set value="${d-d1 }" var="d22"/>
+                          
+                          <c:set value="${tl.tStart_Time.time/(1000*60*60*24) }" var="tss"/>
+                           <c:set value="${tl.tEnd_Time.time/(1000*60*60*24) }" var="tse"/>
+                           <c:set value="${tse-tss }" var="tsst"/>
+                           
+                           <c:set var="d2" value="${tsst+d22 }"/>
+                          
+                          
+                           <fmt:parseNumber var="d3" integerOnly="true" type="number" value="${d2}" />
+                           <c:set var="date14" value="${d3 }"/>
                        </c:when>
                        <c:otherwise>
-                        <fmt:parseDate pattern="yyyy-MM-dd" value="${tl.tSub_Date }" var="date11"/>
-                       <c:set value="${date11.time/(1000*60*60*24)}" var="date14" scope="session"/>
+                         <fmt:parseDate pattern="yyyy-MM-dd" value="${tl.tSub_Date }" var="p"/>
+                       <c:set value="${p.time/(1000*60*60*24)}" var="p1"/>
+                        <c:set value=" ${tl.tEnd_Time.time/(1000*60*60*24) } "  var="p2"/>
+                        <c:set value="${p1-p2 }" var="p33"/>
+                        
+                         <c:set value="${tl.tStart_Time.time/(1000*60*60*24) }" var="tss"/>
+                           <c:set value="${tl.tEnd_Time.time/(1000*60*60*24) }" var="tse"/>
+                           <c:set value="${tse-tss }" var="tsst"/>
+                           
+                            <c:set var="p3" value="${tsst+p33 }"/>
+                        
+                        
+                          <fmt:parseNumber var="p4" integerOnly="true" type="number" value="${p3}" />
+                       <c:set var="date14" value="${p4}"/> 
                        </c:otherwise>
                        </c:choose>
+                       <c:set var="k" value="${date14+k }"/>
                       </c:if>
                       
-                      <c:if test="${a lt date14 }">
-                      <c:set var="a" value="${date14 }"/>
-                      </c:if>
-                      
+                     
                        </c:forEach>
                        
-                       <c:choose>
-                       <c:when test="${a eq 0 }">
-                       <c:set var="j1" value="0"/>
-                       </c:when>
-                       <c:otherwise>
-                       <c:set value="${a-datediff1}" var="fd"/>
-                        <fmt:parseNumber var="j1" integerOnly="true" type="number" value="${fd+j}" />
-                       </c:otherwise>
-                       </c:choose>
-                       completed time: ${j1} Days
+                      
+                      
+                       
+                       completed time: ${k} Days
+                  
+                       
                          </br>
-                         <c:set var="deviation" value="${j1-j }"/>
-                         <c:if test="${ deviation lt 1}">
-                         <c:set var="deviation" value="0"/>
-                         </c:if>
+                         <c:set var="deviation" value="${k-j }"/>
                         delay time:${deviation } Days
                         </td>
                     </tr>

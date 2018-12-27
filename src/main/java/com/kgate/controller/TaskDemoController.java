@@ -38,9 +38,9 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
-        @InitBinder
+    @InitBinder
     public void initConverter(WebDataBinder binder) {
-        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 

@@ -190,14 +190,16 @@ public class UserController {
                 return mav;
 
             } else if (employee.getCategory().equals("CEO")) {
-                ModelAndView model = new ModelAndView("CEODashboard1");
+                ModelAndView model = new ModelAndView("CEODashboard2");
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
-                ProjectDetails pd = new ProjectDetails();
-                model.addObject("pd", pd);
+              /*  ProjectDetails pd = new ProjectDetails();
+                model.addObject("pd", pd);*/
                 model.addObject("listProject", listProject);
 
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
+                
+               
                 return model;
             } else {
                 modelMap.put("error", "Invalid UserName / Password");

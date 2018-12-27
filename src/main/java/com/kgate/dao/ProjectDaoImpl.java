@@ -48,7 +48,7 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus(int id) {
 
-        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.status from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
+        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.status,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -56,7 +56,7 @@ public class ProjectDaoImpl implements ProjectDao {
         for (Object d : data) {
 
             Object arr[] = (Object[]) d;
-            String st, st1, st2, st3, st4, st5, st6, st8;
+            String st, st1, st2, st3, st4, st5, st6, st8,st9;
 
             TaskDTO tdto = new TaskDTO();
 
@@ -67,6 +67,7 @@ public class ProjectDaoImpl implements ProjectDao {
             st4 = arr[4].toString();
             st5 = arr[5].toString();
             st6 = (String) arr[6];
+            st9=(String) arr[7];
 
             tdto.setEmp_name(st);
             tdto.setName(st1);
@@ -75,6 +76,7 @@ public class ProjectDaoImpl implements ProjectDao {
             tdto.settStartDate(st4);
             tdto.settEndDate(st5);
             tdto.setStatus(st6);
+            tdto.setTsubDate(st9);
 
             listtsk.add(tdto);
         }

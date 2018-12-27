@@ -42,9 +42,10 @@ public class ProjectController {
 
     @InitBinder
     public void initConverter(WebDataBinder binder) {
-        CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
+        CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
+
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)
     public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails, @SessionAttribute("employee") Employee employee) {
@@ -244,5 +245,28 @@ public class ProjectController {
         List<TaskDTO> listProject = projectservice.displayAllStatus(id);
         return new ModelAndView("pdfReport", "listProject", listProject);
     }
+
+    @RequestMapping(value = "/downloadProjectReport", method = RequestMethod.POST)
+    public ModelAndView downloadProjectReport(HttpServletRequest request) {
+       List<ProjectDetails> listProject = projectservice.dispalyProjects();
+        return new ModelAndView("pdfProjectReport", "listProject", listProject);
+    }
+    
+    
+    @RequestMapping(value="/CeoBack",method=RequestMethod.POST)
+    public ModelAndView back()
+    {
+    	ModelAndView model=new ModelAndView("CEODashboard2");
+    	
+    	List<ProjectDetails> listProject = projectservice.dispalyProjects();
+      
+          model.addObject("listProject", listProject);
+
+          List<TaskDetails> tasklist = taskservice.getAllTask();
+          model.addObject("tasklist", tasklist);
+    	return model;
+    	
+    }
+
 
 }
