@@ -7,17 +7,17 @@ import com.kgate.model.TaskDTO;
 
 public interface ProjectService {
 
-    public void createProject(ProjectDetails project);
+	public void createProject(ProjectDetails project);
 
-    List<ProjectDetails> dispalyProjects();
+	List<ProjectDetails> dispalyProjects();
 
-    public int getManagerid(String email);
+	public int getManagerid(String email);
 
-    
-    List<ProjectDetails> getProjectByEmail(String email);
-    
-    //list of ProjectStatus
-    public List<TaskDTO> displayAllStatus(int id);
+	List<ProjectDetails> getProjectByEmail(String email);
 
-    
+	// list of ProjectStatus
+	public List<TaskDTO> displayAllStatus(int id);
+
+//return project name using projectId
+	public String displayProjectName(int id);
 }

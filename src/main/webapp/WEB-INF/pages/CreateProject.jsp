@@ -31,7 +31,7 @@
                     <form:hidden path="manageremail" />
                     <tr>
                         <td>Project Name:</td>
-                        <td><form:input type="text" path="project_Name" name="project_Name"/></td>
+                        <td><form:input type="text" path="project_Name" name="project_Name" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Description:</td>
@@ -62,7 +62,7 @@
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}&bk=${bk}" style="color: white">${pd.project_Name}</a></td>
 
                         </tr>
 

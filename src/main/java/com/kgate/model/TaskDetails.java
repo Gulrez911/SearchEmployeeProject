@@ -162,6 +162,8 @@ public class TaskDetails {
 		this.managerId = managerId;
 	}
 
+	
+
 	public int getProjectId() {
 		return projectId;
 	}
