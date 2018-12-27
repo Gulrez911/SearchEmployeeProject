@@ -6,10 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page import="java.text.DateFormat"%>
+
 <%@page import="java.util.*"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Calendar" %> 
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>   
 
 

@@ -223,9 +223,9 @@ public class ProjectDaoImpl implements ProjectDao {
             System.out.println("End:     " + s3);
             listproject.add(dTO);
         }
-        ProjectReportDTO dt1 = new ProjectReportDTO();
-        dt1.setProject_name("This is Test Project::::");
-        listproject.add(dt1);
+//        ProjectReportDTO dt1 = new ProjectReportDTO();
+//        dt1.setProject_name("This is Test Project::::");
+//        listproject.add(dt1);
 
         return listproject;
     }

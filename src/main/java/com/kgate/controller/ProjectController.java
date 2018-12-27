@@ -103,25 +103,30 @@ public class ProjectController {
         return mav;
     }
 
-    /*@RequestMapping(value = "/delete", method = RequestMethod.GET)
+
+   
+  
+    
+   /* @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteTask(@ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request,@SessionAttribute("employee") Employee employee) {
         int task_id = Integer.parseInt(request.getParameter("taskid"));
         taskservice.deleteTask(task_id);
       ModelAndView mav = new ModelAndView("deletetask");
         return mav ;
     }*/
-    @RequestMapping(value = "/delete1", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/delete1", method = RequestMethod.GET)
+
     public ModelAndView deleteTask(HttpServletRequest request) {
         int task_id = Integer.parseInt(request.getParameter("taskid"));
         taskservice.deleteTask(task_id);
-        /*tring[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
+        tring[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
     	mav.addObject("task_Type",Tasktype);
     	 List<TaskDetails> listtask =taskservice.getByProjectId(pId);
          System.out.println("List of task:  " + listtask);
          mav.addObject("td", taskdetails);
-         mav.addObject("listtask", listtask);*/
+         mav.addObject("listtask", listtask);
         return new ModelAndView("redirect:/deleteTask");
-    }
+    }*/
 
     @RequestMapping(value = "/backtoproject", method = RequestMethod.GET)
     public ModelAndView back(@ModelAttribute("employee") Employee employee, @RequestParam("email") String email) {
