@@ -39,13 +39,13 @@
                     </tr>
                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date" type="date" name="pstart_Date"/></td>
+                        <td><form:input path="pstart_Date" type="date" name="pstart_Date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Project End Date:</td>
                         <td><form:input path="pEnd_Date" type="date" id="endDate"
-                                    name="endDate" /></td>
+                                    name="endDate" required="true"/></td>
                     </tr> 
 
                     <tr>

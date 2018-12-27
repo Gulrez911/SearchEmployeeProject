@@ -25,7 +25,10 @@
         </style>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/wood.jpg">
-        <h1>Hello World!</h1>
+        <div align="center">
+            <form action="downloadProjectReport" method="post">
+                <input type="submit" value="Download Task Report" > 
+            </form>
         <div align="center">
             <table border="1">
                 <th>Project Name</th>
