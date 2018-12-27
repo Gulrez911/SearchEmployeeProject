@@ -56,8 +56,8 @@
 
                         <td>${skill.skill_name}</td>
                         <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

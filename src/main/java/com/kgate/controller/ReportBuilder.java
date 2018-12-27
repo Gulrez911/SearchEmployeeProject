@@ -20,8 +20,7 @@ public class ReportBuilder extends AbstractITextPdfView {
 
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
-            PdfWriter writer, HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+            PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
         // get data model which is passed by the Spring container
         List<TaskDTO> listProject = (List<TaskDTO>) model.get("listProject");
 

@@ -135,7 +135,9 @@ public class UserController {
                 mav.addObject("pd", pd);
 
                 mav.addObject("listProject", listProject);
-
+                
+                
+          
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
