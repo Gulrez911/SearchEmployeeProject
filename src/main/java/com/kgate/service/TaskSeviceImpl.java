@@ -1,21 +1,27 @@
 package com.kgate.service;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.kgate.dao.TaskDao;
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDTO;
 import com.kgate.model.TaskDetails;
-import java.util.ArrayList;
 
 @Service
 public class TaskSeviceImpl implements TaskService {
 
     @Autowired
     private TaskDao taskdao;
+
 
     @Override
     @Transactional
@@ -30,12 +36,6 @@ public class TaskSeviceImpl implements TaskService {
 
     }
 
-    @Override
-    @Transactional
-    public void updatetask1(Date date, String email, int tid, String st) {
-        taskdao.updatetask1(date, email, tid, st);
-
-    }
 
     @Override
     @Transactional
@@ -100,4 +100,21 @@ public class TaskSeviceImpl implements TaskService {
         return obj;
     }
 
-}
+	@Override
+    @Transactional
+	public void updatetask1(String date, String email, int tid, String st) {
+		taskdao.updatetask1(date, email, tid, st);
+	}
+
+	
+	}
+
+/*	@Override
+	public List<ProjectDetails> getempTaskList(String email) {
+		List<ProjectDetails> li = new ArrayList<ProjectDetails>();
+		li = taskdao.getempTaskList(email);
+		 System.out.println("List of Employe:::: task:::::    " +li);
+		return li;
+	}
+*/
+

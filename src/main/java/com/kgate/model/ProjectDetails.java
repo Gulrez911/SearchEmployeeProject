@@ -27,13 +27,23 @@ public class ProjectDetails {
     private String project_desc;
 
     @Column
-    @DateTimeFormat(pattern = "mm-dd-yyyy")
-    @Temporal(TemporalType.DATE)
+
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+ /*   @Temporal(TemporalType.DATE)*/
+
+  /*  @DateTimeFormat(pattern = "mm-dd-yyyy")
+    @Temporal(TemporalType.DATE)*/
+
     private Date pstart_Date;
 
     @Column
-    @DateTimeFormat(pattern = "mm-dd-yyyy")
-    @Temporal(TemporalType.DATE)
+
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+/*    @Temporal(TemporalType.DATE)*/
+
+ /*   @DateTimeFormat(pattern = "mm-dd-yyyy")
+    @Temporal(TemporalType.DATE)*/
+
     private Date pEnd_Date;
     
     @Column
