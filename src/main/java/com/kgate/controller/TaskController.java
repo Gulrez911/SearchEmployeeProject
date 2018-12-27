@@ -50,7 +50,7 @@ public class TaskController {
     public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
 //		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-        ModelAndView mav = new ModelAndView("redirect:/editTask");
+        ModelAndView mav = new ModelAndView("redirect:/returnTask");
         String st = taskdetails.getStatus();
         String st1 = st.split(",")[0];
 
@@ -72,73 +72,11 @@ public class TaskController {
 
     }
 
-    /*
-	 * @RequestMapping(value = "/editlink", method = RequestMethod.GET) public
-	 * ModelAndView updateTask1(@ModelAttribute("taskdetails") TaskDetails
-	 * taskdetails,
-	 * 
-	 * @ModelAttribute("employee") Employee employee, @RequestParam("tid") int tid,
-	 * HttpServletRequest request) {
-	 * 
-	 * ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-	 * 
-	 * 
-	 * String st=taskdetails.getStatus(); String st1=st.split(",")[0];
-	 * 
-	 * String st1 = "complete"; String mail = request.getParameter("mail"); //
-	 * mav.addObject("taskdetails",taskdetails); List<TaskDetails> tlist =
-	 * taskservice.getalltaskdetails(mail); String[] taskStatus = { "W.I.P.",
-	 * "complete" }; mav.addObject("taskStatus", taskStatus); mav.addObject("tlist",
-	 * tlist);
-	 * 
-	 * mav.addObject(employee); Employee emp = new Employee(); emp.setEmail(mail);
-	 * mav.addObject("employee", emp); long millis = System.currentTimeMillis();
-	 * java.sql.Date date1 = new java.sql.Date(millis); int
-	 * tid1=Integer.parseInt(tid);
-	 * 
-	 * Cookie ck[]=request.getCookies(); String tid2=ck[0].getValue(); int
-	 * tid3=Integer.parseInt(tid2);
-	 * 
-	 * String s = request.getParameter("tid"); int tid3 = Integer.parseInt(s);
-	 * taskservice.updatetask1(date1, mail, tid3, st1); return mav; return new
-	 * ModelAndView("redirect:/EmployeeDashboard"); }
-     */
- /*@RequestMapping(value = "/editlink", method = RequestMethod.GET)
-	public ModelAndView updateTask1(@ModelAttribute("taskdetails") TaskDetails taskdetails,
-			@ModelAttribute("employee") Employee employee, @RequestParam("tid") int tid, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-		
-		 * String st=taskdetails.getStatus(); String st1=st.split(",")[0];
-		 
-		String st1 = "complete";
-		String mail = request.getParameter("mail");
-//		mav.addObject("taskdetails",taskdetails);
-		List<TaskDetails> tlist = taskservice.getalltaskdetails(mail);
-		String[] taskStatus = { "W.I.P.", "complete" };
-		mav.addObject("taskStatus", taskStatus);
-		mav.addObject("tlist", tlist);
-		 mav.addObject(employee); 
-		Employee emp = new Employee();
-		emp.setEmail(mail);
-		mav.addObject("employee", emp);
-		long millis = System.currentTimeMillis();
-		java.sql.Date date1 = new java.sql.Date(millis);
-		 int tid1=Integer.parseInt(tid); 
-		
-		 * Cookie ck[]=request.getCookies(); String tid2=ck[0].getValue(); int
-		 * tid3=Integer.parseInt(tid2);
-		 
-		String s = request.getParameter("tid");
-		int tid3 = Integer.parseInt(s);
-		taskservice.updatetask1(date1, mail, tid3, st1);
-		return mav;
-		 return new ModelAndView("redirect:/EmployeeDashboard"); 
-	}
-     */
     @RequestMapping(value = "/editlink1", method = RequestMethod.GET)
     public ModelAndView updateTask2(@ModelAttribute("taskdetails") TaskDetails taskdetails,
             @ModelAttribute("employee") Employee employee, @RequestParam("tid") int tid, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("EmployeTaskEdit");
+//        ModelAndView mav = new ModelAndView("redirect:/returnTask");
         String mail = request.getParameter("mail");
         List<TaskDetails> tlist = taskservice.getalltaskdetails(mail);
         mav.addObject("tlist", tlist);
@@ -210,10 +148,11 @@ public class TaskController {
         return mav;
 
     }
-    
-    @RequestMapping(value = "/returnTask",method = RequestMethod.GET)
-    public ModelAndView returnTasklist(){
-        ModelAndView mav = new ModelAndView();
+
+    @RequestMapping(value = "/returnTask", method = RequestMethod.GET)
+    public ModelAndView returnTasklist(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
+        ModelAndView mav = new ModelAndView("EmployeeDashboard1");
+         mav.addObject("taskdetails", taskdetails);
         return mav;
     }
 }

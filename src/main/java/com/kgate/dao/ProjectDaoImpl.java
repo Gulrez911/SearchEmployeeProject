@@ -180,6 +180,7 @@ public class ProjectDaoImpl implements ProjectDao {
                             daysBetween3 = (difference2 / (1000 * 60 * 60 * 24));
                             daysBetween4 = (difference3 / (1000 * 60 * 60 * 24));
                             System.out.println("Days:::" + daysBetween3);
+                            System.out.println("Days:::::::"+daysBetween4);
                             daysBetween2 = daysBetween2 + daysBetween3 + daysBetween4;
                             System.out.println("daysbetween2:::" + daysBetween2);
                         } catch (ParseException ex) {
