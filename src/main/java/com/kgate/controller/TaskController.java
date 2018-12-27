@@ -40,12 +40,18 @@ public class TaskController {
 	 @Autowired
 	    EmployeeService employeeService;
 	
-    @InitBinder
+   /* @InitBinder
     public void initConverter(WebDataBinder binder) {
         CustomDateEditor dateEditor = new CustomDateEditor(new ISO8601DateFormat(), true);
         binder.registerCustomEditor(Date.class, dateEditor);
     }
-
+*/
+	 @InitBinder
+	    public void initConverter(WebDataBinder binder) {
+	        CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+	        binder.registerCustomEditor(Date.class, dateEditor);
+	    }
+	 
 	@RequestMapping(value = "/editTask", method = RequestMethod.POST)
 	public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
