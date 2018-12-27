@@ -16,8 +16,6 @@ public interface EmployeeDAO {
 
     public Employee searchByEmail(String email);
 
-   
-
     public void deleteEmployee(Integer employeeId);
     
     public Employee updateEmployee(Employee employee);

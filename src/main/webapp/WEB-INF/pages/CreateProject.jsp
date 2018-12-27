@@ -24,51 +24,91 @@
         <div align="center">
             <h1 style="color: orangered">Create Project</h1>
 
-
             <form:form action="cproject" method="post"
-                       modelAttribute="projectdetails" commandName="projectdetails">
+                       modelAttribute="pd" commandName="pd">
                 <table>
                     <form:hidden path="project_id" />
+                    <form:hidden path="manageremail" />
                     <tr>
                         <td>Project Name:</td>
-                        <td><form:input type="text" path="project_Name" /></td>
+                        <td><form:input type="text" path="project_Name" name="project_Name" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Description:</td>
-                        <td><form:textarea path="project_desc" rows="5" cols="5" /></td>
+                        <td><form:textarea path="project_desc" rows="5" cols="5" name="project_Name"/></td>
                     </tr>
                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date" /></td>
+                        <td><form:input path="pstart_Date" type="date" name="pstart_Date"/></td>
                     </tr>
+
                     <tr>
                         <td>Project End Date:</td>
-                        <td><form:input type="text" path="pEnd_Date" id="endDate"
+                        <td><form:input path="pEnd_Date" type="date" id="endDate"
                                     name="endDate" /></td>
                     </tr> 
+
                     <tr>
+
                         <td><input type="submit" value="Create Project"></td>
+
                     </tr>
                 </table>
-            </form:form>
 
-            <table border="1">
+                <table border="1" align="left">
 
+                    <th style="color: white">Project Name</th>
 
-                <th>Project Name</th>
-                <th>Create Task</th>
                     <c:forEach var="pd" items="${listProject}">
-                    <tr>
+                        <tr>
 
-                        <td>${pd.project_Name}</td>
-                        <td>
-                            <a href="showtask?project_id=${pd.project_id}">Create Task</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}&bk=${bk}" style="color: white">${pd.project_Name}</a></td>
+
+                        </tr>
 
 
+                    </c:forEach>
+                </table>
+
+            </form:form>
         </div>
-    </body>
+        <br>
+    </div>
+    <div align="right">
+        <form:form action="managerpage"  commandName="e">
+            <%-- <form:hidden path="email" name="email"/> --%>
+            <table>
+                <tr>
+                    <td>
+                        <a href="managerpage?email=${e.email}">Employee List</a>
+            </table>
+        </form:form>
+    </div>
+
+    <div align="right">
+        <form:form action="back" method="post" commandName="e">
+
+            <table>
+                <tr>
+                    <td>
+                        <input type="submit" value="Back">
+
+                    </td>
+                </tr>
+
+
+</table>
+ <tr>
+   <div align="right"><td>
+   
+    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+   
+   </div>
+</tr> 
+
+</form:form>
+</div>
+
+</body>
+
 </html>
