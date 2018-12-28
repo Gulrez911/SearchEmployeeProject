@@ -32,7 +32,7 @@
     </head>
 
 
-    <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">

@@ -9,7 +9,7 @@
         <title>Insert title here</title>
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <div align="center">
             <form:form action="editTask" method="post"
                        modelAttribute="taskdetails" commandName="taskdetails">

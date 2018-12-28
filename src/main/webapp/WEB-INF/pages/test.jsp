@@ -30,7 +30,7 @@
         <title>Add Skills</title>
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/af.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
           <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
         <div align="center">
             <h1 style="color: white">Skills Tracker: Add Skill Page</h1>
