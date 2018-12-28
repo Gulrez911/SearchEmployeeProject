@@ -113,12 +113,14 @@
                     <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
 
 
-       <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
+       
+
+<td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
+
+       
 
 
-
-       <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
-
+      <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td>
 
 
                 </c:forEach>     
