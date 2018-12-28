@@ -106,12 +106,13 @@ public class ProjectDaoImpl implements ProjectDao {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<Object> li = sessionFactory.getCurrentSession().createSQLQuery("select project_details.project_Name, project_details.pstart_Date, project_details.pEnd_Date, project_details.project_id  from project_details").list();
 
-        List<Object> li2 = sessionFactory.getCurrentSession().createSQLQuery("select task_details.task_id, task_details.projectId, task_details.tStart_Time,task_details.tEnd_Time, task_details.tSub_Date from task_details").list();
+        List<Object> li2 = sessionFactory.getCurrentSession().createSQLQuery("select task_details.task_id, task_details.projectId, task_details.tStart_Time,task_details.tEnd_Time, task_details.tSub_Date,task_details.taskStatus from task_details").list();
         System.out.println("Task Details::::tets" + li2);
         System.out.println("");
         String com, var;
         int i, j, k;
         for (Object ob : li) {
+            ProjectReportDTO dTO = new ProjectReportDTO();
             Object arr[] = (Object[]) ob;
             String s1, s2, s3, s4;
             s1 = arr[0].toString();
@@ -121,6 +122,7 @@ public class ProjectDaoImpl implements ProjectDao {
             System.out.println("Id:" + i);
             System.out.println("start Date::" + s2);
             System.out.println("start Date::" + s3);
+            int flag = 0;
             float daysBetween = 0;
             int count = 0;
             float daysBetween2 = 0;
@@ -128,13 +130,14 @@ public class ProjectDaoImpl implements ProjectDao {
             float daysBetween4 = 0;
             float daysBetween5 = 0;
             for (Object ob2 : li2) {
-                String ss1, ss2, ss4;
+                String ss1, ss2, ss4,ss5;
                 String ss3 = null;
                 Object arr2[] = (Object[]) ob2;
 //                k=(int)arr2
                 j = (int) arr2[1];
                 ss1 = arr2[2].toString();
                 ss2 = arr2[3].toString();
+                ss5 = arr2[5].toString();
                 try {
 
                     ss3 = arr2[4].toString();
@@ -146,6 +149,13 @@ public class ProjectDaoImpl implements ProjectDao {
                 System.out.println("Id2:" + j);
 
                 if (i == j) {
+                    if (ss3 == null || ss3.isEmpty()||ss5.equals("W .I. P")) {
+                        dTO.setProStatus("Work in Progress");
+                        flag++;
+                    } else if (flag == 0) {
+                        dTO.setProStatus("Complete");
+
+                    }
                     if (ss3 == null || ss3.isEmpty()) {
                         ss4 = java.time.LocalDate.now().toString();
                         try {
@@ -183,6 +193,7 @@ public class ProjectDaoImpl implements ProjectDao {
                             daysBetween3 = (difference2 / (1000 * 60 * 60 * 24));
                             daysBetween4 = (difference3 / (1000 * 60 * 60 * 24));
                             System.out.println("Days:::" + daysBetween3);
+                            System.out.println("Days:::::::" + daysBetween4);
                             daysBetween2 = daysBetween2 + daysBetween3 + daysBetween4;
                             System.out.println("daysbetween2:::" + daysBetween2);
                         } catch (ParseException ex) {
@@ -214,7 +225,7 @@ public class ProjectDaoImpl implements ProjectDao {
             daysBetween4 = daysBetween2 - daysBetween;
             int days2 = (int) daysBetween4;
             String s6 = Integer.toString(days2);
-            ProjectReportDTO dTO = new ProjectReportDTO();
+
             dTO.setProject_name(s1);
             dTO.setpStartDate(s2);
             dTO.setpEndDate(s3);

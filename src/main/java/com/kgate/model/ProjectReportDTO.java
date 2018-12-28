@@ -8,6 +8,15 @@ public class ProjectReportDTO {
     private String expectDate;
     private String CompleteTime;
     private String variationTime;
+    private String proStatus;
+
+    public String getProStatus() {
+        return proStatus;
+    }
+
+    public void setProStatus(String proStatus) {
+        this.proStatus = proStatus;
+    }
 
     public String getVariationTime() {
         return variationTime;
