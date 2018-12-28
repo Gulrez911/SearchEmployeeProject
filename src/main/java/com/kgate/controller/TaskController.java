@@ -33,6 +33,7 @@ import com.kgate.service.TaskService;
 @Controller
 public class TaskController {
 
+
     @Autowired
     TaskService taskservice;
     @Autowired
@@ -46,8 +47,11 @@ public class TaskController {
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 
-    @RequestMapping(value = "/editTask", method = RequestMethod.POST)
-    public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+
+
+	@RequestMapping(value = "/editTask", method = RequestMethod.POST)
+	public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+
 
 //		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
         ModelAndView mav = new ModelAndView("redirect:/returnTask");

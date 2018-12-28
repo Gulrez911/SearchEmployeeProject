@@ -28,6 +28,7 @@ public class ProjectDetails {
   
     @Column
     @DateTimeFormat(pattern = "dd-mm-yyyy")
+
     @Temporal(TemporalType.DATE)
     private Date pstart_Date;
    

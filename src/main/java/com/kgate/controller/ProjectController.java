@@ -1,5 +1,6 @@
 package com.kgate.controller;
 
+
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,10 +46,12 @@ public class ProjectController {
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 
+
 	@RequestMapping(value = "/cproject", method = RequestMethod.POST)
 	public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,
 			@SessionAttribute("employee") Employee employee) {
 		ModelAndView model = new ModelAndView("redirect:/cproject2");
+
 //        ModelAndView model = new ModelAndView("CreateProject");
 		projectDetails.setManageremail(employee.getEmail());
 		projectservice.createProject(projectDetails);
@@ -102,6 +105,11 @@ public class ProjectController {
 		mav.addObject("listtask", listtask);
 		Employee e = new Employee();
 		mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+
+	
+		mav.addObject("bk", employee.getEmail());
+
+
 		return mav;
 	}
 
@@ -273,6 +281,7 @@ public class ProjectController {
 		System.out.println("Project Id :: " + project_id);
 		ModelAndView mav = new ModelAndView("projectStatus");
 
+
 		List<TaskDTO> listProject = null;
 
 		try {
@@ -288,12 +297,14 @@ public class ProjectController {
 		mav.addObject("Pid", project_id);
 		mav.addObject("d", d);
 
+
 		return mav;
 	}
 
     @RequestMapping(value = "/downloadReport", method = RequestMethod.POST)
     public ModelAndView downloadReport(@RequestParam("project_id") String project_id, HttpServletRequest request) {
-
+//         int project_id = Integer.parseInt(request.getParameter("project_id"));
+//        int project_id = (Integer.BYTES).project_id;
         int id = Integer.parseInt(project_id);
         List<TaskDTO> listProject = projectservice.displayAllStatus(id);
         return new ModelAndView("pdfReport", "listProject", listProject);
@@ -317,6 +328,7 @@ public class ProjectController {
     }
     
     
+
     @RequestMapping(value = "/backtotask", method = RequestMethod.POST)
     
     public ModelAndView backtotask()
@@ -334,5 +346,23 @@ public class ProjectController {
        	     ModelAndView mav = new ModelAndView("CreateProject");
              return mav;
     }*/
+
+    @RequestMapping(value="/CeoBack",method=RequestMethod.POST)
+    public ModelAndView back()
+    {
+    	ModelAndView model=new ModelAndView("CEODashboard2");
+    	
+    	List<ProjectDetails> listProject = projectservice.dispalyProjects();
+      
+          model.addObject("listProject", listProject);
+
+          List<TaskDetails> tasklist = taskservice.getAllTask();
+          model.addObject("tasklist", tasklist);
+    	return model;
+    	
+    }
+
+
+
 }
 

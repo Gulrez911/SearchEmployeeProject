@@ -62,7 +62,7 @@
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}&bk=${bk}" style="color: white">${pd.project_Name}</a></td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
 
                         </tr>
 
@@ -76,7 +76,7 @@
     </div>
     <div align="right">
         <form:form action="managerpage"  commandName="e">
-            <%-- <form:hidden path="email" name="email"/> --%>
+            
             <table>
                 <tr>
                     <td>
