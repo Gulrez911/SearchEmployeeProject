@@ -53,7 +53,6 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus(int id) {
 
-
         String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.status,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
@@ -62,7 +61,7 @@ public class ProjectDaoImpl implements ProjectDao {
         for (Object d : data) {
 
             Object arr[] = (Object[]) d;
-            String st, st1, st2, st3, st4, st5, st6, st8,st9;
+            String st, st1, st2, st3, st4, st5, st6, st8, st9;
 
             TaskDTO tdto = new TaskDTO();
 
@@ -70,10 +69,22 @@ public class ProjectDaoImpl implements ProjectDao {
             st1 = (String) arr[1];
             st2 = (String) arr[2];
             st3 = (String) arr[3];
-            st4 = arr[4].toString();
-            st5 = arr[5].toString();
+            st4 = "";
+            try{
+                  st4 = arr[4].toString();
+            }catch(NullPointerException e){
+                System.out.println("nullpoint exception Date:::"+e);
+            }
+          
+            st5 = "";
+            try {
+                st5 = arr[5].toString();
+            } catch (NullPointerException E) {
+                System.out.println("Nullpoint Exception Assigned::" + E);
+            }
+
             st6 = (String) arr[6];
-            st9=(String) arr[7];
+            st9 = (String) arr[7];
 
             tdto.setEmp_name(st);
             tdto.setName(st1);
@@ -130,7 +141,7 @@ public class ProjectDaoImpl implements ProjectDao {
             float daysBetween4 = 0;
             float daysBetween5 = 0;
             for (Object ob2 : li2) {
-                String ss1, ss2, ss4,ss5;
+                String ss1, ss2, ss4, ss5;
                 String ss3 = null;
                 Object arr2[] = (Object[]) ob2;
 //                k=(int)arr2
@@ -149,7 +160,7 @@ public class ProjectDaoImpl implements ProjectDao {
                 System.out.println("Id2:" + j);
 
                 if (i == j) {
-                    if (ss3 == null || ss3.isEmpty()||ss5.equals("W .I. P")) {
+                    if (ss3 == null || ss3.isEmpty() || ss5.equals("W .I. P")) {
                         dTO.setProStatus("Work in Progress");
                         flag++;
                     } else if (flag == 0) {
