@@ -19,34 +19,47 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
         <style type="text/css">
-        #w{
-        color: red;
+        #cc{
+        background-color:white;
         }
         </style>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/wood.jpg">
         <div align="center">
             <form action="downloadProjectReport" method="post">
-                <input type="submit" value="Download Task Report" > 
-            </form>
+                <input type="submit" value="Download Project Report" > 
+            </form></div>
         <div align="center">
             <table border="1">
                 <th>Project Name</th>
-                <th>Delay</th>
+                <th>Project Start Date</th>
+                <th>Project End Date</th>
+                <th>Expected Duration</th>
+                <th>Completion Duration</th>
+                <th>Deviation Duration</th>
+                <th>Project Status</th>
                    <c:forEach var="pd" items="${listProject}">
                  
                     <tr>
                         <td><a href="displayProjectDetails?project_id=${pd.project_id}">${pd.project_Name}</td>
+                        
+                        <div id="cc">
+                        <td>${pd.pstart_Date}</td>
+                        <td>${pd.pEnd_Date}</td>
+                      
                         <td>
                        <c:set value="${pd.pstart_Date.time/(1000*60*60*24)}" var="datediff"/>
                          <c:set value="${pd.pEnd_Date.time/(1000*60*60*24)}" var="datediff1" />
                       
                           <c:set value="${ datediff1-datediff}" var="datediff2"/>
                           <fmt:parseNumber var="j" integerOnly="true" type="number" value="${datediff2}" />  
-                        Expected time:${j} Days
-                      </br>
+                       ${j} Days
+                        </td>
+                        <td>
+                     
                  <c:set var="date14" value="0"/>
                  <c:set var="k" value="0"/>
+                 <c:set var="status1" value="Completed"/>
                       <c:forEach var="tl" items="${tasklist}">
                       
                        <c:if test="${pd.project_id eq tl.projectId }">
@@ -85,21 +98,26 @@
                        </c:otherwise>
                        </c:choose>
                        <c:set var="k" value="${date14+k }"/>
+                       
+                        
+                       <c:if test="${( empty tl.tSub_Date) and (tl.taskStatus ne 'complete')  }">
+                       <c:set var="status1" value="Work In Progress"/>
                       </c:if>
                       
-                     
+                     </c:if>
                        </c:forEach>
                        
                       
                       
                        
-                       completed time: ${k} Days
-                  
+                        ${k} Days
+                  </td><td>
                        
-                         </br>
+                      
                          <c:set var="deviation" value="${k-j }"/>
-                        delay time:${deviation } Days
+                      ${deviation } Days
                         </td>
+                        <td>${status1}</td></div>
                     </tr>
                     
                 </c:forEach> 
