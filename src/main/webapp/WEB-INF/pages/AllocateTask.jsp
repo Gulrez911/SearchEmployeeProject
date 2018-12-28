@@ -16,7 +16,7 @@
         </style>
 
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">
@@ -76,7 +76,7 @@
                 
             </form:form>
              <div align="right"><td>
-             <a href="logout"><font style="color:white" size="5">LogOut</font></a></div>
+             <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a></div>
         </div>
     </body>
 </html>

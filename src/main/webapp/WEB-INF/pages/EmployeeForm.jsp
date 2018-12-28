@@ -102,11 +102,19 @@
                     </tr>
 
                     <tr>
-                        <td><input type="submit" value="send mail" name="action1"/></td>     
+                        <td><input type="submit" value="Submit" name="action1"/></td>     
                         <td colspan="2" align="center"><input type="submit" value="BACK" name="action2"></td>
                     </tr>
+                    
+                    
+            
                 </table>
-                
+              <tr>
+                <div align="right"><td>
+
+                        <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+                </div>
+            </tr>    
                 
                 
             </form:form>

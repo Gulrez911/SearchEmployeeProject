@@ -18,7 +18,7 @@
 
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">
@@ -57,12 +57,12 @@
 
                 <table border="1" align="left">
 
-                    <th style="color: white">Project Name</th>
+                    <th style="color: red">Project Name</th>
 
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: Dark blue">${pd.project_Name}</a></td>
 
                         </tr>
 
@@ -101,7 +101,7 @@
  <tr>
    <div align="right"><td>
    
-    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+    <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a>
    
    </div>
 </tr> 

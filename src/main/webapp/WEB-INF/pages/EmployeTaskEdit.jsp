@@ -54,6 +54,14 @@
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save"></td>
                     </tr>
+                    
+                     <tr>
+                <div align="right"><td>
+
+                        <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+                </div>
+            </tr> 
+            
                 </table>
             </form:form>
         </div>

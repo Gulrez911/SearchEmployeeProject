@@ -10,7 +10,7 @@
         <title>Create Task</title>
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
@@ -41,7 +41,7 @@
         <div align="right">
             <form:form action="backtoproject" commandName="e">
 
-<
+
                 <table>
                     <tr>
                         <td>
@@ -52,7 +52,7 @@
 
 
 
-                            < <a href="backtoproject?email=${e.email}"><font style="color:white">Back</font></a> 
+                             <a href="backtoproject?email=${e.email}"><font style="color:Dark blue" size="5">Back</font></a> 
                           
 
                         </td>
@@ -63,9 +63,18 @@
                 <tr>
                 <div align="right"><td>
 
-                        <a href="logout"><font style="color:white" size="5">LogOut</font></a>
+                        <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a>
                 </div>
             </tr> 
+            
+            
+            <%-- <form:form action="backtoprj" method="post" >
+
+           
+                    <td>
+                        <input type="submit" value="Back"></form:form>
+
+                    </td> --%>
 
         </form:form>
 
@@ -108,14 +117,9 @@
 
                     <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
 
+       <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
 
-
-
-
-                    <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
-
-
-                    <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
+       <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
 
 
                 </c:forEach>     

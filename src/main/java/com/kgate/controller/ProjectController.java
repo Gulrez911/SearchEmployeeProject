@@ -338,15 +338,16 @@ public class ProjectController {
            return mav;
     	     	
     }
-  /*  
-  @RequestMapping(value = "/backtoprj", method = RequestMethod.POST)
+    
+  /*@RequestMapping(value = "/backtoprj", method = RequestMethod.POST)
     
     public ModelAndView backtoprj()
     {
        	     ModelAndView mav = new ModelAndView("CreateProject");
              return mav;
-    }*/
-
+    }
+  
+*/
     @RequestMapping(value="/CeoBack",method=RequestMethod.POST)
     public ModelAndView back()
     {
