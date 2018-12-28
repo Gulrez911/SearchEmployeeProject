@@ -32,7 +32,7 @@
                             </form:select></td>
 
                     <tr>
-
+                           <input type="hidden" name="bk"/>
                         <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
                     </tr>
 
@@ -52,7 +52,8 @@
 
 
 
-                            <a href="backtoproject?email=${e.email}"><font style="color:white">Back</font></a>
+                            < <a href="backtoproject?email=${e.email}"><font style="color:white">Back</font></a> 
+                          
 
                         </td>
 
@@ -82,6 +83,7 @@
 
                     <td>${td.task_Type}</td>
                     <td>${td.task_Name}</td>
+                    
                     <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
 
 
@@ -105,6 +107,7 @@
 <!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
 
                     <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
+
 
 
 

@@ -12,8 +12,17 @@ public class TaskDTO {
     private int id;
     private String email;
     private String emp_name;
+    private String tsubDate;
 
-    public String getEmp_name() {
+    public String getTsubDate() {
+		return tsubDate;
+	}
+
+	public void setTsubDate(String tsubDate) {
+		this.tsubDate = tsubDate;
+	}
+
+	public String getEmp_name() {
         return emp_name;
     }
 
