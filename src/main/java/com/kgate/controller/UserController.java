@@ -192,7 +192,7 @@ public class UserController {
                 return mav;
 
             } else if (employee.getCategory().equals("CEO")) {
-                ModelAndView model = new ModelAndView("CEODashboard2");
+                ModelAndView model = new ModelAndView("CEODashboard1");
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
               /*  ProjectDetails pd = new ProjectDetails();
                 model.addObject("pd", pd);*/
