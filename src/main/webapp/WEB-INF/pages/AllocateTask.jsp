@@ -22,11 +22,10 @@
         <div align="center">
             <h1 style="color:orangered">Allocate Task</h1>
 
-            <form:form action="taskAllocated" method="post" modelAttribute="bk" commandName="td">
+            <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
-                 <table>
-                 <form:hidden path="Emp_Email"  value="${bk }"/>
-                  <form:hidden path="projectId" /> 
+                <table>
+                    <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="task_id" />
                     <tr>
@@ -41,12 +40,12 @@
 
                     <tr>
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" type="date" required=true/></td>
+                        <td><form:input path="tStart_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" type="date" required=true/></td>
+                        <td><form:input path="tEnd_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
@@ -65,14 +64,10 @@
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                 </table>
+                
             </form:form>
-            
-            <tr>
-                <div align="right"><td>
-
-                        <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-                </div>
-            </tr>   
+             <div align="right"><td>
+             <a href="logout"><font style="color:white" size="5">LogOut</font></a></div>
         </div>
     </body>
 </html>
