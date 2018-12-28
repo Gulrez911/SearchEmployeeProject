@@ -331,11 +331,8 @@ public class ProjectController {
     
     public ModelAndView backtoprj()
     {
-       	  
-            ModelAndView mav = new ModelAndView("CreateProject");
-           return mav;
-    	     	
+       	     ModelAndView mav = new ModelAndView("CreateProject");
+             return mav;
     }
-
 }
 
