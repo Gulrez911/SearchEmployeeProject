@@ -49,8 +49,8 @@ public class TaskController {
     @RequestMapping(value = "/editTask", method = RequestMethod.POST)
     public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
-//		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-        ModelAndView mav = new ModelAndView("redirect:/returnTask");
+		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
+//        ModelAndView mav = new ModelAndView("redirect:/returnTask");
         String st = taskdetails.getStatus();
         String st1 = st.split(",")[0];
 
@@ -152,7 +152,7 @@ public class TaskController {
     @RequestMapping(value = "/returnTask", method = RequestMethod.GET)
     public ModelAndView returnTasklist(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
         ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-         mav.addObject("taskdetails", taskdetails);
+        mav.addObject("taskdetails", taskdetails);
         return mav;
     }
 }
