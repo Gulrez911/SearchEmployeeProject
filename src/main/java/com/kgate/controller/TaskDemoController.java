@@ -91,6 +91,9 @@ public class TaskDemoController {
 
         mav.addObject("listtask", listtask);
         TaskDemoController tdc = new TaskDemoController();
+        
+        String s=request.getParameter("em");
+        mav.addObject("em",s);
 
         String tskName = taskdetails.getTask_Name();
         String tskType = taskdetails.getTask_Type();

@@ -107,7 +107,7 @@ public class ProjectController {
 		mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
 
 	
-		mav.addObject("bk", employee.getEmail());
+		mav.addObject("em", employee.getEmail());
 
 		return mav;
 	}
@@ -252,6 +252,9 @@ public class ProjectController {
 //     e.setEmail(taskdetails.getEmp_Email());
 
 		mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+		
+		String s=request.getParameter("em");
+		mav.addObject("em",s);
 
 		return mav;
 	}
@@ -332,7 +335,7 @@ public class ProjectController {
     @RequestMapping(value="/CeoBack",method=RequestMethod.POST)
     public ModelAndView back()
     {
-    	ModelAndView model=new ModelAndView("CEODashboard2");
+    	ModelAndView model=new ModelAndView("CEODashboard1");
     	
     	List<ProjectDetails> listProject = projectservice.dispalyProjects();
       

@@ -8,7 +8,7 @@
         <meta charset="ISO-8859-1">
         <title>Insert title here</title>
     </head>
-    <body>
+    <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg" >
 
 
         <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
@@ -26,8 +26,8 @@
             <form:hidden path="task_Name" />
             <form:hidden path="tStart_Time" />
             <form:hidden path="tEnd_Time" /> --%>
-            <%-- <form:input path="task_Name" /> --%>
-            <table border="1">
+            <%-- <form:input path="task_Name" /> --%></br></br>
+            <table border="1" align="center" width="800" height="200">
                 <th style="color: red">Project Name</th>
                 <th style="color: red">Task Type</th>
                 <th style="color: red">Task Name</th>
@@ -67,5 +67,15 @@
 
         </table>
     </form:form>
+    
+        <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
+                   modelAttribute="employee" commandName="employee">
+            <form:hidden path="email" />
+            <input type="submit" value="Back">
+        </form:form>
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"/>
+         </form></div>
 </body>
 </html>

@@ -59,7 +59,7 @@
                         <td>
 
                     </tr>  
-
+                               <input type="hidden" name="em" value="${em }"/>
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
