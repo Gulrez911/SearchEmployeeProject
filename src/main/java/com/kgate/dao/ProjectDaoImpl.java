@@ -109,6 +109,7 @@ public class ProjectDaoImpl implements ProjectDao {
         String com, var;
         int i, j, k;
         for (Object ob : li) {
+            ProjectReportDTO dTO = new ProjectReportDTO();
             Object arr[] = (Object[]) ob;
             String s1, s2, s3, s4;
             s1 = arr[0].toString();
@@ -118,6 +119,7 @@ public class ProjectDaoImpl implements ProjectDao {
             System.out.println("Id:" + i);
             System.out.println("start Date::" + s2);
             System.out.println("start Date::" + s3);
+            int flag = 0;
             float daysBetween = 0;
             int count = 0;
             float daysBetween2 = 0;
@@ -143,6 +145,13 @@ public class ProjectDaoImpl implements ProjectDao {
                 System.out.println("Id2:" + j);
 
                 if (i == j) {
+                    if (ss3 == null || ss3.isEmpty()) {
+                        dTO.setProStatus("Work in Progress");
+                        flag++;
+                    } else if (flag == 0) {
+                        dTO.setProStatus("Complete");
+
+                    }
                     if (ss3 == null || ss3.isEmpty()) {
                         ss4 = java.time.LocalDate.now().toString();
                         try {
@@ -180,6 +189,7 @@ public class ProjectDaoImpl implements ProjectDao {
                             daysBetween3 = (difference2 / (1000 * 60 * 60 * 24));
                             daysBetween4 = (difference3 / (1000 * 60 * 60 * 24));
                             System.out.println("Days:::" + daysBetween3);
+                            System.out.println("Days:::::::" + daysBetween4);
                             daysBetween2 = daysBetween2 + daysBetween3 + daysBetween4;
                             System.out.println("daysbetween2:::" + daysBetween2);
                         } catch (ParseException ex) {
@@ -211,7 +221,7 @@ public class ProjectDaoImpl implements ProjectDao {
             daysBetween4 = daysBetween2 - daysBetween;
             int days2 = (int) daysBetween4;
             String s6 = Integer.toString(days2);
-            ProjectReportDTO dTO = new ProjectReportDTO();
+
             dTO.setProject_name(s1);
             dTO.setpStartDate(s2);
             dTO.setpEndDate(s3);
