@@ -33,7 +33,6 @@ import com.kgate.service.TaskService;
 @Controller
 public class TaskController {
 
-
     @Autowired
     TaskService taskservice;
     @Autowired
@@ -47,13 +46,10 @@ public class TaskController {
         binder.registerCustomEditor(Date.class, dateEditor);
     }
 
+    @RequestMapping(value = "/editTask", method = RequestMethod.POST)
+    public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
-
-	@RequestMapping(value = "/editTask", method = RequestMethod.POST)
-	public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-
-
-//		ModelAndView mav = new ModelAndView("EmployeeDashboard1");
+//        ModelAndView mav = new ModelAndView("EmployeeDashboard1");
         ModelAndView mav = new ModelAndView("redirect:/returnTask");
         String st = taskdetails.getStatus();
         String st1 = st.split(",")[0];
@@ -80,7 +76,6 @@ public class TaskController {
     public ModelAndView updateTask2(@ModelAttribute("taskdetails") TaskDetails taskdetails,
             @ModelAttribute("employee") Employee employee, @RequestParam("tid") int tid, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("EmployeTaskEdit");
-//        ModelAndView mav = new ModelAndView("redirect:/returnTask");
         String mail = request.getParameter("mail");
         List<TaskDetails> tlist = taskservice.getalltaskdetails(mail);
         mav.addObject("tlist", tlist);
@@ -154,9 +149,18 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/returnTask", method = RequestMethod.GET)
-    public ModelAndView returnTasklist(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
+    public ModelAndView returnTasklist(@SessionAttribute("employee") Employee emp, @ModelAttribute("taskdetails") TaskDetails taskdetails) {
         ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-         mav.addObject("taskdetails", taskdetails);
+        String empEmail = emp.getEmail();
+        List<TaskDTO> tobj = new ArrayList<TaskDTO>();
+        emp = employeeService.searchByEmail(empEmail);
+        tobj = taskservice.getEmpTasklist(empEmail);
+        System.out.println("From Controller:::: list of Object:::   " + tobj);
+        mav.addObject("employee", emp);
+        mav.addObject("tobj", tobj);
+        mav.addObject("email" + empEmail);
+        mav.addObject("taskdetails", taskdetails);
+
         return mav;
     }
 }
