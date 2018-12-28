@@ -29,12 +29,9 @@
 
     <!-- DataSource -->
     <bean
-        class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-        id="dataSource">
-        <property name="driverClassName"
-                          value="com.mysql.jdbc.Driver ">
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver ">
         </property>
-
 
         <property name="url" value="jdbc:mysql://localhost:3306/employee"></property>
         <property name="username" value="root"></property>

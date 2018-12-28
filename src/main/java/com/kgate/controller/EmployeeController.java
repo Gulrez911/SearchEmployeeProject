@@ -20,11 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import com.kgate.model.Employee;
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
 import com.kgate.model.TaskDetails;
 import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
-
+import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +56,9 @@ public class EmployeeController {
 
     @Autowired
     private SkillService skillService;
+    
+    @Autowired
+    private ProjectService projectservice;
     
     
 
@@ -250,6 +254,9 @@ public class EmployeeController {
         List<Employee> elist = employeeService.displayByManagerId(email);
 
         mav.addObject("elist", elist);
+        
+        String k=request.getParameter("k");
+        mav.addObject("k",k);
 
         return mav;
 
@@ -325,14 +332,31 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/back", method = RequestMethod.POST)
-    public ModelAndView back() {
+    public ModelAndView back(@ModelAttribute("employee") Employee employee,HttpServletRequest request) {
 
-   
-    	  ModelAndView mav = new ModelAndView("login");
-          Employee employee = new Employee();
-          mav.addObject("employee", employee);
+      ModelAndView mav = new ModelAndView("CreateProject");
+          
+          /*mav.addObject("employee", employee);
           String[] userType = {"Admin", "Employee", "Manager","CEO"};
-          mav.addObject("userTypes", userType);
+          mav.addObject("userTypes", userType);*/
+          String s=request.getParameter("mail");
+    	  Integer mid = projectservice.getManagerid(s);
+          // System.out.println("Manager ID:::: " + mid);
+          mav.addObject("mid", mid);
+          ProjectDetails projectdetails = new ProjectDetails();
+          projectdetails.setManageremail(s);
+          TaskDetails taskdetails = new TaskDetails();
+          ProjectDetails pd = new ProjectDetails();
+          mav.addObject("projectdetails", projectdetails);
+          taskdetails.setEmp_Email(employee.getEmail());
+          mav.addObject("taskdetails", taskdetails);
+          Employee e = new Employee();
+          mav.addObject("e", employeeService.searchByEmail(s));
+          List<ProjectDetails> listProject = projectservice.getProjectByEmail(s);
+          // System.out.println("List of Project: " + listProject);
+          mav.addObject("pd", pd);
+
+          mav.addObject("listProject", listProject);
 		return mav;
     	
     	

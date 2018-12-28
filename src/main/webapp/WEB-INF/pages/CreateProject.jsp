@@ -80,7 +80,7 @@
             <table>
                 <tr>
                     <td>
-                        <a href="managerpage?email=${e.email}">Employee List</a>
+                        <a href="managerpage?email=${e.email}&k=${k}">Employee List</a>
             </table>
         </form:form>
     </div>

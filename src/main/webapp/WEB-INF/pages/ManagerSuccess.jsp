@@ -11,7 +11,7 @@
 </head>
 <body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
 <!-- <form:form action="/" method="post" > -->
- <form:form action="back" method="post" commandName="employee">
+ <form:form action="back" method="post" commandName="employee" modelAttribute="employee">
  
 
  <table border="1">
@@ -46,7 +46,7 @@
           
 				<tr>
 					<td>
-					
+					<input type="hidden" name="mail" value="${k }"> 
 					<input type="submit" value="Back">
 				
 				</td>
