@@ -202,16 +202,6 @@ public class ProjectController {
         ModelAndView mav = new ModelAndView("createtask");
         int task_id = Integer.parseInt(request.getParameter("task_id"));
         taskservice.deleteTask(task_id);
-//        int projectId = Integer.parseInt(request.getParameter("projectId"));
-//        int managerId = Integer.parseInt(request.getParameter("managerId"));
-//        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-//        mav.addObject("task_Type", Tasktype);
-//        List<TaskDetails> listtask = taskservice.getByProjectId(task_id);
-//        Employee e = new Employee();
-//        TaskDetails td = new TaskDetails();
-//        mav.addObject("td", td);
-//        mav.addObject("listtask", listtask);
-//        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
         Integer mid = projectservice.getManagerid(employee.getEmail());
         taskdetails.setManagerId(mid);
         mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
