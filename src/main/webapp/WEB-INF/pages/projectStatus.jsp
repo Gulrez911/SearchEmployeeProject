@@ -92,11 +92,15 @@
                     </tr>
                 </c:forEach>
                 </table>
-             <p style="margin-left: 56%">  Total Delay days::${total}</p>
+             <p style="margin-left: 43%">  Total Delay days::${total}</p>
             
    <form action="CeoBack" method="post">
         <input type="submit" value="Back"> 
         </form>
+         <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
         </div>
         
     </body>

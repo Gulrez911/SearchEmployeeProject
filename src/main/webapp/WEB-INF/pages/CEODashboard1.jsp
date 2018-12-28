@@ -28,7 +28,7 @@
         <div align="center">
             <form action="downloadProjectReport" method="post">
                 <input type="submit" value="Download Project Report" > 
-            </form></div>
+            </form></div><br/>
         <div align="center">
             <table border="1">
                 <th>Project Name</th>
@@ -123,5 +123,9 @@
                 </c:forEach> 
             </table>
         </div>
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
     </body>
 </html>
