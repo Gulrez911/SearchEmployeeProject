@@ -14,7 +14,7 @@
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
-            <form:form action="createtask" method="post" modelAttribute="e" commandName="taskdetails">  
+            <form:form action="createtask" method="post" modelAttribute="taskdetails">  
                 <table align="center">
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
@@ -26,40 +26,21 @@
                     <tr>
                         <td style="color: black">Task Types:</td>
                         <td><form:select path="task_Type" name="task_Type" >
-
                                 <form:options items="${task_Type}" />
-
                             </form:select></td>
-
                     <tr>
-                           <input type="hidden" name="bk"/>
-                        <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
+                    <input type="hidden" name="bk"/>
+                    <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
                     </tr>
-
             </form:form></div>
-
         <div align="right">
             <form:form action="backtoproject" commandName="e">
-
- 
                 <table>
                     <tr>
                         <td>
-                            <%--  	<form:hidden path="email" name="email"/>
-                                    
-                                    <input type="submit" value="Back">
-                            --%>
-
-
-
                             < <a href="backtoproject?email=${e.email}"><font style="color:white">Back</font></a> 
-                          
-
                         </td>
-
-
-   </table>
-
+                </table>
                 <tr>
                 <div align="right"><td>
 
@@ -83,38 +64,10 @@
 
                     <td>${td.task_Type}</td>
                     <td>${td.task_Name}</td>
-                    
-                    <!--<td> <a href="asssign?task_id=${td.task_id}">${td.status}</a></td>-->
-
-
-    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
-                         
-                        
-                     <%--    
-                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
-                        
-                     <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
-                     
-                     
-                    </c:forEach>     
-                     
-
- </body>	
- </html> --%>
-
-
-
-<!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
-
-                    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
-
-
-
 
                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
 
-                    <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
-
+                    <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}">delete</a></td>
 
                 </c:forEach>     
                 </div> 
