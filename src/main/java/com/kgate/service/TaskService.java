@@ -39,7 +39,17 @@ public interface TaskService {
     public List<TaskDetails> getTaskList(int mgrId);
 
     public List<TaskDTO> getEmpTasklist(String email);
+    
+      // return manageremail id
+    public String getManagerEmail(String email);
+    
+ // return get employee name 
+    public String getEmployeeName(String name);
 
-
+    //return project name using task id
+    public String getProjectName(int id);
+    
+//  return managereName id
+	public String getManagerName(String email);
 
 }

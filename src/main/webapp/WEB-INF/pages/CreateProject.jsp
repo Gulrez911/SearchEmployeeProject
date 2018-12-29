@@ -99,16 +99,18 @@
 
 
 </table>
- <tr>
-   <div align="right"><td>
+ 
    
-    <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a>
-   
-   </div>
-</tr> 
+ 
 
 </form:form>
 </div>
+
+ <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+        
 
 </body>
 

@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -22,13 +21,18 @@
 
         <div align="center">
             <h1 style="color:orangered">Allocate Task</h1>
+            
+           
 
             <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
+                 <!-- <table border="1" align="center" width="800" height="200"> -->
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="task_id" />
+                    
+                    
                     <tr>
                         <td style="color:white">Task Type: </td>
                         <td><form:input path="task_Type"  /></td>
@@ -60,25 +64,28 @@
                         <td>
 
                     </tr>  
-
+                    <input type="hidden" name="em" value="${em }"/>
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
                
-                    <form:form action="backtotask" method="post" >
-
-           
-                    <td>
-                        <input type="submit" value="Back"></form:form>
-
-                    </td>
+                    
                 
                 </table>
                 
+                  <form:form action="backtotask" method="post"  > 
+                  <div align="left"><td>
+                <td>  <input type="submit" value="Back"></form:form> </td>
+                </div>
             </form:form>
-             <div align="right"><td>
-             <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a></div>
-        </div>
+            
+           
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+                   
+             
     </body>
 </html>
 

@@ -15,7 +15,8 @@
 
             <h1 style="color: orangered" align="center">Create Task</h1>
             <form:form action="createtask" method="post" modelAttribute="taskdetails">  
-                <table align="center">
+              <table align="center">
+               
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="Emp_Email"/>
@@ -50,21 +51,26 @@
 
 
 
-                             <a href="backtoproject?email=${e.email}"><font style="color:Dark blue" size="5">Back</font></a> 
+                            <%--  <a href="backtoproject?email=${e.email}"><font style="color:Dark blue" size="5">Back</font></a>  --%>
+                             <a href="backtoproject?email=${em}"><font style="color:Dark blue" size="5">Back</font></a> 
                           
 
 
                         </td>
                 </table>
-                <tr>
+               <!--  <tr>
                 <div align="right"><td>
 
                         <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a>
                 </div>
-            </tr> 
+            </tr>  -->
             
             
-            <%-- <form:form action="backtoprj" method="post" >
+        
+        
+            
+            
+           <%--  <form:form action="backtoprj" method="post" >
 
            
                     <td>
@@ -89,38 +95,9 @@
                     <td>${td.task_Type}</td>
                     <td>${td.task_Name}</td>
 
+    <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
 
-
-    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
-                         
-                        
-                     <%--    
-                     <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}"> ${td.status} </a></td> 
-                        
-                     <td> <a href="delete?taskid=${td.task_id}">delete</a></td>
-                     
-                     
-                    </c:forEach>     
-                     
-
- </body>	
- </html> --%>
-
-
-
-<!--<td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${pd.project_id}&mgrid=${mid}">${td.status}</a></td>-->
-
-                    <%--   <td>  <a href="asssign?task_id=${taskdetails.task_id}&project_id=${taskdetails.projectId}&mgrid=${taskdetails.managerId}">${taskdetails.status}</a></td>  --%>
-
-
-       
-
-<td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
-
-       
-
-
-      <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td>
+    <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td>
 
 
                 </c:forEach>     
@@ -129,6 +106,13 @@
         </table>
 
     </div> 
+
+<div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+
+
 
 </body>
 </html>

@@ -27,7 +27,7 @@
                 
 
                 <c:forEach var="employee" items="${elist}">
-                    <tr style="color:white">
+                    <tr style="color:Dark blue">
 
                         <td>${employee.name}</td>
                         <td>${employee.email}</td>

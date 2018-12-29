@@ -46,7 +46,7 @@
 
 
 
-            <h1 style="color:white">Employee List</h1>
+            <h1 style="color:maroon">Employee List</h1>
 
             <form action="<s:url value="/search_employeelist"/>">
 
@@ -61,8 +61,8 @@
             </form>
 
             <br>
-            <p style="color:white">${error}</p>
-            <p style="color:white">${message}</p>
+            <p style="color:red">${error}</p>
+            <p style="color:Dark blue">${message}</p>
             <table border="1">
 
                 <th style="color:red">Name</th>
@@ -74,36 +74,37 @@
 
 
                 <c:forEach var="employee" items="${listEmployee}">
-                    <tr style="color:white">
+                    <tr style="color:Dark blue">
 
                         <td>${employee.name}</td>
                         <td>${employee.email}</td>
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
                         <td>${employee.category}</td>
-                        <td ><a href="editEmployee?id=${employee.id}" style="color:greenyellow">Edit</a>
+                        <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteEmployee?id=${employee.id}" style="color:greenyellow">Delete</a></td>
+                                href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td>
 
                     </tr>
                 </c:forEach>                
          </table>
           <tr>
-   <div align="right"><td>
    
-    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-    
-  </div>
    </tr> 
 
  
             <h4><font style="color: darkorange">
-                    New Employee Register</font> <a href="newEmployee" style="color: white;">Here</a>
+                    New Employee Register</font> <a href="newEmployee" style="color: red;">Here</a>
             </h4>
             
               <form:form action="backtosuccess" method="post">
    
    <input type="submit" value="Back"></form:form>
         </div>
+        
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
     </body>
 </html>

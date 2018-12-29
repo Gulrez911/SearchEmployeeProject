@@ -11,10 +11,9 @@
     <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg" >
 
 
-        <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
-                   modelAttribute="employee" commandName="employee">
-            <form:hidden path="email" />
-            <input type="submit" value="Edit Profile">
+        <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post" modelAttribute="employee" commandName="employee">
+        <form:hidden path="email" />
+        <input type="submit" value="Edit Profile">
         </form:form>
         <form:form action="/SpringMVCHibernateCRUD/editTask" method="POST"
                    commandName="taskdetails" modelAttribute="employee">
@@ -27,7 +26,7 @@
             <form:hidden path="tStart_Time" />
             <form:hidden path="tEnd_Time" /> --%>
             <%-- <form:input path="task_Name" /> --%></br></br>
-            <table border="1" align="center" width="800" height="200">
+            <table border="1" align="center" width="800" height="100">
                 <th style="color: red">Project Name</th>
                 <th style="color: red">Task Type</th>
                 <th style="color: red">Task Name</th>
@@ -55,21 +54,15 @@
 
                     <td><a href="editlink1?tid=${taskObj.id}&mail=${taskObj.email}">Edit</a></td>  
                 </tr>
-
-
-            </c:forEach>
+              </c:forEach>
             <tr>
 
                 <!--  <td><input type="submit" value="Done"></td> -->
             </tr>
-            
-            
-
         </table>
     </form:form>
     
-        <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
-                   modelAttribute="employee" commandName="employee">
+      <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"  modelAttribute="employee" commandName="employee">
             <form:hidden path="email" />
             <input type="submit" value="Back">
         </form:form>

@@ -136,39 +136,40 @@ public class ProjectController {
 	 * listtask); return new ModelAndView("redirect:/deleteTask"); }
      */
     @RequestMapping(value = "/backtoproject", method = RequestMethod.GET)
-    public ModelAndView backtoproject(@ModelAttribute("employee") Employee employee,
-            @RequestParam("email") String email) {
+	public ModelAndView backtoproject(@ModelAttribute("employee") Employee employee,
+			@RequestParam("email") String email) {
 
-        ModelAndView mav = new ModelAndView("CreateProject");
+		ModelAndView mav = new ModelAndView("CreateProject");
 
-        Integer mid = projectservice.getManagerid(email);
-        mav.addObject("mid", mid);
+		Integer mid = projectservice.getManagerid(email);
+		mav.addObject("mid", mid);
 
-        ProjectDetails pd = new ProjectDetails();
-        mav.addObject("pd", pd);
+		ProjectDetails pd = new ProjectDetails();
+		mav.addObject("pd", pd);
 
-        TaskDetails taskdetails = new TaskDetails();
-        mav.addObject("taskdetails", taskdetails);
+		TaskDetails taskdetails = new TaskDetails();
+		mav.addObject("taskdetails", taskdetails);
 
-        Employee e = new Employee();
-        e = employeeService.searchByEmail(employee.getEmail());
-        mav.addObject("e", e);
+		Employee e = new Employee();
+		e = employeeService.searchByEmail(employee.getEmail());
+		mav.addObject("e", e);
 
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-        System.out.println("List of Project:  " + listProject);
-        mav.addObject("listProject", listProject);
+		List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+		System.out.println("List of Project:  " + listProject);
+		mav.addObject("listProject", listProject);
 
-        return mav;
+		return mav;
 
-    }
+	}
 
-    @RequestMapping(value = "/backtotask", method = RequestMethod.GET)
-    public ModelAndView backtotask(@SessionAttribute("employee") Employee emp,
-            @ModelAttribute("employee") Employee employee, @RequestParam("email") String email) {
+
+    @RequestMapping(value = "/backtotask", method = RequestMethod.POST)
+    public ModelAndView backtotask( HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("createtask");
 
+        String s=request.getParameter("em");
 //    	Integer mid = projectservice.getManagerid(email);
-        Integer mid = projectservice.getManagerid(emp.getEmail());
+        Integer mid = projectservice.getManagerid(s);
         mav.addObject("mid", mid);
 
         ProjectDetails pd = new ProjectDetails();
@@ -178,13 +179,13 @@ public class ProjectController {
         mav.addObject("taskdetails", taskdetails);
 
         Employee e = new Employee();
-        e = employeeService.searchByEmail(emp.getEmail());
+        e = employeeService.searchByEmail(s);
         System.out.println("Email:::::    " + e);
         mav.addObject("td", e);
 
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(s);
         System.out.println("List of Project:  " + listProject);
         mav.addObject("listProject", listProject);
         /*List<TaskDetails> listtask = taskservice.getByProjectId(pId);
