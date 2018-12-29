@@ -78,6 +78,7 @@
 
                         <td colspan="2" align="right"><input type="submit"
                                                              value="LOGIN" id="bt"></td>
+                        <td>  <div align="center">   <input type="Reset"></div></td>
                     </tr>
 
                 </table>

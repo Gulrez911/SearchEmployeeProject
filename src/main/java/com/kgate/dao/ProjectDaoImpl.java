@@ -255,20 +255,62 @@ public class ProjectDaoImpl implements ProjectDao {
         return listproject;
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public String displayProjectName(int id) {
-        String query = "select project_Name from ProjectDetails where project_id='" + id + "'";
-        Query query2 = sessionFactory.getCurrentSession().createQuery(query);
-        String name = (String) query2.uniqueResult();
-        return name;
-    }
-
+//
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<TaskDTO> displayAllStatus2(String email) {
+//
+//        String query = "select a.name AS 'Employee Name' , task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND b.email='" + email + "'";
+//
+//        List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
+//        List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
+//
+//        for (Object d : data) {
+//
+//            Object arr[] = (Object[]) d;
+//            String st, st2, st3, st4, st5, st6, st9;
+//
+//            TaskDTO tdto = new TaskDTO();
+//
+//            st = (String) arr[0];
+//            st2 = (String) arr[1];
+//            st3 = (String) arr[2].toString();
+//            st4 = "";
+//            try {
+//                st4 = arr[3].toString();
+//            } catch (NullPointerException e) {
+//                System.out.println("nullpoint exception Date:::" + e);
+//            }
+//
+//            st5 = "";
+//            try {
+//                st5 = arr[4].toString();
+//            } catch (NullPointerException E) {
+//                System.out.println("Nullpoint Exception Assigned::" + E);
+//            }
+//
+//            st6 = (String) arr[5].toString();
+//            System.out.println("Task Status::: " + st6);
+//            st9 = (String) arr[6].toString();
+//
+//            tdto.setEmp_name(st);
+//            tdto.setTask_Name(st2);
+//            tdto.setTask_Type(st3);
+//            tdto.settStartDate(st4);
+//            tdto.settEndDate(st5);
+//            tdto.setStatus(st6);
+//            tdto.setTsubDate(st9);
+//
+//            listtsk.add(tdto);
+//        }
+//
+//        return listtsk;
+//    }
     @Override
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus2(String email) {
 
-        String query = "select a.name AS 'Employee Name' , task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND b.email='" + email + "'";
+        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -276,7 +318,7 @@ public class ProjectDaoImpl implements ProjectDao {
         for (Object d : data) {
 
             Object arr[] = (Object[]) d;
-            String st, st2, st3, st4, st5, st6, st9;
+            String st, st2, st3, st4, st5, st6, st9, st10, st11, st12;
 
             TaskDTO tdto = new TaskDTO();
 
@@ -300,7 +342,13 @@ public class ProjectDaoImpl implements ProjectDao {
             st6 = (String) arr[5].toString();
             System.out.println("Task Status::: " + st6);
             st9 = (String) arr[6].toString();
-
+            st10 = (String) arr[7].toString();
+            st11 = (String) arr[8].toString();
+            int est = Integer.parseInt(st10);
+            int act = Integer.parseInt(st11);
+            int delay = act - est;
+            System.out.println("Diff:::" + delay);
+            st12 = Integer.toString(delay);
             tdto.setEmp_name(st);
             tdto.setTask_Name(st2);
             tdto.setTask_Type(st3);
@@ -308,10 +356,22 @@ public class ProjectDaoImpl implements ProjectDao {
             tdto.settEndDate(st5);
             tdto.setStatus(st6);
             tdto.setTsubDate(st9);
+            tdto.setEstimateDays(st10);
+            tdto.setActualDays(st11);
+            tdto.setDelayDays(st12);
 
             listtsk.add(tdto);
         }
 
         return listtsk;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public String displayProjectName(int id) {
+        String query = "select project_Name from ProjectDetails where project_id='" + id + "'";
+        Query query2 = sessionFactory.getCurrentSession().createQuery(query);
+        String name = (String) query2.uniqueResult();
+        return name;
     }
 }

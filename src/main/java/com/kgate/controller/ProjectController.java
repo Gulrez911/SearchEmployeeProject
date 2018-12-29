@@ -360,10 +360,20 @@ public class ProjectController {
         ModelAndView mav = new ModelAndView("employeeProjectStatus");
         List<TaskDTO> taskDTOs = projectservice.displayAllStatus2(employee.getEmail());
         TaskDTO dTO = new TaskDTO();
-        System.out.println("TaskStatus::::"+taskDTOs);
+        System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
         mav.addObject("taskDTOs", taskDTOs);
         return mav;
 
+    }
+
+    @RequestMapping(value = "/downloadProjectStatus", method = RequestMethod.POST)
+    public ModelAndView downloadProjectStatus(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
+
+        List<TaskDTO> list = projectservice.displayAllStatus2(employee.getEmail());
+        ModelAndView mav = new ModelAndView("pdfProjectStatus");
+        mav.addObject("listProject", list);
+//        return new ModelAndView("pdfProjectStatus", "listProject", list);
+        return mav;
     }
 }
