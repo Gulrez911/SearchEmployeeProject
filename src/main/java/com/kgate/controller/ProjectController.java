@@ -104,8 +104,7 @@ public class ProjectController {
         Employee e = new Employee();
         mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
 
-	
-		mav.addObject("em", employee.getEmail());
+        mav.addObject("em", employee.getEmail());
 
         return mav;
     }
@@ -240,8 +239,8 @@ public class ProjectController {
         Employee e1 = new Employee();
 //     e.setEmail(taskdetails.getEmp_Email());
 
-		String s=request.getParameter("em");
-		mav.addObject("em",s);
+        String s = request.getParameter("em");
+        mav.addObject("em", s);
 
         mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
 
@@ -318,17 +317,13 @@ public class ProjectController {
 
     }
 
-    
-    
-    @RequestMapping(value="/CeoBack",method=RequestMethod.POST)
-    public ModelAndView back()
-    {
-    	ModelAndView model=new ModelAndView("CEODashboard1");
-    	
-    	List<ProjectDetails> listProject = projectservice.dispalyProjects();
-      
-          model.addObject("listProject", listProject);
+    @RequestMapping(value = "/CeoBack", method = RequestMethod.POST)
+    public ModelAndView back() {
+        ModelAndView model = new ModelAndView("CEODashboard1");
 
+        List<ProjectDetails> listProject = projectservice.dispalyProjects();
+
+        model.addObject("listProject", listProject);
 
         List<TaskDetails> tasklist = taskservice.getAllTask();
         model.addObject("tasklist", tasklist);
@@ -336,4 +331,39 @@ public class ProjectController {
 
     }
 
+    @RequestMapping(value = "/createProject2", method = RequestMethod.POST)
+    public ModelAndView createProject2(@SessionAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("CreateProject");
+        Integer mid = projectservice.getManagerid(employee.getEmail());
+
+        mav.addObject("mid", mid);
+        ProjectDetails projectdetails = new ProjectDetails();
+        projectdetails.setManageremail(employee.getEmail());
+        TaskDetails taskdetails = new TaskDetails();
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("projectdetails", projectdetails);
+        taskdetails.setEmp_Email(employee.getEmail());
+        mav.addObject("taskdetails", taskdetails);
+        Employee e = new Employee();
+        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+
+        mav.addObject("pd", pd);
+
+        mav.addObject("listProject", listProject);
+        return mav;
+
+    }
+
+    @RequestMapping(value = "/empproject", method = RequestMethod.POST)
+    public ModelAndView EmpProjectStatus(@SessionAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("employeeProjectStatus");
+        List<TaskDTO> taskDTOs = projectservice.displayAllStatus2(employee.getEmail());
+        TaskDTO dTO = new TaskDTO();
+        System.out.println("TaskStatus::::"+taskDTOs);
+        mav.addObject("dTO", dTO);
+        mav.addObject("taskDTOs", taskDTOs);
+        return mav;
+
+    }
 }

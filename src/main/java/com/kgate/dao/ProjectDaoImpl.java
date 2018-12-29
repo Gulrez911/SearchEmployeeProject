@@ -53,7 +53,7 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus(int id) {
 
-        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.status,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
+        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -70,12 +70,12 @@ public class ProjectDaoImpl implements ProjectDao {
             st2 = (String) arr[2];
             st3 = (String) arr[3];
             st4 = "";
-            try{
-                  st4 = arr[4].toString();
-            }catch(NullPointerException e){
-                System.out.println("nullpoint exception Date:::"+e);
+            try {
+                st4 = arr[4].toString();
+            } catch (NullPointerException e) {
+                System.out.println("nullpoint exception Date:::" + e);
             }
-          
+
             st5 = "";
             try {
                 st5 = arr[5].toString();
@@ -264,4 +264,54 @@ public class ProjectDaoImpl implements ProjectDao {
         return name;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<TaskDTO> displayAllStatus2(String email) {
+
+        String query = "select a.name AS 'Employee Name' , task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND b.email='" + email + "'";
+
+        List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
+        List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
+
+        for (Object d : data) {
+
+            Object arr[] = (Object[]) d;
+            String st, st2, st3, st4, st5, st6, st9;
+
+            TaskDTO tdto = new TaskDTO();
+
+            st = (String) arr[0];
+            st2 = (String) arr[1];
+            st3 = (String) arr[2].toString();
+            st4 = "";
+            try {
+                st4 = arr[3].toString();
+            } catch (NullPointerException e) {
+                System.out.println("nullpoint exception Date:::" + e);
+            }
+
+            st5 = "";
+            try {
+                st5 = arr[4].toString();
+            } catch (NullPointerException E) {
+                System.out.println("Nullpoint Exception Assigned::" + E);
+            }
+
+            st6 = (String) arr[5].toString();
+            System.out.println("Task Status::: " + st6);
+            st9 = (String) arr[6].toString();
+
+            tdto.setEmp_name(st);
+            tdto.setTask_Name(st2);
+            tdto.setTask_Type(st3);
+            tdto.settStartDate(st4);
+            tdto.settEndDate(st5);
+            tdto.setStatus(st6);
+            tdto.setTsubDate(st9);
+
+            listtsk.add(tdto);
+        }
+
+        return listtsk;
+    }
 }
