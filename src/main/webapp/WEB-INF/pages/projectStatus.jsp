@@ -14,7 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/natureFlower.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <div align="center">
 
             <form action="downloadReport" method="post">

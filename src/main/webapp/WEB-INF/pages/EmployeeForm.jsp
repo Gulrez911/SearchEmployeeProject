@@ -16,7 +16,7 @@
         </style>
 
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">
@@ -27,12 +27,12 @@
                 <table>
                     <form:hidden path="id"/>
                     <tr>
-                        <td style="color:white">Name:</td>
+                        <td style="color:Dark blue">Name:</td>
                         <td><form:input path="name"  required="required"/></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
-                        <td style="color:white"> Email:</td>
+                        <td style="color:Dark blue"> Email:</td>
                         <td><form:input path="email" type="email"  required="required"/></td>
                         <%--   <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
@@ -44,33 +44,33 @@
                     </tr>
 
                     <tr>
-                        <td style="color:white">Address:</font></td>
+                        <td style="color:Dark blue">Address:</font></td>
                         <td><form:input path="address" /></td>
                     </tr>
                     <tr>
 
-                        <td style="color:white"> Telephone: </font></td>
+                        <td style="color:Dark blue"> Telephone: </font></td>
                         <td><form:input path="telephone" /></td>
 
                     </tr>
 
                     <tr>
-                        <td style="color:white">Password:</td>
+                        <td style="color:Dark blue">Password:</td>
                         <td><form:input path="password" type="password" required="required"/></td>
                     </tr>
                     <tr>
-                        <td style="color:white">Aadhar No.:</td>
+                        <td style="color:Dark blue">Aadhar No.:</td>
                         <td><form:input path="aadhar"  /></td>
                         <td><form:errors path="aadhar" cssClass="error"/></td>
                     </tr>
                     <tr>
-                        <td style="color:white">Pan No.:</td>
+                        <td style="color:Dark blue">Pan No.:</td>
                         <td><form:input path="pan"  /></td>
                         <td><form:errors path="pan" cssClass="error"/></td>
                     </tr>
                     
                       <tr>
-                       <td style="color:white">User Type:</td>
+                       <td style="color:Dark blue">User Type:</td>
                         <td ><form:select path ="category" name="userTypes">
                     
                      <form:options items = "${userTypes}" />
@@ -80,7 +80,7 @@
                     </tr>
                     
                      <tr>
-                        <td style="color:white">ManagerId</td>
+                        <td style="color:Dark blue">ManagerId</td>
                         <td><form:input path="managerId" /></td>
                     </tr>
                     
@@ -90,7 +90,7 @@
 
 
                     <tr>
-                        <td style="color:white"> Skills: </font></td>
+                        <td style="color:Dark blue"> Skills: </font></td>
                         <td>
                             <form:select path="skills" required ="true">
 
@@ -102,16 +102,24 @@
                     </tr>
 
                     <tr>
-                        <td><input type="submit" value="send mail" name="action1"/></td>     
+                        <td><input type="submit" value="Submit" name="action1"/></td>     
                         <td colspan="2" align="center"><input type="submit" value="BACK" name="action2"></td>
                     </tr>
+                    
+                    
+            
                 </table>
-                
-                
+              
                 
             </form:form>
 
 
         </div>
+        
+        
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
     </body>
 </html>

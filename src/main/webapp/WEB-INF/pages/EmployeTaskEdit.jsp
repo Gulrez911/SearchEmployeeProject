@@ -9,7 +9,7 @@
         <title>Insert title here</title>
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <div align="center">
             <form:form action="editTask" method="post"
                        modelAttribute="taskdetails" commandName="taskdetails">
@@ -18,7 +18,11 @@
                     <form:hidden path="Emp_Email"/>
                     <form:hidden path="task_id" />
                     <tr>
-                        <td style="color: white">Task Type:</td>
+                     <div align="center">
+                    <h1 style="color:orangered">Task Edit</h1>
+                    
+                    
+                        <td style="color: black">Task Type:</td>
                         <td><form:input path="task_Type" readonly="true"/></td>
                     </tr>
                     <tr>
@@ -44,19 +48,24 @@
 
 
                                 <form:options items="${taskStatus}" />
-
-
-                            </form:select></td>
+                                   </form:select></td>
                     </tr>
-
 
                     <tr>
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save"></td>
                     </tr>
+                    
+                     <tr>
+                
+            </tr> 
+            
                 </table>
             </form:form>
         </div>
-
+             <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
     </body>
 </html>

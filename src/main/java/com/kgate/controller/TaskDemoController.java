@@ -56,9 +56,11 @@ public class TaskDemoController {
 
         model.addObject("td", td2);
         model.addObject("employeeEmail", employeeEmail);
+
         String bk = request.getParameter("em");
 
         model.addObject("em", bk);
+
         return model;
     }
 
@@ -130,7 +132,8 @@ public class TaskDemoController {
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
         mav.addObject("listtask", listtask);
-        return mav;
+        
+         return mav;
     }
 
     public void sendMail(String to, String message, String subject) {

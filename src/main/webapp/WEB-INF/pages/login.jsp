@@ -62,12 +62,14 @@
                 <table align="center">
                     <tr>
                         <td style="color: white">User Name:</td>
-                        <td><form:input name="email" path="email" type="email" id="nm" /></td>
+                        <td><form:input name="email" path="email" type="email" id="nm"/></td>
+                        
+                        
                     </tr>
                     <tr>
                         <td style="color: white">Password:</td>
                         <td><form:input name="password" path="password" type="password"
-                                    id="pw" /></td>
+                                   id="pw" /></td>
                     </tr>
                     <tr>
                         <td><form:select path="category" name="userType">
@@ -75,14 +77,25 @@
                                 <form:options items="${userTypes}" />
 
                             </form:select></td>
+                            
+                           
 
                         <td colspan="2" align="right"><input type="submit"
                                                              value="LOGIN" id="bt"></td>
-                        <td>  <div align="center">   <input type="Reset"></div></td>
+                        
                     </tr>
+                     <td>
+                      <div align="center">   <input type="Reset"></div>
+                </td>
+                   
 
                 </table>
                 <div style="color: red">${error}</div> 
+                
+                 
+                
+             <!-- <div align="center">   <input type="Reset"></div> -->
+                
             </form:form>
         </div> 
 

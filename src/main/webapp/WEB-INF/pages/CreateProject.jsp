@@ -19,7 +19,7 @@
 
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">
@@ -58,12 +58,12 @@
 
                 <table border="1" align="left">
 
-                    <th style="color: white">Project Name</th>
+                    <th style="color: red">Project Name</th>
 
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: Dark blue">${pd.project_Name}</a></td>
 
                         </tr>
 
@@ -81,7 +81,7 @@
             <table>
                 <tr>
                     <td>
-                        <a href="managerpage?email=${e.email}">Employee List</a>
+                        <a href="managerpage?email=${e.email}&k=${k}">Employee List</a>
             </table>
         </form:form>
     </div>
@@ -99,16 +99,18 @@
 
 
 </table>
- <tr>
-   <div align="right"><td>
+ 
    
-    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-   
-   </div>
-</tr> 
+ 
 
 </form:form>
 </div>
+
+ <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+        
 
 </body>
 

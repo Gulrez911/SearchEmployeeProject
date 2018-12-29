@@ -103,7 +103,6 @@ public class ProjectController {
         mav.addObject("listtask", listtask);
         Employee e = new Employee();
         mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-
         mav.addObject("em", employee.getEmail());
 
         return mav;
@@ -160,13 +159,13 @@ public class ProjectController {
 
     }
 
-    @RequestMapping(value = "/backtotask", method = RequestMethod.GET)
-    public ModelAndView backtotask(@SessionAttribute("employee") Employee emp,
-            @ModelAttribute("employee") Employee employee, @RequestParam("email") String email) {
+    @RequestMapping(value = "/backtotask", method = RequestMethod.POST)
+    public ModelAndView backtotask(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("createtask");
 
+        String s = request.getParameter("em");
 //    	Integer mid = projectservice.getManagerid(email);
-        Integer mid = projectservice.getManagerid(emp.getEmail());
+        Integer mid = projectservice.getManagerid(s);
         mav.addObject("mid", mid);
 
         ProjectDetails pd = new ProjectDetails();
@@ -176,13 +175,13 @@ public class ProjectController {
         mav.addObject("taskdetails", taskdetails);
 
         Employee e = new Employee();
-        e = employeeService.searchByEmail(emp.getEmail());
+        e = employeeService.searchByEmail(s);
         System.out.println("Email:::::    " + e);
         mav.addObject("td", e);
 
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(s);
         System.out.println("List of Project:  " + listProject);
         mav.addObject("listProject", listProject);
         /*List<TaskDetails> listtask = taskservice.getByProjectId(pId);
@@ -214,8 +213,8 @@ public class ProjectController {
         mav.addObject("td", td);
         mav.addObject("listtask", listtask);
         mav.addObject("taskdetails", taskdetails);
-        String s=request.getParameter("em");
-        mav.addObject("em",s);
+        String s = request.getParameter("em");
+        mav.addObject("em", s);
         return mav;
     }
 
@@ -239,8 +238,6 @@ public class ProjectController {
         mav.addObject("td", taskdetails);
         mav.addObject("listtask", listtask);
         Employee e1 = new Employee();
-//     e.setEmail(taskdetails.getEmp_Email());
-
         String s = request.getParameter("em");
         mav.addObject("em", s);
 
@@ -318,8 +315,11 @@ public class ProjectController {
         return new ModelAndView("pdfProjectReport", "listProject", listProjectStatus);
 
     }
+    
+        
 
     @RequestMapping(value = "/CeoBack", method = RequestMethod.POST)
+
     public ModelAndView back() {
         ModelAndView model = new ModelAndView("CEODashboard1");
 
