@@ -214,6 +214,8 @@ public class ProjectController {
         mav.addObject("td", td);
         mav.addObject("listtask", listtask);
         mav.addObject("taskdetails", taskdetails);
+        String s=request.getParameter("em");
+        mav.addObject("em",s);
         return mav;
     }
 
