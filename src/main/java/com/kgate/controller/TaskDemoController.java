@@ -36,6 +36,7 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
+
     @Autowired
     ProjectService projectService;
 
@@ -55,9 +56,11 @@ public class TaskDemoController {
 
         model.addObject("td", td2);
         model.addObject("employeeEmail", employeeEmail);
-        String bk = request.getParameter("bk");
 
-        model.addObject("bk", bk);
+        String bk = request.getParameter("em");
+
+        model.addObject("em", bk);
+
         return model;
     }
 
@@ -76,9 +79,9 @@ public class TaskDemoController {
 
  /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
+        
         ModelAndView mav = new ModelAndView("createtask");
-//        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
-//		int projectId = taskdetails.getProjectId();
+
         String ProjectName = projectService.displayProjectName(pId);
         System.out.println("Project Name::::::::::::" + ProjectName);
         mav.addObject("task_Type", Tasktype);
@@ -90,6 +93,9 @@ public class TaskDemoController {
 
         mav.addObject("listtask", listtask);
         TaskDemoController tdc = new TaskDemoController();
+        
+        String s=request.getParameter("em");
+        mav.addObject("em",s);
 
         String tskName = taskdetails.getTask_Name();
         String tskType = taskdetails.getTask_Type();
@@ -126,11 +132,12 @@ public class TaskDemoController {
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
         mav.addObject("listtask", listtask);
-        return mav;
+        
+         return mav;
     }
 
     public void sendMail(String to, String message, String subject) {
-        final Employee e = new Employee();
+     
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");

@@ -37,9 +37,9 @@ public class ProjectReportBuilder extends AbstractITextPdfView {
         List<ProjectReportDTO> listProject = (List<ProjectReportDTO>) model.get("listProject");
         doc.add(new Paragraph("List of  Project Details  in PDF"));
 
-        PdfPTable table = new PdfPTable(6);
+        PdfPTable table = new PdfPTable(7);
         table.setWidthPercentage(100.0f);
-        table.setWidths(new float[]{2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f});
+        table.setWidths(new float[]{2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f, 2.0f});
         table.setSpacingBefore(10);
 
         // define font for table header row
@@ -58,6 +58,8 @@ public class ProjectReportBuilder extends AbstractITextPdfView {
         table.addCell(cell);
         cell.setPhrase(new Phrase("End Date", font));
         table.addCell(cell);
+        cell.setPhrase(new Phrase("Project Status", font));
+        table.addCell(cell);
         cell.setPhrase(new Phrase("Expected Days", font));
         table.addCell(cell);
         cell.setPhrase(new Phrase("Completed Days", font));
@@ -69,6 +71,7 @@ public class ProjectReportBuilder extends AbstractITextPdfView {
             table.addCell(dTO.getProject_name());
             table.addCell(dTO.getpStartDate());
             table.addCell(dTO.getpEndDate());
+            table.addCell(dTO.getProStatus());
             table.addCell(dTO.getExpectDate());
             table.addCell(dTO.getCompleteTime());
             table.addCell(dTO.getVariationTime());

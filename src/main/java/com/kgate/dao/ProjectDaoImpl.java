@@ -53,7 +53,7 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus(int id) {
 
-        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
+        String query = "select a.name AS 'Employee Name' ,b.name AS 'Manager Name', task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND task_details.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -61,7 +61,7 @@ public class ProjectDaoImpl implements ProjectDao {
         for (Object d : data) {
 
             Object arr[] = (Object[]) d;
-            String st, st1, st2, st3, st4, st5, st6, st8;
+            String st, st1, st2, st3, st4, st5, st6, st8, st9;
 
             TaskDTO tdto = new TaskDTO();
 
@@ -69,9 +69,22 @@ public class ProjectDaoImpl implements ProjectDao {
             st1 = (String) arr[1];
             st2 = (String) arr[2];
             st3 = (String) arr[3];
-            st4 = arr[4].toString();
-            st5 = arr[5].toString();
+            st4 = "";
+            try {
+                st4 = arr[4].toString();
+            } catch (NullPointerException e) {
+                System.out.println("nullpoint exception Date:::" + e);
+            }
+
+            st5 = "";
+            try {
+                st5 = arr[5].toString();
+            } catch (NullPointerException E) {
+                System.out.println("Nullpoint Exception Assigned::" + E);
+            }
+
             st6 = (String) arr[6];
+            st9 = (String) arr[7];
 
             tdto.setEmp_name(st);
             tdto.setName(st1);
@@ -80,6 +93,7 @@ public class ProjectDaoImpl implements ProjectDao {
             tdto.settStartDate(st4);
             tdto.settEndDate(st5);
             tdto.setStatus(st6);
+            tdto.setTsubDate(st9);
 
             listtsk.add(tdto);
         }
@@ -103,12 +117,13 @@ public class ProjectDaoImpl implements ProjectDao {
         SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
         List<Object> li = sessionFactory.getCurrentSession().createSQLQuery("select project_details.project_Name, project_details.pstart_Date, project_details.pEnd_Date, project_details.project_id  from project_details").list();
 
-        List<Object> li2 = sessionFactory.getCurrentSession().createSQLQuery("select task_details.task_id, task_details.projectId, task_details.tStart_Time,task_details.tEnd_Time, task_details.tSub_Date from task_details").list();
+        List<Object> li2 = sessionFactory.getCurrentSession().createSQLQuery("select task_details.task_id, task_details.projectId, task_details.tStart_Time,task_details.tEnd_Time, task_details.tSub_Date,task_details.taskStatus from task_details").list();
         System.out.println("Task Details::::tets" + li2);
         System.out.println("");
         String com, var;
         int i, j, k;
         for (Object ob : li) {
+            ProjectReportDTO dTO = new ProjectReportDTO();
             Object arr[] = (Object[]) ob;
             String s1, s2, s3, s4;
             s1 = arr[0].toString();
@@ -118,6 +133,7 @@ public class ProjectDaoImpl implements ProjectDao {
             System.out.println("Id:" + i);
             System.out.println("start Date::" + s2);
             System.out.println("start Date::" + s3);
+            int flag = 0;
             float daysBetween = 0;
             int count = 0;
             float daysBetween2 = 0;
@@ -125,13 +141,14 @@ public class ProjectDaoImpl implements ProjectDao {
             float daysBetween4 = 0;
             float daysBetween5 = 0;
             for (Object ob2 : li2) {
-                String ss1, ss2, ss4;
+                String ss1, ss2, ss4, ss5;
                 String ss3 = null;
                 Object arr2[] = (Object[]) ob2;
 //                k=(int)arr2
                 j = (int) arr2[1];
                 ss1 = arr2[2].toString();
                 ss2 = arr2[3].toString();
+                ss5 = arr2[5].toString();
                 try {
 
                     ss3 = arr2[4].toString();
@@ -143,6 +160,13 @@ public class ProjectDaoImpl implements ProjectDao {
                 System.out.println("Id2:" + j);
 
                 if (i == j) {
+                    if (ss3 == null || ss3.isEmpty() || ss5.equals("W .I. P")) {
+                        dTO.setProStatus("Work in Progress");
+                        flag++;
+                    } else if (flag == 0) {
+                        dTO.setProStatus("Complete");
+
+                    }
                     if (ss3 == null || ss3.isEmpty()) {
                         ss4 = java.time.LocalDate.now().toString();
                         try {
@@ -180,6 +204,7 @@ public class ProjectDaoImpl implements ProjectDao {
                             daysBetween3 = (difference2 / (1000 * 60 * 60 * 24));
                             daysBetween4 = (difference3 / (1000 * 60 * 60 * 24));
                             System.out.println("Days:::" + daysBetween3);
+                            System.out.println("Days:::::::" + daysBetween4);
                             daysBetween2 = daysBetween2 + daysBetween3 + daysBetween4;
                             System.out.println("daysbetween2:::" + daysBetween2);
                         } catch (ParseException ex) {
@@ -211,7 +236,7 @@ public class ProjectDaoImpl implements ProjectDao {
             daysBetween4 = daysBetween2 - daysBetween;
             int days2 = (int) daysBetween4;
             String s6 = Integer.toString(days2);
-            ProjectReportDTO dTO = new ProjectReportDTO();
+
             dTO.setProject_name(s1);
             dTO.setpStartDate(s2);
             dTO.setpEndDate(s3);
@@ -230,6 +255,117 @@ public class ProjectDaoImpl implements ProjectDao {
         return listproject;
     }
 
+//
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<TaskDTO> displayAllStatus2(String email) {
+//
+//        String query = "select a.name AS 'Employee Name' , task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND b.email='" + email + "'";
+//
+//        List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
+//        List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
+//
+//        for (Object d : data) {
+//
+//            Object arr[] = (Object[]) d;
+//            String st, st2, st3, st4, st5, st6, st9;
+//
+//            TaskDTO tdto = new TaskDTO();
+//
+//            st = (String) arr[0];
+//            st2 = (String) arr[1];
+//            st3 = (String) arr[2].toString();
+//            st4 = "";
+//            try {
+//                st4 = arr[3].toString();
+//            } catch (NullPointerException e) {
+//                System.out.println("nullpoint exception Date:::" + e);
+//            }
+//
+//            st5 = "";
+//            try {
+//                st5 = arr[4].toString();
+//            } catch (NullPointerException E) {
+//                System.out.println("Nullpoint Exception Assigned::" + E);
+//            }
+//
+//            st6 = (String) arr[5].toString();
+//            System.out.println("Task Status::: " + st6);
+//            st9 = (String) arr[6].toString();
+//
+//            tdto.setEmp_name(st);
+//            tdto.setTask_Name(st2);
+//            tdto.setTask_Type(st3);
+//            tdto.settStartDate(st4);
+//            tdto.settEndDate(st5);
+//            tdto.setStatus(st6);
+//            tdto.setTsubDate(st9);
+//
+//            listtsk.add(tdto);
+//        }
+//
+//        return listtsk;
+//    }
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<TaskDTO> displayAllStatus2(String email) {
+
+        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "'";
+
+        List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
+        List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
+
+        for (Object d : data) {
+
+            Object arr[] = (Object[]) d;
+            String st, st2, st3, st4, st5, st6, st9, st10, st11, st12;
+
+            TaskDTO tdto = new TaskDTO();
+
+            st = (String) arr[0];
+            st2 = (String) arr[1];
+            st3 = (String) arr[2].toString();
+            st4 = "";
+            try {
+                st4 = arr[3].toString();
+            } catch (NullPointerException e) {
+                System.out.println("nullpoint exception Date:::" + e);
+            }
+
+            st5 = "";
+            try {
+                st5 = arr[4].toString();
+            } catch (NullPointerException E) {
+                System.out.println("Nullpoint Exception Assigned::" + E);
+            }
+
+            st6 = (String) arr[5].toString();
+            System.out.println("Task Status::: " + st6);
+            st9 = (String) arr[6].toString();
+            st10 = (String) arr[7].toString();
+            st11 = (String) arr[8].toString();
+            int est = Integer.parseInt(st10);
+            int act = Integer.parseInt(st11);
+            int delay = act - est;
+            System.out.println("Diff:::" + delay);
+            st12 = Integer.toString(delay);
+            tdto.setEmp_name(st);
+            tdto.setTask_Name(st2);
+            tdto.setTask_Type(st3);
+            tdto.settStartDate(st4);
+            tdto.settEndDate(st5);
+            tdto.setStatus(st6);
+            tdto.setTsubDate(st9);
+            tdto.setEstimateDays(st10);
+            tdto.setActualDays(st11);
+            tdto.setDelayDays(st12);
+
+            listtsk.add(tdto);
+        }
+
+        return listtsk;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public String displayProjectName(int id) {
@@ -238,5 +374,4 @@ public class ProjectDaoImpl implements ProjectDao {
         String name = (String) query2.uniqueResult();
         return name;
     }
-
 }

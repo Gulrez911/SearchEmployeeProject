@@ -19,7 +19,7 @@
 
 </head>
 <body
-	background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+	background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
 	<div align="center">
@@ -109,15 +109,16 @@
 			</table>
 			
 			<tr>
-   <div align="right"><td>
    
-    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-   
-   </div>
 </tr>
 		</form:form>
 
 
 	</div>
+	
+	<div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
 </body>
 </html>

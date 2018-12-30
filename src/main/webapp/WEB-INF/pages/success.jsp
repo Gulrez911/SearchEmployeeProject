@@ -11,16 +11,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/af.jpg">
-        <h3 style="color:white" align="center">You have successfully Login</h3>
-    <center><a href="/SpringMVCHibernateCRUD/test"><font style="color:white" size="5">Add Skill</font></a><br></center>
- <center><a href="/SpringMVCHibernateCRUD/employeelist"><font style="color:white" size="5">Employee List</font></a></center>
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+        <h3 style="color:Dark blue" align="center">You have successfully Login</h3>
+    <center><a href="/SpringMVCHibernateCRUD/test"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
+ <center><a href="/SpringMVCHibernateCRUD/employeelist"><font style="color:Dark blue" size="5">Employee List</font></a></center>
    <tr>
-   <div align="right"><td>
    
-    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-   
-   </div>
 </tr>
+
+ <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
 </body>
 </html>

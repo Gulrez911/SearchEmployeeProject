@@ -26,24 +26,26 @@ public class TaskDetails {
     @Column
     private String task_Type;
 
-    @Column
-    private String task_Name;
-    @Column
-    private String status;
-    @Column
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
-    @Temporal(TemporalType.DATE)
-    private Date tStart_Time;
-    @Column
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
-    @Temporal(TemporalType.DATE)
-    private Date tEnd_Time;
-    @Column
-    private String Emp_Email;
-    @Column
-    private String tSub_Date;
-    @Column
-    private int managerId;
+
+	@Column
+	private String task_Name;
+	@Column
+	private String status;
+	@Column
+	@DateTimeFormat(pattern = "dd-mm-yyyy")
+@Temporal(TemporalType.DATE)
+	private Date tStart_Time;
+	@Column
+@DateTimeFormat(pattern = "dd-mm-yyyy")
+	@Temporal(TemporalType.DATE)
+	private Date tEnd_Time;
+	@Column
+	private String Emp_Email;
+	@Column
+	private String  tSub_Date;
+	@Column
+	private int managerId;
+
 
     public String gettSub_Date() {
         return tSub_Date;

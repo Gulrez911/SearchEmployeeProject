@@ -16,18 +16,23 @@
         </style>
 
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">
             <h1 style="color:orangered">Allocate Task</h1>
+            
+           
 
             <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
+                 <!-- <table border="1" align="center" width="800" height="200"> -->
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="task_id" />
+                    
+                    
                     <tr>
                         <td style="color:white">Task Type: </td>
                         <td><form:input path="task_Type"  /></td>
@@ -40,12 +45,12 @@
 
                     <tr>
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" type="date"/></td>
+                        <td><form:input path="tStart_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" type="date"/></td>
+                        <td><form:input path="tEnd_Time" type="date" required="true"/></td>
                     </tr>
 
                     <tr>
@@ -59,12 +64,29 @@
                         <td>
 
                     </tr>  
-
+                    <input type="hidden" name="em" value="${em }"/>
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
+               
+                    
+                
                 </table>
+                
+                  <form:form action="backtotask" method="post"  > 
+                  <div align="left"><td>
+                <td>  <input type="submit" value="Back"></form:form> </td>
+                </div>
             </form:form>
-        </div>
+            
+           
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+                   
+             
     </body>
 </html>
+
+    
