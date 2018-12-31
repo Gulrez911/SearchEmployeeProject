@@ -243,12 +243,12 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/managerpage", method = RequestMethod.GET)
-    public ModelAndView taskcreate(@ModelAttribute("employee") Employee employee, HttpServletRequest request) {
+    public ModelAndView taskcreate(@SessionAttribute("employee") Employee emp, @ModelAttribute("employee") Employee employee, HttpServletRequest request) {
         String email = request.getParameter("email");
         ModelAndView mav = new ModelAndView("ManagerSuccess");
         employee = new Employee();
         mav.addObject("employee", employee);
-        List<Employee> elist = employeeService.displayByManagerId(email);
+        List<Employee> elist = employeeService.displayByManagerId(emp.getEmail());
 
         mav.addObject("elist", elist);
 

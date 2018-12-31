@@ -76,12 +76,12 @@
         <br>
     </div>
     <div align="right">
-        <form:form action="managerpage"  commandName="e">
+        <form:form action="managerpage"  modelAttribute="employee">
             
             <table>
                 <tr>
                     <td>
-                        <a href="managerpage?email=${e.email}&k=${k}">Employee List</a>
+                        <a href="managerpage?email=${employee.email}">Employee List</a>
             </table>
         </form:form>
     </div>
