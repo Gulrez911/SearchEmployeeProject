@@ -408,4 +408,17 @@ public class ProjectController {
         return mav;
 
     }
+
+    @RequestMapping(value = "/overviewProject", method = RequestMethod.GET)
+    public ModelAndView overviewProject(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("employeeProjectStatus");
+        int id = Integer.parseInt(request.getParameter("project_id"));
+        List<TaskDTO> taskDTOs = projectservice.displayAllStatus3(employee.getEmail(), id);
+        TaskDTO dTO = new TaskDTO();
+        System.out.println("TaskStatus::::" + taskDTOs);
+        mav.addObject("dTO", dTO);
+        mav.addObject("taskDTOs", taskDTOs);
+        return mav;
+
+    }
 }
