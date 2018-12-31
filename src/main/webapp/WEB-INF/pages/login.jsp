@@ -10,7 +10,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+        <SCRIPT type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </SCRIPT>
         <title>User Login.</title>
         <style>
             * {
@@ -63,13 +68,13 @@
                     <tr>
                         <td style="color: white">User Name:</td>
                         <td><form:input name="email" path="email" type="email" id="nm"/></td>
-                        
-                        
+
+
                     </tr>
                     <tr>
                         <td style="color: white">Password:</td>
                         <td><form:input name="password" path="password" type="password"
-                                   id="pw" /></td>
+                                    id="pw" /></td>
                     </tr>
                     <tr>
                         <td><form:select path="category" name="userType">
@@ -77,25 +82,25 @@
                                 <form:options items="${userTypes}" />
 
                             </form:select></td>
-                            
-                           
+
+
 
                         <td colspan="2" align="right"><input type="submit"
                                                              value="LOGIN" id="bt"></td>
-                        
+
                     </tr>
-                     <td>
-                      <div align="center">   <input type="Reset"></div>
-                </td>
-                   
+                    <td>
+                        <div align="center">   <input type="Reset"></div>
+                    </td>
+
 
                 </table>
                 <div style="color: red">${error}</div> 
-                
-                 
-                
-             <!-- <div align="center">   <input type="Reset"></div> -->
-                
+
+
+
+                <!-- <div align="center">   <input type="Reset"></div> -->
+
             </form:form>
         </div> 
 

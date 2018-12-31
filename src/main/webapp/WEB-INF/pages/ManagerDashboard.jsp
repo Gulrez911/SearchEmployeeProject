@@ -10,6 +10,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+        <SCRIPT type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </SCRIPT>
+
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
     </head>
@@ -26,7 +34,7 @@
                 <form:hidden path="email" />
                 <input type="submit" value="Create Project">
             </form:form>
-                </br>
+            </br>
             <form:form action="/SpringMVCHibernateCRUD/empproject" method="post"  modelAttribute="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Project Status">
