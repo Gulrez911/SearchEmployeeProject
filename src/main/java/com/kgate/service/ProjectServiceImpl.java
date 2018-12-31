@@ -64,7 +64,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public List<TaskDTO> displayAllStatus2(String email) {
-        return projectDao.displayAllStatus2(email);
+    public List<TaskDTO> displayAllStatus2(String email,int id) {
+        return projectDao.displayAllStatus2(email,id);
     }
 }

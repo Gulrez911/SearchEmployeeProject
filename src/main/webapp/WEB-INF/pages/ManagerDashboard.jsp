@@ -39,6 +39,10 @@
                 <form:hidden path="email" />
                 <input type="submit" value="Project Status">
             </form:form>
+            <form:form action="/SpringMVCHibernateCRUD/managerProjectView" method="post"  modelAttribute="employee">
+                <form:hidden path="email" />
+                <input type="submit" value="Project Status">
+            </form:form>
         </div>
     </body>
 </html>

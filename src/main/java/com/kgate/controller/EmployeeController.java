@@ -56,11 +56,9 @@ public class EmployeeController {
 
     @Autowired
     private SkillService skillService;
-    
+
     @Autowired
     private ProjectService projectservice;
-    
-    
 
     public String generateOTP() {
         Random random = new Random();
@@ -221,7 +219,7 @@ public class EmployeeController {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
             }
-             
+
         });
 
         Message message1 = new MimeMessage(session);
@@ -236,7 +234,6 @@ public class EmployeeController {
             Transport.send(message1);
 
             System.out.println("Done");
-              
 
         } catch (MessagingException e1) {
             throw new RuntimeException(e1);
@@ -254,9 +251,9 @@ public class EmployeeController {
         List<Employee> elist = employeeService.displayByManagerId(email);
 
         mav.addObject("elist", elist);
-        
-        String k=request.getParameter("k");
-        mav.addObject("k",k);
+
+        String k = request.getParameter("k");
+        mav.addObject("k", k);
 
         return mav;
 
@@ -332,37 +329,35 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/back", method = RequestMethod.POST)
-    public ModelAndView back(@ModelAttribute("employee") Employee employee,HttpServletRequest request) {
+    public ModelAndView back(@SessionAttribute("employee") Employee emp, @ModelAttribute("employee") Employee employee, HttpServletRequest request) {
 
-      ModelAndView mav = new ModelAndView("CreateProject");
-          
-          /*mav.addObject("employee", employee);
+        ModelAndView mav = new ModelAndView("CreateProject");
+
+        /*mav.addObject("employee", employee);
           String[] userType = {"Admin", "Employee", "Manager","CEO"};
           mav.addObject("userTypes", userType);*/
-          String s=request.getParameter("mail");
-    	  Integer mid = projectservice.getManagerid(s);
-          // System.out.println("Manager ID:::: " + mid);
-          mav.addObject("mid", mid);
-          ProjectDetails projectdetails = new ProjectDetails();
-          projectdetails.setManageremail(s);
-          TaskDetails taskdetails = new TaskDetails();
-          ProjectDetails pd = new ProjectDetails();
-          mav.addObject("projectdetails", projectdetails);
-          taskdetails.setEmp_Email(employee.getEmail());
-          mav.addObject("taskdetails", taskdetails);
-          Employee e = new Employee();
-          mav.addObject("e", employeeService.searchByEmail(s));
-          List<ProjectDetails> listProject = projectservice.getProjectByEmail(s);
-          // System.out.println("List of Project: " + listProject);
-          mav.addObject("pd", pd);
+        String s = request.getParameter("mail");
+        Integer mid = projectservice.getManagerid(emp.getEmail());
+        // System.out.println("Manager ID:::: " + mid);
+        mav.addObject("mid", mid);
+        ProjectDetails projectdetails = new ProjectDetails();
+        projectdetails.setManageremail(s);
+        TaskDetails taskdetails = new TaskDetails();
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("projectdetails", projectdetails);
+        taskdetails.setEmp_Email(employee.getEmail());
+        mav.addObject("taskdetails", taskdetails);
+        Employee e = new Employee();
+        mav.addObject("e", employeeService.searchByEmail(s));
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
+        // System.out.println("List of Project: " + listProject);
+        mav.addObject("pd", pd);
 
-          mav.addObject("listProject", listProject);
-		return mav;
-    	
-    	
+        mav.addObject("listProject", listProject);
+        return mav;
 
     }
-    
+
     /*@RequestMapping(value = "/back", method = RequestMethod.POST)
     
     public ModelAndView back(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
@@ -390,9 +385,6 @@ public class EmployeeController {
     	  ModelAndView mav = new ModelAndView("CreateProject");
     	  return mav;
     }*/
-
-    
-
     @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
     public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
         for (String skill : employee.getSkills()) {

@@ -26,5 +26,5 @@ public interface ProjectService {
     public String displayProjectName(int id);
 
     //return projectdetails of employee using manager email
-    public List<TaskDTO> displayAllStatus2(String email);
+    public List<TaskDTO> displayAllStatus2(String email,int id);
 }

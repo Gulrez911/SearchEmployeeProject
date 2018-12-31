@@ -9,6 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<<<<<<< HEAD
 
         <SCRIPT type="text/javascript">
             window.history.forward();
@@ -16,7 +17,15 @@
                 window.history.forward();
             }
         </SCRIPT>
-        <title>User Login.</title>
+=======-->
+        <script>
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+        </script>
+
+         <title>User Login.</title>
         <style>
             * {
                 box-sizing: border-box;

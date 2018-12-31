@@ -8,6 +8,12 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>Create Task</title>
+        <script>
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+        </script>
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
@@ -15,8 +21,8 @@
 
             <h1 style="color: orangered" align="center">Create Task</h1>
             <form:form action="createtask" method="post" modelAttribute="taskdetails">  
-              <table align="center">
-               
+                <table align="center">
+
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="Emp_Email"/>
@@ -31,8 +37,8 @@
                             </form:select></td>
                     <tr>
 
-                           <input type="hidden" name="em" value="${em }"/>
-                        <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
+                    <input type="hidden" name="em" value="${em }"/>
+                    <td colspan="2" align="right"><input type="submit"  value="CREATE" id="ct"></td>
 
                     </tr>
             </form:form></div>
@@ -52,25 +58,25 @@
 
 
                             <%--  <a href="backtoproject?email=${e.email}"><font style="color:Dark blue" size="5">Back</font></a>  --%>
-                             <a href="backtoproject?email=${em}"><font style="color:Dark blue" size="5">Back</font></a> 
-                          
+                            <a href="backtoproject?email=${em}"><font style="color:Dark blue" size="5">Back</font></a> 
+
 
 
                         </td>
                 </table>
-               <!--  <tr>
-                <div align="right"><td>
+                <!--  <tr>
+                 <div align="right"><td>
+ 
+                         <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a>
+                 </div>
+             </tr>  -->
 
-                        <a href="logout"><font style="color:Dark blue" size="5">LogOut</font></a>
-                </div>
-            </tr>  -->
-            
-            
-        
-        
-            
-            
-           <%--  <form:form action="backtoprj" method="post" >
+
+
+
+
+
+                <%--  <form:form action="backtoprj" method="post" >
 
            
                     <td>
@@ -78,43 +84,43 @@
 
                     </td> --%>
 
-        </form:form>
+            </form:form>
 
 
-        <table border="1"  align="center">
+            <table border="1"  align="center">
 
-            <th style="color:red">Task Type</th>
-            <th style="color:red">Task Name</th>
-            <th style="color:red">Status</th>
-
-
-
-            <c:forEach var="td" items="${listtask}">
-                <tr style="color:black">
-
-                    <td>${td.task_Type}</td>
-                    <td>${td.task_Name}</td>
-
-    <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
-
-    <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td>
-
-
-                </c:forEach>     
-                </div> 
-
-        </table>
-
-    </div> 
-
-<div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
+                <th style="color:red">Task Type</th>
+                <th style="color:red">Task Name</th>
+                <th style="color:red">Status</th>
 
 
 
-</body>
+                <c:forEach var="td" items="${listtask}">
+                    <tr style="color:black">
+
+                        <td>${td.task_Type}</td>
+                        <td>${td.task_Name}</td>
+
+                        <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
+
+                        <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td>
+
+
+                    </c:forEach>     
+                    </div> 
+
+            </table>
+
+        </div> 
+
+        <div align="right">
+            <form action="logout" method="get">
+                <input type="submit" value="Logout"> 
+            </form></div>
+
+
+
+    </body>
 </html>
 
 

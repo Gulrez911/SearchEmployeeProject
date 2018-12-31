@@ -308,9 +308,9 @@ public class ProjectDaoImpl implements ProjectDao {
 //    }
     @Override
     @SuppressWarnings("unchecked")
-    public List<TaskDTO> displayAllStatus2(String email) {
+    public List<TaskDTO> displayAllStatus2(String email, int id) {
 
-        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "'";
+        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
