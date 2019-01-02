@@ -407,7 +407,7 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.POST)
+    @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
     public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, @SessionAttribute("employee") Employee employee1, ModelMap modelMap) {
         ModelAndView mav = new ModelAndView("byEmployeeEdit");
 
@@ -490,6 +490,16 @@ public class EmployeeController {
          mav.addObject("skill", skill);
 	return mav;
     }
+    
+    @RequestMapping(value = "/backtomanagerDashboard", method = RequestMethod.POST)
+    public ModelAndView backtomanagerDash( @SessionAttribute("employee") Employee employee) 
+   {
+    	ModelAndView mav = new ModelAndView("ManagerDashboard");
+    	mav.addObject("employee", employee);
+	   return mav;
+    
+   }  
+    
     }
     
 

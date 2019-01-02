@@ -161,10 +161,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/backtotask", method = RequestMethod.POST)
-    public ModelAndView backtotask(HttpServletRequest request) {
+    public ModelAndView backtotask( HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("createtask");
 
-        String s = request.getParameter("em");
+        String s=request.getParameter("em");
 //    	Integer mid = projectservice.getManagerid(email);
         Integer mid = projectservice.getManagerid(s);
         mav.addObject("mid", mid);
@@ -196,6 +196,7 @@ public class ProjectController {
         return mav;
 
     }
+
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView deleteTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee, @ModelAttribute("taskdetails") TaskDetails taskdetails) {
