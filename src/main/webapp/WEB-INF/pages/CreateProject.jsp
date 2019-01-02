@@ -87,7 +87,7 @@
     </div>
 
     <div align="right">
-        <form:form action="back" method="post" commandName="e">
+        <form:form action="backtomanagerDashboard" method="post" commandName="employee">
 
             <table>
                 <tr>

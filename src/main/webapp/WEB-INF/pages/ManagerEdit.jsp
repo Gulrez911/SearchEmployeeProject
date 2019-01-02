@@ -94,6 +94,19 @@
     </div>
     
     <div align="right">
+    <form:form action="backtomanagerDashboard" method="post" commandName="employee">
+    <table>
+    <tr>
+       <td><input type="submit" value="Back"></td> 
+    </tr>
+    
+   </table>
+    </form:form>
+    
+    
+    </div>
+    
+    <div align="right">
         <form action="logout" method="get">
         <input type="submit" value="Logout"> 
         </form></div>

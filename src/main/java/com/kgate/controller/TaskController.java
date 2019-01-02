@@ -154,7 +154,7 @@ public class TaskController {
 			mav.addObject("employee", employee);
 		} else {
 
-			modelMap.put("error", "Please Edit Details For Make Status Approved");
+			modelMap.put("error", "Please Edit Details to Make Status Approved");
 			mav = new ModelAndView("byEmployeeEdit");
 
 			Employee emp = employeeService.searchByEmail(employee.getEmail());
