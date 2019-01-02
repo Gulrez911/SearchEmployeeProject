@@ -12,6 +12,7 @@ import com.kgate.model.ProjectDetails;
 import com.kgate.model.ProjectReportDTO;
 
 import com.kgate.model.TaskDTO;
+import com.sun.javafx.image.impl.IntArgb;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -379,71 +380,90 @@ public class ProjectDaoImpl implements ProjectDao {
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus3(String email, int id) {
 
+//        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays, a.id from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "' order by a.id";
         String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays, a.id from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "' order by a.id";
-
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
+        int x = 0;
+        for (int i = 0; i < data.size(); i++) {
+            TaskDTO tdo = new TaskDTO();
+            Object arr[] = (Object[]) data.get(i);
+            String st1, st2, st3, st4, st5, st6, st7, st8, st9, st10, st11, st12;
+            int empid;
+//            int flag = 0;
 
-        for (Object d : data) {
-
-            Object arr[] = (Object[]) d;
-            String st, st2, st3, st4, st5, st6, st9, st10, st11, st12, st13;
-            System.out.println("In Object:::"+d);
-//            System.out.println("List of OBject contains:::::   "+data.get(0).arr[]);
-            TaskDTO tdto = new TaskDTO();
-
-            st = (String) arr[0];
-            st2 = (String) arr[1];
+            st1 = (String) arr[0].toString();
+            st2 = (String) arr[1].toString();
             st3 = (String) arr[2].toString();
-            st4 = "";
-            try {
-                st4 = arr[3].toString();
-            } catch (NullPointerException e) {
-                System.out.println("nullpoint exception Date:::" + e);
-            }
-
-            st5 = "";
-            try {
-                st5 = arr[4].toString();
-            } catch (NullPointerException E) {
-                System.out.println("Nullpoint Exception Assigned::" + E);
-            }
-
+            st4 = (String) arr[3].toString();
+            st5 = (String) arr[4].toString();
             st6 = (String) arr[5].toString();
-//            System.out.println("Task Status::: " + st6);
-            st9 = (String) arr[6].toString();
-            st10 = (String) arr[7].toString();
-            st11 = (String) arr[8].toString();
-            st13 = (String) arr[9].toString();
-            int empID = Integer.parseInt(st13);
-            int est = Integer.parseInt(st10);
-
-            int act = Integer.parseInt(st11);
-            int delay = act - est;
-//            System.out.println("Diff:::" + delay);
-            st12 = Integer.toString(delay);
-            // 
-            for (Object o2 : data) {
-                Object arr2[] = (Object[]) o2;
-                
-                String sst, sst2, sst3, sst4, sst5;
-                sst = (String)arr[9].toString();
-                int empID2 = Integer.parseInt(sst);
+            st7 = (String) arr[6].toString();
+            st8 = (String) arr[7].toString();
+            st9 = (String) arr[8].toString();
+            int flag = 0;
+            empid = Integer.parseInt((String) arr[9].toString());
+            if (x == empid) {
+                flag = 1;
             }
-            tdto.setEmp_name(st);
-            tdto.setTask_Name(st2);
-            tdto.setTask_Type(st3);
-            tdto.settStartDate(st4);
-            tdto.settEndDate(st5);
-            tdto.setStatus(st6);
-            tdto.setTsubDate(st9);
-            tdto.setEstimateDays(st10);
-            tdto.setActualDays(st11);
-            tdto.setDelayDays(st12);
+            int est = Integer.parseInt(st8);
+            int act = Integer.parseInt(st9);
+            int est1;
+            int delay;
+            delay = act - est;
+            System.out.println("Estimate time in Loop1::" + est);
+            for (int j = i + 1; j < data.size(); j++) {
+                Object arr2[] = (Object[]) data.get(j);
 
-            listtsk.add(tdto);
+                String sst1, sst2, sst3, sst4, sst5, sst6, sst7, sst8, sst9, sst10;
+                int empid2, act2;
+                sst1 = (String) arr2[0].toString();
+                sst2 = (String) arr2[1].toString();
+                sst3 = (String) arr2[2].toString();
+                sst4 = (String) arr2[3].toString();
+                sst5 = (String) arr2[4].toString();
+                sst6 = (String) arr2[5].toString();
+                sst7 = (String) arr2[6].toString();
+                sst8 = (String) arr2[7].toString();
+                sst9 = (String) arr2[8].toString();
+                empid2 = Integer.parseInt((String) arr2[9].toString());
+                est1 = Integer.parseInt(sst8);
+                act2 = Integer.parseInt(sst9);
+                int delay2;
+                delay2 = act2 - est1;
+                System.out.println("second LOOP::" + est1);
+                int act1 = Integer.parseInt(sst9);
+                if (flag == 0) {
+                    if (empid == empid2) {
+                        est = est + est1;
+                        act = act + act2;
+                        delay = delay + delay2;
+//                        System.out.println("Estimate time in Loop2::" + est);
+//                        sst10 = Integer.toString(est);
+//                        tdo.setEstimateDays(sst10);
+
+                    }
+                }
+            }
+            st10 = Integer.toString(est);
+            System.out.println("Estimate time in Loop2nd::" + st10);
+            st11 = Integer.toString(act);
+            st12 = Integer.toString(delay);
+            tdo.setEmp_name(st1);
+            tdo.setTask_Name(st2);
+            tdo.setTask_Type(st3);
+            tdo.settStartDate(st4);
+            tdo.settEndDate(st5);
+            tdo.setStatus(st6);
+            tdo.setTsubDate(st7);
+            tdo.setEstimateDays(st10);
+            tdo.setActualDays(st11);
+            tdo.setDelayDays(st12);
+            if (flag == 0) {
+                listtsk.add(tdo);
+            }
+            x = empid;
         }
-
         return listtsk;
     }
 
