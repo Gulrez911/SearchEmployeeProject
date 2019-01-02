@@ -21,8 +21,8 @@
                 <th>Task End Date</th>
                 <th>Task Status</th>
                 <th>Task Submit Date</th>
-                <th>Estimate Date</th>
-                <th>Actual Date</th>
+                <th>Estimate Days</th>
+                <th>Actual Days</th>
                 <th>Delay Days</th>
                     <c:forEach var="dTO" items="${taskDTOs}">
                     <tr>

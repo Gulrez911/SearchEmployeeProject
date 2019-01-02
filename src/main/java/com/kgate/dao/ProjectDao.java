@@ -33,4 +33,6 @@ public interface ProjectDao {
 
     //return projectdetails of employee using manager email
     public List<TaskDTO> displayAllStatus3(String email, int id);
+    
+    public String getmanagernameformail(String email);
 }

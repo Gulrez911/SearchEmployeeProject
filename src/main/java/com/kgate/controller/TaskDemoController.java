@@ -38,7 +38,6 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
-
     @Autowired
     ProjectService projectService;
 
@@ -68,7 +67,9 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,RedirectAttributes redirectAttributes,Model model1) {
+
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
         int mId = TaskDetails.getManagerId();
@@ -82,8 +83,9 @@ public class TaskDemoController {
 
  /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-        
-        ModelAndView mav = new ModelAndView("createtask");
+
+//        ModelAndView mav = new ModelAndView("createtask");
+        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
 
         String ProjectName = projectService.displayProjectName(pId);
         System.out.println("Project Name::::::::::::" + ProjectName);
@@ -96,15 +98,16 @@ public class TaskDemoController {
 
         mav.addObject("listtask", listtask);
         TaskDemoController tdc = new TaskDemoController();
-        
-        String s=request.getParameter("em");
-        mav.addObject("em",s);
+
+        String s = request.getParameter("em");
+        mav.addObject("em", s);
 
         String tskName = taskdetails.getTask_Name();
         String tskType = taskdetails.getTask_Type();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
+      String managername=projectService.getmanagernameformail(employee.getEmail());
         System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
 
         /*
@@ -112,11 +115,16 @@ public class TaskDemoController {
 		 * + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(),
 		 * "You have been assigned a Task");
          */
-        String message = "<i>You have been assigned a task</i><br>";
+        String message = "Dear Sir/Mam,<br>"
+        		+ " <i>You have been assigned a task</i><br>";
         message += "<font color=red>Task Details are as below</font>";
         message += "<table border='1'><th>Project Name</th><th>Task Name</th><th> Task Type</th><th> Task Start Date</th><th> Task End Date</th><tr><td>"
                 + ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
-                + tEndDate + "</td></tr></table>";
+                + tEndDate + "</td></tr></table>"
+                 +"<br>"
+                +"<br>"
+                +"Thanks And Regards,<br>"
+                +managername;
         tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
         
        /* redirectAttributes.addAttribute("pId1", pId);
@@ -127,26 +135,11 @@ public class TaskDemoController {
        
     }
 
-    @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-    public ModelAndView taskSubmit(@ModelAttribute("taskDetails") TaskDetails taskDetails, HttpServletRequest request) {
+   
 
-        ModelAndView mav = new ModelAndView("createtask");
-//       int pId = Integer.parseInt(request.getParameter("project_id"));
-        int pId = taskDetails.getProjectId();
-        System.out.println("ProjectID:::"+pId);
-        taskDetails.setProjectId(pId);
-        List<TaskDetails> listtask = taskService.getTaskList(pId);
-        TaskDetails td = new TaskDetails();
-        mav.addObject("td",td);
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        mav.addObject("task_Type", Tasktype);
-        mav.addObject("listtask", listtask);
-        
-         return mav;
-    }
 
     public void sendMail(String to, String message, String subject) {
-     
+
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");

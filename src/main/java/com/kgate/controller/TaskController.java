@@ -85,20 +85,26 @@ public class TaskController {
 		System.out.println("Manager Email::::" + Mangemail);
 		String empName = taskservice.getEmployeeName(employee.getEmail());
 		System.out.println("Employee Name;::" + empName);
-
+		
 		String ManagerName = taskservice.getManagerName(employee.getEmail());
 		System.out.println("Manager Name:::" + ManagerName);
 		String projectName = taskservice.getProjectName(taskdetails.getTask_id());
 		System.out.println("TaskName;::::: " + projectName);
 		TaskController tc = new TaskController();
-		String message = "<i>Task has been completed</i><br>";
+		String message ="Dear Sir/Madam"
+				+"<i>Task has been completed</i><br>";
 //		 message += "<font color=red>Task Completed</font>";
 		message += "<table border='1'><th>Employee Name</th><th>Manager Name</th><th>Project Name</th><th>Task Name</th><th>Task Type</th><th>Task Start Date</th><th>Task End Date</th><th>Task Status</th><tr><td>"
 				+ empName + "</td><td>" + ManagerName + "</td><td>" + projectName + "</td><td>"
 				+ taskdetails.getTask_Name() + "</td><td>" + taskdetails.getTask_Type() + "</td><td> "
 				+ taskdetails.gettStart_Time() + "</td><td>" + taskdetails.gettEnd_Time() + "</td><td>" + st1
-				+ "</td></tr></table>";
-
+				+ "</td></tr></table><br>"
+				+"<br>"
+				+"<br>"
+				+"Thanks & Regards<br>"
+				+empName;
+				;
+				
 		tc.sendMail(Mangemail, message, "Task is been completed");
 
 		return mav;

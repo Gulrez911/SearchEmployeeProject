@@ -27,6 +27,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+@SuppressWarnings("deprecation")
 @Controller
 public class ProjectController {
 
@@ -150,7 +151,7 @@ public class ProjectController {
         Employee e = new Employee();
         e = employeeService.searchByEmail(employee.getEmail());
         mav.addObject("e", e);
-
+        taskdetails.setEmp_Email(employee.getEmail());
         List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("listProject", listProject);
@@ -316,6 +317,7 @@ public class ProjectController {
 
     }
 
+
     @RequestMapping(value = "/CeoBack", method = RequestMethod.POST)
 
     public ModelAndView back() {
@@ -411,7 +413,7 @@ public class ProjectController {
 
     @RequestMapping(value = "/overviewProject", method = RequestMethod.GET)
     public ModelAndView overviewProject(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
-        ModelAndView mav = new ModelAndView("employeeProjectStatus");
+        ModelAndView mav = new ModelAndView("overviewProjectStatus");
         int id = Integer.parseInt(request.getParameter("project_id"));
         List<TaskDTO> taskDTOs = projectservice.displayAllStatus3(employee.getEmail(), id);
         TaskDTO dTO = new TaskDTO();
@@ -421,4 +423,15 @@ public class ProjectController {
         return mav;
 
     }
+
+     @RequestMapping(value = "/downloadOverviewProjectStatus", method = RequestMethod.POST)
+    public ModelAndView downloadOverviewProjectStatus(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
+//        int id = Integer.parseInt("proejct_id");
+        List<TaskDTO> list = projectservice.displayAllStatus3(employee.getEmail(), 8);
+        ModelAndView mav = new ModelAndView("pdfProjectStatusOverview");
+        mav.addObject("listProject", list);
+//        return new ModelAndView("pdfProjectStatus", "listProject", list);
+        return mav;
+    }
+
 }

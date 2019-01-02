@@ -170,6 +170,7 @@ public class TaskDaoImpl implements TaskDao {
 
 		Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query);
 		String name1 = (String) query2.uniqueResult();
+		/*String name1 = (String) query2.getFirstResult().toString();*/
 		return name1;
 	}
 
