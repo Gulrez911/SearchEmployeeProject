@@ -140,7 +140,7 @@ public class ProjectController {
         Employee e = new Employee();
         e = employeeService.searchByEmail(employee.getEmail());
         mav.addObject("e", e);
-
+        taskdetails.setEmp_Email(employee.getEmail());
         List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("listProject", listProject);
@@ -257,4 +257,6 @@ public class ProjectController {
         return new ModelAndView("pdfProjectReport", "listProject", listProject);
     }
 
+ 
+    
 }

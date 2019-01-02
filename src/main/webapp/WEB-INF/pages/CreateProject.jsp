@@ -31,7 +31,7 @@
                     <form:hidden path="manageremail" />
                     <tr>
                         <td>Project Name:</td>
-                        <td><form:input type="text" path="project_Name" name="project_Name"/></td>
+                        <td><form:input type="text" path="project_Name" name="project_Name" required="true"/></td>
                     </tr>
                     <tr>
                         <td>Description:</td>
