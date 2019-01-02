@@ -10,8 +10,10 @@
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/abstract.jpg">
         <div align="center">
+
             <form action="downloadOverviewProjectStatus" method="post">
-                <input type="submit" value="Download Project Report" > 
+                <input type="hidden" name="project_id" value="${project_id}">
+                <input type="submit" value="Download Task Report" > 
             </form>
             <table border="1">
                 <th>Developer Name</th>

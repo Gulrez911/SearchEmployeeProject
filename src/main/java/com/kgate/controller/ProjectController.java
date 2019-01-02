@@ -27,6 +27,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+@SuppressWarnings("deprecation")
 @Controller
 public class ProjectController {
 
@@ -150,7 +151,7 @@ public class ProjectController {
         Employee e = new Employee();
         e = employeeService.searchByEmail(employee.getEmail());
         mav.addObject("e", e);
-
+        taskdetails.setEmp_Email(employee.getEmail());
         List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("listProject", listProject);
@@ -369,9 +370,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/downloadProjectStatus", method = RequestMethod.POST)
-    public ModelAndView downloadProjectStatus(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
-//        int id = Integer.parseInt("proejct_id");
-        List<TaskDTO> list = projectservice.displayAllStatus2(employee.getEmail(), 8);
+    public ModelAndView downloadProjectStatus(@SessionAttribute("employee") Employee employee, @RequestParam("project_id") String project_id) {
+        int id = Integer.parseInt(project_id);
+        System.out.println("Ide:: " + id);
+        List<TaskDTO> list = projectservice.displayAllStatus2(employee.getEmail(), id);
         ModelAndView mav = new ModelAndView("pdfProjectStatus");
         mav.addObject("listProject", list);
 //        return new ModelAndView("pdfProjectStatus", "listProject", list);
@@ -405,6 +407,7 @@ public class ProjectController {
         System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
         mav.addObject("taskDTOs", taskDTOs);
+        mav.addObject("project_id", id);
         return mav;
 
     }
@@ -418,16 +421,19 @@ public class ProjectController {
         System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
         mav.addObject("taskDTOs", taskDTOs);
+        mav.addObject("project_id", id);
         return mav;
 
     }
-     @RequestMapping(value = "/downloadOverviewProjectStatus", method = RequestMethod.POST)
-    public ModelAndView downloadOverviewProjectStatus(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
-//        int id = Integer.parseInt("proejct_id");
-        List<TaskDTO> list = projectservice.displayAllStatus3(employee.getEmail(), 8);
+
+    @RequestMapping(value = "/downloadOverviewProjectStatus", method = RequestMethod.POST)
+    public ModelAndView downloadOverviewProjectStatus(@SessionAttribute("employee") Employee employee, @RequestParam("project_id") String project_id) {
+        int id = Integer.parseInt(project_id);
+        List<TaskDTO> list = projectservice.displayAllStatus3(employee.getEmail(), id);
         ModelAndView mav = new ModelAndView("pdfProjectStatusOverview");
         mav.addObject("listProject", list);
 //        return new ModelAndView("pdfProjectStatus", "listProject", list);
         return mav;
     }
+
 }

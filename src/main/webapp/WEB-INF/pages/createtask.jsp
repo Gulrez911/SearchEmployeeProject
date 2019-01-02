@@ -8,15 +8,21 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>Create Task</title>
+
+        
+
         <script>
             history.pushState(null, null, location.href);
             window.onpopstate = function () {
                 history.go(1);
             };
+
         </script>
     </head>
     <body
+
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
@@ -43,7 +49,7 @@
                     </tr>
             </form:form></div>
         <div align="right">
-            <form:form action="backtoproject" commandName="e">
+            <form:form action="backtoproject" >
 
                 <table>
                     <tr>

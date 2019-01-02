@@ -466,4 +466,16 @@ public class ProjectDaoImpl implements ProjectDao {
         }
         return listtsk;
     }
+
+	@Override
+    @SuppressWarnings("unchecked")
+	public String getmanagernameformail(String email) {
+		
+		 String query = "select name from Employee where email='" + email + "'";
+	        Query query2 = sessionFactory.getCurrentSession().createQuery(query);
+	        String name = (String) query2.uniqueResult();
+	        return name;
+		
+		
+	}
 }

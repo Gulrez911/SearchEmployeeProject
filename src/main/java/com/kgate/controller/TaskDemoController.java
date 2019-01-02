@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 //@SessionAttributes("taskDetails")
@@ -65,7 +67,9 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
         int mId = TaskDetails.getManagerId();
@@ -74,6 +78,7 @@ public class TaskDemoController {
         taskdetails.setProjectId(pId);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         List<TaskDetails> listtask = taskService.getTaskList(pId);
+        
         /* int pId = taskdetails.getProjectId(); */
 
  /* int mId = taskdetails.getManagerId(); */
@@ -102,6 +107,7 @@ public class TaskDemoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
+      String managername=projectService.getmanagernameformail(employee.getEmail());
         System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
 
         /*
@@ -109,16 +115,22 @@ public class TaskDemoController {
 		 * + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(),
 		 * "You have been assigned a Task");
          */
-        String message = "<i>You have been assigned a task</i><br>";
+        String message = "Dear Sir/Mam,<br>"
+        		+ " <i>You have been assigned a task</i><br>";
         message += "<font color=red>Task Details are as below</font>";
         message += "<table border='1'><th>Project Name</th><th>Task Name</th><th> Task Type</th><th> Task Start Date</th><th> Task End Date</th><tr><td>"
                 + ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
-                + tEndDate + "</td></tr></table>";
+                + tEndDate + "</td></tr></table>"
+                 +"<br>"
+                +"<br>"
+                +"Thanks And Regards,<br>"
+                +managername;
         tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
-        return mav;
+ 
+//    return tdc.refreshmethod(taskdetails, request);
+       return TaskDemoController.this.refreshmethod(taskdetails, request);
     }
  
-
     public void sendMail(String to, String message, String subject) {
 
         Properties props = new Properties();
@@ -152,6 +164,22 @@ public class TaskDemoController {
         }
         // return "employeelist";
 
+    }
+    
+    @RequestMapping(value="/refresh",method=RequestMethod.POST)
+    ModelAndView refreshmethod(  @ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request) {
+    	
+    	ModelAndView mav=new ModelAndView("createtask");
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        mav.addObject("task_Type", Tasktype);
+            int s1=taskdetails.getProjectId();
+              List<TaskDetails> listtask = taskService.getTaskList(s1);
+         	mav.addObject("listtask",listtask);
+    	 mav.addObject("taskdetails", taskdetails);
+    	 String s12=request.getParameter("em");
+         mav.addObject("em",s12);
+    	return mav;
+    		
     }
 
 }

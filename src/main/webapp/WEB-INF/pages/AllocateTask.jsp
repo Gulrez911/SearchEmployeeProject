@@ -73,11 +73,27 @@
 
                 </table>
 
+                
+                
+         
+
+       
+        
+  
+           
+        <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+                   
+             </form:form>
+
+
                 <form:form action="backtotask" method="post"  > 
                     <div align="left"><td>
                         <td>  <input type="submit" value="Back"></form:form> </td>
                     </div>
-            </form:form>
+        
 
 
             <div align="right">
@@ -87,4 +103,8 @@
 
 
     </body>
+
 </html>
+
+    
+
