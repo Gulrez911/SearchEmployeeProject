@@ -1,7 +1,5 @@
 package com.kgate.dao;
 
-
-
 import java.util.Date;
 import java.text.DateFormat;
 import java.time.LocalDate;
@@ -15,32 +13,43 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskDao {
 
+	public List<TaskDetails> getalltaskdetails(String email);
 
+	public void updateTask(TaskDetails taskDetails);
 
-    public List<TaskDetails> getalltaskdetails(String email);
+	public void updatetask1(String date, String email, int tid, String st);
 
-    public void updateTask(TaskDetails taskDetails);
+	public TaskDetails getEmployeeTask(int taskid);
 
-	 public void updatetask1(String date,String email,int tid,String st);
+	public void deleteTask(int task_id);
 
-    public TaskDetails getEmployeeTask(int taskid);
+	public void addTask(TaskDetails task);
 
-    public void deleteTask(int task_id);
+	public List<TaskDetails> getByProjectId(int id);
 
-    public void addTask(TaskDetails task);
+	public List<TaskDetails> getAllTask();
 
-    public List<TaskDetails> getByProjectId(int id);
+	// return employee name from manager email
+	public List<String> getEmployeeEmail(String email);
 
+	// return task
+	public TaskDetails getTask(int task_id);
 
-    public List<TaskDetails> getAllTask();
+	public List<TaskDetails> getTaskList(int mgrId);
 
-    //return employee name from manager email
-    public List<String> getEmployeeEmail(String email);
+	public List<TaskDTO> getEmpTasklist(String email);
 
-    //return task 
-    public TaskDetails getTask(int task_id);
+	// return manageremail id
 
-    public List<TaskDetails> getTaskList(int mgrId);
+	public String getManagerEmail(String email);
 
-    public List<TaskDTO> getEmpTasklist(String email);
+	// return get employee name
+	public String getEmployeeName(String name);
+
+	// return project name using task id
+	public String getProjectName(int id);
+
+//    return managereName id
+	public String getManagerName(String email);
+
 }

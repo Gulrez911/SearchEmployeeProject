@@ -43,11 +43,11 @@ public class ProjectReportBuilder extends AbstractITextPdfView {
         table.setSpacingBefore(10);
 
         // define font for table header row
-        Font font = FontFactory.getFont(FontFactory.TIMES);
+        Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
         font.setColor(BaseColor.WHITE);
 
         // define table header cell
-        PdfPCell cell = new PdfPCell();
+        PdfPCell cell = new PdfPCell(); 
         cell.setBackgroundColor(BaseColor.BLUE);
         cell.setPadding(5);
 

@@ -61,4 +61,16 @@ public class ProjectServiceImpl implements ProjectService {
     public String displayProjectName(int id) {
         return projectDao.displayProjectName(id);
     }
+
+    @Override
+    @Transactional
+    public List<TaskDTO> displayAllStatus2(String email, int id) {
+        return projectDao.displayAllStatus2(email, id);
+    }
+
+    @Override
+    @Transactional
+    public List<TaskDTO> displayAllStatus3(String email, int id) {
+        return projectDao.displayAllStatus3(email, id);
+    }
 }

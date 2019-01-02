@@ -24,7 +24,7 @@
         }
         </style>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/wood.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <div align="center">
             <form action="downloadProjectReport" method="post">
                 <input type="submit" value="Download Project Report" > 
