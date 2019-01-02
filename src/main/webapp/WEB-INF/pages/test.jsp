@@ -10,7 +10,7 @@
         <style>
             table {
                 border-collapse: collapse;
-            }
+              }
 
             th, td {
                 text-align: left;
@@ -30,22 +30,28 @@
         <title>Add Skills</title>
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/af.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+          <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
         <div align="center">
-            <h1 style="color: white">Skills Tracker: Add Skill Page</h1>
+            <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
             <form:form action="saveTest" method="post" modelAttribute="skill"
                        commandName="skill">
                 <table>
+                 
                     <form:hidden path="skill_Id" />
                     <tr>
-                        <td style="color: white">Name:</td>
+                        <td style="color: Dark blue">Name:</td>
                         <td><form:input path="skill_name" name="skill_name"
                                     id="skill_name" /></td>
                     <br>
                     <td colspan="2" align="center"><input type="submit"
                                                           value="Add"></td>
+                                                          
                     </tr>
+                    
+                    
                 </table>
+                 
             </form:form>
             <table border="1">
                 <th>Skills</th>
@@ -56,15 +62,12 @@
 
                         <td>${skill.skill_name}</td>
                         <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>
-           <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form>
-						
-
-				
+       			
         </div>
     </body>
 </html>

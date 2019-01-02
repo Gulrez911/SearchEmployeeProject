@@ -12,6 +12,42 @@ public class TaskDTO {
     private int id;
     private String email;
     private String emp_name;
+    private String tsubDate;
+    private String estimateDays;
+    private String actualDays;
+    private String delayDays;
+
+    public String getEstimateDays() {
+        return estimateDays;
+    }
+
+    public void setEstimateDays(String estimateDays) {
+        this.estimateDays = estimateDays;
+    }
+
+    public String getActualDays() {
+        return actualDays;
+    }
+
+    public void setActualDays(String actualDays) {
+        this.actualDays = actualDays;
+    }
+
+    public String getDelayDays() {
+        return delayDays;
+    }
+
+    public void setDelayDays(String delayDays) {
+        this.delayDays = delayDays;
+    }
+
+    public String getTsubDate() {
+        return tsubDate;
+    }
+
+    public void setTsubDate(String tsubDate) {
+        this.tsubDate = tsubDate;
+    }
 
     public String getEmp_name() {
         return emp_name;

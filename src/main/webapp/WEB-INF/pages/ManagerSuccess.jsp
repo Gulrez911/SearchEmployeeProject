@@ -9,11 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body background="<%=request.getContextPath()%>/resources/images/wp2596947.jpg">
+<body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 <!-- <form:form action="/" method="post" > -->
- <form:form action="back" method="post" commandName="employee">
+ <form:form action="back" method="post" commandName="employee" modelAttribute="employee">
+ 
 
  <table border="1">
+ 
+                  
 
                 <th style="color:red">Name</th>
                 <th style="color:red">Email</th>
@@ -24,7 +27,7 @@
                 
 
                 <c:forEach var="employee" items="${elist}">
-                    <tr style="color:white">
+                    <tr style="color:Dark blue">
 
                         <td>${employee.name}</td>
                         <td>${employee.email}</td>
@@ -35,17 +38,18 @@
 
                     </tr>
                 </c:forEach>
-                
+                     
             </table>
            <!--  </form:form> -->
-           
-        
+               
            <table>
           
 				<tr>
 					<td>
+					<input type="hidden" name="mail" value="${k }"> 
 					<input type="submit" value="Back">
-					</td>
+				
+				</td>
 				</tr>
 			</table>
            

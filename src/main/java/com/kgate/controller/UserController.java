@@ -116,26 +116,29 @@ public class UserController {
 
             } else if (employee.getCategory().equals("Manager")) {
 
-                ModelAndView mav = new ModelAndView("CreateProject");
-
-                Integer mid = projectservice.getManagerid(employee.getEmail());
-                // System.out.println("Manager ID:::: " + mid);
-                mav.addObject("mid", mid);
-                ProjectDetails projectdetails = new ProjectDetails();
-                projectdetails.setManageremail(employee.getEmail());
-                TaskDetails taskdetails = new TaskDetails();
-                ProjectDetails pd = new ProjectDetails();
-                mav.addObject("projectdetails", projectdetails);
-                taskdetails.setEmp_Email(employee.getEmail());
-                mav.addObject("taskdetails", taskdetails);
-                Employee e = new Employee();
-                mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-                List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-                // System.out.println("List of Project: " + listProject);
-                mav.addObject("pd", pd);
-
-                mav.addObject("listProject", listProject);
-
+                ModelAndView mav = new ModelAndView("ManagerDashboard");
+//                ModelAndView mav = new ModelAndView("CreateProject");
+ 
+//                Integer mid = projectservice.getManagerid(employee.getEmail());
+//                // System.out.println("Manager ID:::: " + mid);
+//                mav.addObject("mid", mid);
+//                ProjectDetails projectdetails = new ProjectDetails();
+//                projectdetails.setManageremail(employee.getEmail());
+//                TaskDetails taskdetails = new TaskDetails();
+//                ProjectDetails pd = new ProjectDetails();
+//                mav.addObject("projectdetails", projectdetails);
+//                taskdetails.setEmp_Email(employee.getEmail());
+//                mav.addObject("taskdetails", taskdetails);
+//                Employee e = new Employee();
+//                mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+//                List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+//                // System.out.println("List of Project: " + listProject);
+//                mav.addObject("pd", pd);
+//
+//                mav.addObject("listProject", listProject);
+//                
+ 
+          
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
@@ -192,12 +195,14 @@ public class UserController {
             } else if (employee.getCategory().equals("CEO")) {
                 ModelAndView model = new ModelAndView("CEODashboard1");
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
-                ProjectDetails pd = new ProjectDetails();
-                model.addObject("pd", pd);
+              /*  ProjectDetails pd = new ProjectDetails();
+                model.addObject("pd", pd);*/
                 model.addObject("listProject", listProject);
 
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
+                
+               
                 return model;
             } else {
                 modelMap.put("error", "Invalid UserName / Password");

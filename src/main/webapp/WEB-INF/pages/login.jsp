@@ -9,9 +9,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<<<<<<< HEAD
 
+        <SCRIPT type="text/javascript">
+            window.history.forward();
+            function noBack() {
+                window.history.forward();
+            }
+        </SCRIPT>
+=======-->
+        <script>
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+            };
+        </script>
 
-        <title>User Login.</title>
+         <title>User Login.</title>
         <style>
             * {
                 box-sizing: border-box;
@@ -62,7 +76,9 @@
                 <table align="center">
                     <tr>
                         <td style="color: white">User Name:</td>
-                        <td><form:input name="email" path="email" type="email" id="nm" /></td>
+                        <td><form:input name="email" path="email" type="email" id="nm"/></td>
+
+
                     </tr>
                     <tr>
                         <td style="color: white">Password:</td>
@@ -76,12 +92,24 @@
 
                             </form:select></td>
 
+
+
                         <td colspan="2" align="right"><input type="submit"
                                                              value="LOGIN" id="bt"></td>
+
                     </tr>
+                    <td>
+                        <div align="center">   <input type="Reset"></div>
+                    </td>
+
 
                 </table>
                 <div style="color: red">${error}</div> 
+
+
+
+                <!-- <div align="center">   <input type="Reset"></div> -->
+
             </form:form>
         </div> 
 

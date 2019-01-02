@@ -15,10 +15,11 @@
                 font-weight: bold;
             }
         </style>
+        
 
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
 
         <div align="center">
@@ -39,13 +40,13 @@
                     </tr>
                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date" type="date" name="pstart_Date"/></td>
+                        <td><form:input path="pstart_Date" type="date" name="pstart_Date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Project End Date:</td>
                         <td><form:input path="pEnd_Date" type="date" id="endDate"
-                                    name="endDate" /></td>
+                                    name="endDate" required="true"/></td>
                     </tr> 
 
                     <tr>
@@ -57,12 +58,12 @@
 
                 <table border="1" align="left">
 
-                    <th style="color: white">Project Name</th>
+                    <th style="color: red">Project Name</th>
 
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
-                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: white">${pd.project_Name}</a></td>
+                            <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: Dark blue">${pd.project_Name}</a></td>
 
                         </tr>
 
@@ -75,12 +76,12 @@
         <br>
     </div>
     <div align="right">
-        <form:form action="managerpage"  commandName="e">
-            <%-- <form:hidden path="email" name="email"/> --%>
+        <form:form action="managerpage"  modelAttribute="employee">
+            
             <table>
                 <tr>
                     <td>
-                        <a href="managerpage?email=${e.email}">Employee List</a>
+                        <a href="managerpage?email=${employee.email}">Employee List</a>
             </table>
         </form:form>
     </div>
@@ -98,16 +99,18 @@
 
 
 </table>
- <tr>
-   <div align="right"><td>
+ 
    
-    <a href="logout"><font style="color:white" size="5">LogOut</font></a>
-   
-   </div>
-</tr> 
+ 
 
 </form:form>
 </div>
+
+ <div align="right">
+        <form action="logout" method="get">
+        <input type="submit" value="Logout"> 
+        </form></div>
+        
 
 </body>
 
