@@ -407,7 +407,7 @@ public class EmployeeController {
 
     }
 
-    @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
+    @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.POST)
     public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, @SessionAttribute("employee") Employee employee1, ModelMap modelMap) {
         ModelAndView mav = new ModelAndView("byEmployeeEdit");
 
@@ -437,5 +437,59 @@ public class EmployeeController {
         return mav;
 
     }
+    
+    @RequestMapping(value = "/byManagerEdit", method = RequestMethod.POST)
+    public ModelAndView byManagerEdit(@ModelAttribute Employee employee) {
+        for (String skill : employee.getSkills()) {
+            Skill sk = skillService.getSkillByName(skill);
+            employee.getListSkill().add(sk);
+        }
+        employee.setStatus("Approved");
+        employeeService.addEmployee(employee);
+        String message = "Employee is successfully edited.";
+//        ModelAndView mav = new ModelAndView("EmployeeSuccess");
 
-}
+        ModelAndView mav = new ModelAndView("redirect:/bymanagerSuccess");
+        mav.addObject("message", message);
+        List<Employee> listEmployee = employeeService.getAllEmployees();
+        mav.addObject("listEmployee", listEmployee);
+        EmployeeController ec = new EmployeeController();
+        ec.sendMail(employee.getEmail(), "Details are Successfully save", "confirm message");
+
+        return mav;
+
+    }
+    
+    @RequestMapping(value = "/bymanagerSuccess", method = RequestMethod.GET)
+    public ModelAndView bymanagerSuccess(@ModelAttribute Employee employee, @SessionAttribute("employee") Employee employee1, ModelMap modelMap) 
+   {
+    	 ModelAndView mav = new ModelAndView("ManagerEdit");
+
+         Employee emp = employeeService.searchByEmail(employee1.getEmail());
+         List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee1.getEmail());
+
+         System.out.println("List of EmployeeSkill: " + employeeSkill);
+
+         List<Skill> listSkill = skillService.getAllSkills();
+
+         List<String> sk = new ArrayList<>();
+
+         for (int i = 0; i < employeeSkill.size(); i++) {
+             Object o = employeeSkill.get(i);
+             String s = (String) o;
+             sk.add(s);
+         }
+         emp.setSkills(sk);
+         String[] userType = {"Employee", "Admin", "Manager"};
+         mav.addObject("userTypes", userType);
+
+         mav.addObject("listSkill", listSkill);
+         mav.addObject("employee", emp);
+         modelMap.addAttribute("msg", "You have successfully edited");
+         Skill skill = new Skill();
+         mav.addObject("skill", skill);
+	return mav;
+    }
+    }
+    
+

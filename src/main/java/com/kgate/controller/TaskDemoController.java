@@ -66,7 +66,7 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
         int mId = TaskDetails.getManagerId();
@@ -102,6 +102,7 @@ public class TaskDemoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
+      String managername=projectService.getmanagernameformail(employee.getEmail());
         System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
 
         /*
@@ -109,11 +110,16 @@ public class TaskDemoController {
 		 * + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(),
 		 * "You have been assigned a Task");
          */
-        String message = "<i>You have been assigned a task</i><br>";
+        String message = "Dear Sir/Mam,<br>"
+        		+ " <i>You have been assigned a task</i><br>";
         message += "<font color=red>Task Details are as below</font>";
         message += "<table border='1'><th>Project Name</th><th>Task Name</th><th> Task Type</th><th> Task Start Date</th><th> Task End Date</th><tr><td>"
                 + ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
-                + tEndDate + "</td></tr></table>";
+                + tEndDate + "</td></tr></table>"
+                 +"<br>"
+                +"<br>"
+                +"Thanks And Regards,<br>"
+                +managername;
         tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
         return mav;
     }

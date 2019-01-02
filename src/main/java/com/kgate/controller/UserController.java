@@ -245,9 +245,10 @@ public class UserController {
         ModelAndView mav = new ModelAndView("byEmployeeEdit");
         Employee emp = employeeService.searchByEmail(employee.getEmail());
         List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());*/
+    
     @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
     public ModelAndView Empedit(@ModelAttribute Employee employee) {
-        ModelAndView mav = new ModelAndView("byEmployeeEdit");
+        ModelAndView mav = new ModelAndView("ManagerEdit");
         Employee emp = employeeService.searchByEmail(employee.getEmail());
         List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());
 

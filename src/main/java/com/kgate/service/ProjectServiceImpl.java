@@ -73,4 +73,11 @@ public class ProjectServiceImpl implements ProjectService {
     public List<TaskDTO> displayAllStatus3(String email, int id) {
         return projectDao.displayAllStatus3(email, id);
     }
+
+	@Override
+	 @Transactional
+	public String getmanagernameformail(String email) {
+		
+		return projectDao.getmanagernameformail(email);
+	}
 }
