@@ -117,49 +117,7 @@ public class TaskDemoController {
         tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
         return mav;
     }
-
-    @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-    public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
-        int mId = taskdetails.getManagerId();
-        taskdetails.setManagerId(mId);
-        int pId = taskdetails.getProjectId();
-        taskdetails.setProjectId(pId);
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        List<TaskDetails> listtask = taskService.getTaskList(pId);
-        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-
-        ModelAndView mav = new ModelAndView("createtask");
-
-        String ProjectName = projectService.displayProjectName(pId);
-        System.out.println("Project Name::::::::::::" + ProjectName);
-        
-        mav.addObject("task_Type", Tasktype);
-        mav.addObject("taskdetails", taskdetails);
-        System.out.println("List Task in Submit::::  "+listtask);
-        mav.addObject("listtask", listtask);
-        TaskDemoController tdc = new TaskDemoController();
-
-        String s = request.getParameter("em");
-        mav.addObject("em", s);
-        return mav;
-    }
-//    @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-//    public ModelAndView taskSubmit(@ModelAttribute("taskDetails") TaskDetails taskDetails, HttpServletRequest request) {
-//
-//        ModelAndView mav = new ModelAndView("createtask");
-////       int pId = Integer.parseInt(request.getParameter("project_id"));
-//        int pId = taskDetails.getProjectId();
-//        System.out.println("ProjectID:::" + pId);
-//        taskDetails.setProjectId(pId);
-//        List<TaskDetails> listtask = taskService.getTaskList(pId);
-//        TaskDetails td = new TaskDetails();
-//        mav.addObject("td", td);
-//        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-//        mav.addObject("task_Type", Tasktype);
-//        mav.addObject("listtask", listtask);
-//
-//        return mav;
-//    }
+ 
 
     public void sendMail(String to, String message, String subject) {
 
