@@ -436,4 +436,22 @@ public class ProjectController {
         return mav;
     }
 
+    @RequestMapping(value = "/ManagerDashboardBack", method = RequestMethod.POST)
+    public ModelAndView ManagerDashboardBack(@ModelAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("ManagerDashboard");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/ManagerProjectDetBack", method = RequestMethod.POST)
+    public ModelAndView ManagerProjectDetBack(@SessionAttribute("employee") Employee emp, @ModelAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("managerProjectDetails");
+        List<ProjectDetails> listProjectName = projectservice.getProjectByEmail(emp.getEmail());
+
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("listProjectName", listProjectName);
+        mav.addObject("pd", pd);
+        return mav;
+    }
+
 }

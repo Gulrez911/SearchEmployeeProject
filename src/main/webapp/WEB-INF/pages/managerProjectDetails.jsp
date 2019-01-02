@@ -18,7 +18,7 @@
                 <th>Project Name</th>
                 <th>View Details</th>
                 <th>Overview</th>
-                    <c:forEach var="pd" items="${listProjectName}">
+                <c:forEach var="pd" items="${listProjectName}">
                     <tr>
 
                         <td>${pd.project_Name}</td>
@@ -26,7 +26,10 @@
                         <td><a href="overviewProject?project_id=${pd.project_id}">Overview</a></td>
                     </tr>
                 </c:forEach>
-            </table>
+            </table><br/>
+            <form action="/SpringMVCHibernateCRUD/ManagerDashboardBack" method="post">
+            <input type="submit" value="Back"/>
+        </form>
         </div>
     </body>
 </html>
