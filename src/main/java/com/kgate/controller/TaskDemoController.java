@@ -36,7 +36,6 @@ public class TaskDemoController {
     @Autowired
     TaskService taskService;
 
-
     @Autowired
     ProjectService projectService;
 
@@ -79,8 +78,9 @@ public class TaskDemoController {
 
  /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-        
-        ModelAndView mav = new ModelAndView("createtask");
+
+//        ModelAndView mav = new ModelAndView("createtask");
+        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
 
         String ProjectName = projectService.displayProjectName(pId);
         System.out.println("Project Name::::::::::::" + ProjectName);
@@ -93,9 +93,9 @@ public class TaskDemoController {
 
         mav.addObject("listtask", listtask);
         TaskDemoController tdc = new TaskDemoController();
-        
-        String s=request.getParameter("em");
-        mav.addObject("em",s);
+
+        String s = request.getParameter("em");
+        mav.addObject("em", s);
 
         String tskName = taskdetails.getTask_Name();
         String tskType = taskdetails.getTask_Type();
@@ -119,25 +119,50 @@ public class TaskDemoController {
     }
 
     @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
-    public ModelAndView taskSubmit(@ModelAttribute("taskDetails") TaskDetails taskDetails, HttpServletRequest request) {
+    public ModelAndView taskSubmit(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+        int mId = taskdetails.getManagerId();
+        taskdetails.setManagerId(mId);
+        int pId = taskdetails.getProjectId();
+        taskdetails.setProjectId(pId);
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        List<TaskDetails> listtask = taskService.getTaskList(pId);
+        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
 
         ModelAndView mav = new ModelAndView("createtask");
-//       int pId = Integer.parseInt(request.getParameter("project_id"));
-        int pId = taskDetails.getProjectId();
-        System.out.println("ProjectID:::"+pId);
-        taskDetails.setProjectId(pId);
-        List<TaskDetails> listtask = taskService.getTaskList(pId);
-        TaskDetails td = new TaskDetails();
-        mav.addObject("td",td);
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        mav.addObject("task_Type", Tasktype);
-        mav.addObject("listtask", listtask);
+
+        String ProjectName = projectService.displayProjectName(pId);
+        System.out.println("Project Name::::::::::::" + ProjectName);
         
-         return mav;
+        mav.addObject("task_Type", Tasktype);
+        mav.addObject("taskdetails", taskdetails);
+        System.out.println("List Task in Submit::::  "+listtask);
+        mav.addObject("listtask", listtask);
+        TaskDemoController tdc = new TaskDemoController();
+
+        String s = request.getParameter("em");
+        mav.addObject("em", s);
+        return mav;
     }
+//    @RequestMapping(value = "/taskSubmit", method = RequestMethod.GET)
+//    public ModelAndView taskSubmit(@ModelAttribute("taskDetails") TaskDetails taskDetails, HttpServletRequest request) {
+//
+//        ModelAndView mav = new ModelAndView("createtask");
+////       int pId = Integer.parseInt(request.getParameter("project_id"));
+//        int pId = taskDetails.getProjectId();
+//        System.out.println("ProjectID:::" + pId);
+//        taskDetails.setProjectId(pId);
+//        List<TaskDetails> listtask = taskService.getTaskList(pId);
+//        TaskDetails td = new TaskDetails();
+//        mav.addObject("td", td);
+//        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+//        mav.addObject("task_Type", Tasktype);
+//        mav.addObject("listtask", listtask);
+//
+//        return mav;
+//    }
 
     public void sendMail(String to, String message, String subject) {
-     
+
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
