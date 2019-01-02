@@ -8,9 +8,18 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>Create Task</title>
+        <script type="text/javascript">
+function f1()
+{
+	/* if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+	} */
+}
+        </script>
     </head>
     <body
-        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg">
+        background="<%=request.getContextPath()%>/resources/images/macbook_apple.jpg" onload="f1()">
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 //@SessionAttributes("taskDetails")
@@ -64,7 +66,7 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,RedirectAttributes redirectAttributes) {
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
         int mId = TaskDetails.getManagerId();
@@ -73,6 +75,7 @@ public class TaskDemoController {
         taskdetails.setProjectId(pId);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         List<TaskDetails> listtask = taskService.getTaskList(pId);
+        
         /* int pId = taskdetails.getProjectId(); */
 
  /* int mId = taskdetails.getManagerId(); */
@@ -113,6 +116,11 @@ public class TaskDemoController {
                 + ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
                 + tEndDate + "</td></tr></table>";
         tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
+        redirectAttributes.addAttribute("pId1", pId);
+        redirectAttributes.addFlashAttribute("pid2", pId);
+      /* return new ModelAndView("redirect:/refresh");*/
+      /* return success( TaskDetails,
+            taskdetails, request, redirectAttributes);*/
         return mav;
     }
 
@@ -166,6 +174,21 @@ public class TaskDemoController {
         }
         // return "employeelist";
 
+    }
+    
+    @RequestMapping(value="/refresh",method=RequestMethod.GET)
+    ModelAndView refreshmethod(  @ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request,Model model) {
+    	
+    	ModelAndView mav=new ModelAndView("createtask");
+        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
+        int s=(Integer)model.asMap().get("pId1");
+        
+        int s1=Integer.parseInt(request.getParameter("pId1"));
+       
+        List<TaskDetails> listtask = taskService.getTaskList(s);
+    	mav.addObject("listtask",listtask);
+    	return mav;
+    		
     }
 
 }
