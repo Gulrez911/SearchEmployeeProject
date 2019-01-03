@@ -70,5 +70,6 @@
         <form action="logout" method="get">
         <input type="submit" value="Logout"/>
          </form></div>
+         
 </body>
 </html>

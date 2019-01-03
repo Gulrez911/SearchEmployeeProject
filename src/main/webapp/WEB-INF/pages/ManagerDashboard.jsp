@@ -22,6 +22,7 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/pineapple.jpg">
+    <div>
         <h4>Welcome to DashBoard</h4>
         <div align="center">
             <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
@@ -40,7 +41,9 @@
                 <form:hidden path="email" />
                 <input type="submit" value="Project Status">
             </form:form>
+          
         </div>
-         
+       
+         </div>
     </body>
 </html>
