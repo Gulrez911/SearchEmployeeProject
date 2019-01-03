@@ -318,7 +318,6 @@ public class ProjectController {
 
     }
 
-
     @RequestMapping(value = "/CeoBack", method = RequestMethod.POST)
 
     public ModelAndView back() {
@@ -372,9 +371,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/downloadProjectStatus", method = RequestMethod.POST)
-    public ModelAndView downloadProjectStatus(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
-//        int id = Integer.parseInt("proejct_id");
-        List<TaskDTO> list = projectservice.displayAllStatus2(employee.getEmail(), 8);
+    public ModelAndView downloadProjectStatus(@SessionAttribute("employee") Employee employee, @RequestParam("project_id") String project_id) {
+        int id = Integer.parseInt(project_id);
+        System.out.println("Ide:: " + id);
+        List<TaskDTO> list = projectservice.displayAllStatus2(employee.getEmail(), id);
         ModelAndView mav = new ModelAndView("pdfProjectStatus");
         mav.addObject("listProject", list);
 //        return new ModelAndView("pdfProjectStatus", "listProject", list);
@@ -408,6 +408,7 @@ public class ProjectController {
         System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
         mav.addObject("taskDTOs", taskDTOs);
+        mav.addObject("project_id", id);
         return mav;
 
     }
@@ -421,17 +422,36 @@ public class ProjectController {
         System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
         mav.addObject("taskDTOs", taskDTOs);
+        mav.addObject("project_id", id);
         return mav;
 
     }
 
-     @RequestMapping(value = "/downloadOverviewProjectStatus", method = RequestMethod.POST)
-    public ModelAndView downloadOverviewProjectStatus(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
-//        int id = Integer.parseInt("proejct_id");
-        List<TaskDTO> list = projectservice.displayAllStatus3(employee.getEmail(), 8);
+    @RequestMapping(value = "/downloadOverviewProjectStatus", method = RequestMethod.POST)
+    public ModelAndView downloadOverviewProjectStatus(@SessionAttribute("employee") Employee employee, @RequestParam("project_id") String project_id) {
+        int id = Integer.parseInt(project_id);
+        List<TaskDTO> list = projectservice.displayAllStatus3(employee.getEmail(), id);
         ModelAndView mav = new ModelAndView("pdfProjectStatusOverview");
         mav.addObject("listProject", list);
 //        return new ModelAndView("pdfProjectStatus", "listProject", list);
+        return mav;
+    }
+
+    @RequestMapping(value = "/ManagerDashboardBack", method = RequestMethod.POST)
+    public ModelAndView ManagerDashboardBack(@ModelAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("ManagerDashboard");
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/ManagerProjectDetBack", method = RequestMethod.POST)
+    public ModelAndView ManagerProjectDetBack(@SessionAttribute("employee") Employee emp, @ModelAttribute("employee") Employee employee) {
+        ModelAndView mav = new ModelAndView("managerProjectDetails");
+        List<ProjectDetails> listProjectName = projectservice.getProjectByEmail(emp.getEmail());
+
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("listProjectName", listProjectName);
+        mav.addObject("pd", pd);
         return mav;
     }
 

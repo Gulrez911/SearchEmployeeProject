@@ -11,6 +11,7 @@
     <body background="<%=request.getContextPath()%>/resources/images/abstract.jpg">
         <div align="center">
             <form action="downloadProjectStatus" method="post">
+                <input type="hidden" name="project_id" value="${project_id}">
                 <input type="submit" value="Download Project Report" > 
             </form>
             <table border="1">
@@ -40,6 +41,9 @@
                     </tr>
                 </c:forEach>
             </table>
+            <form action="/SpringMVCHibernateCRUD/ManagerProjectDetBack" method="post">
+                <input type="submit" value="Back"/>
+            </form>
         </div>
     </body>
 </html>

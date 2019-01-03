@@ -126,18 +126,11 @@ public class TaskDemoController {
                 +"Thanks And Regards,<br>"
                 +managername;
         tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
-        
-       /* redirectAttributes.addAttribute("pId1", pId);
-        redirectAttributes.addAttribute("em", s);
-           return new ModelAndView("redirect:/refresh");*/
-    return TaskDemoController.this.refreshmethod(taskdetails, request);
-     
-       
+ 
+//    return tdc.refreshmethod(taskdetails, request);
+       return TaskDemoController.this.refreshmethod(taskdetails, request);
     }
-
-   
-
-
+ 
     public void sendMail(String to, String message, String subject) {
 
         Properties props = new Properties();
