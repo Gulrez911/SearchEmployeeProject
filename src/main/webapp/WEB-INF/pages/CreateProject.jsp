@@ -20,7 +20,7 @@
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-
+ <jsp:include page="header.jsp"/>
 
         <div align="center">
             <h1 style="color: orangered">Create Project</h1>
@@ -100,18 +100,10 @@
 
 </table>
  
-   
- 
-
 </form:form>
 </div>
 
- <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
-        
-
+ 
 </body>
 
 </html>

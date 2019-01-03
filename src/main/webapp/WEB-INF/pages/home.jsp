@@ -34,7 +34,7 @@
 
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
-
+<%@include file="header.jsp" %>
         <div align="center">
 
             <h1><font style="color:yellow" size="5">Employee List</font></h1>
@@ -102,9 +102,6 @@
    <input type="submit" value="Back"></form:form>
         </div>
         
-        <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
+       
     </body>
 </html>

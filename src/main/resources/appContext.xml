@@ -41,11 +41,8 @@
 
         <property name="username" value="root"></property>
         <property name="password" value="1234"></property>
-
-
-    </bean>
-
-
+   
+     </bean>
 
     <!-- Hibernate SessionFactory -->
     <bean id="sessionFactory"
@@ -88,6 +85,5 @@
     <property name="objectMapper" ref="jacksonObjectMapper" /> </bean> </mvc:message-converters> 
     </mvc:annotation-driven> <bean id="jacksonObjectMapper" class="de.Company.backend.web.CompanyObjectMapper" 
     /> -->
-
 
 </beans>

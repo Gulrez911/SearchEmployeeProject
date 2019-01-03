@@ -9,7 +9,7 @@
         <title>Insert title here</title>
     </head>
     <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg" >
-
+<%@include file="header.jsp" %>
 
         <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post" modelAttribute="employee" commandName="employee">
         <form:hidden path="email" />
@@ -66,9 +66,6 @@
             <form:hidden path="email" />
             <input type="submit" value="Back">
         </form:form>
-        <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"/>
-         </form></div>
+       
 </body>
 </html>

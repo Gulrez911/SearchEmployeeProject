@@ -17,6 +17,7 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/pineapple.jpg">
+    <%@include file="header.jsp" %>
         <h4>Welcome to DashBoard</h4>
         <div align="center">
             <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
