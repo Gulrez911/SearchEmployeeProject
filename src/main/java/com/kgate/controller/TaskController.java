@@ -105,7 +105,7 @@ public class TaskController {
 				+empName;
 				;
 				
-		tc.sendMail(Mangemail, message, "Task is been completed");
+		tc.sendMail(Mangemail, message, "Task has been completed");
 
 		return mav;
 

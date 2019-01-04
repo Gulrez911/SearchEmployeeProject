@@ -17,9 +17,9 @@
 
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+     <%@include file="header.jsp" %>
 
-
-        <div align="center">
+            <div align="center">
             <h1 style="color:orangered">New/Edit Employee</h1>
 
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
@@ -84,11 +84,6 @@
                         <td><form:input path="managerId" /></td>
                     </tr>
                     
-                  
-
-                 
-
-
                     <tr>
                         <td style="color:Dark blue"> Skills: </font></td>
                         <td>
@@ -104,22 +99,9 @@
                     <tr>
                         <td><input type="submit" value="Submit" name="action1"/></td>     
                         <td colspan="2" align="center"><input type="submit" value="BACK" name="action2"></td>
-                    </tr>
-                    
-                    
-            
-                </table>
-              
-                
+                    </tr>     
+                </table>     
             </form:form>
-
-
         </div>
-        
-        
-        <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
     </body>
 </html>

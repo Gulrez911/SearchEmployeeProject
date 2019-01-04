@@ -1,8 +1,3 @@
-<%-- 
-    Document   : ManagerDashboard
-    Created on : Dec 28, 2018, 5:28:29 PM
-    Author     : user
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -22,6 +17,7 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/pineapple.jpg">
+    <%@include file="header.jsp" %>
         <h4>Welcome to DashBoard</h4>
         <div align="center">
             <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
@@ -44,3 +40,4 @@
          
     </body>
 </html>
+

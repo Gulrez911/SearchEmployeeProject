@@ -1,8 +1,3 @@
-<%-- 
-    Document   : CEODashboard
-    Created on : Dec 18, 2018, 10:55:29 AM
-    Author     : user
---%>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -25,6 +20,7 @@
         </style>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+     <%@include file="header.jsp" %>
         <div align="center">
             <form action="downloadProjectReport" method="post">
                 <input type="submit" value="Download Project Report" > 
@@ -123,9 +119,6 @@
                 </c:forEach> 
             </table>
         </div>
-        <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
+        
     </body>
 </html>
