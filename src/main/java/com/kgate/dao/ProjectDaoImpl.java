@@ -249,69 +249,15 @@ public class ProjectDaoImpl implements ProjectDao {
             System.out.println("End:     " + s3);
             listproject.add(dTO);
         }
-//        ProjectReportDTO dt1 = new ProjectReportDTO();
-//        dt1.setProject_name("This is Test Project::::");
-//        listproject.add(dt1);
-
+ 
         return listproject;
     }
-
-//
-//    @Override
-//    @SuppressWarnings("unchecked")
-//    public List<TaskDTO> displayAllStatus2(String email) {
-//
-//        String query = "select a.name AS 'Employee Name' , task_details.task_Name, task_details.task_Type,task_details.tStart_Time,task_details.tEnd_Time, task_details.taskStatus,task_details.tSub_Date from employee123 a, employee123 b cross join task_details where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND task_details.Emp_Email=a.email AND b.email='" + email + "'";
-//
-//        List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
-//        List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
-//
-//        for (Object d : data) {
-//
-//            Object arr[] = (Object[]) d;
-//            String st, st2, st3, st4, st5, st6, st9;
-//
-//            TaskDTO tdto = new TaskDTO();
-//
-//            st = (String) arr[0];
-//            st2 = (String) arr[1];
-//            st3 = (String) arr[2].toString();
-//            st4 = "";
-//            try {
-//                st4 = arr[3].toString();
-//            } catch (NullPointerException e) {
-//                System.out.println("nullpoint exception Date:::" + e);
-//            }
-//
-//            st5 = "";
-//            try {
-//                st5 = arr[4].toString();
-//            } catch (NullPointerException E) {
-//                System.out.println("Nullpoint Exception Assigned::" + E);
-//            }
-//
-//            st6 = (String) arr[5].toString();
-//            System.out.println("Task Status::: " + st6);
-//            st9 = (String) arr[6].toString();
-//
-//            tdto.setEmp_name(st);
-//            tdto.setTask_Name(st2);
-//            tdto.setTask_Type(st3);
-//            tdto.settStartDate(st4);
-//            tdto.settEndDate(st5);
-//            tdto.setStatus(st6);
-//            tdto.setTsubDate(st9);
-//
-//            listtsk.add(tdto);
-//        }
-//
-//        return listtsk;
-//    }
+ 
     @Override
     @SuppressWarnings("unchecked")
     public List<TaskDTO> displayAllStatus2(String email, int id) {
 
-        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "'";
+        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "'";
 
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -342,9 +288,21 @@ public class ProjectDaoImpl implements ProjectDao {
 
             st6 = (String) arr[5].toString();
             System.out.println("Task Status::: " + st6);
-            st9 = (String) arr[6].toString();
+            st9 = "";
+            try {
+                st9 = (String) arr[6].toString();
+            } catch (NullPointerException e) {
+                System.out.println("Nullpoint exception::" + e);
+            }
+
             st10 = (String) arr[7].toString();
-            st11 = (String) arr[8].toString();
+            st11 = "";
+            try {
+                st11 = (String) arr[8].toString();
+            } catch (NullPointerException e) {
+                System.out.println("Null Point Exception   " + e);
+            }
+
             int est = Integer.parseInt(st10);
             int act = Integer.parseInt(st11);
             int delay = act - est;
@@ -381,7 +339,7 @@ public class ProjectDaoImpl implements ProjectDao {
     public List<TaskDTO> displayAllStatus3(String email, int id) {
 
 //        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays, a.id from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "' order by a.id";
-        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is not null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays, a.id from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "' order by a.id";
+        String query = "select a.name AS 'Employee Name' , td.task_Name, td.task_Type,td.tStart_Time,td.tEnd_Time, td.taskStatus,td.tSub_Date,datediff(td.tEnd_Time,td.tStart_Time)  as EstimateDays , if(td.tSub_Date is null,datediff(curdate(),td.tStart_Time),datediff(td.tSub_Date,td.tStart_Time)) as ActualDays, a.id from employee123 a, employee123 b cross join task_details td where a.category = 'employee' AND a.managerId = b.id AND b.category ='Manager' AND td.Emp_Email=a.email AND b.email='" + email + "' AND td.projectId='" + id + "' order by a.id";
         List<TaskDTO> listtsk = new ArrayList<TaskDTO>();
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
         int x = 0;
@@ -398,7 +356,13 @@ public class ProjectDaoImpl implements ProjectDao {
             st4 = (String) arr[3].toString();
             st5 = (String) arr[4].toString();
             st6 = (String) arr[5].toString();
-            st7 = (String) arr[6].toString();
+            st7 = "";
+            try {
+                st7 = (String) arr[6].toString();
+            } catch (NullPointerException e) {
+
+            }
+
             st8 = (String) arr[7].toString();
             st9 = (String) arr[8].toString();
             int flag = 0;
@@ -423,7 +387,13 @@ public class ProjectDaoImpl implements ProjectDao {
                 sst4 = (String) arr2[3].toString();
                 sst5 = (String) arr2[4].toString();
                 sst6 = (String) arr2[5].toString();
-                sst7 = (String) arr2[6].toString();
+                sst7 = "";
+                try {
+                    sst7 = (String) arr2[6].toString();
+                } catch (NullPointerException e) {
+                    System.out.println("Nullpoint exception: " + e);
+                }
+
                 sst8 = (String) arr2[7].toString();
                 sst9 = (String) arr2[8].toString();
                 empid2 = Integer.parseInt((String) arr2[9].toString());
@@ -467,15 +437,14 @@ public class ProjectDaoImpl implements ProjectDao {
         return listtsk;
     }
 
-	@Override
+    @Override
     @SuppressWarnings("unchecked")
-	public String getmanagernameformail(String email) {
-		
-		 String query = "select name from Employee where email='" + email + "'";
-	        Query query2 = sessionFactory.getCurrentSession().createQuery(query);
-	        String name = (String) query2.uniqueResult();
-	        return name;
-		
-		
-	}
+    public String getmanagernameformail(String email) {
+
+        String query = "select name from Employee where email='" + email + "'";
+        Query query2 = sessionFactory.getCurrentSession().createQuery(query);
+        String name = (String) query2.uniqueResult();
+        return name;
+
+    }
 }

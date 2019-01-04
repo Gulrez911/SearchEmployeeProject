@@ -7,10 +7,23 @@
 <html>
     <head>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("input").focus(function () {
+                    $(this).css("background-color", "#cccccc");
+                });
+                $("input").blur(function () {
+                    $(this).css("background-color", "#ffffff");
+                });
+            });
+        </script>
+
+
         <style>
             table {
                 border-collapse: collapse;
-              }
+            }
 
             th, td {
                 text-align: left;
@@ -27,47 +40,52 @@
             }
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <title>Add Skills</title>
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-          <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
-        <div align="center">
-            <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
-            <form:form action="saveTest" method="post" modelAttribute="skill"
-                       commandName="skill">
-                <table>
-                 
-                    <form:hidden path="skill_Id" />
-                    <tr>
-                        <td style="color: Dark blue">Name:</td>
-                        <td><form:input path="skill_name" name="skill_name"
-                                    id="skill_name" /></td>
-                    <br>
-                    <td colspan="2" align="center"><input type="submit"
-                                                          value="Add"></td>
-                                                          
-                    </tr>
-                    
-                    
-                </table>
-                 
-            </form:form>
-            <table border="1">
-                <th>Skills</th>
-                <th>Action</th>
+    <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
+    <div align="center">
+        <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
+    <form:form action="saveTest" method="post" modelAttribute="skill"
+               commandName="skill">
+        <table>
 
-                <c:forEach var="skill" items="${listSkill}">
-                    <tr>
+            <form:hidden path="skill_Id" />
+            <tr>
+                <td style="color: Dark blue">Name:</td>
+                <td><form:input path="skill_name" name="skill_name"
+                            id="skill_name" /></td>
 
-                        <td>${skill.skill_name}</td>
-                        <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; 
-                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-       			
-        </div>
-    </body>
+            <br>
+            <td colspan="2" align="center"><input type="submit"
+                                                  value="Add"></td>
+
+            </tr>
+
+
+        </table>
+
+    </form:form>
+    <table border="1">
+        <th>Skills</th>
+        <th>Action</th>
+
+        <c:forEach var="skill" items="${listSkill}">
+            <tr>
+
+                <td>${skill.skill_name}</td>
+                <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp; 
+<!--                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>-->
+                    <a href="deleteTest?skill_Id=${skill.skill_Id}" onclick = "if (!confirm('Are you sure want to Delete Skill?')) {
+                                return false;
+                            }">Delete</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+
+</div>
+</body>
 </html>
