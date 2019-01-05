@@ -17,27 +17,27 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/pineapple.jpg">
-    <%@include file="header.jsp" %>
+        <%@include file="header.jsp" %>
         <h4>Welcome to DashBoard</h4>
         <div align="center">
-            <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"
+            <form:form action="/PMS-1.0/MngEdit" method="post"
                        modelAttribute="employee" commandName="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Edit Profile">
             </form:form>
             </br>
-            <form:form action="/SpringMVCHibernateCRUD/createProject2" method="post"  modelAttribute="employee">
+            <form:form action="/PMS-1.0/createProject2" method="post"  modelAttribute="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Create Project">
             </form:form>
             </br>
-            
-            <form:form action="/SpringMVCHibernateCRUD/managerProjectView" method="post"  modelAttribute="employee">
+
+            <form:form action="/PMS-1.0/managerProjectView" method="post"  modelAttribute="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Project Status">
             </form:form>
         </div>
-         
+
     </body>
 </html>
 

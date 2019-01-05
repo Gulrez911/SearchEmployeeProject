@@ -17,6 +17,19 @@
                     $(this).css("background-color", "#ffffff");
                 });
             });
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
+            $(document).ready(function (){
+               $("[href]").click(function (){
+                  alert("Do you want to delete?"); 
+               }); 
+            });
         </script>
 
 
@@ -68,22 +81,26 @@
         </table>
 
     </form:form>
+    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br>
     <table border="1">
         <th>Skills</th>
         <th>Action</th>
+        <tbody id="myTable">
+            <c:forEach var="skill" items="${listSkill}">
+                <tr>
 
-        <c:forEach var="skill" items="${listSkill}">
-            <tr>
-
-                <td>${skill.skill_name}</td>
-                <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
-                    &nbsp;&nbsp;&nbsp;&nbsp; 
-<!--                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>-->
-                    <a href="deleteTest?skill_Id=${skill.skill_Id}" onclick = "if (!confirm('Are you sure want to Delete Skill?')) {
-                                return false;
-                            }">Delete</a></td>
-            </tr>
-        </c:forEach>
+                    <td>${skill.skill_name}</td>
+                    <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp; 
+    <!--                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>-->
+<!--                        <a href="deleteTest?skill_Id=${skill.skill_Id}" onclick = "if (!confirm('Are you sure want to Delete Skill?')) {
+                                    return false;
+                                }">Delete</a>-->
+                        <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
     </table>
 
 </div>
