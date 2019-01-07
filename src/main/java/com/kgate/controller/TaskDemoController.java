@@ -80,8 +80,8 @@ public class TaskDemoController {
        /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
 
-//        ModelAndView mav = new ModelAndView("createtask");
-        ModelAndView mav = new ModelAndView("redirect:/taskSubmit");
+        ModelAndView mav = new ModelAndView("createtask");
+     
 
         String ProjectName = projectService.displayProjectName(pId);
         System.out.println("Project Name::::::::::::" + ProjectName);

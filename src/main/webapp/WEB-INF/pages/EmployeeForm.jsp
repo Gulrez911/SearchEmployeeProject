@@ -7,6 +7,14 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
     <head>
+           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+           $(document).ready(function (){
+               $("input[name$='action1']").click(function (){
+                  alert("You have successfully submited."); 
+               });
+           });
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New/Edit Contact</title>
         <style>
@@ -17,9 +25,9 @@
 
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-     <%@include file="header.jsp" %>
+        <%@include file="header.jsp" %>
 
-            <div align="center">
+        <div align="center">
             <h1 style="color:orangered">New/Edit Employee</h1>
 
             <form:form action="saveEmployee" method="post" modelAttribute="employee" commandName="employee">
@@ -68,22 +76,22 @@
                         <td><form:input path="pan"  /></td>
                         <td><form:errors path="pan" cssClass="error"/></td>
                     </tr>
-                    
-                      <tr>
-                       <td style="color:Dark blue">User Type:</td>
+
+                    <tr>
+                        <td style="color:Dark blue">User Type:</td>
                         <td ><form:select path ="category" name="userTypes">
-                    
-                     <form:options items = "${userTypes}" />
-                     
-						</form:select>
-						</td>
+
+                                <form:options items = "${userTypes}" />
+
+                            </form:select>
+                        </td>
                     </tr>
-                    
-                     <tr>
+
+                    <tr>
                         <td style="color:Dark blue">ManagerId</td>
                         <td><form:input path="managerId" /></td>
                     </tr>
-                    
+
                     <tr>
                         <td style="color:Dark blue"> Skills: </font></td>
                         <td>
@@ -97,8 +105,8 @@
                     </tr>
 
                     <tr>
-                        <td><input type="submit" value="Submit" name="action1"/></td>     
-                        <td colspan="2" align="center"><input type="submit" value="BACK" name="action2"></td>
+                        <td><input type="submit" value="BACK" name="action2"></td>
+                        <td><input type="submit" value="Submit" name="action1" id="submit1"/></td>    
                     </tr>     
                 </table>     
             </form:form>

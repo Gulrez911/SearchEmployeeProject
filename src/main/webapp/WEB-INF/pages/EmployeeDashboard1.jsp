@@ -9,13 +9,13 @@
         <title>Insert title here</title>
     </head>
     <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg" >
-<%@include file="header.jsp" %>
+        <%@include file="header.jsp" %>
 
-        <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post" modelAttribute="employee" commandName="employee">
-        <form:hidden path="email" />
-        <input type="submit" value="Edit Profile">
+        <form:form action="/PMS-1.0/Empedit" method="post" modelAttribute="employee" commandName="employee">
+            <form:hidden path="email" />
+            <input type="submit" value="Edit Profile">
         </form:form>
-        <form:form action="/SpringMVCHibernateCRUD/editTask" method="POST"
+        <form:form action="/PMS-1.0/editTask" method="POST"
                    commandName="taskdetails" modelAttribute="employee">
 
 
@@ -54,18 +54,18 @@
 
                     <td><a href="editlink1?tid=${taskObj.id}&mail=${taskObj.email}">Edit</a></td>  
                 </tr>
-              </c:forEach>
+            </c:forEach>
             <tr>
 
                 <!--  <td><input type="submit" value="Done"></td> -->
             </tr>
         </table>
     </form:form>
-    
-      <form:form action="/SpringMVCHibernateCRUD/Empedit" method="post"  modelAttribute="employee" commandName="employee">
-            <form:hidden path="email" />
-            <input type="submit" value="Back">
-        </form:form>
-       
+
+    <form:form action="/PMS-1.0/Empedit" method="post"  modelAttribute="employee" commandName="employee">
+        <form:hidden path="email" />
+        <input type="submit" value="Back">
+    </form:form>
+
 </body>
 </html>
