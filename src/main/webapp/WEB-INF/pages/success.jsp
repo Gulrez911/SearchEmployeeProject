@@ -1,9 +1,3 @@
-<%-- 
-    Document   : success
-    Created on : Nov 6, 2018, 6:22:23 PM
-    Author     : USER
---%>
-
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <!DOCTYPE html>
 <html>
