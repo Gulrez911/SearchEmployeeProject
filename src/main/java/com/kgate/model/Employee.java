@@ -27,7 +27,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "employee123")
+@Table(name = "Employee_Details")
 
 public class Employee implements Serializable {
 

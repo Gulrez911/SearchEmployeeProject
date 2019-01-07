@@ -26,7 +26,7 @@
                 });
             });
             $(document).ready(function (){
-               $("[href]").click(function (){
+               $("a[id$='id_delete']").click(function (){
                   alert("Do you want to delete?"); 
                }); 
             });
