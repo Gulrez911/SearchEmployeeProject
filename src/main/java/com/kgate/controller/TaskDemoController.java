@@ -48,27 +48,23 @@ public class TaskDemoController {
     }
 
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
-
-    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+   
+        public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));
         TaskDetails td2 = taskService.getTask(taskId);
         List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
-
         model.addObject("td", td2);
         model.addObject("employeeEmail", employeeEmail);
-
         String bk = request.getParameter("em");
-
         model.addObject("em", bk);
-
         return model;
     }
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
 
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+    @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
 
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
@@ -81,7 +77,7 @@ public class TaskDemoController {
         
         /* int pId = taskdetails.getProjectId(); */
 
- /* int mId = taskdetails.getManagerId(); */
+       /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
 
 //        ModelAndView mav = new ModelAndView("createtask");
@@ -107,7 +103,7 @@ public class TaskDemoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
-      String managername=projectService.getmanagernameformail(employee.getEmail());
+        String managername=projectService.getmanagernameformail(employee.getEmail());
         System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
 
         /*
@@ -166,6 +162,7 @@ public class TaskDemoController {
 
     }
     
+  
     @RequestMapping(value="/refresh",method=RequestMethod.POST)
     ModelAndView refreshmethod(  @ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request) {
     	

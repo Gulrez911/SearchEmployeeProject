@@ -46,11 +46,8 @@
                     <br>
                     <td colspan="2" align="center"><input type="submit"
                                                           value="Add"></td>
-                                                          
-                    </tr>
-                    
-                    
-                </table>
+                   </tr>
+                  </table>
                  
             </form:form>
             <table border="1">

@@ -9,7 +9,7 @@
 
 <html>
    <head>
-      <title>The include Directive Example</title>
+      <title>Header Example</title>
    </head>
    
 <body>
