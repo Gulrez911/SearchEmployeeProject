@@ -7,6 +7,7 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
+       
         <title>Create Task</title>
 
         
@@ -22,7 +23,7 @@
     <body
 
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-
+<%@include file="header.jsp" %>
         <div class="content">
 
             <h1 style="color: orangered" align="center">Create Task</h1>
@@ -111,21 +112,11 @@
 
                         <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td>
 
-
                     </c:forEach>     
                     </div> 
-
             </table>
-
         </div> 
 
-        <div align="right">
-            <form action="logout" method="get">
-                <input type="submit" value="Logout"> 
-            </form></div>
-
-
-   
     </body>
 </html>
 

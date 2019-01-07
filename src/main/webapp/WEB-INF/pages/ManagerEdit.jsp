@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-
+ <%@include file="header.jsp" %>
         <div align="center">
             <h1 style="color: orangered">Edit Employee</h1>
             <h3> <p style="color: green" >${msg}</p></h3>
@@ -105,13 +105,8 @@
     
     
     </div>
-    
-    <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
-        
 
-  
+   
+
 </body>
 </html>

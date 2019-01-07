@@ -17,8 +17,9 @@
 
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-
-
+     <%@include file="header.jsp" %>
+     
+           
         <div align="center">
             <h1 style="color:orangered">Allocate Task</h1>
             
@@ -75,19 +76,11 @@
                 
                   <form:form action="backtotask" method="post"  > 
                   <div align="left"><td>
-                <td>  <input type="submit" value="Back"></form:form> </td>
+<!--                <td>  <input type="submit" value="Back"></form:form> </td>-->
                 </div>
             </form:form>
             
-           
-        <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
-        
-     
-                   
-     
+
     </body>
 </html>
 

@@ -12,18 +12,14 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+        <%@include file="header.jsp" %>
         <h3 style="color:Dark blue" align="center">You have successfully Login</h3>
-    <center><a href="/SpringMVCHibernateCRUD/test"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
- <center><a href="/SpringMVCHibernateCRUD/employeelist"><font style="color:Dark blue" size="5">Employee List</font></a></center>
-   <tr>
-   
-</tr>
+    <center><a href="/PMS-1.0/test"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
+    <center><a href="/PMS-1.0/employeelist"><font style="color:Dark blue" size="5">Employee List</font></a></center>
+    <tr>
 
- <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
-        
-          
-</body>
+
+    </tr>
+
+
 </html>

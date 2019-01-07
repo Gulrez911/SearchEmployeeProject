@@ -1,13 +1,8 @@
-<%-- 
-    Document   : managerProjectDetails
-    Created on : Dec 31, 2018, 11:16:23 AM
-    Author     : user
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
@@ -18,7 +13,7 @@
                 <th>Project Name</th>
                 <th>View Details</th>
                 <th>Overview</th>
-                <c:forEach var="pd" items="${listProjectName}">
+                    <c:forEach var="pd" items="${listProjectName}">
                     <tr>
 
                         <td>${pd.project_Name}</td>
@@ -27,11 +22,12 @@
                     </tr>
                 </c:forEach>
             </table><br/>
-            <form action="/SpringMVCHibernateCRUD/ManagerDashboardBack" method="post">
-            <input type="submit" value="Back"/>
-        </form>
+            <form action="/PMS-1.0/ManagerDashboardBack" method="post">
+                <input type="submit" value="Back"/>
+            </form>
         </div>
         
          
     </body>
 </html>
+

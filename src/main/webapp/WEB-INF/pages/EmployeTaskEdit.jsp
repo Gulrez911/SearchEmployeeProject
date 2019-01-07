@@ -10,6 +10,7 @@
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+         <%@include file="header.jsp" %>
         <div align="center">
             <form:form action="editTask" method="post"
                        modelAttribute="taskdetails" commandName="taskdetails">
@@ -44,10 +45,9 @@
 
                         <td>Status:</td>
                         <%-- 	<td><form:input path="status" /></td> --%>
-                        <td><form:select path="status" name="taskStatus">
-
-
-                                <form:options items="${taskStatus}" />
+                        <td><form:select path="status" name="taskStatus"></td>
+                        
+                                    <form:options items="${taskStatus}" />
                                    </form:select></td>
                     </tr>
 
@@ -55,18 +55,10 @@
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save"></td>
                     </tr>
-                    
-                     <tr>
-                
-            </tr> 
-            
+   
                 </table>
             </form:form>
         </div>
-             <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
-          
+
     </body>
 </html>

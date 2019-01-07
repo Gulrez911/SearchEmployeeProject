@@ -1,8 +1,3 @@
-<%-- 
-    Document   : demo
-    Created on : Dec 24, 2018, 12:53:25 PM
-    Author     : user
---%>
 
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -15,6 +10,7 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+   <%@include file="header.jsp" %>
         <div align="center">
 
             <form action="downloadReport" method="post">
@@ -97,12 +93,9 @@
    <form action="CeoBack" method="post">
         <input type="submit" value="Back"> 
         </form>
-         <div align="right">
-        <form action="logout" method="get">
-        <input type="submit" value="Logout"> 
-        </form></div>
+         
         </div>
-       
-           
+        
     </body>
 </html>
+

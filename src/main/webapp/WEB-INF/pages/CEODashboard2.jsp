@@ -1,9 +1,3 @@
-<%-- 
-    Document   : CEODashboard
-    Created on : Dec 18, 2018, 10:55:29 AM
-    Author     : user
---%>
-
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="java.text.DateFormat"%>

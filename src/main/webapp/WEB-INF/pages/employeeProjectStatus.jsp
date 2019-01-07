@@ -41,7 +41,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <form action="/SpringMVCHibernateCRUD/ManagerProjectDetBack" method="post">
+            <form action="/PMS-1.0/ManagerProjectDetBack" method="post">
                 <input type="submit" value="Back"/>
             </form>
         </div>
