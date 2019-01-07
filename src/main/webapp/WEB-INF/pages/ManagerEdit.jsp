@@ -11,7 +11,7 @@
 <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
  <%@include file="header.jsp" %>
         <div align="center">
-            <h1 style="color: orangered">Edit Employee</h1>
+            <h1 style="color: orangered">Edit Manager Details</h1>
             <h3> <p style="color: green" >${msg}</p></h3>
                 <form:form action="byManagerEdit" method="post"
                            modelAttribute="employee" commandName="employee">

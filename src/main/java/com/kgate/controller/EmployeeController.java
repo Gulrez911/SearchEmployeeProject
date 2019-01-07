@@ -153,7 +153,7 @@ public class EmployeeController {
         employeeService.addEmployee(employee);
 //        System.out.println("otp: " + temp_otp);
         ec.sendMail(employee.getEmail(), "Temporary Password=" + employee.getPassword() + "\n click on below mention link use temporary password and"
-                + "\n Reset Your details" + "href=\\\"http://localhost:8080/SpringMVCHibernateCRUD\">\"", "confirm message");
+                + "\n Reset Your details" + "href=\\\"http://localhost:8080/PMS-1.0\">\"", "confirm message");
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
