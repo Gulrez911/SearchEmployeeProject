@@ -17,7 +17,9 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/pineapple.jpg">
+
         <%@include file="header.jsp" %>
+
         <h4>Welcome to DashBoard</h4>
         <div align="center">
             <form:form action="/PMS-1.0/MngEdit" method="post"
@@ -36,6 +38,7 @@
                 <form:hidden path="email" />
                 <input type="submit" value="Project Status">
             </form:form>
+          
         </div>
 
     </body>

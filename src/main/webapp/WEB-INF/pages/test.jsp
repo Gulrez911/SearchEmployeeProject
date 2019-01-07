@@ -72,6 +72,7 @@
                 <td><form:input path="skill_name" name="skill_name"
                             id="skill_name" /></td>
 
+
             <br>
             <td colspan="2" align="center"><input type="submit"
                                                   value="Add"></td>
@@ -106,4 +107,5 @@
 
 </div>
 </body>
+
 </html>

@@ -37,14 +37,14 @@
         </property>
 
 
-
         <property name="url" value="jdbc:mysql://localhost:3306/PMS"></property>
 
-
         <property name="username" value="root"></property>
+        
         <property name="password" value="kgate"></property>
    
      </bean>
+
 
     <!-- Hibernate SessionFactory -->
     <bean id="sessionFactory"
