@@ -13,6 +13,8 @@ import com.kgate.model.ProjectReportDTO;
 
 import com.kgate.model.TaskDTO;
 import com.sun.javafx.image.impl.IntArgb;
+
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,7 +31,12 @@ public class ProjectDaoImpl implements ProjectDao {
     @Override
     public void createProject(ProjectDetails project) {
         Session s = this.sessionFactory.getCurrentSession();
+    /*    try {
         s.saveOrUpdate(project);
+        }catch(SQLIntegrityConstraintViolationException e)
+        {
+        	
+        }*/
     }
 
     @Override

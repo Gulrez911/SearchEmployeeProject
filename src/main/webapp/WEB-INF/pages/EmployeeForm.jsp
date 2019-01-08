@@ -7,14 +7,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
     <head>
-           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-           $(document).ready(function (){
-               $("input[name$='action1']").click(function (){
-                  alert("You have successfully submited."); 
-               });
-           });
-        </script>
+          
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New/Edit Contact</title>
         <style>
@@ -36,12 +29,12 @@
                     <form:hidden path="id"/>
                     <tr>
                         <td style="color:Dark blue">Name:</td>
-                        <td><form:input path="name"  required="required"/></td>
+                        <td><form:input path="name"  required="true"/></td>
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
-                        <td><form:input path="email" type="email"  required="required"/></td>
+                        <td><form:input path="email" type="email"  required="true"/></td>
                         <%--   <tr>
                         <td><input type="submit" value="Send OTP" name="action1"/></td>     
                         <td><form:input path="otp" /></td>
@@ -53,18 +46,18 @@
 
                     <tr>
                         <td style="color:Dark blue">Address:</font></td>
-                        <td><form:input path="address" /></td>
+                        <td><form:input path="address" required="true"/></td>
                     </tr>
                     <tr>
 
                         <td style="color:Dark blue"> Telephone: </font></td>
-                        <td><form:input path="telephone" /></td>
+                        <td><form:input path="telephone" required="true"/></td>
 
                     </tr>
 
                     <tr>
                         <td style="color:Dark blue">Password:</td>
-                        <td><form:input path="password" type="password" required="required"/></td>
+                        <td><form:input path="password" type="password" required="true"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue">Aadhar No.:</td>
@@ -79,7 +72,7 @@
 
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
-                        <td ><form:select path ="category" name="userTypes">
+                        <td ><form:select path ="category" name="userTypes" required="true">
 
                                 <form:options items = "${userTypes}" />
 
@@ -89,7 +82,7 @@
 
                     <tr>
                         <td style="color:Dark blue">ManagerId</td>
-                        <td><form:input path="managerId" /></td>
+                        <td><form:input path="managerId" required="true"/></td>
                     </tr>
 
                     <tr>

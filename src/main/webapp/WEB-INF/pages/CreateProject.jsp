@@ -24,10 +24,11 @@
 
         <div align="center">
             <h1 style="color: orangered">Create Project</h1>
-
+        <h3> <p style="color: orangered">${msg}</p></h3>
             <form:form action="cproject" method="post"
                        modelAttribute="pd" commandName="pd">
                 <table>
+                
                     <form:hidden path="project_id" />
                     <form:hidden path="manageremail" />
                     <tr>
