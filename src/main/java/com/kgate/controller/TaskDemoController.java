@@ -53,10 +53,10 @@ public class TaskDemoController {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));
         TaskDetails td2 = taskService.getTask(taskId);
-        List<String> employeeEmail = taskService.getEmployeeEmail(employee.getEmail());
+        List<String> empnameList = taskService.getEmpNameList(employee.getEmail());
 
         model.addObject("td", td2);
-        model.addObject("employeeEmail", employeeEmail);
+        model.addObject("empnameList", empnameList);
 
         String bk = request.getParameter("em");
 
@@ -67,7 +67,6 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-
             @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
 
         taskdetails.setStatus("Assigned");
@@ -78,14 +77,15 @@ public class TaskDemoController {
         taskdetails.setProjectId(pId);
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         List<TaskDetails> listtask = taskService.getTaskList(pId);
-        
+
+        String EmpEmail = taskService.EmployeeEmail(taskdetails.getEmp_name());
+        taskdetails.setEmp_Email(EmpEmail);
         /* int pId = taskdetails.getProjectId(); */
 
  /* int mId = taskdetails.getManagerId(); */
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
 
         ModelAndView mav = new ModelAndView("createtask");
-     
 
         String ProjectName = projectService.displayProjectName(pId);
         System.out.println("Project Name::::::::::::" + ProjectName);
@@ -107,8 +107,8 @@ public class TaskDemoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
-      String managername=projectService.getmanagernameformail(employee.getEmail());
-        System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
+        String managername = projectService.getmanagernameformail(employee.getEmail());
+        System.out.println("Employee Email:::: " + EmpEmail);
 
         /*
 		 * tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details:  \nTask Type:  "
@@ -116,21 +116,21 @@ public class TaskDemoController {
 		 * "You have been assigned a Task");
          */
         String message = "Dear Sir/Mam,<br>"
-        		+ " <i>You have been assigned a task</i><br>";
+                + " <i>You have been assigned a task</i><br>";
         message += "<font color=red>Task Details are as below</font>";
         message += "<table border='1'><th>Project Name</th><th>Task Name</th><th> Task Type</th><th> Task Start Date</th><th> Task End Date</th><tr><td>"
                 + ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
                 + tEndDate + "</td></tr></table>"
-                 +"<br>"
-                +"<br>"
-                +"Thanks And Regards,<br>"
-                +managername;
-        tdc.sendMail(taskdetails.getEmp_Email(), message, "You have been assigned a task");
- 
+                + "<br>"
+                + "<br>"
+                + "Thanks And Regards,<br>"
+                + managername;
+        tdc.sendMail(EmpEmail, message, "You have been assigned a task");
+
 //    return tdc.refreshmethod(taskdetails, request);
-       return TaskDemoController.this.refreshmethod(taskdetails, request);
+        return TaskDemoController.this.refreshmethod(taskdetails, request);
     }
- 
+
     public void sendMail(String to, String message, String subject) {
 
         Properties props = new Properties();
@@ -165,21 +165,21 @@ public class TaskDemoController {
         // return "employeelist";
 
     }
-    
-    @RequestMapping(value="/refresh",method=RequestMethod.POST)
-    ModelAndView refreshmethod(  @ModelAttribute("taskdetails") TaskDetails taskdetails,HttpServletRequest request) {
-    	
-    	ModelAndView mav=new ModelAndView("createtask");
+
+    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
+    ModelAndView refreshmethod(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+
+        ModelAndView mav = new ModelAndView("createtask");
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
-            int s1=taskdetails.getProjectId();
-              List<TaskDetails> listtask = taskService.getTaskList(s1);
-         	mav.addObject("listtask",listtask);
-    	 mav.addObject("taskdetails", taskdetails);
-    	 String s12=request.getParameter("em");
-         mav.addObject("em",s12);
-    	return mav;
-    		
+        int s1 = taskdetails.getProjectId();
+        List<TaskDetails> listtask = taskService.getTaskList(s1);
+        mav.addObject("listtask", listtask);
+        mav.addObject("taskdetails", taskdetails);
+        String s12 = request.getParameter("em");
+        mav.addObject("em", s12);
+        return mav;
+
     }
 
 }

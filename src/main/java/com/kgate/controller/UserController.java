@@ -104,6 +104,10 @@ public class UserController {
 		 * validate whether person is in database and person user and password are
 		 * matching
          */
+        //session Related
+        HttpSession session = request.getSession(true);
+
+        //
         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(), employee.getPassword(),
                 employee.getCategory());
 
@@ -112,6 +116,7 @@ public class UserController {
 
                 request.setAttribute("loginuser", employee.getEmail());
                 ModelAndView mav = new ModelAndView("success");
+                session.setMaxInactiveInterval(1 * 60);
                 return mav;
 
             } else if (employee.getCategory().equals("Manager")) {

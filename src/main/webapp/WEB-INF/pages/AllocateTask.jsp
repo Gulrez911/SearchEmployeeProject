@@ -17,23 +17,23 @@
 
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-     <%@include file="header.jsp" %>
-     
-           
+        <%@include file="header.jsp" %>
+
+
         <div align="center">
             <h1 style="color:orangered">Allocate Task</h1>
-            
-           
+
+
 
             <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
-                 <!-- <table border="1" align="center" width="800" height="200"> -->
+                    <!-- <table border="1" align="center" width="800" height="200"> -->
                     <form:hidden path="projectId" />
                     <form:hidden path="managerId" />
                     <form:hidden path="task_id" />
-                    
-                    
+
+
                     <tr>
                         <td style="color:white">Task Type: </td>
                         <td><form:input path="task_Type"  /></td>
@@ -57,9 +57,9 @@
                     <tr>
                         <td style="color:white"> Assign: </font></td>
                         <td>
-                            <form:select path="Emp_Email" required ="true">
+                            <form:select path="emp_name" required ="true">
 
-                                <form:options items="${employeeEmail}" />
+                                <form:options items="${empnameList}" />
                             </form:select>
 
                         <td>
@@ -69,20 +69,19 @@
                     <tr>
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
-               
-                    
-                
+
+
+
                 </table>
-                
-                  <form:form action="backtotask" method="post"  > 
-                  <div align="left"><td>
-<!--                <td>  <input type="submit" value="Back"></form:form> </td>-->
-                </div>
+
+                <form:form action="backtotask" method="post"  > 
+                    <div align="left"><td>
+  <!--                <td>  <input type="submit" value="Back"></form:form> </td>-->
+                    </div>
             </form:form>
-            
-       
-       
+
+
+
     </body>
 </html>
 
-    

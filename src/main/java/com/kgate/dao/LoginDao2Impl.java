@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.kgate.model.User;
 
 @Repository("LoginDao2")
 public class LoginDao2Impl implements LoginDao2  {

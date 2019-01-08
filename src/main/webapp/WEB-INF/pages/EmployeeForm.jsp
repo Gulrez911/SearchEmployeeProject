@@ -7,13 +7,13 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
     <head>
-           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-           $(document).ready(function (){
-               $("input[name$='action1']").click(function (){
-                  alert("You have successfully submited."); 
-               });
-           });
+//           $(document).ready(function (){
+//               $("input[name$='action1']").click(function (){
+//                  alert("You have successfully submited."); 
+//               });
+//           });
         </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New/Edit Contact</title>
@@ -42,12 +42,6 @@
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
                         <td><form:input path="email" type="email"  required="required"/></td>
-                        <%--   <tr>
-                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
-                        <td><form:input path="otp" /></td>
-                    </tr> --%>
-
-
 
                     </tr>
 
@@ -80,9 +74,7 @@
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
                         <td ><form:select path ="category" name="userTypes">
-
                                 <form:options items = "${userTypes}" />
-
                             </form:select>
                         </td>
                     </tr>
