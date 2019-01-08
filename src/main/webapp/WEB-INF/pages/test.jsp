@@ -63,6 +63,7 @@
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+
     <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
     <div align="center">
         <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
@@ -76,6 +77,7 @@
                 <td style="color: Dark blue">Name:</td>
                 <td><form:input path="skill_name" name="skill_name"
                             id="skill_name" /></td>
+
 
             <br>
             <td colspan="2" align="center"><input type="submit"
@@ -113,4 +115,5 @@
 </div>
 
 </body>
+
 </html>

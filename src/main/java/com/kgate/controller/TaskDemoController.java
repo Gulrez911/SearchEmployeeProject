@@ -59,9 +59,7 @@ public class TaskDemoController {
         model.addObject("empnameList", empnameList);
 
         String bk = request.getParameter("em");
-
         model.addObject("em", bk);
-
         return model;
     }
 
@@ -107,14 +105,15 @@ public class TaskDemoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
+
         String managername = projectService.getmanagernameformail(employee.getEmail());
         System.out.println("Employee Email:::: " + EmpEmail);
 
-        /*
-		 * tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details:  \nTask Type:  "
-		 * + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(),
-		 * "You have been assigned a Task");
-         */
+        System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
+// 		 * tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details:  \nTask Type:  "
+//		 * + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(),
+//		 * "You have been assigned a Task");
+//                 */
         String message = "Dear Sir/Mam,<br>"
                 + " <i>You have been assigned a task</i><br>";
         message += "<font color=red>Task Details are as below</font>";

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : hello
-    Created on : Jan 4, 2019, 6:03:54 PM
-    Author     : user
---%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 

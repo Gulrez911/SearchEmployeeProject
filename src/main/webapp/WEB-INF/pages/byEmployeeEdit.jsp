@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -119,4 +118,5 @@
 
 </body>
 
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 </html>

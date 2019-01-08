@@ -37,6 +37,10 @@
 <%@include file="header.jsp" %>
         <div align="center">
 
+
+          <!-- bug 40 Employee List as a title is repeated solved -->
+           
+
             <h1><font style="color:yellow" size="5">Employee List</font></h1>
             <center><a href="/PMS-1.0/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
 
@@ -102,6 +106,6 @@
    <input type="submit" value="Back"></form:form>
         </div>
         
-       
+
     </body>
 </html>
