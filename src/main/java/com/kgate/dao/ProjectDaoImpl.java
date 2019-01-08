@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.ProjectReportDTO;
 
 import com.kgate.model.TaskDTO;
+
 import com.sun.javafx.image.impl.IntArgb;
 
 
@@ -569,5 +571,33 @@ public class ProjectDaoImpl implements ProjectDao {
 
     }
 
+	@Override
+	public String findproject(String projectname) {
+		 String query1 = "select project_Name from project_details where project_Name='" + projectname + "'";
+	        Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query1);
+	        String name1 = (String) query2.uniqueResult();
+	        return name1;
+		
+	}
+
+	@Override
+	public void deleteproject(int id) {
+		  Session s = this.sessionFactory.getCurrentSession();
+	        ProjectDetails p =(ProjectDetails) s.load(ProjectDetails.class, new Integer(id));
+	        if (p != null) {
+	            s.delete(p);
+	        } 
+
+		
+	}
+
+	@Override
+	public ProjectDetails getProjectById(int id) {
+		 return (ProjectDetails) sessionFactory.getCurrentSession().get(
+				 ProjectDetails.class,
+	                id);
+	}
+
+	
 	
 }

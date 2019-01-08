@@ -54,18 +54,15 @@ public class ProjectController {
 
 //        ModelAndView model = new ModelAndView("CreateProject");
         projectDetails.setManageremail(employee.getEmail());
-        if((projectDetails.getProject_Name())!=name)
-        {
-        	 ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
-        	 ProjectDetails pd = new ProjectDetails();
-             List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-             model.addObject("listProject ", listProject);
-             model.addObject("pd", pd);
-           return model1;
-        }else
-        {
-        
+      
+        	String projectname=projectservice.findproject(name);
+        	if(projectname==null)
+        	{
         	 projectservice.createProject(projectDetails);
+        	}else {
+        		 ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
+        		 return model1;
+        	}
         	 ProjectDetails pd = new ProjectDetails();
              List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
              model.addObject("listProject ", listProject);
@@ -73,10 +70,7 @@ public class ProjectController {
             
              return model;
              
-        }
-       
     }
-    
     @RequestMapping(value = "/duplicateproject", method = RequestMethod.GET)
     public ModelAndView duplicate(@ModelAttribute("projectDetails") ProjectDetails projectDetails,ModelMap modelMap,
             @SessionAttribute("employee") Employee employee) {
@@ -90,7 +84,8 @@ public class ProjectController {
         mav.addObject("mid", mid);
         mav.addObject("pd", pd);
         mav.addObject("listProject", listProject);
-        modelMap.addAttribute("msg", "Already Exist");
+        modelMap.addAttribute("msg","Already Exists");
+       
       
         return mav;
 
@@ -489,5 +484,71 @@ public class ProjectController {
         mav.addObject("pd", pd);
         return mav;
     }
- 
+    
+    @RequestMapping(value = "/deleteproject", method = RequestMethod.GET)
+    public ModelAndView deleteproject(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+    	int id = Integer.parseInt(request.getParameter("project_id"));
+    	projectservice.deleteproject(id);
+    	  ModelAndView model = new ModelAndView("redirect:/cproject2");
+
+//        ModelAndView model = new ModelAndView("CreateProject");
+        projectDetails.setManageremail(employee.getEmail());
+        ProjectDetails pd = new ProjectDetails();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+        model.addObject("listProject ", listProject);
+        model.addObject("pd", pd);
+       
+        return model;
+		
+}
+    
+    @RequestMapping(value = "/editproject", method = RequestMethod.GET)
+    public ModelAndView editproject(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+    	 ModelAndView mav = new ModelAndView("editProject");
+    	 int id = Integer.parseInt(request.getParameter("project_id"));
+    	 Integer mid = projectservice.getManagerid(employee.getEmail());
+          ProjectDetails prd=projectservice.getProjectById(id);
+          
+         mav.addObject("mid", mid);
+        ProjectDetails projectdetails = new ProjectDetails();
+         projectdetails.setManageremail(employee.getEmail());
+        
+         ProjectDetails pd = new ProjectDetails();
+         mav.addObject("projectdetails", projectdetails);
+           mav.addObject("pd", prd);
+		   return mav;   
+    
+    }
+    
+    @RequestMapping(value = "/editproject1", method = RequestMethod.POST)
+    public ModelAndView editproject1(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap,
+    		@RequestParam("project_Name")String name) {
+    
+    	 
+    	 ModelAndView model = new ModelAndView("editProject");
+    	 String projectname=projectservice.findproject(name);
+     	if(projectname==null)
+     	{
+     	 projectservice.createProject(projectDetails);
+     	}else {
+     		 ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
+     		 return model1;
+     	}
+//       ModelAndView model = new ModelAndView("CreateProject");
+       projectDetails.setManageremail(employee.getEmail());
+       ProjectDetails pd = new ProjectDetails();
+       List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+       model.addObject("listProject ", listProject);
+       model.addObject("pd", pd);
+       modelMap.addAttribute("msg","You have successfully edited");
+		return model;
+    	
+    
+    
+    }
+    
+    
+    
+    
+    
 }

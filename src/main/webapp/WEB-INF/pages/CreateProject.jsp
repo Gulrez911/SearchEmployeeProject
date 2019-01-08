@@ -60,12 +60,15 @@
                 <table border="1" align="left">
 
                     <th style="color: red">Project Name</th>
+                     <th style="color: red">Edit Action</th>
+                      <th style="color: red">Delete Action</th>
 
                     <c:forEach var="pd" items="${listProject}">
                         <tr>
 
                             <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: Dark blue">${pd.project_Name}</a></td>
-
+                            <td><a href="editproject?project_id=${pd.project_id}" style="color: Dark blue">Edit</a>
+                             <td><a href="deleteproject?project_id=${pd.project_id}" style="color: Dark blue" onclick="return confirm('Are you sure you want to delete this Project?');">delete</a>
                         </tr>
 
 
