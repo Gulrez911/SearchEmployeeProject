@@ -3,6 +3,7 @@ package com.kgate.controller;
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,23 +48,37 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)
-    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,
-            @SessionAttribute("employee") Employee employee) {
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,@RequestParam("project_Name")String name,
+    		ModelMap modelMap ,@SessionAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("redirect:/cproject2");
 
 //        ModelAndView model = new ModelAndView("CreateProject");
         projectDetails.setManageremail(employee.getEmail());
-        projectservice.createProject(projectDetails);
-        ProjectDetails pd = new ProjectDetails();
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-        model.addObject("listProject ", listProject);
-        model.addObject("pd", pd);
-        return model;
-
+        if((projectDetails.getProject_Name())!=name)
+        {
+        	 ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
+        	 ProjectDetails pd = new ProjectDetails();
+             List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+             model.addObject("listProject ", listProject);
+             model.addObject("pd", pd);
+           return model1;
+        }else
+        {
+        
+        	 projectservice.createProject(projectDetails);
+        	 ProjectDetails pd = new ProjectDetails();
+             List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+             model.addObject("listProject ", listProject);
+             model.addObject("pd", pd);
+            
+             return model;
+             
+        }
+       
     }
-
-    @RequestMapping(value = "/cproject2", method = RequestMethod.GET)
-    public ModelAndView createProject2(@ModelAttribute("projectDetails") ProjectDetails projectDetails,
+    
+    @RequestMapping(value = "/duplicateproject", method = RequestMethod.GET)
+    public ModelAndView duplicate(@ModelAttribute("projectDetails") ProjectDetails projectDetails,ModelMap modelMap,
             @SessionAttribute("employee") Employee employee) {
         Integer mid = projectservice.getManagerid(employee.getEmail());
         ModelAndView mav = new ModelAndView("CreateProject");
@@ -75,6 +90,26 @@ public class ProjectController {
         mav.addObject("mid", mid);
         mav.addObject("pd", pd);
         mav.addObject("listProject", listProject);
+        modelMap.addAttribute("msg", "Already Exist");
+      
+        return mav;
+
+    }
+    @RequestMapping(value = "/cproject2", method = RequestMethod.GET)
+    public ModelAndView createProject2(@ModelAttribute("projectDetails") ProjectDetails projectDetails,ModelMap modelMap,
+            @SessionAttribute("employee") Employee employee) {
+        Integer mid = projectservice.getManagerid(employee.getEmail());
+        ModelAndView mav = new ModelAndView("CreateProject");
+        ProjectDetails projectdetails = new ProjectDetails();
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("projectdetails", projectdetails);
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+        System.out.println("List of Project:  " + listProject);
+        mav.addObject("mid", mid);
+        mav.addObject("pd", pd);
+        mav.addObject("listProject", listProject);
+       
+      
         return mav;
 
     }

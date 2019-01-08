@@ -35,4 +35,7 @@ public interface ProjectDao {
     public List<TaskDTO> displayAllStatus3(String email, int id);
     
     public String getmanagernameformail(String email);
+   
+    
+    
 }
