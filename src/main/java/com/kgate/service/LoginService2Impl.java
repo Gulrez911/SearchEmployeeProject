@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kgate.dao.LoginDao2;
-import com.kgate.model.User;
 
 @Service
 public class LoginService2Impl  implements LoginService2{

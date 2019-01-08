@@ -25,11 +25,16 @@
                     });
                 });
             });
-            $(document).ready(function (){
-               $("a[id$='id_delete']").click(function (){
-                  alert("Do you want to delete?"); 
-               }); 
+            $(document).ready(function () {
+                $("a[id$='id_delete']").click(function () {
+                    alert("Do you want to delete?");
+                });
             });
+//            $(document).ready(function () {
+//                $("a[id$='id_edit']").click(function () {
+//                    $("input[id$='myInput']").hide();
+//                });
+//            });
         </script>
 
 
@@ -58,9 +63,11 @@
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+
     <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
     <div align="center">
         <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
+        <div style="color: red">${error}</div> 
     <form:form action="saveTest" method="post" modelAttribute="skill"
                commandName="skill">
         <table>
@@ -82,7 +89,8 @@
         </table>
 
     </form:form>
-    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br>
+    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br> 
+
     <table border="1">
         <th>Skills</th>
         <th>Action</th>
@@ -91,13 +99,13 @@
                 <tr>
 
                     <td>${skill.skill_name}</td>
-                    <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
+                    <td><a href="editTest?skill_Id=${skill.skill_Id}" id="id_edit">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp; 
     <!--                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>-->
-<!--                        <a href="deleteTest?skill_Id=${skill.skill_Id}" onclick = "if (!confirm('Are you sure want to Delete Skill?')) {
+                        <a href="deleteTest?skill_Id=${skill.skill_Id}" onclick = "if (!confirm('Are you sure want to Delete Skill?')) {
                                     return false;
-                                }">Delete</a>-->
-                        <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a>
+                                }">Delete</a>
+                        <!--<a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a>-->
                     </td>
                 </tr>
             </c:forEach>
@@ -105,6 +113,7 @@
     </table>
 
 </div>
+
 </body>
 
 </html>

@@ -84,4 +84,13 @@ public class SkillDAOImpl implements SkillDao {
 //    String query = "select distinct(s.skill_name) from Skills s cross join join_employee_skill je , Employee_Details e1 where s.skill_id=je.skill_id and e1.id=je.id and e1.email="+email+"";
         return sessionFactory.getCurrentSession().createSQLQuery(query).list();
     }
+
+    @Override
+    public String findSkill(String skill) {
+//        return (Skill) sessionFactory.getCurrentSession().get(Skill.class, skill);
+        String query1 = "select skill_name from Skills where skill_name='" + skill + "'";
+        Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query1);
+        String name1 = (String) query2.uniqueResult();
+        return name1;
+    }
 }

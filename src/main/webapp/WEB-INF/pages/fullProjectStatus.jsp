@@ -1,11 +1,3 @@
-
-
-<%-- 
-    Document   : fullProjectStatus
-    Created on : Dec 31, 2018, 11:15:59 AM
-    Author     : user
---%>
-
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <!DOCTYPE html>
 <html>
