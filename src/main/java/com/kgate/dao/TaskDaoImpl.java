@@ -59,9 +59,9 @@ public class TaskDaoImpl implements TaskDao {
     // return employee name from manager email
     @SuppressWarnings("unchecked")
     @Override
-    public List<String> getEmployeeEmail(String email) {
+    public List<String> getEmpNameList(String email) {
 
-        String query2 = "select email from Employee_Details where category='employee' and managerid = (select id from Employee_Details where category = 'manager' and email='"
+        String query2 = "select name from Employee_Details where category='employee' and managerid = (select id from Employee_Details where category = 'manager' and email='"
                 + email + "')";
         return sessionFactory.getCurrentSession().createSQLQuery(query2).list();
 
@@ -132,9 +132,9 @@ public class TaskDaoImpl implements TaskDao {
                 st3 = (String) arr[3].toString();
             } catch (Exception e) {
             }
-            st4="";
+            st4 = "";
             try {
-                 st4 = (String) arr[4].toString();
+                st4 = (String) arr[4].toString();
             } catch (Exception e) {
             }
             st6 = (String) arr[6];
@@ -200,4 +200,14 @@ public class TaskDaoImpl implements TaskDao {
         String name1 = (String) query2.uniqueResult();
         return name1;
     }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public String EmployeeEmail(String name) {
+        String query = "select email from employee_details where name ='" + name + "'";
+        Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query);
+        String name1 = (String) query2.uniqueResult();
+        return name1;
+    }
+
 }

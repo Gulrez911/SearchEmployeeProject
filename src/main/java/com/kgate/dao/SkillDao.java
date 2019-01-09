@@ -16,10 +16,12 @@ public interface SkillDao {
     public Skill getSkill(int skill_Id);
 
     public Skill getSkillByName(String skillName);
-    
+
     // retrive employeeSkill list
     public List<String> getEmployeeSkill(int empid);
-    
+
     public List<String> getEmployeeSkillByEmail(String email);
-    
+
+    //return skill Name
+    public String findSkill(String skill);
 }

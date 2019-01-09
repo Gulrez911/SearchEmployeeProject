@@ -87,14 +87,22 @@
                     <form:hidden path="id"/>
                     <tr>
                         <td style="color:Dark blue">Name:</td>
+
                         <td><form:input path="name"  required="true" pattern="^[A-Za-z\\s]*$"/></td>
                            
+
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
+
                         <td><form:input path="email" type="email"  required="true"/></td>
-      
+                        <%--   <tr>
+                        <td><input type="submit" value="Send OTP" name="action1"/></td>     
+                        <td><form:input path="otp" /></td>
+                    </tr> --%>
+
+
                     </tr>
 
                     <tr>
@@ -104,7 +112,9 @@
                     <tr>
 
                         <td style="color:Dark blue"> Telephone: </font></td>
+
                         <td><form:input path="telephone" required="true" pattern="^[0-9]*$"/></td>
+
 
                     </tr>
 
@@ -126,15 +136,21 @@
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
 
+
+                       
+
                         <td ><form:select path ="category" name="userTypes" required="true">
-                        <form:options items = "${userTypes}" />
+ <form:options items = "${userTypes}" />
+
                             </form:select>
                         </td>
                     </tr>
 
                     <tr>
                         <td style="color:Dark blue">ManagerId</td>
+
                         <td><form:input path="managerId" required="true" pattern="^[0-9]*$"/></td>
+
                     </tr>
 
                     <tr>

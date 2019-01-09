@@ -26,26 +26,34 @@ public class TaskDetails {
     @Column
     private String task_Type;
 
+    @Column
+    private String task_Name;
+    @Column
+    private String status;
+    @Column
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @Temporal(TemporalType.DATE)
+    private Date tStart_Time;
+    @Column
+    @DateTimeFormat(pattern = "dd-mm-yyyy")
+    @Temporal(TemporalType.DATE)
+    private Date tEnd_Time;
+    @Column
+    private String Emp_Email;
+    @Column
+    private String tSub_Date;
+    @Column
+    private int managerId;
+    @Column
+    private String emp_name;
 
-	@Column
-	private String task_Name;
-	@Column
-	private String status;
-	@Column
-	@DateTimeFormat(pattern = "dd-mm-yyyy")
-@Temporal(TemporalType.DATE)
-	private Date tStart_Time;
-	@Column
-@DateTimeFormat(pattern = "dd-mm-yyyy")
-	@Temporal(TemporalType.DATE)
-	private Date tEnd_Time;
-	@Column
-	private String Emp_Email;
-	@Column
-	private String  tSub_Date;
-	@Column
-	private int managerId;
+    public String getEmp_name() {
+        return emp_name;
+    }
 
+    public void setEmp_name(String emp_name) {
+        this.emp_name = emp_name;
+    }
 
     public String gettSub_Date() {
         return tSub_Date;
@@ -164,7 +172,7 @@ public class TaskDetails {
 
     @Override
     public String toString() {
-        return "TaskDetails{" + "task_id=" + task_id + ", task_Type=" + task_Type + ", task_Name=" + task_Name + ", status=" + status + ", tStart_Time=" + tStart_Time + ", tEnd_Time=" + tEnd_Time + ", Emp_Email=" + Emp_Email + ", tSub_Date=" + tSub_Date + ", managerId=" + managerId + ", projectId=" + projectId + ", taskStatus=" + taskStatus + '}';
+        return "TaskDetails{" + "task_id=" + task_id + ", task_Type=" + task_Type + ", task_Name=" + task_Name + ", status=" + status + ", tStart_Time=" + tStart_Time + ", tEnd_Time=" + tEnd_Time + ", Emp_Email=" + Emp_Email + ", tSub_Date=" + tSub_Date + ", managerId=" + managerId + ", emp_name=" + emp_name + ", projectId=" + projectId + ", taskStatus=" + taskStatus + '}';
     }
 
 }

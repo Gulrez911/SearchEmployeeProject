@@ -23,22 +23,15 @@ import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
 import com.kgate.model.TaskDetails;
-import com.kgate.model.User;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
-import javax.validation.Valid;
 import org.springframework.ui.ModelMap;
 
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
