@@ -37,6 +37,12 @@
        <%@include file="header.jsp" %>
 
         <div align="center">
+      <form commandName="employee">    
+        <h2 style="color: orangered">Welcome ${employee.name} </h2>
+       <h2 style="color: orangered">you have successfully Login</h2>
+      
+      
+      </form>
             <h1 style="color: orangered">Edit Employee</h1>
             <h3> <p style="color: green" >${msg}</p></h3>
                 <form:form action="byEmployeeEdit" method="post"

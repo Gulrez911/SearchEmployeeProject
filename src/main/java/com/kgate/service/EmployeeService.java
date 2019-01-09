@@ -27,6 +27,6 @@ public interface EmployeeService {
 	
 	public List<Employee> displayByManagerId(String email);
 
-	
+	 public String getEmployeeName(String email);
 	
 }
