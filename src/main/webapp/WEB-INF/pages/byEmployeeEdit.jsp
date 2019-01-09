@@ -16,6 +16,7 @@
             }
         </style>
         
+
       <!--  <script type="text/javascript">
         function numberOnly(txt, e) {
             var arr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
@@ -138,12 +139,19 @@ myInput.onkeyup = function() {
 </script>
 
 
+
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
        <%@include file="header.jsp" %>
 
         <div align="center">
+      <form commandName="employee">    
+        <h2 style="color: orangered">Welcome ${employee.name} </h2>
+       <h2 style="color: orangered">you have successfully Login</h2>
+      
+      
+      </form>
             <h1 style="color: orangered">Edit Employee</h1>
             <h3> <p style="color: green" >${msg}</p></h3>
                 <form:form action="byEmployeeEdit" method="post"
@@ -174,9 +182,11 @@ myInput.onkeyup = function() {
 
                     <tr>
                         <td style="color: yellow">Password:</td>
+
                         <td><form:input path="password" type="password"  id="psw" name="psw" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                         title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  required="required" /></td>
+
                     </tr>
                     <tr>
                         <td style="color: yellow">Aadhar No.:</td>
@@ -228,6 +238,7 @@ myInput.onkeyup = function() {
 
         </form:form>
     </div>
+
 <div id="message">
   <h3>Password must contain the following:</h3>
   <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
@@ -237,4 +248,5 @@ myInput.onkeyup = function() {
 </div>
   
 </body>
+
 </html>

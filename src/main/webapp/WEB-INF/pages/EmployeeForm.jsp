@@ -24,14 +24,8 @@
                 color: red; font-weight: bold; 
             }
         </style>
-       
-        
-        
-       
-        
-        
- <!-- 
- <script type="text/javascript">
+
+<!--  <script type="text/javascript">
  function AadharValidate() {
      var aadhar = document.getElementById("txtAadhar").value;
      var adharcardTwelveDigit = /^\d{12}$/;
@@ -48,7 +42,7 @@
              return false;
          }
      }
- }
+ } -->
 </script> -->
 
 <style>
@@ -159,8 +153,7 @@ myInput.onkeyup = function() {
 
 
 
-        
-     
+       
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <%@include file="header.jsp" %>
@@ -168,20 +161,26 @@ myInput.onkeyup = function() {
         <div align="center">
             <h1 style="color:orangered">New/Edit Employee</h1>
 
-            <form:form action="saveEmployee"  method="post" modelAttribute="employee" commandName="employee" onclick="AadharValidate()">
+
+            <form:form action="saveEmployee"  method="post" modelAttribute="employee" commandName="employee">
+
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
                     <form:hidden path="id"/>
                     <tr>
                         <td style="color:Dark blue">Name:</td>
+
                         <td><form:input path="name"  required="true" pattern="^[A-Za-z\\s]*$"/></td>
                            
+
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
+
                         <td><form:input path="email" type="email"  required="true"/></td>
       
+
                     </tr>
 
                     <tr>
@@ -191,15 +190,21 @@ myInput.onkeyup = function() {
                     <tr>
 
                         <td style="color:Dark blue"> Telephone: </font></td>
+
                         <td><form:input path="telephone" required="true" pattern="^[0-9]*$"/></td>
+
 
                     </tr>
 
                     <tr>
                         <td style="color:Dark blue">Password:</td>
+
                         <td><form:input path="password" type="password" id="psw" name="psw" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                         title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="true"/></td>
+
+                        <%-- <td><form:input path="password" type="password" required="true"/></td> --%>
+
                     </tr>
                     <tr>
                         <td style="color:Dark blue">Aadhar No.:</td>
@@ -215,15 +220,23 @@ myInput.onkeyup = function() {
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
 
+
+
+                       
+
                         <td ><form:select path ="category" name="userTypes" required="true">
-                        <form:options items = "${userTypes}" />
+ <form:options items = "${userTypes}" />
+
+
                             </form:select>
                         </td>
                     </tr>
 
                     <tr>
                         <td style="color:Dark blue">ManagerId</td>
+
                         <td><form:input path="managerId" required="true" pattern="^[0-9]*$"/></td>
+
                     </tr>
 
                     <tr>
@@ -245,6 +258,7 @@ myInput.onkeyup = function() {
                 </table>     
             </form:form>
         </div>
+
         
 <div id="message">
   <h3>Password must contain the following:</h3>
@@ -253,6 +267,7 @@ myInput.onkeyup = function() {
   <p id="number" class="invalid">A <b>number</b></p>
   <p id="length" class="invalid">Minimum <b>8 characters</b></p>
 </div>
+
 
     </body>
 </html>

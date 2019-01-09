@@ -13,12 +13,16 @@ public interface SkillService {
     public void deleteSkill(Integer skill_id);
 
     public Skill getSkill(int skill_id);
-    
+
     public Skill getSkillByName(String skillName);
 
     public Skill updateSkill(Skill skill);
-    
+
     //retrieve employeeSkill List
     public List<String> getEmployeeSkill(int empid);
+
     public List<String> getEmployeeSkillByEmail(String email);
+
+    //return skill Name
+    public String findSkill(String skill);
 }

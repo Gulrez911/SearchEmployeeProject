@@ -14,7 +14,7 @@ public class SkillServiceImpl implements SkillService {
 
     @Autowired
     private SkillDao skillDao;
-    
+
     @Autowired
     private EmployeeDAO employeeDAO;
 
@@ -44,28 +44,34 @@ public class SkillServiceImpl implements SkillService {
     }
 
     public void setSkill(SkillDao skillDao) {
-		this.skillDao = skillDao;
-	}
+        this.skillDao = skillDao;
+    }
 
     @Override
     public Skill getSkillByName(String skillName) {
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   return skillDao.getSkillByName(skillName);
-    
-    }
-    
-    //return employeeSkill list
-    
-    @Transactional
-     public List<String> getEmployeeSkill(int empid){
-         return skillDao.getEmployeeSkill(empid);
-     }
+        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return skillDao.getSkillByName(skillName);
 
-	@Override
-         @Transactional
-	public List<String> getEmployeeSkillByEmail(String email) {
-		
-		return skillDao.getEmployeeSkillByEmail(email);
-	}
-    
+    }
+
+    //return employeeSkill list
+    @Transactional
+    public List<String> getEmployeeSkill(int empid) {
+        return skillDao.getEmployeeSkill(empid);
+    }
+
+    @Override
+    @Transactional
+    public List<String> getEmployeeSkillByEmail(String email) {
+
+        return skillDao.getEmployeeSkillByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public String findSkill(String skill) {
+
+        return skillDao.findSkill(skill);
+    }
+
 }

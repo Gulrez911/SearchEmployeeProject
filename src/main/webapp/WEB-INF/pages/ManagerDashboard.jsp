@@ -20,10 +20,13 @@
 
         <%@include file="header.jsp" %>
 
-        <h4>Welcome to DashBoard</h4>
+      
+        
         <div align="center">
             <form:form action="/PMS-1.0/MngEdit" method="post"
                        modelAttribute="employee" commandName="employee">
+                         <h2>Welcome ${employee.name} </h2>
+                         <h2>you have successfully Login</h2>
                 <form:hidden path="email" />
                 <input type="submit" value="Edit Profile">
             </form:form>

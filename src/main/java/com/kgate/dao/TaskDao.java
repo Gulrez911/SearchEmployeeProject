@@ -13,43 +13,45 @@ import com.kgate.model.TaskDetails;
 
 public interface TaskDao {
 
-	public List<TaskDetails> getalltaskdetails(String email);
+    public List<TaskDetails> getalltaskdetails(String email);
 
-	public void updateTask(TaskDetails taskDetails);
+    public void updateTask(TaskDetails taskDetails);
 
-	public void updatetask1(String date, String email, int tid, String st);
+    public void updatetask1(String date, String email, int tid, String st);
 
-	public TaskDetails getEmployeeTask(int taskid);
+    public TaskDetails getEmployeeTask(int taskid);
 
-	public void deleteTask(int task_id);
+    public void deleteTask(int task_id);
 
-	public void addTask(TaskDetails task);
+    public void addTask(TaskDetails task);
 
-	public List<TaskDetails> getByProjectId(int id);
+    public List<TaskDetails> getByProjectId(int id);
 
-	public List<TaskDetails> getAllTask();
+    public List<TaskDetails> getAllTask();
 
-	// return employee name from manager email
-	public List<String> getEmployeeEmail(String email);
+    // return employee name from manager email
+    public List<String> getEmpNameList(String email);
 
-	// return task
-	public TaskDetails getTask(int task_id);
+    // return task
+    public TaskDetails getTask(int task_id);
 
-	public List<TaskDetails> getTaskList(int mgrId);
+    public List<TaskDetails> getTaskList(int mgrId);
 
-	public List<TaskDTO> getEmpTasklist(String email);
+    public List<TaskDTO> getEmpTasklist(String email);
 
-	// return manageremail id
+    // return manageremail id
+    public String getManagerEmail(String email);
 
-	public String getManagerEmail(String email);
+    // return get employee name
+    public String getEmployeeName(String name);
 
-	// return get employee name
-	public String getEmployeeName(String name);
-
-	// return project name using task id
-	public String getProjectName(int id);
+    // return project name using task id
+    public String getProjectName(int id);
 
 //    return managereName id
-	public String getManagerName(String email);
+    public String getManagerName(String email);
+
+    //return employee email from emp name
+    public String EmployeeEmail(String name);
 
 }

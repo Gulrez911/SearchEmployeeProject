@@ -25,11 +25,16 @@
                     });
                 });
             });
-            $(document).ready(function (){
-               $("a[id$='id_delete']").click(function (){
-                  alert("Do you want to delete?"); 
-               }); 
+            $(document).ready(function () {
+                $("a[id$='id_delete']").click(function () {
+                    alert("Do you want to delete?");
+                });
             });
+//            $(document).ready(function () {
+//                $("a[id$='id_edit']").click(function () {
+//                    $("input[id$='myInput']").hide();
+//                });
+//            });
         </script>
 
 
@@ -58,9 +63,11 @@
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+
     <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
     <div align="center">
         <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
+        <div style="color: red">${error}</div> 
     <form:form action="saveTest" method="post" modelAttribute="skill"
                commandName="skill">
         <table>
@@ -82,7 +89,8 @@
         </table>
 
     </form:form>
-    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br>
+    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br> 
+
     <table border="1">
         <th>Skills</th>
         <th>Action</th>
@@ -91,6 +99,7 @@
                 <tr>
 
                     <td>${skill.skill_name}</td>
+
                     <%-- <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;  --%>
                         
@@ -103,11 +112,13 @@
                            </td>
                    
                 </tr>
+
             </c:forEach>
         </tbody>
     </table>
 
 </div>
+
 </body>
 
 </html>
