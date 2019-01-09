@@ -16,6 +16,21 @@
                 font-weight: bold;
             }
         </style>
+        
+       <script type="text/javascript">
+        function numberOnly(txt, e) {
+            var arr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
+            var code;
+            if (window.event)
+                code = e.keyCode;
+            else
+                code = e.which;
+            var char = keychar = String.fromCharCode(code);
+            if (arr.indexOf(char) == -1)
+                return false;
+            
+        }
+    </script> 
 
     </head>
     <body
@@ -34,7 +49,7 @@
                     <form:hidden path="otp" />
                     <tr>
                         <td style="color: yellow">Name:</td>
-                        <td><form:input path="name" required="required" readonly="true" /></td>
+                        <td><form:input path="name" required="required" readonly="true" pattern="^[A-Za-z\\s]*$" /></td>
                         <td><form:errors path="email" cssClass="error" /></td>
                     </tr>
                     <tr>
@@ -48,14 +63,12 @@
                     <tr>
 
                         <td style="color: yellow">Telephone: </font></td>
-                        <td><form:input path="telephone" /></td>
-
+                        <td><form:input path="telephone" pattern="^[0-9]*$"/></td>
                     </tr>
 
                     <tr>
                         <td style="color: yellow">Password:</td>
-                        <td><form:input path="password" type="password"
-                                    required="required" /></td>
+                        <td><form:input path="password" type="password" required="required" /></td>
                     </tr>
                     <tr>
                         <td style="color: yellow">Aadhar No.:</td>
@@ -76,15 +89,7 @@
                         <td style="color: yellow">Status</td>
                         <td><form:input path="status" readonly="true" /></td>
                     </tr>
-
-
-                    <%--<tr>
-            <td style="color:white">OTP:</td>
-            <td><form:input path="otp" /></td>
-        </tr> --%>
-
-
-
+                    
                     <tr>
                         <td style="color: yellow">Skills: </font></td>
                         <td><form:select path="skills" required="true">
@@ -114,10 +119,10 @@
 
 
         </form:form>
-
     </div>
+  
 
 </body>
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 </html>
