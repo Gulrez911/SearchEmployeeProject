@@ -1,9 +1,3 @@
-<%-- 
-    Document   : success
-    Created on : Nov 6, 2018, 6:22:23 PM
-    Author     : USER
---%>
-
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <!DOCTYPE html>
 <html>
@@ -16,10 +10,5 @@
         <h3 style="color:Dark blue" align="center">You have successfully Login</h3>
     <center><a href="/PMS-1.0/test"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
     <center><a href="/PMS-1.0/employeelist"><font style="color:Dark blue" size="5">Employee List</font></a></center>
-    <tr>
-
-
-    </tr>
-
-
+    
 </html>
