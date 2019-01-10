@@ -90,7 +90,7 @@ public class UserController {
 		 * matching
          */
         //session Related
-        ModelAndView mav = new ModelAndView();
+     
         HttpSession session = request.getSession(false);
 //        session.setMaxInactiveInterval(20);
         //
@@ -102,19 +102,33 @@ public class UserController {
             if (employee.getCategory().equals("Admin")) {
 
                 request.setAttribute("loginuser", employee.getEmail());
-                mav.setViewName("success");
-
+ 
+                ModelAndView mav = new ModelAndView("success");
+           
+                Employee e=employeeService.searchByEmail(email);
+           
+                mav.addObject("employee",e);
+                session.setMaxInactiveInterval(1 * 60);
+ 
                 return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
 
-//                        ModelAndView mav = new ModelAndView("ManagerDashboard");
-                mav.setViewName("ManagerDashboard");
+ 
+                ModelAndView mav = new ModelAndView("ManagerDashboard");
+                Employee e=employeeService.searchByEmail(email);
+                
+                mav.addObject("employee",e);
+ 
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
 
-                mav.setViewName("byEmployeeEdit");
+  
+                ModelAndView mav = new ModelAndView("byEmployeeEdit");
+  
+                
+ 
                 Employee emp = employeeService.searchByEmail(employee.getEmail());
                 List<String> employeeSkill
                         = skillService.getEmployeeSkillByEmail(employee.getEmail());
@@ -146,7 +160,9 @@ public class UserController {
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
 
                 model.addObject("listProject", listProject);
-
+                 Employee e=employeeService.searchByEmail(email);
+                
+                 model.addObject("employee",e);
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
 

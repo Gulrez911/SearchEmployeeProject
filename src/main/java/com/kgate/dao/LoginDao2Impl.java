@@ -25,11 +25,20 @@ public class LoginDao2Impl implements LoginDao2  {
 	  	{
 		  Session session = sessionFactory.openSession();
 		  boolean userFound = false;
-		  String SQL_QUERY ="from Employee where email=? and password=? and category=?";
-		  Query query = session.createQuery(SQL_QUERY);
+		
+		  String SQL_QUERY="from Employee where email=? and password=? and category=?"; Query query =
+		  session.createQuery(SQL_QUERY); 
 		  query.setParameter(0,userName);
 		  query.setParameter(1,userPassword);
 		  query.setParameter(2,usertype);
+		 
+		/*
+		 * String q="from Employee u where BINARY u.email = '" + userName +
+		 * "' and BINARY u.password='"+
+		 * userPassword+"'and BINARY category='"+usertype+"'"; Query query =
+		 * session.createQuery(q);
+		 */
+		  
 		  List list = query.list();
 		
 		if ((list != null) && (list.size() > 0))

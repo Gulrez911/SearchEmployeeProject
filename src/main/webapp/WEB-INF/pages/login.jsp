@@ -9,15 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--<<<<<<< HEAD
 
-        <SCRIPT type="text/javascript">
-            window.history.forward();
-            function noBack() {
-                window.history.forward();
-            }
-        </SCRIPT>
-=======-->
         <script>
             history.pushState(null, null, location.href);
             window.onpopstate = function () {
@@ -77,14 +69,20 @@
                     <tr>
                         <td style="color: white">User Name:</td>
                         <td><form:input name="email" path="email" type="email" id="nm"/></td>
-
-
                     </tr>
+                    
                     <tr>
                         <td style="color: white">Password:</td>
+                        <%-- <td><form:input name="password" path="password" type="password"
+                               id="psw" 
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="true"/></td> --%>
+                        
+                        
                         <td><form:input name="password" path="password" type="password"
-                                    id="pw" /></td>
+                              id="pw" /></td>
                     </tr>
+                    
                     <tr>
                         <td><form:select path="category" name="userType">
 

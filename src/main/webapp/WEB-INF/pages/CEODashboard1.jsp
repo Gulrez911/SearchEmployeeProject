@@ -21,6 +21,10 @@
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
      <%@include file="header.jsp" %>
         <div align="center">
+        <form commandName="employee">
+         <h2>Welcome ${employee.name} </h2>
+         <h2>you have successfully Login</h2>
+        </form>
             <form action="downloadProjectReport" method="post">
                 <input type="submit" value="Download Project Report" > 
             </form></div><br/>

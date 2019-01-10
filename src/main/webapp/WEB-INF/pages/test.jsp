@@ -76,8 +76,8 @@
             <tr>
                 <td style="color: Dark blue">Name:</td>
                 <td><form:input path="skill_name" name="skill_name"
-                            id="skill_name" /></td>
-
+                            id="skill_name"  required="true"/> </td>
+               <!--  <input type='text' pattern='[A-Za-z\\s]*'/> -->
 
             <br>
             <td colspan="2" align="center"><input type="submit"
@@ -99,15 +99,20 @@
                 <tr>
 
                     <td>${skill.skill_name}</td>
-                    <td><a href="editTest?skill_Id=${skill.skill_Id}" id="id_edit">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp; 
-    <!--                            <a href="deleteTest?skill_Id=${skill.skill_Id}">Delete</a></td>-->
-                        <a href="deleteTest?skill_Id=${skill.skill_Id}" onclick = "if (!confirm('Are you sure want to Delete Skill?')) {
-                                    return false;
-                                }">Delete</a>
-                        <!--<a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a>-->
-                    </td>
+
+                    <%-- <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;  --%>
+                        
+                        <td><a href="editTest?skill_Id=${skill.skill_Id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this skill?');">Edit</a>    
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+   
+                       <%--  <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a> --%>
+                        
+                <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
+                           </td>
+                   
                 </tr>
+
             </c:forEach>
         </tbody>
     </table>
