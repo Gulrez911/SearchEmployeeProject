@@ -20,7 +20,7 @@
     <center><a href="/PMS-1.0/employeelist?page=0"><font style="color:Dark blue" size="5">Employee List</font></a></center>
 
 </form>
-<<<<<<< HEAD
+
     </body>
 
 
