@@ -68,21 +68,6 @@ public class UserController {
         return mav;
     }
 
-    /*
-	 * public ModelAndView ct() { ModelAndView mav=new ModelAndView("createtask");
-	 * TaskDetails TaskDetails=new TaskDetails(); mav.addObject("task",TaskDetails);
-	 * String[] Tasktype= {"Coding","Design","Integration","Quality","Testing"};
-	 * mav.addObject("task_Type",Tasktype); return mav;
-     */
- /*
-	 * @RequestMapping(value= ,method = RequestMethod.GET) public ModelAndView
-	 * addingtask() { ModelAndView mav=new ModelAndView("createtask");
-	 * taskservice.addTask(); String message ="Task is successfully added"; return
-	 * mav;
-	 * 
-	 * }
-	 
-     */
     @RequestMapping(value = "/Edit", method = RequestMethod.POST)
     public ModelAndView editByemployee(@ModelAttribute Employee employee) {
         employeeService.updateEmployee(employee);
@@ -105,9 +90,11 @@ public class UserController {
 		 * matching
          */
         //session Related
-        HttpSession session = request.getSession(true);
-
+        ModelAndView mav = new ModelAndView();
+        HttpSession session = request.getSession(false);
+//        session.setMaxInactiveInterval(20);
         //
+
         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(), employee.getPassword(),
                 employee.getCategory());
 
@@ -115,60 +102,19 @@ public class UserController {
             if (employee.getCategory().equals("Admin")) {
 
                 request.setAttribute("loginuser", employee.getEmail());
-                ModelAndView mav = new ModelAndView("success");
-                session.setMaxInactiveInterval(1 * 60);
+                mav.setViewName("success");
+
                 return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
 
-                ModelAndView mav = new ModelAndView("ManagerDashboard");
-//                ModelAndView mav = new ModelAndView("CreateProject");
-
-//                Integer mid = projectservice.getManagerid(employee.getEmail());
-//                // System.out.println("Manager ID:::: " + mid);
-//                mav.addObject("mid", mid);
-//                ProjectDetails projectdetails = new ProjectDetails();
-//                projectdetails.setManageremail(employee.getEmail());
-//                TaskDetails taskdetails = new TaskDetails();
-//                ProjectDetails pd = new ProjectDetails();
-//                mav.addObject("projectdetails", projectdetails);
-//                taskdetails.setEmp_Email(employee.getEmail());
-//                mav.addObject("taskdetails", taskdetails);
-//                Employee e = new Employee();
-//                mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-//                List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-//                // System.out.println("List of Project: " + listProject);
-//                mav.addObject("pd", pd);
-//
-//                mav.addObject("listProject", listProject);
-//                
+//                        ModelAndView mav = new ModelAndView("ManagerDashboard");
+                mav.setViewName("ManagerDashboard");
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
 
-                /* Get all data required for Person jsp and set in ModelAndView */
-                // ModelAndView mav = new ModelAndView("byEmployeeEdit");
-                // Employee emp = employeeService.searchByEmail(employee.getEmail());
-                // List<String> employeeSkill =
-                // skillService.getEmployeeSkillByEmail(employee.getEmail());
-
-                /*	ModelAndView mav = new ModelAndView("EmployeeDashboard1");
-				// System.out.println("List of EmployeeSkill: " + employeeSkill);
-				TaskDetails taskdetails = new TaskDetails();
-				mav.addObject("taskdetails", taskdetails);
-				List<String> tlist = taskservice.getalltaskdetails(email);
-				
-				List<ProjectDetails> li = new ArrayList<ProjectDetails>();
-				li = taskservice.getempTaskList(email);
-				System.out.println("List of Projec task::::: "+li);
-				mav.addObject("mail", email);
-				String[] taskStatus = { "W.I.P.", "Complete" };
-				mav.addObject("taskStatus", taskStatus);
-				mav.addObject("tlist", tlist);
-				mav.addObject("employee", employee);
-				return mav;*/
-                ModelAndView mav = new ModelAndView("byEmployeeEdit");
-
+                mav.setViewName("byEmployeeEdit");
                 Employee emp = employeeService.searchByEmail(employee.getEmail());
                 List<String> employeeSkill
                         = skillService.getEmployeeSkillByEmail(employee.getEmail());
@@ -198,55 +144,29 @@ public class UserController {
             } else if (employee.getCategory().equals("CEO")) {
                 ModelAndView model = new ModelAndView("CEODashboard1");
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
-                /*  ProjectDetails pd = new ProjectDetails();
-                model.addObject("pd", pd);*/
+
                 model.addObject("listProject", listProject);
 
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
 
                 return model;
-            } else {
-                modelMap.put("error", "Invalid UserName / Password");
-                ModelAndView mav = new ModelAndView("login");
-                return mav;
-
             }
 
+        } else {
+            modelMap.put("error", "Invalid UserName / Password");
         }
-        modelMap.put("error", "Invalid UserName / Password");
         return init();
+
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
-        HttpSession httpSession = request.getSession();
-        httpSession.invalidate();
+//        HttpSession httpSession = request.getSession();
+//        httpSession.invalidate();
         return "redirect:/";
     }
 
-//               Employee Edit by Employee
-//              @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
-//              public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
-//		for (String skill : employee.getSkills()) {
-//			Skill sk = skillService.getSkillByName(skill);
-//			employee.getListSkill().add(sk);
-//		}
-//
-//		employeeService.addEmployee(employee);
-//		String message = "Employee is successfully edited.";
-//		ModelAndView mav = new ModelAndView("EmployeeSuccess");
-//		mav.addObject("message", message);
-//		List<Employee> listEmployee = employeeService.getAllEmployees();
-//		mav.addObject("listEmployee", listEmployee);
-//		return mav;
-//
-//	}
-    /* @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
-    public ModelAndView Empedit(@ModelAttribute Employee employee) {
-        ModelAndView mav = new ModelAndView("byEmployeeEdit");
-        Employee emp = employeeService.searchByEmail(employee.getEmail());
-        List<String> employeeSkill = skillService.getEmployeeSkillByEmail(employee.getEmail());*/
     @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
     public ModelAndView Empedit(@ModelAttribute Employee employee) {
 //        ModelAndView mav = new ModelAndView("ManagerEdit");

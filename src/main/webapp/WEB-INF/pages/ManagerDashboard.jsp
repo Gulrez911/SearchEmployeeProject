@@ -28,7 +28,7 @@
                 <input type="submit" value="Edit Profile">
             </form:form>
             </br>
-            <form:form action="/PMS-1.0/createProject2" method="post"  modelAttribute="employee">
+            <form:form action="/PMS-1.0/ " method="post"  modelAttribute="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Create Project">
             </form:form>

@@ -42,8 +42,7 @@ public class TestController {
     @RequestMapping(value = "/saveTest", method = RequestMethod.POST)
     public ModelAndView saveSkill(@ModelAttribute Skill skill, @RequestParam("skill_name") String skill_name) {
 
-        ModelAndView model = new ModelAndView("test");
-//          ModelAndView model = new ModelAndView("redirect:/test");
+        ModelAndView model = new ModelAndView("redirect:/test");
         String error = "Duplicate Skill";
 
         String skillName = skillService.findSkill(skill_name);
@@ -53,10 +52,9 @@ public class TestController {
         } else {
             model.addObject("error", error);
         }
-        List<Skill> listSkill = skillService.getAllSkills();
-        model.addObject("listSkill", listSkill);
 
-        return model;
+        return TestController.this.newContact(model);
+
     }
 
     @RequestMapping(value = "/deleteTest", method = RequestMethod.GET)

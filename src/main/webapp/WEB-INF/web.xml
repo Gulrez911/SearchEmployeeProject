@@ -25,8 +25,8 @@
         <servlet-name>spring</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <session-config>
+    <!--    <session-config>
         <session-timeout>1</session-timeout> 
-    </session-config>
+    </session-config>-->
 </web-app> 
  
