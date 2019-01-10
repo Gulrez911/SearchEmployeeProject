@@ -108,7 +108,7 @@
    
                        <%--  <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a> --%>
                         
-                <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
+               <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
                            </td>
                    
                 </tr>

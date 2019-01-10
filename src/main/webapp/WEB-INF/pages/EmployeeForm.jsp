@@ -24,26 +24,78 @@
                 color: red; font-weight: bold; 
             }
         </style>
+        
+<script type="text/javascript">
+function ValidatePAN()
+{
+	 var pan_no = document.getElementById("pan");
+	
+ if (pan_no.value != "") {
+            PanNo = pan_no.value;
+            var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+            if (PanNo.search(panPattern) == -1) {
+                alert("Invalid Pan No");
+                pan_no.focus();
+                pan_no.value='';
+                return false;
+            }
+          
+        }
+}
 
-<!--  <script type="text/javascript">
- function AadharValidate() {
-     var aadhar = document.getElementById("txtAadhar").value;
-     var adharcardTwelveDigit = /^\d{12}$/;
-     var adharSixteenDigit = /^\d{16}$/;
-     if (aadhar != '') {
-         if (aadhar.match(adharcardTwelveDigit)) {
-             return true;
+</script>   
+
+<script type="text/javascript">
+    function AadharValidate() 
+    {
+    
+        var aadhar = document.getElementById("txtAadhar");
+        var adharcardTwelveDigit = /^\d{12}$/;
+        var adharSixteenDigit = /^\d{16}$/;
+        
+        if (aadhar.value != "") {
+        	 aadharNo = aadhar.value;
+            if (aadharNo.match(adharcardTwelveDigit)) {
+                return true;
+            }
+            else if (aadharNo.match(adharSixteenDigit)) {
+                return true;
+            }
+            else {
+            	alert("Enter valid Aadhar Number");
+                aadhar.focus();
+                aadhar.value='';
+                return false;
+            }
          }
-         else if (aadhar.match(adharSixteenDigit)) {
-             return true;
-         }
-         else {
-             alert("Enter valid Aadhar Number");
-             return false;
-         }
-     }
- } -->
-</script> -->
+    } 
+</script>
+
+<!-- <script type="text/javascript">
+function AadharValidate() 
+{
+	 var pan_no = document.getElementById("pan");	
+}
+ -->
+
+
+
+
+<!-- <script>
+function phonenumber(inputtxt)
+{
+  var phoneno = /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/;
+  if((inputtxt.value.match(phoneno))
+        {
+      return true;
+        }
+      else
+        {
+        alert("message");
+        return false;
+        }
+}
+</script>  -->
 
 <style>
 /* Style the container for inputs */
@@ -108,7 +160,7 @@ myInput.onblur = function() {
 }
          
 
-/ When the user starts to type something inside the password field
+//When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate lowercase letters
   var lowerCaseLetters = /[a-z]/g;
@@ -191,7 +243,7 @@ myInput.onkeyup = function() {
 
                         <td style="color:Dark blue"> Telephone: </font></td>
 
-                        <td><form:input path="telephone" required="true" pattern="^[0-9]*$"/></td>
+                        <td><form:input path="telephone" required="true" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
 
 
                     </tr>
@@ -208,12 +260,12 @@ myInput.onkeyup = function() {
                     </tr>
                     <tr>
                         <td style="color:Dark blue">Aadhar No.:</td>
-                        <td><form:input path="aadhar"  id="txtAadhar" /></td>
+                        <td><form:input path="aadhar"  id="txtAadhar" onblur="AadharValidate(this);" /></td>
                         <td><form:errors path="aadhar" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue">Pan No.:</td>
-                        <td><form:input path="pan"  /></td>
+                        <td><form:input path="pan" id="pan" name="organisation_pan" onblur='ValidatePAN(this)' /></td>
                         <td><form:errors path="pan" cssClass="error"/></td>
                     </tr>
 
@@ -225,7 +277,7 @@ myInput.onkeyup = function() {
                        
 
                         <td ><form:select path ="category" name="userTypes" required="true">
- <form:options items = "${userTypes}" />
+                        <form:options items = "${userTypes}" />
 
 
                             </form:select>

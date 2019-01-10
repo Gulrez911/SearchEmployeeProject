@@ -66,6 +66,45 @@ myInput.onkeyup = function() {
   }
 }
 </script>
+<script type="text/javascript">
+    function AadharValidate() {
+        var aadhar = document.getElementById("txtAadhar").value;
+        var adharcardTwelveDigit = /^\d{12}$/;
+        var adharSixteenDigit = /^\d{16}$/;
+        if (aadhar != '') {
+            if (aadhar.match(adharcardTwelveDigit)) {
+                return true;
+            }
+            else if (aadhar.match(adharSixteenDigit)) {
+                return true;
+            }
+            else {
+                alert("Enter valid Aadhar Number");
+                return false;
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript">
+function ValidatePAN()
+{
+	 var pan_no = document.getElementById("pan");
+	
+ if (pan_no.value != "") {
+            PanNo = pan_no.value;
+            var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+            if (PanNo.search(panPattern) == -1) {
+                alert("Invalid Pan No");
+                pan_no.focus();
+                pan_no.value='';
+                return false;
+            }
+          
+        }
+}
+
+</script> 
 </head>
 <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
  <%@include file="header.jsp" %>
@@ -95,7 +134,7 @@ myInput.onkeyup = function() {
                     <tr>
 
                         <td style="color: yellow">Telephone: </font></td>
-                        <td><form:input path="telephone" /></td>
+                        <td><form:input path="telephone" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
 
                     </tr>
 
@@ -108,12 +147,12 @@ myInput.onkeyup = function() {
                     </tr>
                     <tr>
                         <td style="color: yellow">Aadhar No.:</td>
-                        <td><form:input path="aadhar" required="required" /></td>
+                        <td><form:input path="aadhar" required="required" id="txtAadhar" onblur="AadharValidate();" /></td>
                         <td><form:errors path="aadhar" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td style="color: yellow">Pan No.:</td>
-                        <td><form:input path="pan" required="required" /></td>
+                        <td><form:input path="pan" required="required" id="pan" name="organisation_pan" onblur='ValidatePAN(this)' /></td>
                         <td><form:errors path="pan" cssClass="error" /></td>
                     </tr>
 
@@ -164,11 +203,6 @@ myInput.onkeyup = function() {
    </table>
     </form:form>
     
-    
     </div>
-
-
-   
-
 </body>
 </html>
