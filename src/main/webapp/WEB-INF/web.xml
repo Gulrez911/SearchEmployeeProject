@@ -27,6 +27,11 @@
     </servlet-mapping>
     <!--    <session-config>
         <session-timeout>1</session-timeout> 
+<<<<<<< HEAD
+    </session-config>
+</web-app> 
+=======
     </session-config>-->
 </web-app> 
  
+

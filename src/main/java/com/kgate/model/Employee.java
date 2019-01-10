@@ -188,8 +188,11 @@ public class Employee implements Serializable {
         this.aadhar = aadhar;
         this.pan = pan;
     }
+    
 
-    public Employee() {
+  
+
+	public Employee() {
         super();
     }
 
