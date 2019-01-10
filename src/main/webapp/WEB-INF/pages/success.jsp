@@ -9,9 +9,12 @@
         <title>JSP Page</title>
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+          <%@include file="header.jsp" %>
+         
+         
          <form commandName="employee">
     
-        <%@include file="header.jsp" %>
+       
        
         <h3 style="color:blue" align="center"> Welcome ${employee.name}</h3>
         <h3 style="color:Red" align="center"> You have successfully logged in!!!</h3>

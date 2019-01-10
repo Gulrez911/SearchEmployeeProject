@@ -25,7 +25,7 @@ myInput.onblur = function() {
 }
          
 
-/ When the user starts to type something inside the password field
+// When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate lowercase letters
   var lowerCaseLetters = /[a-z]/g;
@@ -65,25 +65,31 @@ myInput.onkeyup = function() {
     length.classList.add("invalid");
   }
 }
-</script>
+
 <script type="text/javascript">
-    function AadharValidate() {
-        var aadhar = document.getElementById("txtAadhar").value;
-        var adharcardTwelveDigit = /^\d{12}$/;
-        var adharSixteenDigit = /^\d{16}$/;
-        if (aadhar != '') {
-            if (aadhar.match(adharcardTwelveDigit)) {
-                return true;
-            }
-            else if (aadhar.match(adharSixteenDigit)) {
-                return true;
-            }
-            else {
-                alert("Enter valid Aadhar Number");
-                return false;
-            }
+function AadharValidate() 
+{
+
+    var aadhar = document.getElementById("txtAadhar");
+    var adharcardTwelveDigit = /^\d{12}$/;
+    var adharSixteenDigit = /^\d{16}$/;
+    
+    if (aadhar.value != "") {
+    	 aadharNo = aadhar.value;
+        if (aadharNo.match(adharcardTwelveDigit)) {
+            return true;
         }
-    }
+        else if (aadharNo.match(adharSixteenDigit)) {
+            return true;
+        }
+        else {
+        	alert("Enter valid Aadhar Number");
+            aadhar.focus();
+            aadhar.value='';
+            return false;
+        }
+     }
+} 
 </script>
 
 <script type="text/javascript">
@@ -147,7 +153,7 @@ function ValidatePAN()
                     </tr>
                     <tr>
                         <td style="color: yellow">Aadhar No.:</td>
-                        <td><form:input path="aadhar" required="required" id="txtAadhar" onblur="AadharValidate();" /></td>
+                        <td><form:input path="aadhar" required="required" id="txtAadhar" onblur="AadharValidate(this);" /></td>
                         <td><form:errors path="aadhar" cssClass="error" /></td>
                     </tr>
                     <tr>

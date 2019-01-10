@@ -99,6 +99,7 @@
                 <th style="color:red">Task Type</th>
                 <th style="color:red">Task Name</th>
                 <th style="color:red">Status</th>
+                 <th style="color: red">Delete Action</th>
 
 
 
@@ -110,7 +111,7 @@
 
                         <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
 
-                      <%--   <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td> --%>
+                 <%--   <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td> --%>
 
 <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"  onclick="return confirm('Are you sure you want to delete this task?');">delete</a></td>
                            </td>

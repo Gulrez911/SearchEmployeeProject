@@ -39,23 +39,29 @@ function ValidatePAN()
 </script> 
 
 <script type="text/javascript">
-    function AadharValidate() {
-        var aadhar = document.getElementById("txtAadhar").value;
+    function AadharValidate() 
+    {
+    
+        var aadhar = document.getElementById("txtAadhar");
         var adharcardTwelveDigit = /^\d{12}$/;
         var adharSixteenDigit = /^\d{16}$/;
-        if (aadhar != '') {
-            if (aadhar.match(adharcardTwelveDigit)) {
+        
+        if (aadhar.value != "") {
+        	 aadharNo = aadhar.value;
+            if (aadharNo.match(adharcardTwelveDigit)) {
                 return true;
             }
-            else if (aadhar.match(adharSixteenDigit)) {
+            else if (aadharNo.match(adharSixteenDigit)) {
                 return true;
             }
             else {
-                alert("Enter valid Aadhar Number");
+            	alert("Enter valid Aadhar Number");
+                aadhar.focus();
+                aadhar.value='';
                 return false;
             }
-        }
-    }
+         }
+    } 
 </script>
 
 <script>
@@ -76,7 +82,7 @@ myInput.onblur = function() {
 }
          
 
-/ When the user starts to type something inside the password field
+//When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate lowercase letters
   var lowerCaseLetters = /[a-z]/g;
@@ -147,9 +153,8 @@ myInput.onkeyup = function() {
 				<tr>
 
 					<td style="color: yellow">Telephone: </font></td>
-					<td><form:input path="telephone"pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
-
-				</tr>
+					<td><form:input path="telephone" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
+                    </tr>
 
 				<tr>
 					<td style="color: white">Password:</td>
@@ -160,7 +165,7 @@ myInput.onkeyup = function() {
 				</tr>
 				<tr>
 					<td style="color: white">Aadhar No.:</td>
-					<td><form:input path="aadhar" required="required" id="txtAadhar" onblur="AadharValidate();" /></td>
+					<td><form:input path="aadhar" required="required" id="txtAadhar" onblur="AadharValidate(this);" /></td>
 					<td><form:errors path="aadhar" cssClass="error" /></td>
 				</tr>
 				<tr>
@@ -215,19 +220,7 @@ myInput.onkeyup = function() {
    
 </tr>
 		</form:form>
-
-
 	</div>
-
-	<div id="message">
-  <h3>Password must contain the following:</h3>
-  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-  <p id="number" class="invalid">A <b>number</b></p>
-  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-</div>
-
-
 
 </body>
 </html>

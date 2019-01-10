@@ -89,7 +89,7 @@
         </table>
 
     </form:form>
-    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br> 
+    <input id="myInput" type="text" placeholder="Search Skill Here.."  /><br></br> 
 
     <table border="1">
         <th>Skills</th>

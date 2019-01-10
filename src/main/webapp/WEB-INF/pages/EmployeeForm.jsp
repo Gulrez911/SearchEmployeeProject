@@ -272,15 +272,9 @@ myInput.onkeyup = function() {
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
 
-
-
-                       
-
                         <td ><form:select path ="category" name="userTypes" required="true">
                         <form:options items = "${userTypes}" />
-
-
-                            </form:select>
+                        </form:select>
                         </td>
                     </tr>
 

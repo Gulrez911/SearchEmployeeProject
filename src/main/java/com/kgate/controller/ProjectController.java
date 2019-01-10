@@ -485,6 +485,7 @@ public class ProjectController {
         return mav;
     }
     
+    
     @RequestMapping(value = "/deleteproject", method = RequestMethod.GET)
     public ModelAndView deleteproject(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
     	int id = Integer.parseInt(request.getParameter("project_id"));
