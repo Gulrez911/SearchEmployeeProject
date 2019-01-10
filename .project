@@ -55,9 +55,8 @@
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
-<<<<<<< HEAD
+
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
-=======
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 	</natures>
 </projectDescription>
