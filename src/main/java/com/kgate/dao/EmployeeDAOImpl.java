@@ -86,10 +86,6 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     	         .list();
     }
     
-    
-    
-    
-    
 
     @Override
     public void deleteEmployee(Integer employeeId) {
@@ -168,6 +164,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
 	@Override
 	public String getEmployeeName(String email) {
+		
 		 String query1 = "select name from employee_details where email='" + email + "'";
 	        Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query1);
 	        String name1 = (String) query2.uniqueResult();
@@ -177,12 +174,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		
 	}
 
-	private static final int limitResultsPerPage = 3;
+	private static final int limitResultsPerPage = 5;
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Employee> getAllEmployees(int page) {
-		
 		
 		 Query q=sessionFactory.getCurrentSession().createQuery("from Employee");
 		  q.setFirstResult(page * limitResultsPerPage);
