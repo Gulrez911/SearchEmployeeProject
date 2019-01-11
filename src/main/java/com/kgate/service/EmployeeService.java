@@ -10,8 +10,7 @@ public interface EmployeeService {
         
         public List<Employee> searchEmployees(String txt);
      
-        public List<Employee> searchEmployeesBySkill(String skill);
-         
+        public List<Employee> searchEmployeesBySkill(String skill);  
     
 	public void addEmployee(Employee employee);
 

@@ -19,9 +19,7 @@
     <body background="<%=request.getContextPath()%>/resources/images/pineapple.jpg">
 
         <%@include file="header.jsp" %>
-
-      
-        
+     
         <div align="center">
             <form:form action="/PMS-1.0/MngEdit" method="post"
                        modelAttribute="employee" commandName="employee">
