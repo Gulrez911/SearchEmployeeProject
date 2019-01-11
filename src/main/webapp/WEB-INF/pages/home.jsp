@@ -85,10 +85,16 @@
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
                         <td>${employee.category}</td>
-                        <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; <a
-                                href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td>
-
+                       <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp; --%>
+                            
+                      <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
+                            
+                           <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
+                                
+                          <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+                           </td>
                     </tr>
                 </c:forEach>                
          </table>
