@@ -28,18 +28,24 @@
                     return false;
                 }
             }
+
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("a[id$='id1']").window.alert("hi");
+            })
         </script>
     </head>
 
 
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
-<%@include file="header.jsp" %>
+        <%@include file="header.jsp" %>
         <div align="center">
 
 
-          <!-- bug 40 Employee List as a title is repeated solved -->
-           
+            <!-- bug 40 Employee List as a title is repeated solved -->
+
 
             <h1><font style="color:yellow" size="5">Employee List</font></h1>
             <center><a href="/PMS-1.0/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
@@ -51,7 +57,6 @@
 
 
             <h1 style="color:maroon">Employee List</h1>
-
             <form action="<s:url value="/search_employeelist"/>">
 
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
@@ -76,42 +81,41 @@
                 <th style="color:red">User Type</th>
                 <th style="color:red">Action</th>
 
+                <tbody id="myTable">
+                    <c:forEach var="employee" items="${listEmployee}">
+                        <tr style="color:Dark blue">
 
-                <c:forEach var="employee" items="${listEmployee}">
-                    <tr style="color:Dark blue">
+                            <td>${employee.name}</td>
+                            <td>${employee.email}</td>
+                            <td>${employee.address}</td>
+                            <td>${employee.telephone}</td>
+                            <td>${employee.category}</td>
 
-                        <td>${employee.name}</td>
-                        <td>${employee.email}</td>
-                        <td>${employee.address}</td>
-                        <td>${employee.telephone}</td>
-                        <td>${employee.category}</td>
-                       <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; --%>
-                            
-                      <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
-                            &nbsp;&nbsp;&nbsp;&nbsp; 
-                            
-                           <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
-                                
-                          <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
-                           </td>
-                    </tr>
-                </c:forEach>                
-         </table>
-          <tr>
-   
-   </tr> 
+                            <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
+                                &nbsp;&nbsp;&nbsp;&nbsp; 
 
- 
+                                <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
+
+                                <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
+                            </td>
+                        </tr>
+                    </c:forEach>  
+                </tbody>
+            </table>
+            <tr>
+
+            </tr> 
+
+
             <h4><font style="color: darkorange">
                     New Employee Register</font> <a href="newEmployee" style="color: red;">Here</a>
             </h4>
-            
-              <form:form action="backtosuccess" method="post">
-   
-   <input type="submit" value="Back"></form:form>
+
+            <form:form action="backtosuccess" method="post">
+
+                <input type="submit" value="Back"></form:form>
         </div>
-        
+
 
     </body>
 </html>

@@ -20,16 +20,16 @@
             $(document).ready(function () {
                 $("#myInput").on("keyup", function () {
                     var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function () {
+                    $("#myTable td").filter(function () {
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
             });
-            $(document).ready(function () {
-                $("a[id$='id_delete']").click(function () {
-                    alert("Do you want to delete?");
-                });
-            });
+//            $(document).ready(function () {
+//                $("a[id$='id_delete']").click(function () {
+//                    alert("Do you want to delete?");
+//                });
+//            });
 //            $(document).ready(function () {
 //                $("a[id$='id_edit']").click(function () {
 //                    $("input[id$='myInput']").hide();
@@ -77,7 +77,7 @@
                 <td style="color: Dark blue">Name:</td>
                 <td><form:input path="skill_name" name="skill_name"
                             id="skill_name"  required="true"/> </td>
-               <!--  <input type='text' pattern='[A-Za-z\\s]*'/> -->
+                <!--  <input type='text' pattern='[A-Za-z\\s]*'/> -->
 
             <br>
             <td colspan="2" align="center"><input type="submit"
@@ -102,15 +102,15 @@
 
                     <%-- <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;  --%>
-                        
-                        <td><a href="editTest?skill_Id=${skill.skill_Id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this skill?');">Edit</a>    
-                            &nbsp;&nbsp;&nbsp;&nbsp; 
-   
-                       <%--  <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a> --%>
-                        
-                <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
-                           </td>
-                   
+
+                    <td><a href="editTest?skill_Id=${skill.skill_Id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this skill?');">Edit</a>    
+                        &nbsp;&nbsp;&nbsp;&nbsp; 
+
+                        <%--  <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a> --%>
+
+                        <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
+                    </td>
+
                 </tr>
 
             </c:forEach>
