@@ -83,6 +83,11 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	 @Transactional
+
+	public List<ProjectDetails> getProjectDates(int projectId) {
+		return projectDao.getProjectDates(projectId);
+	}
+
 	public String findproject(String projectname) {
 		
 		return projectDao.findproject(projectname);
@@ -102,4 +107,5 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectDao.getProjectById(id);
 	}
 	
+
 }

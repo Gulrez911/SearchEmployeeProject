@@ -1,7 +1,10 @@
 package com.kgate.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -14,12 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
@@ -27,14 +34,7 @@ import com.kgate.model.TaskDetails;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.util.Random;
-
-import org.springframework.ui.ModelMap;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import com.kgate.service.TaskService;
 
 @Controller
 public class EmployeeController {
@@ -44,6 +44,8 @@ public class EmployeeController {
     public EmployeeController() {
         System.out.println("EmployeeController()");
     }
+    @Autowired
+	private TaskService taskservice;
 
     @Autowired
     private EmployeeService employeeService;
@@ -65,6 +67,16 @@ public class EmployeeController {
         ModelAndView mav = new ModelAndView("success");
         return mav;
     }
+    
+    @RequestMapping(value = "/success1")
+	@ResponseBody
+	public int success1(HttpServletRequest request) {
+		String s = request.getParameter("mail");
+		List<TaskDetails> l = taskservice.getalltaskdetails(s);
+		int size = l.size();
+
+		return size;
+	}
 
     @RequestMapping(value = "/search_employeelist")
     public ModelAndView searchEmployee(ModelAndView model, @RequestParam("freeText") String freeText)
@@ -76,34 +88,35 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/search_employeelist_skill1")
-    public ModelAndView searchEmployeeBySkill1(ModelAndView model, @RequestParam("skillSearch") String skillSearch)
-            throws IOException {
-        int flag = 1;
-        List<Employee> listEmployee = null;
+	public ModelAndView searchEmployeeBySkill1(ModelAndView model, @RequestParam("skillSearch") String skillSearch)
+			throws IOException {
+		int flag = 1;
+		List<Employee> listEmployee = null;
 
-        List<Skill> listSkill = skillService.getAllSkills();
+		List<Skill> listSkill = skillService.getAllSkills();
 
-        for (Skill s : listSkill) {
-            String a = s.getSkill_name().toLowerCase();
-            if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch)) {
-                listEmployee = employeeService.searchEmployeesBySkill(a);
-                model.addObject("listEmployee", listEmployee);
-                flag = 0;
+		for (Skill s : listSkill) {
+			String a = s.getSkill_name();
+			if (a.contains(skillSearch) || a.equalsIgnoreCase(skillSearch.toLowerCase())
+					|| a.equalsIgnoreCase(skillSearch.toUpperCase()) || a.toLowerCase().contains(skillSearch)) {
+				listEmployee = employeeService.searchEmployeesBySkill(a);
+				model.addObject("listEmployee", listEmployee);
+				flag = 0;
 
-            }
-        }
-        if (flag == 1) {
+			}
+		}
+		if (flag == 1) {
 
-            model.addObject("error", "data not found");
-            model.setViewName("home");
-            return model;
+			model.addObject("error", "Data not found");
+			model.setViewName("home");
+			return model;
 
-        }
-        model.addObject("listEmployee", listEmployee);
-        model.setViewName("home");
-        return model;
+		}
+		model.addObject("listEmployee", listEmployee);
+		model.setViewName("home");
+		return model;
 
-    }
+	}
 
     // with validation
     @RequestMapping(value = "/employeelist")

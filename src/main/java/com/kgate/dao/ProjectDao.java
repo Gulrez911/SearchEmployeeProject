@@ -35,10 +35,15 @@ public interface ProjectDao {
     public List<TaskDTO> displayAllStatus3(String email, int id);
     
     public String getmanagernameformail(String email);
+
+    
+    public List<ProjectDetails> getProjectDates(int projectId);
+
    //return project name for duplicate check
     public String findproject(String projectname);
     
     public void deleteproject(int id);
     
    public ProjectDetails getProjectById(int id);
+
 }

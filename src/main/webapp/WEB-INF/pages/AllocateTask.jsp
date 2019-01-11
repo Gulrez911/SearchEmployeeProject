@@ -2,6 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -24,6 +25,8 @@
             <h1 style="color:orangered">Allocate Task</h1>
 
 
+           <c:forEach var="pd1" items="${pd }">
+
 
             <form:form action="taskAllocated" method="post" modelAttribute="td" commandName="td">
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
@@ -45,13 +48,15 @@
                     </tr>
 
                     <tr>
+                         
                         <td>Task Start Date:</td>
-                        <td><form:input path="tStart_Time" type="date" required="true"/></td>
+                        <td><form:input path="tStart_Time" type="date" min="${pd1.pstart_Date }" max="${pd1.pEnd_Date }"  required="true"/></td>
+                        
                     </tr>
 
                     <tr>
                         <td>Task End Date:</td>
-                        <td><form:input path="tEnd_Time" type="date" required="true"/></td>
+                        <td><form:input path="tEnd_Time" type="date" min="${pd1.pstart_Date }" max="${pd1.pEnd_Date }" required="true"/></td>
                     </tr>
 
                     <tr>
@@ -70,8 +75,6 @@
                         <td colspan="2" align="center"><input type="submit" value="Save" name="action2"></td>
                     </tr>
 
-
-
                 </table>
 
                 <form:form action="backtotask" method="post"  > 
@@ -80,6 +83,8 @@
                     </div>
             </form:form>
 
-    </body>
+            </c:forEach>
+      </body>
+
 </html>
 

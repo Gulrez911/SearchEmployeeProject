@@ -2,6 +2,7 @@ package com.kgate.controller;
 
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.kgate.model.Employee;
+import com.kgate.model.ProjectDetails;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.ProjectService;
 import com.kgate.service.TaskService;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,153 +38,151 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 //@SessionAttributes("taskDetails")
 public class TaskDemoController {
-	
+
 	private static final Logger logger = Logger.getLogger(TaskDemoController.class);
 
-    @Autowired
-    TaskService taskService;
+	@Autowired
+	TaskService taskService;
 
-    @Autowired
-    ProjectService projectService;
+	@Autowired
+	ProjectService projectService;
 
-    @InitBinder
-    public void initConverter(WebDataBinder binder) {
-        CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
-        binder.registerCustomEditor(Date.class, dateEditor);
-    }
+	@InitBinder
+	public void initConverter(WebDataBinder binder) {
+		CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
+		binder.registerCustomEditor(Date.class, dateEditor);
+	}
 
-    @RequestMapping(value = "/asssign", method = RequestMethod.GET)
+	@RequestMapping(value = "/asssign", method = RequestMethod.GET)
 
-    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
-        ModelAndView model = new ModelAndView("AllocateTask");
-        int taskId = Integer.parseInt(request.getParameter("task_id"));
-        TaskDetails td2 = taskService.getTask(taskId);
-        List<String> empnameList = taskService.getEmpNameList(employee.getEmail());
+	public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee,
+			@RequestParam("project_id") String pid) {
+		ModelAndView model = new ModelAndView("AllocateTask");
+		int taskId = Integer.parseInt(request.getParameter("task_id"));
+		TaskDetails td2 = taskService.getTask(taskId);
+		List<String> empnameList = taskService.getEmpNameList(employee.getEmail());
+		int pid1 = Integer.parseInt(pid);
+		model.addObject("td", td2);
+		model.addObject("empnameList", empnameList);
+		List<ProjectDetails> listpd = projectService.getProjectDates(pid1);
+		model.addObject("pd", listpd);
+		String bk = request.getParameter("em");
+		model.addObject("em", bk);
+		return model;
+	}
 
-        model.addObject("td", td2);
-        model.addObject("empnameList", empnameList);
+	@RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
+	public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
+			@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,
+			@SessionAttribute("employee") Employee employee) {
 
-        String bk = request.getParameter("em");
-        model.addObject("em", bk);
-        return model;
-    }
+		taskdetails.setStatus("Assigned");
+		taskdetails.setTaskStatus("W .I. P");
+		int mId = TaskDetails.getManagerId();
+		taskdetails.setManagerId(mId);
+		int pId = TaskDetails.getProjectId();
+		taskdetails.setProjectId(pId);
+		String[] Tasktype = { "Coding", "Design", "Integration", "Quality", "Testing" };
+		List<TaskDetails> listtask = taskService.getTaskList(pId);
 
-    @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
-    public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+		String EmpEmail = taskService.EmployeeEmail(taskdetails.getEmp_name());
+		taskdetails.setEmp_Email(EmpEmail);
+		/* int pId = taskdetails.getProjectId(); */
 
-        taskdetails.setStatus("Assigned");
-        taskdetails.setTaskStatus("W .I. P");
-        int mId = TaskDetails.getManagerId();
-        taskdetails.setManagerId(mId);
-        int pId = TaskDetails.getProjectId();
-        taskdetails.setProjectId(pId);
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        List<TaskDetails> listtask = taskService.getTaskList(pId);
+		/* int mId = taskdetails.getManagerId(); */
+		System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
 
-        String EmpEmail = taskService.EmployeeEmail(taskdetails.getEmp_name());
-        taskdetails.setEmp_Email(EmpEmail);
-        /* int pId = taskdetails.getProjectId(); */
+		ModelAndView mav = new ModelAndView("createtask");
 
- /* int mId = taskdetails.getManagerId(); */
-        System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mId);
-
-        ModelAndView mav = new ModelAndView("createtask");
-
-        String ProjectName = projectService.displayProjectName(pId);
-        System.out.println("Project Name::::::::::::" + ProjectName);
-        mav.addObject("task_Type", Tasktype);
+		String ProjectName = projectService.displayProjectName(pId);
+		System.out.println("Project Name::::::::::::" + ProjectName);
+		mav.addObject("task_Type", Tasktype);
 //		List<TaskDetails> listtask = taskService.getAllTask();
 
-        System.out.println("List of task:  " + listtask);
-        taskService.addTask(taskdetails);
-        mav.addObject("taskdetails", taskdetails);
+		System.out.println("List of task:  " + listtask);
+		taskService.addTask(taskdetails);
+		mav.addObject("taskdetails", taskdetails);
 
-        mav.addObject("listtask", listtask);
-        TaskDemoController tdc = new TaskDemoController();
+		mav.addObject("listtask", listtask);
+		TaskDemoController tdc = new TaskDemoController();
 
-        String s = request.getParameter("em");
-        mav.addObject("em", s);
+		String s = request.getParameter("em");
+		mav.addObject("em", s);
 
-        String tskName = taskdetails.getTask_Name();
-        String tskType = taskdetails.getTask_Type();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
-        String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
+		String tskName = taskdetails.getTask_Name();
+		String tskType = taskdetails.getTask_Type();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
+		String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
 
-        String managername = projectService.getmanagernameformail(employee.getEmail());
-        System.out.println("Employee Email:::: " + EmpEmail);
+		String managername = projectService.getmanagernameformail(employee.getEmail());
+		System.out.println("Employee Email:::: " + EmpEmail);
 
-        System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
+		System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());
 // 		 * tdc.sendMail(taskdetails.getEmp_Email(), "Your Task Details:  \nTask Type:  "
 //		 * + taskdetails.getTask_Type() + "\nTaskName::: " + taskdetails.getTask_Name(),
 //		 * "You have been assigned a Task");
 //                 */
-        String message = "Dear Sir/Mam,<br>"
-                + " <i>You have been assigned a task</i><br>";
-        message += "<font color=red>Task Details are as below</font>";
-        message += "<table border='1'><th>Project Name</th><th>Task Name</th><th> Task Type</th><th> Task Start Date</th><th> Task End Date</th><tr><td>"
-                + ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
-                + tEndDate + "</td></tr></table>"
-                + "<br>"
-                + "<br>"
-                + "Thanks And Regards,<br>"
-                + managername;
-        tdc.sendMail(EmpEmail, message, "You have been assigned a task");
+		String message = "Dear Sir/Mam,<br>" + " <i>You have been assigned a task</i><br>";
+		message += "<font color=red>Task Details are as below</font>";
+		message += "<table border='1'><th>Project Name</th><th>Task Name</th><th> Task Type</th><th> Task Start Date</th><th> Task End Date</th><tr><td>"
+				+ ProjectName + "</td><td>" + tskName + "</td><td>" + tskType + "</td><td>" + tStartDate + "</td><td>"
+				+ tEndDate + "</td></tr></table>" + "<br>" + "<br>" + "Thanks And Regards,<br>" + managername;
+		tdc.sendMail(EmpEmail, message, "You have been assigned a task");
 
 //    return tdc.refreshmethod(taskdetails, request);
-        return TaskDemoController.this.refreshmethod(taskdetails, request);
-    }
+		return TaskDemoController.this.refreshmethod(taskdetails, request);
+	}
 
-    public void sendMail(String to, String message, String subject) {
+	public void sendMail(String to, String message, String subject) {
 
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.socketFactory.port", "465");
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "465");
+		Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.port", "465");
 
-        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
-            }
-        });
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("gulfarooqui1@gmail.com", "Gulrez#7326");
+			}
+		});
 
-        Message message1 = new MimeMessage(session);
+		Message message1 = new MimeMessage(session);
 
-        try {
+		try {
 
-            message1.setFrom(new InternetAddress("test@gmail.com"));
-            message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-            message1.setSubject(subject);
-            /* message1.setText(message); */
-            message1.setContent(message, "text/html");
-            Transport.send(message1);
+			message1.setFrom(new InternetAddress("test@gmail.com"));
+			message1.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			message1.setSubject(subject);
+			/* message1.setText(message); */
+			message1.setContent(message, "text/html");
+			Transport.send(message1);
 
-            System.out.println("Done");
+			System.out.println("Done");
 
-        } catch (MessagingException e1) {
-            throw new RuntimeException(e1);
-        }
-        // return "employeelist";
+		} catch (MessagingException e1) {
+			throw new RuntimeException(e1);
+		}
+		// return "employeelist";
 
-    }
+	}
 
-    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
-    ModelAndView refreshmethod(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+	@RequestMapping(value = "/refresh", method = RequestMethod.POST)
+	ModelAndView refreshmethod(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
-        ModelAndView mav = new ModelAndView("createtask");
-        String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
-        mav.addObject("task_Type", Tasktype);
-        int s1 = taskdetails.getProjectId();
-        List<TaskDetails> listtask = taskService.getTaskList(s1);
-        mav.addObject("listtask", listtask);
-        mav.addObject("taskdetails", taskdetails);
-        String s12 = request.getParameter("em");
-        mav.addObject("em", s12);
-        return mav;
+		ModelAndView mav = new ModelAndView("createtask");
+		String[] Tasktype = { "Coding", "Design", "Integration", "Quality", "Testing" };
+		mav.addObject("task_Type", Tasktype);
+		int s1 = taskdetails.getProjectId();
+		List<TaskDetails> listtask = taskService.getTaskList(s1);
+		mav.addObject("listtask", listtask);
+		mav.addObject("taskdetails", taskdetails);
+		String s12 = request.getParameter("em");
+		mav.addObject("em", s12);
+		return mav;
 
-    }
+	}
 
 }

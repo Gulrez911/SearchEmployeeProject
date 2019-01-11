@@ -70,7 +70,8 @@
                          
                          
                        
-                         <fmt:parseNumber var="days" integerOnly="true" type="number" value="${t1}"/>
+                        <%--  <fmt:parseNumber var="days" integerOnly="true" type="number" value="${t1}"/> --%>
+                         <fmt:parseNumber var="days" integerOnly="true" type="number" value="${t}"/>
                           Delay Days ${days}
                            <c:set value="${total+days}" var="total"/>
                            <%--  <fmt:parseDate pattern="yyyy-mm-dd" value="${d.tEndDate}" var="a"/>

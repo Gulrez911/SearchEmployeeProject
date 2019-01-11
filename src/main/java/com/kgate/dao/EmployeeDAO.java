@@ -2,6 +2,7 @@ package com.kgate.dao;
 
 import java.util.List;
 import com.kgate.model.Employee;
+import com.kgate.model.Holiday;
 import com.kgate.model.Skill;
 
 public interface EmployeeDAO {
@@ -25,6 +26,16 @@ public interface EmployeeDAO {
     public List<Employee> searchEmployeesBySkill(String skill);
     
     public List<Employee> displayByManagerId(String email);
+    
+    
+    
+    public void addHoliday(Holiday holiday);
+    
+    public List<Holiday> getAllHoliday();
+    
+   
+    
+    public void deleteHoliday(Integer Days_id);
    
     public String getEmployeeName(String email);
     

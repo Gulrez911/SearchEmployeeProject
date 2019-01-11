@@ -111,11 +111,6 @@
 
                         <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
 
-<<<<<<< HEAD
-                      <%--   <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td> --%>
-=======
-                 <%--   <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}">delete</a></td> --%>
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
 <td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"  onclick="return confirm('Are you sure you want to delete this task?');">delete</a></td>
                            </td>

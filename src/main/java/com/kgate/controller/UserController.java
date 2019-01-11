@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kgate.model.Employee;
+import com.kgate.model.Holiday;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
 import com.kgate.model.TaskDetails;
@@ -20,7 +21,6 @@ import com.kgate.service.TaskService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -36,8 +36,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("employee")
 public class UserController {
 
-	private static final Logger logger = Logger.getLogger(UserController.class);
-	
     @Autowired
     private TaskService taskservice;
 
@@ -168,8 +166,10 @@ public class UserController {
                  model.addObject("employee",e);
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
-
-                return model;
+                List<Holiday> holiday=employeeService.getAllHoliday();
+                model.addObject("holiday",holiday);
+         return model;
+            
             }
 
         } else {
