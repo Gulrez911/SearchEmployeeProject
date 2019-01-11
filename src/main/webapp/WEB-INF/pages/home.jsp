@@ -17,7 +17,6 @@
                 background-position:left;
                 background-size: 40px; 
             }
-
         </style>
         <script type="text/javascript">
             function chk()
@@ -28,12 +27,6 @@
                     return false;
                 }
             }
-
-        </script>
-        <script>
-            $(document).ready(function () {
-                $("a[id$='id1']").window.alert("hi");
-            })
         </script>
     </head>
 
@@ -43,8 +36,6 @@
         <%@include file="header.jsp" %>
         <div align="center">
 
-
-            <h1><font style="color:yellow" size="5">Employee List</font></h1>
 
             <!-- bug 40 Employee List as a title is repeated solved -->
 
@@ -57,6 +48,7 @@
 
 
             <h1 style="color:maroon">Employee List</h1>
+
             <form action="<s:url value="/search_employeelist"/>">
 
                 <input type="text" name="freeText" placeholder="Enter Text To Search" value="${param.freeText}"/>
@@ -81,32 +73,27 @@
                 <th style="color:red">User Type</th>
                 <th style="color:red">Action</th>
 
-                <tbody id="myTable">
-                    <c:forEach var="employee" items="${listEmployee}">
-                        <tr style="color:Dark blue">
 
-                            <td>${employee.name}</td>
-                            <td>${employee.email}</td>
-                            <td>${employee.address}</td>
-                            <td>${employee.telephone}</td>
-                            <td>${employee.category}</td>
-                            <td>${employee.name}</td>
-                            <td>${employee.email}</td>
-                            <td>${employee.address}</td>
-                            <td>${employee.telephone}</td>
-                            <td>${employee.category}</td>
-                            <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
-                                 &nbsp;&nbsp;&nbsp;&nbsp; --%>
+                <c:forEach var="employee" items="${listEmployee}">
+                    <tr style="color:Dark blue">
 
-                            <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
-                                &nbsp;&nbsp;&nbsp;&nbsp; 
+                        <td>${employee.name}</td>
+                        <td>${employee.email}</td>
+                        <td>${employee.address}</td>
+                        <td>${employee.telephone}</td>
+                        <td>${employee.category}</td>
+                        <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
+                             &nbsp;&nbsp;&nbsp;&nbsp; --%>
 
-                                <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
+                        <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
+                            &nbsp;&nbsp;&nbsp;&nbsp; 
 
-                                <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
-                            </td>
-                        </tr>
-                    </c:forEach>                
+                            <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
+
+                            <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+                        </td>
+                    </tr>
+                </c:forEach>                
             </table>
 
 
@@ -118,7 +105,6 @@
 
                 <input type="submit" value="Back"></form:form>
             </div>
-
             <!--   <div class="pagination">
              <ul>
                  
