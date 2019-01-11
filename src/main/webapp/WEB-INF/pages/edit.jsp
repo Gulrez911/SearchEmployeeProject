@@ -221,7 +221,12 @@ myInput.onkeyup = function() {
 </tr>
 		</form:form>
 	</div>
+<<<<<<< HEAD
+	
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
 </body>
 </html>

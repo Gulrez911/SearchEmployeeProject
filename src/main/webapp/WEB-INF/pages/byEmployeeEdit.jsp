@@ -16,6 +16,22 @@
             }
         </style>
         
+<<<<<<< HEAD
+       <script type="text/javascript">
+        function numberOnly(txt, e) {
+            var arr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
+            var code;
+            if (window.event)
+                code = e.keyCode;
+            else
+                code = e.which;
+            var char = keychar = String.fromCharCode(code);
+            if (arr.indexOf(char) == -1)
+                return false;
+            
+        }
+    </script> 
+=======
 <script type="text/javascript">
 function ValidatePAN()
 {
@@ -165,6 +181,7 @@ myInput.onkeyup = function() {
   }
 }
 </script>
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
     </head>
     <body
@@ -203,15 +220,23 @@ myInput.onkeyup = function() {
                     <tr>
 
                         <td style="color: yellow">Telephone: </font></td>
+<<<<<<< HEAD
+                        <td><form:input path="telephone" pattern="^[0-9]*$"/></td>
+=======
                         <td><form:input path="telephone" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number"/></td>
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
                     </tr>
 
                     <tr>
                         <td style="color: yellow">Password:</td>
+<<<<<<< HEAD
+                        <td><form:input path="password" type="password" required="required" /></td>
+=======
 
                         <td><form:input path="password" type="password"  id="psw" name="psw" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                         title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  required="required" /></td>
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
                     </tr>
                     
                     <tr>
@@ -261,7 +286,17 @@ myInput.onkeyup = function() {
                 
             </tr>
         </form:form>
+<<<<<<< HEAD
+    </div>
+  
+
+=======
     </div>  
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 </body>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 </html>

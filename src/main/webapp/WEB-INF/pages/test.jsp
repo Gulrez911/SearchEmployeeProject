@@ -20,16 +20,16 @@
             $(document).ready(function () {
                 $("#myInput").on("keyup", function () {
                     var value = $(this).val().toLowerCase();
-                    $("#myTable td").filter(function () {
+                    $("#myTable tr").filter(function () {
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
             });
-//            $(document).ready(function () {
-//                $("a[id$='id_delete']").click(function () {
-//                    alert("Do you want to delete?");
-//                });
-//            });
+            $(document).ready(function () {
+                $("a[id$='id_delete']").click(function () {
+                    alert("Do you want to delete?");
+                });
+            });
 //            $(document).ready(function () {
 //                $("a[id$='id_edit']").click(function () {
 //                    $("input[id$='myInput']").hide();
@@ -42,16 +42,13 @@
             table {
                 border-collapse: collapse;
             }
-
             th, td {
                 text-align: left;
                 padding: 8px;
             }
-
             tr:nth-child(even) {
                 background-color: #f2f2f2
             }
-
             th {
                 background-color: #4CAF50;
                 color: white;
@@ -100,7 +97,8 @@
 
                     <td>${skill.skill_name}</td>
 
-
+                    <%-- <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;  --%>
 
                     <td><a href="editTest?skill_Id=${skill.skill_Id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this skill?');">Edit</a>    
                         &nbsp;&nbsp;&nbsp;&nbsp; 

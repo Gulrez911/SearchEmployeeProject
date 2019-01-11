@@ -107,12 +107,13 @@ public class EmployeeController {
 
     // with validation
     @RequestMapping(value = "/employeelist")
+
     public ModelAndView listEmployee(ModelAndView model, ModelMap model1, @RequestParam(value = "page", required = false) int page) throws IOException {
         int size;
         List<Employee> listEmployee1 = employeeService.getAllEmployees();
         size = listEmployee1.size() / 5;
         int startpage = (int) (page - 5 > 0 ? page - 5 : 1);
-        int endpage = startpage + size - 1;
+        int endpage = startpage + size + 1;
 
         List<Employee> listEmployee = employeeService.getAllEmployees(page);
         model.addObject("listEmployee", listEmployee);
