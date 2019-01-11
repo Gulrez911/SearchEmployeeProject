@@ -22,8 +22,8 @@
      <%@include file="header.jsp" %>
         <div align="center">
         <form commandName="employee">
-         <h2>Welcome ${employee.name} </h2>
-         <h2>you have successfully Login</h2>
+         <h2 style="color:blue"> Welcome ${employee.name} </h2>
+         <h2 style="color:red">You have successfully logged in!!!</h2>
         </form>
             <form action="downloadProjectReport" method="post">
                 <input type="submit" value="Download Project Report" > 
@@ -104,21 +104,14 @@
                       </c:if>
                       
                      </c:if>
-                       </c:forEach>
-                       
-                      
-                      
-                       
+                       </c:forEach>  
                         ${k} Days
                   </td><td>
-                       
-                      
-                         <c:set var="deviation" value="${k-j }"/>
+                     <c:set var="deviation" value="${k-j }"/>
                       ${deviation } Days
                         </td>
                         <td>${status1}</td></div>
                     </tr>
-                    
                 </c:forEach> 
             </table>
         </div>

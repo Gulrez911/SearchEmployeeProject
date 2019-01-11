@@ -8,7 +8,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
         <title>JSP Page</title>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/abstract.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+    <%@include file="header.jsp" %>
         <div align="center">  <table border="1">
                 <th>Project Name</th>
                 <th>View Details</th>

@@ -73,6 +73,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         return sessionFactory.getCurrentSession().createQuery("from Employee")
                 .list();
     }
+    
+    
+    
+    
+    
 
     @Override
     public void deleteEmployee(Integer employeeId) {
@@ -146,6 +151,25 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	        Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query1);
 	        String name1 = (String) query2.uniqueResult();
 	        return name1;
+		
+	}
+
+	private static final int limitResultsPerPage = 3;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Employee> getAllEmployees(int page) {
+		
+		
+		 Query q=sessionFactory.getCurrentSession().createQuery("from Employee");
+		  q.setFirstResult(page * limitResultsPerPage);
+		  q.setFetchSize(limitResultsPerPage);
+	        q.setMaxResults(limitResultsPerPage);
+	        return (List<Employee>) q.list();
+	
+		
+		 
+	                
 		
 	}
 

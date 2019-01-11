@@ -16,22 +16,51 @@
             }
         </style>
         
-
-      <!--  <script type="text/javascript">
-        function numberOnly(txt, e) {
-            var arr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ";
-            var code;
-            if (window.event)
-                code = e.keyCode;
-            else
-                code = e.which;
-            var char = keychar = String.fromCharCode(code);
-            if (arr.indexOf(char) == -1)
+<script type="text/javascript">
+function ValidatePAN()
+{
+	 var pan_no = document.getElementById("pan");
+	
+ if (pan_no.value != "") {
+            PanNo = pan_no.value;
+            var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+            if (PanNo.search(panPattern) == -1) {
+                alert("Invalid Pan No");
+                pan_no.focus();
+                pan_no.value='';
                 return false;
-            
+            }
+          
         }
+}
 
-    </script>  -->
+</script>   
+    
+<script type="text/javascript">
+    function AadharValidate() 
+    {
+    
+        var aadhar = document.getElementById("txtAadhar");
+        var adharcardTwelveDigit = /^\d{12}$/;
+        var adharSixteenDigit = /^\d{16}$/;
+        
+        if (aadhar.value != "") {
+        	 aadharNo = aadhar.value;
+            if (aadharNo.match(adharcardTwelveDigit)) {
+                return true;
+            }
+            else if (aadharNo.match(adharSixteenDigit)) {
+                return true;
+            }
+            else {
+            	alert("Enter Valid Aadhar Number");
+                aadhar.focus();
+                aadhar.value='';
+                return false;
+            }
+         }
+    } 
+</script>
     
 <style>
 /* Style the container for inputs */
@@ -95,8 +124,7 @@ myInput.onblur = function() {
   document.getElementById("message").style.display = "none";
 }
          
-
-/ When the user starts to type something inside the password field
+// When the user starts to type something inside the password field
 myInput.onkeyup = function() {
   // Validate lowercase letters
   var lowerCaseLetters = /[a-z]/g;
@@ -138,8 +166,6 @@ myInput.onkeyup = function() {
 }
 </script>
 
-
-
     </head>
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
@@ -177,7 +203,7 @@ myInput.onkeyup = function() {
                     <tr>
 
                         <td style="color: yellow">Telephone: </font></td>
-                        <td><form:input path="telephone" pattern="^[0-9]*$"/></td>
+                        <td><form:input path="telephone" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number"/></td>
                     </tr>
 
                     <tr>
@@ -186,16 +212,16 @@ myInput.onkeyup = function() {
                         <td><form:input path="password" type="password"  id="psw" name="psw" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
                         title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  required="required" /></td>
-
                     </tr>
+                    
                     <tr>
                         <td style="color: yellow">Aadhar No.:</td>
-                        <td><form:input path="aadhar" required="required" /></td>
+                        <td><form:input path="aadhar" required="required" id="txtAadhar" onblur="AadharValidate(this);" /></td>
                         <td><form:errors path="aadhar" cssClass="error" /></td>
                     </tr>
                     <tr>
                         <td style="color: yellow">Pan No.:</td>
-                        <td><form:input path="pan" required="required" /></td>
+                        <td><form:input path="pan" id="pan" name="organisation_pan" onblur='ValidatePAN(this)' required="required" /></td>
                         <td><form:errors path="pan" cssClass="error" /></td>
                     </tr>
 
@@ -218,7 +244,7 @@ myInput.onkeyup = function() {
                     </tr>
 
                     <tr>
-                        <!--                        <td><input type="submit" value="Send OTP" name="action1" /></td>-->
+                        <!-- <td><input type="submit" value="Send OTP" name="action1" /></td>-->
                         <td colspan="2" align="center"><input type="submit"
                                                               value="Save" name="action2"></td>
 
@@ -234,19 +260,8 @@ myInput.onkeyup = function() {
                 <tr>
                 
             </tr>
-
-
         </form:form>
-    </div>
-
-<div id="message">
-  <h3>Password must contain the following:</h3>
-  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-  <p id="number" class="invalid">A <b>number</b></p>
-  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-</div>
-  
+    </div>  
 </body>
 
 </html>

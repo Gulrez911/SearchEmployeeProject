@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,14 +107,44 @@ public class EmployeeController {
 
     // with validation
     @RequestMapping(value = "/employeelist")
-    public ModelAndView listEmployee(ModelAndView model) throws IOException {
-        List<Employee> listEmployee = employeeService.getAllEmployees();
+    public ModelAndView listEmployee(ModelAndView model,ModelMap model1,@RequestParam(value = "page", required = false) int page) throws IOException {
+    	int size;
+    	 List<Employee> listEmployee1= employeeService.getAllEmployees();
+    	 size=listEmployee1.size()/5;
+    	int startpage = (int) (page - 5 > 0?page - 5:1);
+        int endpage = startpage +size-1;
+       
+       List<Employee> listEmployee = employeeService.getAllEmployees(page);
         model.addObject("listEmployee", listEmployee);
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
+        model1.addAttribute("startpage",startpage);
+        model1.addAttribute("endpage",endpage);
         model.setViewName("home");
         return model;
     }
+    
+    
+/*    @RequestMapping(value = "/pageemployeelist")
+    public ModelAndView pagelistEmployee(ModelMap model1,ModelAndView model, @RequestParam(value = "page", required = false) int page) throws IOException {
+    	int size;
+    	 List<Employee> listEmployee1= employeeService.getAllEmployees();
+    	 size=listEmployee1.size()/5;
+    	int startpage = (int) (page - 5 > 0?page - 5:1);
+        int endpage = startpage + 10;
+       
+       List<Employee> listEmployee = employeeService.getAllEmployees(page);
+        model.addObject("listEmployee", listEmployee);
+        List<Skill> listSkill = skillService.getAllSkills();
+        model.addObject("listSkill", listSkill);
+        model1.addAttribute("startpage",startpage);
+        model1.addAttribute("endpage",endpage);
+        model.setViewName("home");
+        return model;
+    }*/
+    
+   
+  
 
     @RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
     public ModelAndView newContact(ModelAndView model) {
@@ -303,7 +334,7 @@ public class EmployeeController {
         String message = "Employee is successfully edited.";
         ModelAndView mav = new ModelAndView("home");
         mav.addObject("message", message);
-        List<Employee> listEmployee = employeeService.getAllEmployees();
+       List<Employee> listEmployee = employeeService.getAllEmployees();
         mav.addObject("listEmployee", listEmployee);
         return mav;
 
@@ -311,7 +342,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
     public ModelAndView downloadPDF() {
-        List<Employee> listEmployee = employeeService.getAllEmployees();
+     List<Employee> listEmployee = employeeService.getAllEmployees();
         return new ModelAndView("pdfView", "listEmployee", listEmployee);
     }
 
@@ -492,7 +523,7 @@ public class EmployeeController {
 	   return mav;
     
    }  
-    
+   
     }
     
 

@@ -89,7 +89,7 @@
         </table>
 
     </form:form>
-    <input id="myInput" type="text" placeholder="Search Skill Here.."/><br></br> 
+    <input id="myInput" type="text" placeholder="Search Skill Here.."  /><br></br> 
 
     <table border="1">
         <th>Skills</th>
@@ -100,8 +100,7 @@
 
                     <td>${skill.skill_name}</td>
 
-                    <%-- <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;  --%>
+
 
                     <td><a href="editTest?skill_Id=${skill.skill_Id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this skill?');">Edit</a>    
                         &nbsp;&nbsp;&nbsp;&nbsp; 

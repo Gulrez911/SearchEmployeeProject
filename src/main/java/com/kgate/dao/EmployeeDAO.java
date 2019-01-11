@@ -8,9 +8,9 @@ public interface EmployeeDAO {
 
     public void addEmployee(Employee employee);
 
-    public List<Employee> getAllEmployees();
+   public List<Employee> getAllEmployees();
     //search Employee
-
+    public List<Employee> getAllEmployees(int page);
     
     public List<Employee> searchEmployees(String txt);
 
@@ -27,5 +27,7 @@ public interface EmployeeDAO {
     public List<Employee> displayByManagerId(String email);
    
     public String getEmployeeName(String email);
+    
+    
 
 }

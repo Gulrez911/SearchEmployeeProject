@@ -44,13 +44,13 @@
         <div align="center">
 
 
+            <h1><font style="color:yellow" size="5">Employee List</font></h1>
+
             <!-- bug 40 Employee List as a title is repeated solved -->
 
 
-            <h1><font style="color:yellow" size="5">Employee List</font></h1>
+
             <center><a href="/PMS-1.0/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
-
-
 
             <center><a href="/PMS-1.0/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
 
@@ -90,21 +90,24 @@
                             <td>${employee.address}</td>
                             <td>${employee.telephone}</td>
                             <td>${employee.category}</td>
+                            <td>${employee.name}</td>
+                            <td>${employee.email}</td>
+                            <td>${employee.address}</td>
+                            <td>${employee.telephone}</td>
+                            <td>${employee.category}</td>
+                            <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
+                                 &nbsp;&nbsp;&nbsp;&nbsp; --%>
 
                             <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
                                 &nbsp;&nbsp;&nbsp;&nbsp; 
 
                                 <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
 
-                                <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
+                                <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
                             </td>
                         </tr>
-                    </c:forEach>  
-                </tbody>
+                    </c:forEach>                
             </table>
-            <tr>
-
-            </tr> 
 
 
             <h4><font style="color: darkorange">
@@ -114,8 +117,35 @@
             <form:form action="backtosuccess" method="post">
 
                 <input type="submit" value="Back"></form:form>
-        </div>
+            </div>
 
+            <!--   <div class="pagination">
+             <ul>
+                 
+                 
+                 <li class="active"><a href="employeelist?page=1">1</a></li>
+                 <li class="active"><a href="">2</a></li>
+                 <li class="active"><a href="#">3</a></li>
+                 <li class="active"><a href="#">4</a></li>
+                 <li class="active"><a href="#">5</a></li>
+                 <li class="active"><a href="#">Next</a></li>
+                 <li class="active"><a href="#">Last</a></li>
+             </ul>
+         </div> -->
+
+            <div class="pagination">
+                <ul>
+
+                    <li>
+                        <a href="employeelist?page=0">0</a>
+                    <c:forEach begin="${startpage}" end="${endpage}" var="p">
+                        <a href="<c:url value="employeelist" >
+                               <c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+                    </c:forEach>
+                </li>
+
+            </ul>
+        </div>
 
     </body>
 </html>

@@ -8,7 +8,8 @@
         <meta charset="ISO-8859-1">
         <title>Project Details</title>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/abstract.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+    <%@include file="header.jsp" %>
         <div align="center">
 
             <form action="downloadOverviewProjectStatus" method="post">
@@ -30,6 +31,9 @@
                     </tr>
                 </c:forEach>
             </table>
+            <form action="/PMS-1.0/ManagerProjectDetBack" method="post">
+                <input type="submit" value="Back"/>
+            </form>
         </div>
           
     </body>
