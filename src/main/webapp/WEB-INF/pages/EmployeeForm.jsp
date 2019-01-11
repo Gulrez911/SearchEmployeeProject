@@ -205,11 +205,6 @@ myInput.onkeyup = function() {
 }
 </script>
 
-
-
-
-       
-
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <%@include file="header.jsp" %>
