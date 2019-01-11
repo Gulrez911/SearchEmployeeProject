@@ -231,12 +231,7 @@ myInput.onkeyup = function() {
                     </tr>
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
-
-
                         <td><form:input path="email" type="email"  required="true"/></td>
-      
-
-
                     </tr>
 
                     <tr>
@@ -249,8 +244,6 @@ myInput.onkeyup = function() {
 
 
                         <td><form:input path="telephone" required="true" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
-
-
 
                     </tr>
 
@@ -303,7 +296,6 @@ myInput.onkeyup = function() {
                             </form:select>
 
                         <td>
-
                     </tr>
 
                     <tr>
@@ -313,7 +305,5 @@ myInput.onkeyup = function() {
                 </table>     
             </form:form>
         </div>
-
-
     </body>
 </html>

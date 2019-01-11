@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.springmvc.kgate.tests;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +15,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/**
- *
- * @author user
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
@@ -49,7 +40,6 @@ public class TestEmployee {
     public void getAllSkills() {
         List<Skill> li = skillService.getAllSkills();
       
-
     }
 
 }
