@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TestController {
+	
+	private static final Logger logger = Logger.getLogger(TestController.class);
 
 //     @RequestMapping(value = "/test")
 //     public ModelAndView viewSkill(){

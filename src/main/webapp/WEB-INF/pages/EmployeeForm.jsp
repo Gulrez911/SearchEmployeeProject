@@ -27,6 +27,58 @@
             }
         </style>
 
+        <script> 
+        /* 
+        function formValidation(){
+        var name = document.validation.name;
+        var add = document.validation.address;
+        {
+        	if(allLetter(name))
+        	{
+        		if(alphanumeric(add))
+        		{
+        		}
+        		}
+        }
+        }
+        return false;
+        }
+        
+        
+        function allLetter(name)
+        { 
+        var letters = /^[A-Za-z]+$/;
+        if(uname.value.match(letters))
+        {
+        return true;
+        }
+        else
+        {
+        alert('Username must have alphabet characters only');
+        name.focus();
+        return false;
+        }
+        } */
+        
+        /* function alphanumeric(add)
+        { 
+        var letters = /^[0-9a-zA-Z]+$/;
+        if(uadd.value.match(letters))
+        {
+        return true;
+        }
+        else
+        {
+        alert('User address must have alphanumeric characters only');
+        add.focus();
+        return false;
+        }
+        }
+ */
+        
+      </script>
+
+
         
 <script type="text/javascript">
 function ValidatePAN()
@@ -205,6 +257,7 @@ myInput.onkeyup = function() {
 }
 </script>
 
+
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <%@include file="header.jsp" %>
@@ -213,7 +266,9 @@ myInput.onkeyup = function() {
             <h1 style="color:orangered">New/Edit Employee</h1>
 
 
+
             <form:form action="saveEmployee"  method="post" modelAttribute="employee" commandName="employee">
+
 
 
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
@@ -227,11 +282,14 @@ myInput.onkeyup = function() {
                            
 
 
+
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
+
                         <td><form:input path="email" type="email"  required="true"/></td>
+
                     </tr>
 
                     <tr>
@@ -245,6 +303,7 @@ myInput.onkeyup = function() {
 
                         <td><form:input path="telephone" required="true" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
 
+
                     </tr>
 
                     <tr>
@@ -255,6 +314,7 @@ myInput.onkeyup = function() {
                         title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="true"/></td>
 
                         <%-- <td><form:input path="password" type="password" required="true"/></td> --%>
+
 
                     </tr>
                     <tr>
@@ -271,10 +331,12 @@ myInput.onkeyup = function() {
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
 
+
                         <td ><form:select path ="category" name="userTypes" required="true">
 
                         <form:options items = "${userTypes}" />
                         </form:select>
+
 
                         </td>
                     </tr>
@@ -282,7 +344,9 @@ myInput.onkeyup = function() {
                     <tr>
                         <td style="color:Dark blue">ManagerId</td>
 
+
                         <td><form:input path="managerId" required="true" pattern="^[0-9]*$"/></td>
+
 
 
                     </tr>

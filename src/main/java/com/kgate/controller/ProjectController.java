@@ -1,6 +1,8 @@
 package com.kgate.controller;
 
 import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
+
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,6 +33,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @SuppressWarnings("deprecation")
 @Controller
 public class ProjectController {
+	
+	 private static final Logger logger = Logger.getLogger(ProjectController.class);
 
     @Autowired
     ProjectService projectservice;
