@@ -7,13 +7,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
     <head>
-<<<<<<< HEAD
-
-=======
 
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
         <script>
 //           $(document).ready(function (){
@@ -22,11 +18,7 @@
 //               });
 //           });
         </script>
-<<<<<<< HEAD
 
-=======
-
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>New/Edit Contact</title>
         <style>
@@ -34,7 +26,7 @@
                 color: red; font-weight: bold; 
             }
         </style>
-<<<<<<< HEAD
+
         <script> 
         /* 
         function formValidation(){
@@ -85,7 +77,7 @@
  */
         
       </script>
-=======
+
 
         
 <script type="text/javascript">
@@ -266,11 +258,6 @@ myInput.onkeyup = function() {
 </script>
 
 
-
-
-       
-
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
     </head>
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
         <%@include file="header.jsp" %>
@@ -278,45 +265,35 @@ myInput.onkeyup = function() {
         <div align="center">
             <h1 style="color:orangered">New/Edit Employee</h1>
 
-<<<<<<< HEAD
-            <form:form action="saveEmployee"  method="post" modelAttribute="employee" commandName="employee">
-=======
+
 
             <form:form action="saveEmployee"  method="post" modelAttribute="employee" commandName="employee">
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                 <form:errors path = "*" cssClass = "errorblock" element = "div" />
                 <table>
                     <form:hidden path="id"/>
                     <tr>
                         <td style="color:Dark blue">Name:</td>
-<<<<<<< HEAD
-                        <td><form:input path="name"  required="true" pattern="^[A-Za-z\\s]*$"/></td>
-                           
-=======
 
 
                         <td><form:input path="name"  required="true" pattern="^[A-Za-z\\s]*$"/></td>
                            
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                         <td><form:errors path="email" cssClass="error"/></td>
                     </tr>
                     <tr>
                         <td style="color:Dark blue"> Email:</td>
-<<<<<<< HEAD
-                        <td><form:input path="email" type="email"  required="true"/></td>
-      
-=======
 
 
                         <td><form:input path="email" type="email"  required="true"/></td>
       
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                     </tr>
 
                     <tr>
@@ -326,23 +303,17 @@ myInput.onkeyup = function() {
                     <tr>
 
                         <td style="color:Dark blue"> Telephone: </font></td>
-<<<<<<< HEAD
-                        <td><form:input path="telephone" required="true" pattern="^[0-9]*$"/></td>
-=======
 
 
                         <td><form:input path="telephone" required="true" pattern="[1-9]{1}[0-9]{9}" title="Enter valid 10 digit number" /></td>
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 
                     </tr>
 
                     <tr>
                         <td style="color:Dark blue">Password:</td>
-<<<<<<< HEAD
-                        <td><form:input path="password" type="password" required="true"/></td>
-=======
 
                         <td><form:input path="password" type="password" id="psw" name="psw" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
@@ -350,7 +321,7 @@ myInput.onkeyup = function() {
 
                         <%-- <td><form:input path="password" type="password" required="true"/></td> --%>
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                     </tr>
                     <tr>
                         <td style="color:Dark blue">Aadhar No.:</td>
@@ -365,32 +336,25 @@ myInput.onkeyup = function() {
 
                     <tr>
                         <td style="color:Dark blue">User Type:</td>
-<<<<<<< HEAD
 
-                        <td ><form:select path ="category" name="userTypes" required="true">
-                        <form:options items = "${userTypes}" />
-                            </form:select>
-=======
 
                         <td ><form:select path ="category" name="userTypes" required="true">
 
                         <form:options items = "${userTypes}" />
                         </form:select>
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                         </td>
                     </tr>
 
                     <tr>
                         <td style="color:Dark blue">ManagerId</td>
-<<<<<<< HEAD
-                        <td><form:input path="managerId" required="true" pattern="^[0-9]*$"/></td>
-=======
+
 
                         <td><form:input path="managerId" required="true" pattern="^[0-9]*$"/></td>
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
                     </tr>
 
                     <tr>
@@ -412,10 +376,7 @@ myInput.onkeyup = function() {
                 </table>     
             </form:form>
         </div>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
     </body>
 </html>
