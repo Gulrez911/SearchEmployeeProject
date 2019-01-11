@@ -21,8 +21,7 @@
                     <tr>
                      <div align="center">
                     <h1 style="color:orangered">Task Edit</h1>
-                    
-                    
+                   
                         <td style="color: black">Task Type:</td>
                         <td><form:input path="task_Type" readonly="true"/></td>
                     </tr>
@@ -45,7 +44,7 @@
 
                         <td>Status:</td>
                         <%-- 	<td><form:input path="status" /></td> --%>
-                        <td><form:select path="status" name="taskStatus"></td>
+                        <td><form:select path="status" name="taskStatus">
                         
                                     <form:options items="${taskStatus}" />
                                    </form:select></td>
