@@ -16,6 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -41,6 +42,8 @@ import com.kgate.service.TaskService;
 
 @Controller
 public class TaskController {
+
+	private static final Logger logger = Logger.getLogger(TaskController.class);
 
 	@Autowired
 	TaskService taskservice;

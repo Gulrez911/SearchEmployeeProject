@@ -3,10 +3,14 @@ package com.kgate.dao;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kgate.model.Employee;
+
+
 import java.util.ArrayList;
 
 import org.hibernate.Query;
@@ -15,6 +19,8 @@ import org.hibernate.Session;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
+	
+	private static final Logger logger = LoggerFactory.getLogger(EmployeeDAOImpl.class);
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -22,6 +28,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public void addEmployee(Employee employee) {
         sessionFactory.getCurrentSession().saveOrUpdate(employee);
         //  sessionFactory.getCurrentSession().saveOrUpdate(skill);
+        logger.info("Details of employee is successfully save");
     }
 
     @SuppressWarnings("unchecked")
@@ -56,7 +63,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             emp.add(e);
 
         }
-
+        logger.info("employee search by skill is successfully," +emp);
         return emp;
     }
 
@@ -64,14 +71,19 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public List<Employee> searchEmployees(String txt) {
 
         String query = "from Employee u where u.name like '" + txt + "%' or u.email like '" + txt + "%' or u.address like '" + txt + "%' or u.telephone like '" + txt + "%' ";
+        logger.info("Details loaded successfully, employee details=" +query);
+
         return sessionFactory.getCurrentSession().createQuery(query).list();
+        
+       
+        
     }
 
     @SuppressWarnings("unchecked")
     public List<Employee> getAllEmployees() {
 
-        return sessionFactory.getCurrentSession().createQuery("from Employee")
-                .list();
+    return  sessionFactory.getCurrentSession().createQuery("from Employee")
+    	         .list();
     }
     
     
@@ -83,21 +95,28 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public void deleteEmployee(Integer employeeId) {
 
         String query = "delete Employee_Details, join_employee_skill from Employee_Details inner join  join_employee_skill  where  Employee_Details.id = join_employee_skill.id and Employee_Details.id =" + employeeId + "";
-
+        if(query !=null)
+        {
         SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
         sqlq.executeUpdate();
-
+        } else {
+            logger.info("employee details are not present");
+        }
+        logger.info("details of employee are deleted succesfully");
     }
 
     public Employee getEmployee(int empid) {
-        return (Employee) sessionFactory.getCurrentSession().get(
-                Employee.class,
-                empid);
+    	  Session s = this.sessionFactory.getCurrentSession();
+    	  Employee e=(Employee) s.get(Employee.class,empid);
+    	  logger.info("Details loaded successfully, employee details=" +e);
+
+        return e;
     }
 
     @Override
     public Employee updateEmployee(Employee employee) {
         sessionFactory.getCurrentSession().update(employee);
+        logger.info("Details are updated");
         return employee;
     }
 
@@ -107,6 +126,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         List<Object> emps = sessionFactory.getCurrentSession().createQuery(query).list();
         if (emps != null && emps.size() > 0) {
             Employee employee = (Employee) emps.get(0);
+            logger.info("employee search by email succesfully");
             return employee;
         }
         return null;
@@ -142,6 +162,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             e.setCategory(st4);
             emp.add(e);
         }
+        logger.info("display employee by manager id"+emp);
         return emp;
     }
 
@@ -150,6 +171,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 		 String query1 = "select name from employee_details where email='" + email + "'";
 	        Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query1);
 	        String name1 = (String) query2.uniqueResult();
+	        
+	        logger.info("display employee Name By email"+name1);
 	        return name1;
 		
 	}

@@ -20,6 +20,7 @@ import com.kgate.service.TaskService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +36,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("employee")
 public class UserController {
 
+	private static final Logger logger = Logger.getLogger(UserController.class);
+	
     @Autowired
     private TaskService taskservice;
 

@@ -16,17 +16,13 @@
         <h3 style="color:blue" align="center"> Welcome ${employee.name}</h3>
         <h3 style="color:Red" align="center"> You have successfully logged in!!!</h3>
     <center><a href="/PMS-1.0/test"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
-<<<<<<< HEAD
-    <center><a href="/PMS-1.0/employeelist"><font style="color:Dark blue" size="5">Employee List</font></a></center>
-    
-=======
 
-    <center><a href="/PMS-1.0/employeelist?page=0"><font style="color:Dark blue" size="5">Employee List</font></a></center>
+<center><a href="/PMS-1.0/employeelist?page=0"><font style="color:Dark blue" size="5">Employee List</font></a></center>
 
 </form>
 
     </body>
 
 
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
+
 </html>

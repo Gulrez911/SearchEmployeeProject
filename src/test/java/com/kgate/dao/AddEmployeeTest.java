@@ -7,6 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kgate.model.Employee;
 import com.kgate.service.EmployeeService;
+import com.kgate.service.TaskService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:appContext.xml"})
@@ -15,6 +16,9 @@ public class AddEmployeeTest {
 
     @Autowired
     EmployeeService employeeservice;
+    
+    @Autowired
+    TaskService taskservice;
 
     /*@Test
     public void testMeth() {
@@ -97,6 +101,7 @@ public class AddEmployeeTest {
     	System.out.println(employeeservice.getEmployee(empid));
     }
     
+   
 }
 
 

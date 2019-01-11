@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,8 @@ import java.util.logging.Logger;
 @Repository
 public class ProjectDaoImpl implements ProjectDao {
 
+	
+	
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -36,7 +39,7 @@ public class ProjectDaoImpl implements ProjectDao {
         Session s = this.sessionFactory.getCurrentSession();
       
         s.saveOrUpdate(project);
-     
+      
         
     }
 
@@ -54,6 +57,7 @@ public class ProjectDaoImpl implements ProjectDao {
         /*	 int id=Integer.parseInt(s);
 		 return id;*/
         int id = (int) q.uniqueResult();
+      
         return id;
 
     }
@@ -106,7 +110,6 @@ public class ProjectDaoImpl implements ProjectDao {
 
             listtsk.add(tdto);
         }
-
         return listtsk;
     }
 
