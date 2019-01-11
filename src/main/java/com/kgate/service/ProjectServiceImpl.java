@@ -80,4 +80,26 @@ public class ProjectServiceImpl implements ProjectService {
 		
 		return projectDao.getmanagernameformail(email);
 	}
+
+	@Override
+	 @Transactional
+	public String findproject(String projectname) {
+		
+		return projectDao.findproject(projectname);
+	}
+
+	@Override
+	 @Transactional
+	public void deleteproject(int id) {
+		
+		projectDao.deleteproject(id);
+	}
+
+	@Override
+	 @Transactional
+	public ProjectDetails getProjectById(int id) {
+	
+		return projectDao.getProjectById(id);
+	}
+	
 }

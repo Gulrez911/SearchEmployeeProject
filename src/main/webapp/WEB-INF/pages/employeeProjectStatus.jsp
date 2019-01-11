@@ -8,7 +8,8 @@
         <meta charset="ISO-8859-1">
         <title>Project Details</title>
     </head>
-    <body background="<%=request.getContextPath()%>/resources/images/abstract.jpg">
+    <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+     <jsp:include page="header.jsp"/>
         <div align="center">
             <form action="downloadProjectStatus" method="post">
                 <input type="hidden" name="project_id" value="${project_id}">

@@ -74,6 +74,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		return employeeDAO.displayByManagerId(email);
 	}
+	@Override
+	 @Transactional
+	public String getEmployeeName(String email) {
+		
+		return employeeDAO.getEmployeeName(email);
+	}
+	@Override
+	 @Transactional
+	public List<Employee> getAllEmployees(int page) {
+		
+		return employeeDAO.getAllEmployees(page);
+	}
 	
 }
     
