@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,18 +16,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import static javax.swing.text.StyleConstants.Size;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import javax.validation.constraints.Size;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Scope;
 
 @Entity
 @Table(name = "Employee_Details")
-
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = -3465813074586302847L;
@@ -188,11 +181,8 @@ public class Employee implements Serializable {
         this.aadhar = aadhar;
         this.pan = pan;
     }
-    
 
-  
-
-	public Employee() {
+    public Employee() {
         super();
     }
 

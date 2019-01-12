@@ -34,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@SessionAttributes("employee")
+ 
 public class TaskDemoController {
 
     private static final Logger logger = Logger.getLogger(TaskDemoController.class);

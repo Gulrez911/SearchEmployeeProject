@@ -37,8 +37,10 @@ import org.springframework.ui.ModelMap;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
+ 
 public class EmployeeController {
 
     private static final Logger logger = Logger.getLogger(EmployeeController.class);

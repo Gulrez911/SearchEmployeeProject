@@ -32,12 +32,11 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-// @RequestMapping(value = ("/"))
 @SessionAttributes("employee")
 public class UserController {
 
-	private static final Logger logger = Logger.getLogger(UserController.class);
-	
+    private static final Logger logger = Logger.getLogger(UserController.class);
+
     @Autowired
     private TaskService taskservice;
 
@@ -93,7 +92,6 @@ public class UserController {
 		 * matching
          */
         //session Related
-     
         HttpSession session = request.getSession(false);
 //        session.setMaxInactiveInterval(20);
         //
@@ -105,33 +103,29 @@ public class UserController {
             if (employee.getCategory().equals("Admin")) {
 
                 request.setAttribute("loginuser", employee.getEmail());
- 
+
                 ModelAndView mav = new ModelAndView("success");
-           
-                Employee e=employeeService.searchByEmail(email);
-           
-                mav.addObject("employee",e);
+
+                Employee e = employeeService.searchByEmail(email);
+
+                mav.addObject("employee", e);
                 session.setMaxInactiveInterval(1 * 60);
- 
+
                 return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
 
- 
                 ModelAndView mav = new ModelAndView("ManagerDashboard");
-                Employee e=employeeService.searchByEmail(email);
-                
-                mav.addObject("employee",e);
- 
+                Employee e = employeeService.searchByEmail(email);
+
+                mav.addObject("employee", e);
+
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
 
-  
                 ModelAndView mav = new ModelAndView("byEmployeeEdit");
-  
-                
- 
+
                 Employee emp = employeeService.searchByEmail(employee.getEmail());
                 List<String> employeeSkill
                         = skillService.getEmployeeSkillByEmail(employee.getEmail());
@@ -163,9 +157,9 @@ public class UserController {
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
 
                 model.addObject("listProject", listProject);
-                 Employee e=employeeService.searchByEmail(email);
-                
-                 model.addObject("employee",e);
+                Employee e = employeeService.searchByEmail(email);
+
+                model.addObject("employee", e);
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
 

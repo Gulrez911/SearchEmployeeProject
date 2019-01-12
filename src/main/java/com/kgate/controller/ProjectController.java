@@ -28,9 +28,10 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @SuppressWarnings("deprecation")
-@Controller
+@Controller 
 public class ProjectController {
 	
 	 private static final Logger logger = Logger.getLogger(ProjectController.class);
