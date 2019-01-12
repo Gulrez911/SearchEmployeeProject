@@ -165,12 +165,11 @@
 					<td>${employee.address}</td>
 					<td>${employee.telephone}</td>
 					<td>${employee.category}</td>
-					<td><a href="editEmployee?id=${employee.id}"
-						style="color: blue">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <%-- <a
-                                href="deleteEmployee?id=${employee.id}&email=${employee.email}" style="color:maroon" onclick="return confirm('Are you sure?')">Delete</a></td> --%>
-						<c> <a
+					<td><a href="editEmployee?id=${employee.id}&page=${page}"
+						style="color: blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+						 <a
 							href="deleteEmployee?id=${employee.id}&email=${employee.email}"
-							style="color: maroon" onclick=" return f1('${employee.email}')">Delete</a></c></td>
+							style="color: maroon" onclick=" return f1('${employee.email}')">Delete</a></td>
 
 				</tr>
 			</c:forEach>
@@ -194,8 +193,8 @@
 
 
 
-            
-   
+</div>
+
      <div class="pagination">
     <ul style="list-style-type:none">
     
@@ -211,7 +210,7 @@
    
    
    
-
+   
    
   
 </div>

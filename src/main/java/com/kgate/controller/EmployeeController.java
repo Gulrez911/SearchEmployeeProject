@@ -49,7 +49,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-
 @Controller
 
 public class EmployeeController {
@@ -69,19 +68,17 @@ public class EmployeeController {
 	@Autowired
 	private SkillService skillService;
 
-
 	@Autowired
 	private ProjectService projectservice;
 
-    @Autowired
-    private Employee emp;
+	@Autowired
+	private Employee emp;
 
-    public String generateOTP() {
-        Random random = new Random();
-        String id = String.format("%04d", random.nextInt(10000));
-        return id;
-    }
-
+	public String generateOTP() {
+		Random random = new Random();
+		String id = String.format("%04d", random.nextInt(10000));
+		return id;
+	}
 
 	@RequestMapping(value = "/success")
 	public ModelAndView success() {
@@ -132,34 +129,35 @@ public class EmployeeController {
 			model.setViewName("home");
 			return model;
 
-
 		}
 		model.addObject("listEmployee", listEmployee);
 		model.setViewName("home");
 		return model;
 	}
+
 	// with validation
-		@RequestMapping(value = "/employeelist")
+	@RequestMapping(value = "/employeelist")
+	public ModelAndView listEmployee(ModelAndView model, ModelMap model1,
+			@RequestParam(value = "page", required = false) Integer page) throws IOException {
+		int size;
 
-    public ModelAndView listEmployee(ModelAndView model, ModelMap model1, @RequestParam(value = "page", required = false) Integer page) throws IOException {
-        int size;
+		List<Employee> listEmployee1 = employeeService.getAllEmployees();
+		size = listEmployee1.size() / 5;
+		Integer startpage = (page - 5 > 0 ? page - 5 : 1);
+		Integer endpage = startpage + size + 1;
 
-        List<Employee> listEmployee1 = employeeService.getAllEmployees();
-        size = listEmployee1.size() / 5;
-        Integer startpage = (page - 5 > 0 ? page - 5 : 1);
-        Integer endpage = startpage + size + 1;
+		List<Employee> listEmployee = employeeService.getAllEmployees(page);
+		model.addObject("listEmployee", listEmployee);
+		List<Skill> listSkill = skillService.getAllSkills();
+		model.addObject("listSkill", listSkill);
+		model1.addAttribute("startpage", startpage);
+		model1.addAttribute("endpage", endpage);
+		model1.addAttribute("page", page);
+		model.setViewName("home");
+		System.out.println("EmployeeList email:: " + emp.getEmail());
+		return model;
 
-        List<Employee> listEmployee = employeeService.getAllEmployees(page);
-        model.addObject("listEmployee", listEmployee);
-        List<Skill> listSkill = skillService.getAllSkills();
-        model.addObject("listSkill", listSkill);
-        model1.addAttribute("startpage", startpage);
-        model1.addAttribute("endpage", endpage);
-        model.setViewName("home");
-        return model;
-
-    }
-
+	}
 
 	/*
 	 * @RequestMapping(value = "/pageemployeelist") public ModelAndView
@@ -177,30 +175,26 @@ public class EmployeeController {
 	 * model; }
 	 */
 
-    /*    @RequestMapping(value = "/pageemployeelist")
-    public ModelAndView pagelistEmployee(ModelMap model1,ModelAndView model, @RequestParam(value = "page", required = false) int page) throws IOException {
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
-    	int size;
-    	 List<Employee> listEmployee1= employeeService.getAllEmployees();
-    	 size=listEmployee1.size()/5;
-    	Long startpage = (page - 5 > 0?page - 5:1);
-        Long endpage = startpage +size+1;
-       
-       List<Employee> listEmployee = employeeService.getAllEmployees(page);
-        model.addObject("listEmployee", listEmployee);
-        List<Skill> listSkill = skillService.getAllSkills();
-        model.addObject("listSkill", listSkill);
-        model1.addAttribute("startpage",startpage);
-        model1.addAttribute("endpage",endpage);
-        model.setViewName("home");
-        return model;
-<<<<<<< HEAD
-        }
-    
-     */
-    @RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
-    public ModelAndView newContact(ModelAndView model) {
-
+	/*
+	 * @RequestMapping(value = "/pageemployeelist") public ModelAndView
+	 * pagelistEmployee(ModelMap model1,ModelAndView model, @RequestParam(value =
+	 * "page", required = false) int page) throws IOException { >>>>>>> branch
+	 * 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git int size;
+	 * List<Employee> listEmployee1= employeeService.getAllEmployees();
+	 * size=listEmployee1.size()/5; Long startpage = (page - 5 > 0?page - 5:1); Long
+	 * endpage = startpage +size+1;
+	 * 
+	 * List<Employee> listEmployee = employeeService.getAllEmployees(page);
+	 * model.addObject("listEmployee", listEmployee); List<Skill> listSkill =
+	 * skillService.getAllSkills(); model.addObject("listSkill", listSkill);
+	 * model1.addAttribute("startpage",startpage);
+	 * model1.addAttribute("endpage",endpage); model.setViewName("home"); return
+	 * model; <<<<<<< HEAD }
+	 * 
+	 */
+	@RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
+	public ModelAndView newContact(ModelAndView model, ModelMap model1,
+			@RequestParam(value = "page", required = false) Integer page) {
 //        Skill skill = new Skill();
 		List<Skill> listSkill = skillService.getAllSkills();
 		model.addObject("listSkill", listSkill);
@@ -211,13 +205,16 @@ public class EmployeeController {
 
 		String[] userType = { "Admin", "Employee", "Manager", "CEO" };
 		model.addObject("userTypes", userType);
+		model1.addAttribute("page", page);
 		model.setViewName("EmployeeForm");
+
 		return model;
 
 	}
 
 	@RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
-	public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
+	public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee, ModelMap model1,
+			@RequestParam(value = "page", required = false) Integer page) {
 
 		for (String skill : employee.getSkills()) {
 			Skill sk = skillService.getSkillByName(skill);
@@ -228,7 +225,7 @@ public class EmployeeController {
 
 		employee.setStatus("Not Approved");
 		employeeService.addEmployee(employee);
-//        System.out.println("otp: " + temp_otp);
+//	        System.out.println("otp: " + temp_otp);
 		ec.sendMail(employee.getEmail(),
 				"Temporary Password=" + employee.getPassword()
 						+ "\n click on below mention link use temporary password and" + "\n Reset Your details"
@@ -237,8 +234,8 @@ public class EmployeeController {
 		ModelAndView model = new ModelAndView();
 		List<Skill> listSkill = skillService.getAllSkills();
 		model.addObject("listSkill", listSkill);
-
-//        model.addObject("employee", employee)
+		model1.addAttribute("page", page);
+//	        model.addObject("employee", employee)
 		String[] userType = { "Admin", "Employee", "Manager" };
 		model.addObject("userTypes", userType);
 		model.setViewName("EmployeeForm");
@@ -246,30 +243,26 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-	public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
+	public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model, ModelMap model1,
+			@ModelAttribute("page") Integer page) {
 
-		List<Employee> listEmployee = employeeService.getAllEmployees();
+		List<Employee> listEmployee = employeeService.getAllEmployees(page);
 		model.addObject("listEmployee", listEmployee);
 		List<Skill> listSkill = skillService.getAllSkills();
 		model.addObject("listSkill", listSkill);
-		model.setViewName("home");
+		model1.addAttribute("page", page);
+		model.setViewName("redirect:/employeelist");
 		/*
-		 * if (employee.getOtp().equals(temp_3)) {
-		 * 
-		 * for (String skill : employee.getSkills()) { Skill sk =
-		 * skillService.getSkillByName(skill); employee.getListSkill().add(sk); }
-		 * 
-		 * Employee emp = employeeService.searchByEmail(employee.getEmail()); if (emp ==
-		 * null) { throw new RuntimeException("cannnot be null"); } else { if
+		 * if (employee.getOtp().equals(temp_3)) { for (String skill :
+		 * employee.getSkills()) { Skill sk = skillService.getSkillByName(skill);
+		 * employee.getListSkill().add(sk); } Employee emp =
+		 * employeeService.searchByEmail(employee.getEmail()); if (emp == null) { throw
+		 * new RuntimeException("cannnot be null"); } else { if
 		 * (employee.getOtp().equals(emp.getOtp())) { // emp.setStatus("Approved");
 		 * employee.setStatus("Approved"); // employeeService.addEmployee(emp);
-		 * 
-		 * employeeService.addEmployee(employee);
-		 * 
-		 * } else { // send him a message that otp is invalid return new
-		 * ModelAndView("invalid"); } }
-		 * 
-		 * // String password=employee.getPassword(); EmployeeController ec = new
+		 * employeeService.addEmployee(employee); } else { // send him a message that
+		 * otp is invalid return new ModelAndView("invalid"); } } // String
+		 * password=employee.getPassword(); EmployeeController ec = new
 		 * EmployeeController(); ec.sendMail(employee.getEmail(), "OTP:" +
 		 * employee.getOtp() + "\n password:" + employee.getPassword(),
 		 * "confirm message"); return new ModelAndView("redirect:/employeelist"); }
@@ -314,8 +307,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/managerpage", method = RequestMethod.GET)
-	public ModelAndView taskcreate(@SessionAttribute("employee") Employee emp,
-			@ModelAttribute("employee") Employee employee, HttpServletRequest request) {
+	public ModelAndView taskcreate(@ModelAttribute("employee") Employee employee, HttpServletRequest request) {
 		String email = request.getParameter("email");
 		ModelAndView mav = new ModelAndView("ManagerSuccess");
 		employee = new Employee();
@@ -331,21 +323,35 @@ public class EmployeeController {
 
 	}
 
+	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
+	public ModelAndView deleteEmployee(HttpServletRequest request, ModelMap model1,
+			@RequestParam(value = "page", required = false) Integer page) {
 
+		int employeeId = Integer.parseInt(request.getParameter("id"));
+		/* Long pageId = (long) Integer.parseInt(request.getParameter("page")); */
+		employeeService.deleteEmployee(employeeId);
+		System.out.println("deleteEmployee:::   " + emp.getEmail());
+		model1.addAttribute("page", page);
+		ModelAndView mav = new ModelAndView("redirect:/employeelist");
+		/* mav.addObject("pageid", pageId); */
 
-	 @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
-	    public ModelAndView editEmployee(HttpServletRequest request, ModelMap model1, @RequestParam(value = "page", required = false) Long page) {
+		return mav;
+	}
+
+	@RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
+	public ModelAndView editEmployee(HttpServletRequest request, ModelMap model1,
+			@RequestParam(value = "page", required = false) Integer page) {
+
 		int employeeId = Integer.parseInt(request.getParameter("id"));
 
 		List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);
-		System.out.println("List of EmployeeSkill:   " + employeeSkill);
+//		System.out.println("List of EmployeeSkill:   " + employeeSkill);
 		Employee employee = employeeService.getEmployee(employeeId);
-
+		System.out.println("EditEmployee email   " + emp.getEmail());
 		ModelAndView model = new ModelAndView("edit");
 		List<Skill> listSkill = skillService.getAllSkills();
 
 		List<String> sk = new ArrayList<>();
-
 
 		for (int i = 0; i < employeeSkill.size(); i++) {
 			Object o = employeeSkill.get(i);
@@ -353,60 +359,48 @@ public class EmployeeController {
 			sk.add(s);
 		}
 		employee.setSkills(sk);
+
 		String[] userType = { "Employee", "Admin", "Manager" };
 		model.addObject("userTypes", userType);
+
 		model.addObject("listSkill", listSkill);
 		model.addObject("employee", employee);
 
 		Skill skill = new Skill();
 		model.addObject("skill", skill);
-		
 
-        model1.addAttribute("page", page);
-        return model;
+		model1.addAttribute("page", page);
+		return model;
 	}
-    @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
-    public ModelAndView deleteEmployee(HttpServletRequest request, RedirectAttributes redirctattribute) {
-        int employeeId = Integer.parseInt(request.getParameter("id"));
-        /* Long pageId = (long) Integer.parseInt(request.getParameter("page"));*/
-        employeeService.deleteEmployee(employeeId);
-        redirctattribute.addAttribute("page", 0);
-        ModelAndView mav = new ModelAndView("redirect:/employeelist");
-        /*  mav.addObject("pageid", pageId);*/
-        return mav;
-    }
 
+	@RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
+	public ModelAndView updateperson(@ModelAttribute Employee employee, ModelMap model, HttpServletRequest request,
+			@ModelAttribute("page") Integer page) {
 
-	
-    @RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
-    public ModelAndView updateperson(@ModelAttribute Employee employee, ModelMap model, HttpServletRequest request, @ModelAttribute("page") Integer page) {
+		for (String skill : employee.getSkills()) {
+			Skill sk = skillService.getSkillByName(skill);
+			employee.getListSkill().add(sk);
+		}
 
-        for (String skill : employee.getSkills()) {
-            Skill sk = skillService.getSkillByName(skill);
-            employee.getListSkill().add(sk);
-        }
+		employeeService.addEmployee(employee);
+		System.out.println("editEmployee List::: "+emp.getEmail());
+		String message = "Employee is successfully edited.";
+		ModelAndView mav = new ModelAndView("redirect:/employeelist");
+		mav.addObject("message", message);
 
-        employeeService.addEmployee(employee);
+		List<Employee> listEmployee = employeeService.getAllEmployees(page);
 
-        String message = "Employee is successfully edited.";
-        ModelAndView mav = new ModelAndView("redirect:/employeelist");
-        mav.addObject("message", message);
+		mav.addObject("listEmployee", listEmployee);
+		model.addAttribute("page", page);
+		return mav;
 
-        List<Employee> listEmployee = employeeService.getAllEmployees(page);
-
-        mav.addObject("listEmployee", listEmployee);
-        model.addAttribute("page", page);
-        return mav;
-
-    }
-
+ 	}
 
 	@RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
 	public ModelAndView downloadPDF() {
 		List<Employee> listEmployee = employeeService.getAllEmployees();
 		return new ModelAndView("pdfView", "listEmployee", listEmployee);
 	}
-
 
 	@RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
 	public ModelAndView downloadExcel() {
@@ -415,13 +409,14 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/back", method = RequestMethod.POST)
-	public ModelAndView back(@SessionAttribute("employee") Employee emp, @ModelAttribute("employee") Employee employee,
-			HttpServletRequest request) {
-
+	public ModelAndView back(@ModelAttribute("employee") Employee employee, HttpServletRequest request) {
 
 		ModelAndView mav = new ModelAndView("CreateProject");
 
-		 
+		/*
+		 * mav.addObject("employee", employee); String[] userType = {"Admin",
+		 * "Employee", "Manager","CEO"}; mav.addObject("userTypes", userType);
+		 */
 		String s = request.getParameter("mail");
 		Integer mid = projectservice.getManagerid(emp.getEmail());
 		// System.out.println("Manager ID:::: " + mid);
@@ -444,7 +439,6 @@ public class EmployeeController {
 
 	}
 
-
 	/*
 	 * @RequestMapping(value = "/back", method = RequestMethod.POST)
 	 * 
@@ -452,10 +446,8 @@ public class EmployeeController {
 	 * taskdetails, HttpServletRequest request, @SessionAttribute("employee")
 	 * Employee employee) { public ModelAndView back() {
 	 * 
-	 * int pId = taskdetails.getProjectId(); taskdetails.setProjectId(pId);
-	 * 
-	 * int mId = taskdetails.getManagerId(); taskdetails.setManagerId(mId);
-	 * 
+	 * int pId = taskdetails.getProjectId(); taskdetails.setProjectId(pId); int mId
+	 * = taskdetails.getManagerId(); taskdetails.setManagerId(mId);
 	 * taskdetails.setStatus("Not Assigned"); taskservice.addTask(taskdetails);
 	 * String[] Tasktype = {"Coding", "Design", "Integration", "Quality",
 	 * "Testing"}; mav.addObject("task_Type", Tasktype); List<TaskDetails> listtask
@@ -465,19 +457,18 @@ public class EmployeeController {
 	 * e.setEmail(taskdetails.getEmp_Email()); mav.addObject("e",
 	 * employeeService.searchByEmail(employee.getEmail()));
 	 * 
-	 * 
 	 * ModelAndView mav = new ModelAndView("CreateProject"); return mav; }
 	 */
-	
-    @RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
-    public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
-        for (String skill : employee.getSkills()) {
-            Skill sk = skillService.getSkillByName(skill);
-            employee.getListSkill().add(sk);
-        }
-        employee.setStatus("Approved");
-        employeeService.addEmployee(employee);
-        String message = "Employee is successfully edited.";
+	@RequestMapping(value = "/byEmployeeEdit", method = RequestMethod.POST)
+	public ModelAndView byEmployeeEdit(@ModelAttribute Employee employee) {
+		for (String skill : employee.getSkills()) {
+			Skill sk = skillService.getSkillByName(skill);
+			employee.getListSkill().add(sk);
+		}
+		employee.setStatus("Approved");
+		employeeService.addEmployee(employee);
+		String message = "Employee is successfully edited.";
+//	        ModelAndView mav = new ModelAndView("EmployeeSuccess");
 
 		ModelAndView mav = new ModelAndView("redirect:/byEmployeeSuccess");
 		mav.addObject("message", message);
@@ -490,36 +481,36 @@ public class EmployeeController {
 
 	}
 
- @RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
-public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, ModelMap modelMap) {
-    ModelAndView mav = new ModelAndView("byEmployeeEdit");
+	@RequestMapping(value = "/byEmployeeSuccess", method = RequestMethod.GET)
+	public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, ModelMap modelMap) {
+		ModelAndView mav = new ModelAndView("byEmployeeEdit");
 
-    Employee emp1 = employeeService.searchByEmail(emp.getEmail());
-    List<String> employeeSkill = skillService.getEmployeeSkillByEmail(emp.getEmail());
+		Employee emp1 = employeeService.searchByEmail(emp.getEmail());
+		List<String> employeeSkill = skillService.getEmployeeSkillByEmail(emp.getEmail());
 
-    System.out.println("List of EmployeeSkill: " + employeeSkill);
+		System.out.println("List of EmployeeSkill: " + employeeSkill);
 
-    List<Skill> listSkill = skillService.getAllSkills();
+		List<Skill> listSkill = skillService.getAllSkills();
 
-    List<String> sk = new ArrayList<>();
+		List<String> sk = new ArrayList<>();
 
-    for (int i = 0; i < employeeSkill.size(); i++) {
-        Object o = employeeSkill.get(i);
-        String s = (String) o;
-        sk.add(s);
-    }
-    emp1.setSkills(sk);
-    String[] userType = {"Employee", "Admin", "Manager"};
-    mav.addObject("userTypes", userType);
+		for (int i = 0; i < employeeSkill.size(); i++) {
+			Object o = employeeSkill.get(i);
+			String s = (String) o;
+			sk.add(s);
+		}
+		emp1.setSkills(sk);
+		String[] userType = { "Employee", "Admin", "Manager" };
+		mav.addObject("userTypes", userType);
 
-    mav.addObject("listSkill", listSkill);
-    mav.addObject("employee", emp1);
-    modelMap.addAttribute("msg", "You have successfully edited");
-    Skill skill = new Skill();
-    mav.addObject("skill", skill);
-    return mav;
+		mav.addObject("listSkill", listSkill);
+		mav.addObject("employee", emp1);
+		modelMap.addAttribute("msg", "You have successfully edited");
+		Skill skill = new Skill();
+		mav.addObject("skill", skill);
+		return mav;
 
-}
+	}
 
 	@RequestMapping(value = "/byManagerEdit", method = RequestMethod.POST)
 	public ModelAndView byManagerEdit(@ModelAttribute Employee employee) {
@@ -530,7 +521,7 @@ public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, ModelMa
 		employee.setStatus("Approved");
 		employeeService.addEmployee(employee);
 		String message = "Employee is successfully edited.";
-//        ModelAndView mav = new ModelAndView("EmployeeSuccess");
+//	        ModelAndView mav = new ModelAndView("EmployeeSuccess");
 
 		ModelAndView mav = new ModelAndView("redirect:/bymanagerSuccess");
 		mav.addObject("message", message);
@@ -543,42 +534,42 @@ public ModelAndView byEmployeeSuccess(@ModelAttribute Employee employee, ModelMa
 
 	}
 
-	 @RequestMapping(value = "/bymanagerSuccess", method = RequestMethod.GET)
-	    public ModelAndView bymanagerSuccess(@ModelAttribute Employee employee, ModelMap modelMap) {
-	        ModelAndView mav = new ModelAndView("ManagerEdit");
+	@RequestMapping(value = "/bymanagerSuccess", method = RequestMethod.GET)
+	public ModelAndView bymanagerSuccess(@ModelAttribute Employee employee, ModelMap modelMap) {
+		ModelAndView mav = new ModelAndView("ManagerEdit");
 
-	        Employee emp1 = employeeService.searchByEmail(emp.getEmail());
-	        List<String> employeeSkill = skillService.getEmployeeSkillByEmail(emp.getEmail());
+		Employee emp1 = employeeService.searchByEmail(emp.getEmail());
+		List<String> employeeSkill = skillService.getEmployeeSkillByEmail(emp.getEmail());
 
-	        System.out.println("List of EmployeeSkill: " + employeeSkill);
+		System.out.println("List of EmployeeSkill: " + employeeSkill);
 
-	        List<Skill> listSkill = skillService.getAllSkills();
+		List<Skill> listSkill = skillService.getAllSkills();
 
-	        List<String> sk = new ArrayList<>();
+		List<String> sk = new ArrayList<>();
 
-	        for (int i = 0; i < employeeSkill.size(); i++) {
-	            Object o = employeeSkill.get(i);
-	            String s = (String) o;
-	            sk.add(s);
-	        }
-	        emp1.setSkills(sk);
-	        String[] userType = {"Employee", "Admin", "Manager"};
-	        mav.addObject("userTypes", userType);
+		for (int i = 0; i < employeeSkill.size(); i++) {
+			Object o = employeeSkill.get(i);
+			String s = (String) o;
+			sk.add(s);
+		}
+		emp1.setSkills(sk);
+		String[] userType = { "Employee", "Admin", "Manager" };
+		mav.addObject("userTypes", userType);
 
-	        mav.addObject("listSkill", listSkill);
-	        mav.addObject("employee", emp1);
-	        modelMap.addAttribute("msg", "You have successfully edited");
-	        Skill skill = new Skill();
-	        mav.addObject("skill", skill);
-	        return mav;
-	    }
+		mav.addObject("listSkill", listSkill);
+		mav.addObject("employee", emp1);
+		modelMap.addAttribute("msg", "You have successfully edited");
+		Skill skill = new Skill();
+		mav.addObject("skill", skill);
+		return mav;
+	}
 
-	    @RequestMapping(value = "/backtomanagerDashboard", method = RequestMethod.POST)
-	    public ModelAndView backtomanagerDash() {
-	        ModelAndView mav = new ModelAndView("ManagerDashboard");
-	        mav.addObject("employee", emp);
-	        return mav;
-
-	    }
+	@RequestMapping(value = "/backtomanagerDashboard", method = RequestMethod.POST)
+	public ModelAndView backtomanagerDash() {
+		ModelAndView mav = new ModelAndView("ManagerDashboard");
+		mav.addObject("employee", emp);
+		return mav;
 
 	}
+
+}
