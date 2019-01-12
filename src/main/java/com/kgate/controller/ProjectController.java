@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.Employee;
@@ -552,6 +553,28 @@ public class ProjectController {
     
     }
     
+    
+    @RequestMapping(value = "/getProjecttask")
+    @ResponseBody()
+    public int getProjecttask(HttpServletRequest request) {
+    	String s = request.getParameter("pid");
+    	int id=Integer.parseInt(s);
+    	List<TaskDetails> tl=taskservice.getByProjectId(id);
+    	for(int i=0;i<tl.size();i++)
+    	{
+    		TaskDetails  s1=tl.get(i);
+            String p=s1.getTaskStatus();
+            if(p.equals("W .I. P"))
+            {
+            	return 1;
+            }
+            
+        	
+    	}
+		return 0;
+      
+    	
+    }
     
     
     

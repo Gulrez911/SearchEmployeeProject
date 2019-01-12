@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -182,6 +183,22 @@ public class TaskDemoController {
 		String s12 = request.getParameter("em");
 		mav.addObject("em", s12);
 		return mav;
+
+	}
+
+	@RequestMapping(value = "/taskAjax")
+	@ResponseBody
+	public int taskAjax(HttpServletRequest request) {
+		String s = request.getParameter("pid");
+		int task_id = Integer.parseInt(s);
+
+		TaskDetails td = taskService.getTask(task_id);
+		System.out.println("td value::: " + td);
+		if (td.getEmp_Email() == "" || td.getEmp_Email().isEmpty() || td.getEmp_Email() == null) {
+			return 0;
+		} else {
+			return 1;
+		}
 
 	}
 

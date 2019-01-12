@@ -46,11 +46,13 @@
 		});
 	});
 
-	function f1(email) {
+	function f1(mail) {
+		var returned = true;
+		
 		var r = confirm("Are you sure want to delete");
 		if (r == true) {
-			var url = "success1?mail=" + email;
-			var a;
+			var url = "success1?mail=" + mail;
+			
 
 			$.ajax({
 				url : url,
@@ -58,32 +60,55 @@
 				success : function(result) {
 
 					console.log("SUCCESS: ", result);
-					var returned = true;
+				
 					if (result > 0) {
 
-						alert("You can't delete");
+						alert("You can't delete employee");
 						returned = false;
 						return false;
-					} else {
-          
-					}
-					f2(returned);
+						f3(returned)
+						
+					} 
+					else
+    					{
+    					alert("Employee deleted successfully");
+
+    					}
+					
 				}
 			});
-			function f2(result) {
-				if (result) {
-					alert('TRUE');
-				} else {
-					alert('FALSE');
-					return false;
-				}
-			}
 
-		} else {
+		} else 
+    	{
 			return false;
 		}
 
+		if(returned)
+    		{
+			
+    		}
+		else
+    		{
+    	
+    		return false;
+    		}
+	
 	}
+	function f3(flag)
+	{
+		if(flag)
+		{
+		
+		}
+		else
+			{
+			console.log("anil flase");
+    		alert('flag false');
+    		return false;
+    	
+			}
+	
+		}
 </script>
 </head>
 

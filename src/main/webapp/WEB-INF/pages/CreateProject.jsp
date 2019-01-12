@@ -16,7 +16,74 @@
                 font-weight: bold;
             }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
+        <script>
+    	function f1(pid) {
+    		var returned = true;
+    		
+    		var r = confirm("Are you sure want to delete");
+    		if (r == true) {
+    			var url = "getProjecttask?pid=" + pid;
+    			
+
+    			$.ajax({
+    				url : url,
+    				async : false,
+    				success : function(result) {
+
+    					console.log("SUCCESS: ", result);
+    				
+    					if (result > 0) {
+
+    						alert("You can't delete Project");
+    						returned = false;
+    						return false;
+    						f3(returned)
+    						
+    					} 
+    					else
+        					{
+        					alert("Project deleted successfully");
+
+        					}
+    					
+    				}
+    			});
+
+    		} else 
+        	{
+    			return false;
+    		}
+
+    		if(returned)
+        		{
+    			
+        		}
+    		else
+        		{
+        	
+        		return false;
+        		}
+    	
+    	}
+    	function f3(flag)
+		{
+			if(flag)
+    		{
+			
+    		}
+			else
+				{
+				console.log("anil flase");
+	    		alert('flag false');
+	    		return false;
+	    	
+				}
+		
+    		}
+
+        </script>
 
     </head>
     <body
@@ -75,7 +142,8 @@
 
                             <td><a href="showtask?project_id=${pd.project_id}&mgrid=${mid}" style="color: Dark blue">${pd.project_Name}</a></td>
                             <td><a href="editproject?project_id=${pd.project_id}" style="color: Dark blue">Edit</a>
-                            <td><a href="deleteproject?project_id=${pd.project_id}" style="color: Dark blue" onclick="return confirm('Are you sure you want to delete this Project?');">delete</a>
+                            <%-- <td><a href="deleteproject?project_id=${pd.project_id}" style="color: Dark blue" onclick="return confirm('Are you sure you want to delete this Project?');">delete</a> --%>
+                 <td><t><a href="deleteproject?project_id=${pd.project_id}" style="color: Dark blue" onclick="return f1('${pd.project_id}')">delete</a>  </t>
                         </tr>
 
 
@@ -85,7 +153,7 @@
             </form:form>
         </div>
         <br>
-    </div>
+    
     <div align="right">
         <form:form action="managerpage"  modelAttribute="employee">
             

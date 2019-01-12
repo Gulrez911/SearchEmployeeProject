@@ -15,7 +15,7 @@ public interface EmployeeService {
 	public void addEmployee(Employee employee);
 
 	public List<Employee> getAllEmployees();
-	
+
 	public List<Employee> getAllEmployees(int page);
 
 	public void deleteEmployee(Integer employeeId);
@@ -28,14 +28,12 @@ public interface EmployeeService {
 
 	public List<Employee> displayByManagerId(String email);
 
-
 	public List<Holiday> getAllHoliday();
 
 	public void deleteHoliday(Integer Days_id);
 
 	public void addHoliday(Holiday holiday);
 
-	 public String getEmployeeName(String email);
-	
+	public String getEmployeeName(String email);
 
 }

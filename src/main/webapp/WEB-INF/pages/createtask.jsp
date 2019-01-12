@@ -19,6 +19,72 @@
             };
 
         </script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <script>
+    	function f1(pid) {
+    		var returned = true;
+    		
+    		var r = confirm("Are you sure want to delete");
+    		if (r == true) {
+    			var url = "taskAjax?pid=" + pid;
+    			
+
+    			$.ajax({
+    				url : url,
+    				async : false,
+    				success : function(result) {
+
+    					console.log("SUCCESS: ", result);
+    				
+    					if (result > 0) {
+
+    						alert("You can't delete Task!!");
+    						returned = false;
+    						return false;
+    						f3(returned)
+    						
+    					} 
+    					else
+        					{
+        					alert('Task deleted successfully')
+        					}
+    				}
+    			});
+
+    		} else 
+        	{
+    			return false;
+    		}
+
+    		if(returned)
+        		{
+    			
+        		}
+    		else
+        		{
+        	
+        		return false;
+        		}
+    	
+    	}
+    	function f3(flag)
+		{
+			if(flag)
+    		{
+			
+    		}
+			else
+				{
+				console.log("anil flase");
+	    		alert('flag false');
+	    		return false;
+	    	
+				}
+		
+    		}
+
+        </script>
     </head>
     <body
 
@@ -112,7 +178,7 @@
                         <td><a href="asssign?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"> ${td.status} </a></td> 
 
 
-<td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"  onclick="return confirm('Are you sure you want to delete this task?');">delete</a></td>
+<td> <a href="delete?task_id=${td.task_id}&project_id=${td.projectId}&mgrid=${td.managerId}&em=${em}"  onclick="return f1('${td.task_id}')">delete</a></td>
                            </td>
 
                     </c:forEach>     

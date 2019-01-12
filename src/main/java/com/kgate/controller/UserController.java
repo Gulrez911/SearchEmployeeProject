@@ -59,7 +59,7 @@ public class UserController {
         this.employeeService = employeeService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView init() {
         ModelAndView mav = new ModelAndView("login");
         Employee employee = new Employee();
@@ -183,7 +183,7 @@ public class UserController {
     public String logout(HttpServletRequest request) {
 //        HttpSession httpSession = request.getSession();
 //        httpSession.invalidate();
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @RequestMapping(value = "/Empedit", method = RequestMethod.POST)
