@@ -82,7 +82,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	@Override
 	 @Transactional
-	public List<Employee> getAllEmployees(int page) {
+	public List<Employee> getAllEmployees(Integer page) {
 		
 		return employeeDAO.getAllEmployees(page);
 	}

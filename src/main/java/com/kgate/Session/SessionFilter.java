@@ -15,17 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.HttpSessionRequiredException;
 
 public class SessionFilter implements Filter {
-    
+
     @Override
     public void init(FilterConfig fc) throws ServletException {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public void doFilter(ServletRequest request,
             ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        
+
         try {
             String page = ((HttpServletRequest) request).getRequestURI();
             System.out.println("page is " + page);
@@ -41,9 +41,9 @@ public class SessionFilter implements Filter {
                 } else {
                     chain.doFilter(request, response);
                 }
-                
+
             }
-            
+
         } catch (IOException | ServletException ex) {
             ((HttpServletResponse) response).sendRedirect("login");
             StringWriter sw = new StringWriter();
@@ -53,12 +53,12 @@ public class SessionFilter implements Filter {
             ((HttpServletRequest) request).getSession().setAttribute("employee", sStackTrace);
             ((HttpServletResponse) response).sendRedirect("login");
         }
-        
+
     }
-    
+
     @Override
     public void destroy() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
