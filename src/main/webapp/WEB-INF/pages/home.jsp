@@ -194,11 +194,13 @@
 
 
 
-    <div class="pagination">
-    <ul>
+            
+   
+     <div class="pagination">
+    <ul style="list-style-type:none">
     
-        <li>
-        <a href="employeelist?page=0">0</a>
+        <li>Page
+      <!--   <a href="employeelist?page=0">0</a> -->
         <c:forEach begin="${startpage}" end="${endpage}" var="p">
         <a href="<c:url value="employeelist" >
         <c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
@@ -206,7 +208,36 @@
         </li>
         
     </ul>
+   
+   
+   
+
+   
+  
 </div>
+   
+   
+   
+   
+
+        </div>
+
+       <!--   <div class="pagination">
+        <ul>
+            
+            
+            <li class="active"><a href="employeelist?page=1">1</a></li>
+            <li class="active"><a href="">2</a></li>
+            <li class="active"><a href="#">3</a></li>
+            <li class="active"><a href="#">4</a></li>
+            <li class="active"><a href="#">5</a></li>
+            <li class="active"><a href="#">Next</a></li>
+            <li class="active"><a href="#">Last</a></li>
+        </ul>
+    </div> -->
+    
+   
+
 
     </body>
 

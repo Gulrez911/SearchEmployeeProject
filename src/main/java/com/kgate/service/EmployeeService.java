@@ -16,7 +16,9 @@ public interface EmployeeService {
 
 	public List<Employee> getAllEmployees();
 
-	public List<Employee> getAllEmployees(int page);
+	
+	public List<Employee> getAllEmployees(Integer page);
+
 
 	public void deleteEmployee(Integer employeeId);
 

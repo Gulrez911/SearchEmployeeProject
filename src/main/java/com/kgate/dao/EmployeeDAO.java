@@ -11,8 +11,9 @@ public interface EmployeeDAO {
 
    public List<Employee> getAllEmployees();
     //search Employee
-    public List<Employee> getAllEmployees(int page);
-    
+
+    public List<Employee> getAllEmployees(Integer page);
+
     public List<Employee> searchEmployees(String txt);
 
     public Employee searchByEmail(String email);

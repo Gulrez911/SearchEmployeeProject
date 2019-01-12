@@ -1,11 +1,21 @@
 package com.kgate.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kgate.model.Employee;
 import com.kgate.model.Holiday;
@@ -18,23 +28,11 @@ import com.kgate.service.ProjectService;
 import com.kgate.service.SkillService;
 import com.kgate.service.TaskService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Map;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
 @Controller
-// @RequestMapping(value = ("/"))
-@SessionAttributes("employee")
 public class UserController {
+
+
+    private static final Logger logger = Logger.getLogger(UserController.class);
 
     @Autowired
     private TaskService taskservice;
@@ -51,6 +49,9 @@ public class UserController {
     @Autowired
     private ProjectService projectservice;
 
+    @Autowired
+    private Employee emp;
+
     public void setloginService1(LoginService2 loginservice2) {
         this.loginservice2 = loginservice2;
     }
@@ -62,8 +63,8 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView init() {
         ModelAndView mav = new ModelAndView("login");
-        Employee employee = new Employee();
-        mav.addObject("employee", employee);
+//        Employee employee = new Employee();
+        mav.addObject("employee", emp);
         String[] userType = {"Admin", "Employee", "Manager", "CEO"};
         mav.addObject("userTypes", userType);
         return mav;
@@ -91,11 +92,10 @@ public class UserController {
 		 * matching
          */
         //session Related
-     
         HttpSession session = request.getSession(false);
 //        session.setMaxInactiveInterval(20);
         //
-
+        emp.setEmail(email);
         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(), employee.getPassword(),
                 employee.getCategory());
 
@@ -103,33 +103,29 @@ public class UserController {
             if (employee.getCategory().equals("Admin")) {
 
                 request.setAttribute("loginuser", employee.getEmail());
- 
+
                 ModelAndView mav = new ModelAndView("success");
-           
-                Employee e=employeeService.searchByEmail(email);
-           
-                mav.addObject("employee",e);
+
+                Employee e = employeeService.searchByEmail(email);
+
+                mav.addObject("employee", e);
                 session.setMaxInactiveInterval(1 * 60);
- 
+
                 return mav;
 
             } else if (employee.getCategory().equals("Manager")) {
 
- 
                 ModelAndView mav = new ModelAndView("ManagerDashboard");
-                Employee e=employeeService.searchByEmail(email);
-                
-                mav.addObject("employee",e);
- 
+                Employee e = employeeService.searchByEmail(email);
+
+                mav.addObject("employee", e);
+                System.out.println("Session Email:::    " + emp.getEmail());
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {
 
-  
                 ModelAndView mav = new ModelAndView("byEmployeeEdit");
-  
-                
- 
+
                 Employee emp = employeeService.searchByEmail(employee.getEmail());
                 List<String> employeeSkill
                         = skillService.getEmployeeSkillByEmail(employee.getEmail());
@@ -161,9 +157,9 @@ public class UserController {
                 List<ProjectDetails> listProject = projectservice.dispalyProjects();
 
                 model.addObject("listProject", listProject);
-                 Employee e=employeeService.searchByEmail(email);
-                
-                 model.addObject("employee",e);
+                Employee e = employeeService.searchByEmail(email);
+
+                model.addObject("employee", e);
                 List<TaskDetails> tasklist = taskservice.getAllTask();
                 model.addObject("tasklist", tasklist);
                 List<Holiday> holiday=employeeService.getAllHoliday();
