@@ -124,6 +124,7 @@ public class EmployeeController {
        model.addObject("listSkill", listSkill);
        model1.addAttribute("startpage",startpage);
        model1.addAttribute("endpage",endpage);
+       model1.addAttribute("page",page);
        model.setViewName("home");
        return model;
 
@@ -163,7 +164,7 @@ public class EmployeeController {
 
 
     @RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
-    public ModelAndView newContact(ModelAndView model) {
+    public ModelAndView newContact(ModelAndView model,ModelMap model1,@RequestParam(value = "page", required = false) Integer page) {
 //        Skill skill = new Skill();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
@@ -174,13 +175,15 @@ public class EmployeeController {
 
         String[] userType = {"Admin", "Employee", "Manager", "CEO"};
         model.addObject("userTypes", userType);
+        model1.addAttribute("page", page);
         model.setViewName("EmployeeForm");
+       
         return model;
 
     }
 
     @RequestMapping(value = "/saveEmployee", params = "action1", method = RequestMethod.POST)
-    public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee) {
+    public ModelAndView sendOTPAction(@ModelAttribute("employee") Employee employee ,ModelMap model1,@RequestParam(value = "page", required = false) Integer page) {
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -197,7 +200,7 @@ public class EmployeeController {
         ModelAndView model = new ModelAndView();
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
-
+        model1.addAttribute("page", page);
 //        model.addObject("employee", employee)
         String[] userType = {"Admin", "Employee", "Manager"};
         model.addObject("userTypes", userType);
@@ -206,13 +209,14 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/saveEmployee", params = "action2", method = RequestMethod.POST)
-    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model) {
+    public ModelAndView saveEmployee(@ModelAttribute("employee") Employee employee, ModelAndView model,ModelMap model1,@ModelAttribute("page")Integer page) {
 
-        List<Employee> listEmployee = employeeService.getAllEmployees();
+        List<Employee> listEmployee = employeeService.getAllEmployees(page);
         model.addObject("listEmployee", listEmployee);
         List<Skill> listSkill = skillService.getAllSkills();
         model.addObject("listSkill", listSkill);
-        model.setViewName("home");
+        model1.addAttribute("page", page);
+        model.setViewName("redirect:/employeelist");
         /* if (employee.getOtp().equals(temp_3)) { 
 
         for (String skill : employee.getSkills()) {
@@ -300,18 +304,18 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
-    public ModelAndView deleteEmployee(HttpServletRequest request,RedirectAttributes redirctattribute) {
+    public ModelAndView deleteEmployee(HttpServletRequest request,ModelMap model1,@RequestParam(value = "page", required = false) Integer page) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
        /* Long pageId = (long) Integer.parseInt(request.getParameter("page"));*/
         employeeService.deleteEmployee(employeeId);
-        redirctattribute.addAttribute("page", 0);
+        model1.addAttribute("page", page);
         ModelAndView mav= new ModelAndView("redirect:/employeelist");
       /*  mav.addObject("pageid", pageId);*/
         return mav;
     }
 
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
-    public ModelAndView editEmployee(HttpServletRequest request,ModelMap model1,@RequestParam(value = "page", required = false) Long page) {
+    public ModelAndView editEmployee(HttpServletRequest request,ModelMap model1,@RequestParam(value = "page", required = false) Integer page) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
 
         List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);

@@ -218,7 +218,7 @@ myInput.onkeyup = function() {
 			</table>
 			
 			<tr>
-   <input type="hidden" value="0" name="page">
+   <input type="hidden" value="${page}" name="page">
 </tr>
 		</form:form>
 	</div>

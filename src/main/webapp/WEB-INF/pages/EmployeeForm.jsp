@@ -355,7 +355,9 @@
                         <td><input type="submit" value="Submit" name="action1" id="submit1"/></td>    
                     </tr>     
                 </table>     
+                 <input type="hidden" value="0" name="page">
             </form:form>
+           
         </div>
  
     </body>

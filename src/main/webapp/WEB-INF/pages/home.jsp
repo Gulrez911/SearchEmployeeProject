@@ -85,12 +85,12 @@
                         <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
                              &nbsp;&nbsp;&nbsp;&nbsp; --%>
 
-                        <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
+                        <td><a href="editEmployee?id=${employee.id}&page=${page}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
                             &nbsp;&nbsp;&nbsp;&nbsp; 
 
                             <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
 
-                            <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+                            <a href="deleteEmployee?id=${employee.id}&page=${page}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
                         </td>
                     </tr>
                 </c:forEach>                
@@ -98,7 +98,7 @@
 
 
             <h4><font style="color: darkorange">
-                    New Employee Register</font> <a href="newEmployee" style="color: red;">Here</a>
+                    New Employee Register</font> <a href="newEmployee?page=${page}" style="color: red;">Here</a>
             </h4>
 
             
