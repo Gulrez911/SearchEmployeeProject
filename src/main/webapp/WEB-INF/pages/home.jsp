@@ -104,7 +104,29 @@
             
               <form:form action="backtosuccess" method="post">
    
+     <div class="pagination">
+    <ul style="list-style-type:none">
+    
+        <li>Page
+      <!--   <a href="employeelist?page=0">0</a> -->
+        <c:forEach begin="${startpage}" end="${endpage}" var="p">
+        <a href="<c:url value="employeelist" >
+        <c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
+        </c:forEach>
+        </li>
+        
+    </ul>
+   
+   
+   
    <input type="submit" value="Back"></form:form>
+   
+  
+</div>
+   
+   
+   
+   
         </div>
        <!--   <div class="pagination">
         <ul>
@@ -120,19 +142,7 @@
         </ul>
     </div> -->
     
-    <div class="pagination">
-    <ul>
-    
-        <li>
-        <a href="employeelist?page=0">0</a>
-        <c:forEach begin="${startpage}" end="${endpage}" var="p">
-        <a href="<c:url value="employeelist" >
-        <c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
-        </c:forEach>
-        </li>
-        
-    </ul>
-</div>
+   
 
     </body>
 </html>

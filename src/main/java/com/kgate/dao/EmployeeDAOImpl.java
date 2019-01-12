@@ -178,10 +178,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Employee> getAllEmployees(int page) {
-		
+	public List<Employee> getAllEmployees(Integer page) {
+		page=page-1;
 		 Query q=sessionFactory.getCurrentSession().createQuery("from Employee");
-		  q.setFirstResult(page * limitResultsPerPage);
+		  q.setFirstResult((int) (page * limitResultsPerPage));
 		  q.setFetchSize(limitResultsPerPage);
 	        q.setMaxResults(limitResultsPerPage);
 	        return (List<Employee>) q.list();

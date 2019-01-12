@@ -137,6 +137,7 @@ myInput.onkeyup = function() {
 			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
 				<form:hidden path="id" />
+				
 				<tr>
 					<td style="color: yellow">Name:</td>
 					<td><form:input path="name" required="required" /></td>
@@ -217,16 +218,11 @@ myInput.onkeyup = function() {
 			</table>
 			
 			<tr>
-   
+   <input type="hidden" value="0" name="page">
 </tr>
 		</form:form>
 	</div>
-<<<<<<< HEAD
-	
 
-=======
-
->>>>>>> branch 'master' of https://github.com/Gulrez911/SearchEmployeeProject.git
 
 </body>
 </html>

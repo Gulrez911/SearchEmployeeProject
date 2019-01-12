@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.kgate.model.Employee;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
@@ -107,31 +109,32 @@ public class EmployeeController {
 
     // with validation
     @RequestMapping(value = "/employeelist")
-    public ModelAndView listEmployee(ModelAndView model,ModelMap model1,@RequestParam(value = "page", required = false) int page) throws IOException {
+    public ModelAndView listEmployee(ModelAndView model,ModelMap model1,@RequestParam(value = "page", required = false) Integer page) throws IOException {
     	int size;
-    	 List<Employee> listEmployee1= employeeService.getAllEmployees();
-    	 size=listEmployee1.size()/5;
-    	int startpage = (int) (page - 5 > 0?page - 5:1);
-        int endpage = startpage +size+1;
-       
-       List<Employee> listEmployee = employeeService.getAllEmployees(page);
-        model.addObject("listEmployee", listEmployee);
-        List<Skill> listSkill = skillService.getAllSkills();
-        model.addObject("listSkill", listSkill);
-        model1.addAttribute("startpage",startpage);
-        model1.addAttribute("endpage",endpage);
-        model.setViewName("home");
-        return model;
+    	
+   	 List<Employee> listEmployee1= employeeService.getAllEmployees();
+   	 size=listEmployee1.size()/5;
+   	Integer startpage = (page - 5 > 0?page - 5:1);
+   	Integer endpage = startpage +size+1;
+      
+      List<Employee> listEmployee = employeeService.getAllEmployees(page);
+       model.addObject("listEmployee", listEmployee);
+       List<Skill> listSkill = skillService.getAllSkills();
+       model.addObject("listSkill", listSkill);
+       model1.addAttribute("startpage",startpage);
+       model1.addAttribute("endpage",endpage);
+       model.setViewName("home");
+       return model;
     }
     
     
-/*    @RequestMapping(value = "/pageemployeelist")
-    public ModelAndView pagelistEmployee(ModelMap model1,ModelAndView model, @RequestParam(value = "page", required = false) int page) throws IOException {
+   /*   @RequestMapping(value = "/pageemployeelist")
+     public ModelAndView pagelistEmployee(ModelAndView model,ModelMap model1,@RequestParam(value = "page", required = false) Long page) throws IOException {
     	int size;
     	 List<Employee> listEmployee1= employeeService.getAllEmployees();
     	 size=listEmployee1.size()/5;
-    	int startpage = (int) (page - 5 > 0?page - 5:1);
-        int endpage = startpage + 10;
+    	Long startpage = (page - 5 > 0?page - 5:1);
+        Long endpage = startpage +size+1;
        
        List<Employee> listEmployee = employeeService.getAllEmployees(page);
         model.addObject("listEmployee", listEmployee);
@@ -141,9 +144,9 @@ public class EmployeeController {
         model1.addAttribute("endpage",endpage);
         model.setViewName("home");
         return model;
-    }*/
+        }
     
-   
+   */
   
 
     @RequestMapping(value = "/newEmployee", method = RequestMethod.GET)
@@ -284,14 +287,18 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
-    public ModelAndView deleteEmployee(HttpServletRequest request) {
+    public ModelAndView deleteEmployee(HttpServletRequest request,RedirectAttributes redirctattribute) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
+       /* Long pageId = (long) Integer.parseInt(request.getParameter("page"));*/
         employeeService.deleteEmployee(employeeId);
-        return new ModelAndView("redirect:/employeelist");
+        redirctattribute.addAttribute("page", 0);
+        ModelAndView mav= new ModelAndView("redirect:/employeelist");
+      /*  mav.addObject("pageid", pageId);*/
+        return mav;
     }
 
     @RequestMapping(value = "/editEmployee", method = RequestMethod.GET)
-    public ModelAndView editEmployee(HttpServletRequest request) {
+    public ModelAndView editEmployee(HttpServletRequest request,ModelMap model1,@RequestParam(value = "page", required = false) Long page) {
         int employeeId = Integer.parseInt(request.getParameter("id"));
 
         List<String> employeeSkill = skillService.getEmployeeSkill(employeeId);
@@ -318,11 +325,13 @@ public class EmployeeController {
 
         Skill skill = new Skill();
         model.addObject("skill", skill);
+        
+        model1.addAttribute("page", page);
         return model;
     }
 
     @RequestMapping(value = "/editEmployee", method = RequestMethod.POST)
-    public ModelAndView updateperson(@ModelAttribute Employee employee) {
+    public ModelAndView updateperson(@ModelAttribute Employee employee,ModelMap model,HttpServletRequest request,@ModelAttribute("page")Integer page ) {
 
         for (String skill : employee.getSkills()) {
             Skill sk = skillService.getSkillByName(skill);
@@ -332,10 +341,12 @@ public class EmployeeController {
         employeeService.addEmployee(employee);
 
         String message = "Employee is successfully edited.";
-        ModelAndView mav = new ModelAndView("home");
+        ModelAndView mav = new ModelAndView("redirect:/employeelist");
         mav.addObject("message", message);
-       List<Employee> listEmployee = employeeService.getAllEmployees();
+   
+       List<Employee> listEmployee = employeeService.getAllEmployees(page);
         mav.addObject("listEmployee", listEmployee);
+        model.addAttribute("page",page);
         return mav;
 
     }
