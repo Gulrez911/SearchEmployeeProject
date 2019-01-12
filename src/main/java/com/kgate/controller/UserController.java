@@ -32,7 +32,6 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("employee")
 public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
@@ -52,6 +51,9 @@ public class UserController {
     @Autowired
     private ProjectService projectservice;
 
+    @Autowired
+    private Employee emp;
+
     public void setloginService1(LoginService2 loginservice2) {
         this.loginservice2 = loginservice2;
     }
@@ -63,8 +65,8 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView init() {
         ModelAndView mav = new ModelAndView("login");
-        Employee employee = new Employee();
-        mav.addObject("employee", employee);
+//        Employee employee = new Employee();
+        mav.addObject("employee", emp);
         String[] userType = {"Admin", "Employee", "Manager", "CEO"};
         mav.addObject("userTypes", userType);
         return mav;
@@ -95,7 +97,7 @@ public class UserController {
         HttpSession session = request.getSession(false);
 //        session.setMaxInactiveInterval(20);
         //
-
+        emp.setEmail(email);
         boolean isValidUser = loginservice2.checkLogin(employee.getEmail(), employee.getPassword(),
                 employee.getCategory());
 
@@ -119,7 +121,7 @@ public class UserController {
                 Employee e = employeeService.searchByEmail(email);
 
                 mav.addObject("employee", e);
-
+                System.out.println("Session Email:::    " + emp.getEmail());
                 return mav;
 
             } else if (employee.getCategory().equals("Employee")) {

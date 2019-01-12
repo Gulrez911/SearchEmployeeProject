@@ -58,6 +58,9 @@ public class TaskController {
     @Autowired
     ProjectService projectService;
 
+    @Autowired
+    private Employee emp;
+
     @InitBinder
     public void initConverter(WebDataBinder binder) {
         CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
@@ -65,8 +68,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/editTask", method = RequestMethod.POST)
-    public ModelAndView updateTask(@SessionAttribute("employee") Employee employee,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+    public ModelAndView updateTask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
 //        ModelAndView mav = new ModelAndView("EmployeeDashboard1");
         ModelAndView mav = new ModelAndView("redirect:/returnTask");
@@ -88,12 +90,12 @@ public class TaskController {
 
         taskservice.updatetask1(date1, taskdetails.getEmp_Email(), taskdetails.getTask_id(), st1);
 
-        String Mangemail = taskservice.getManagerEmail(employee.getEmail());
+        String Mangemail = taskservice.getManagerEmail(emp.getEmail());
         System.out.println("Manager Email::::" + Mangemail);
-        String empName = taskservice.getEmployeeName(employee.getEmail());
+        String empName = taskservice.getEmployeeName(emp.getEmail());
         System.out.println("Employee Name;::" + empName);
 
-        String ManagerName = taskservice.getManagerName(employee.getEmail());
+        String ManagerName = taskservice.getManagerName(emp.getEmail());
         System.out.println("Manager Name:::" + ManagerName);
         String projectName = taskservice.getProjectName(taskdetails.getTask_id());
         System.out.println("TaskName;::::: " + projectName);
@@ -196,8 +198,7 @@ public class TaskController {
     }
 
     @RequestMapping(value = "/returnTask", method = RequestMethod.GET)
-    public ModelAndView returnTasklist(@SessionAttribute("employee") Employee emp,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails) {
+    public ModelAndView returnTasklist(@ModelAttribute("taskdetails") TaskDetails taskdetails) {
         ModelAndView mav = new ModelAndView("EmployeeDashboard1");
         String empEmail = emp.getEmail();
         List<TaskDTO> tobj = new ArrayList<TaskDTO>();
