@@ -73,14 +73,14 @@
                     
                     <tr>
                         <td style="color: white">Password:</td>
-                        <%-- <td><form:input name="password" path="password" type="password"
+                        <td><form:input name="password" path="password" type="password"
                                id="psw" 
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="true"/></td> --%>
+                        title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="true"/></td>
                         
                         
-                        <td><form:input name="password" path="password" type="password"
-                              id="pw" /></td>
+                        <%-- <td><form:input name="password" path="password" type="password"
+                              id="pw" /></td> --%>
                     </tr>
                     
                     <tr>

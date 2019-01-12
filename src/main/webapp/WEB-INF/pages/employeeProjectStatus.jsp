@@ -42,7 +42,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <form action="/PMS-1.0/ManagerProjectDetBack" method="post">
+            <form action="/PMS-1.1/ManagerProjectDetBack" method="post">
                 <input type="submit" value="Back"/>
             </form>
         </div>

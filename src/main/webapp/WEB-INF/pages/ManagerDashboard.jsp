@@ -21,7 +21,7 @@
         <%@include file="header.jsp" %>
      
         <div align="center">
-            <form:form action="/PMS-1.0/MngEdit" method="post"
+            <form:form action="/PMS-1.1/MngEdit" method="post"
                        modelAttribute="employee" commandName="employee">
                           <h2 style=color:blue> Welcome ${employee.name} </h2>
                         
@@ -30,13 +30,13 @@
                 <input type="submit" value="Edit Profile">
             </form:form>
             </br>
-            <form:form action="/PMS-1.0/createProject2" method="post"  modelAttribute="employee">
+            <form:form action="/PMS-1.1/createProject2" method="post"  modelAttribute="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Create Project">
             </form:form>
             </br>
 
-            <form:form action="/PMS-1.0/managerProjectView" method="post"  modelAttribute="employee">
+            <form:form action="/PMS-1.1/managerProjectView" method="post"  modelAttribute="employee">
                 <form:hidden path="email" />
                 <input type="submit" value="Project Status">
             </form:form>

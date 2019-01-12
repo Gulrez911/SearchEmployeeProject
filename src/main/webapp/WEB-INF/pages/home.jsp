@@ -120,9 +120,9 @@
 	<div align="center">
 
            
-            <center><a href="/PMS-1.0/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
+            <center><a href="/PMS-1.1/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
 
-            <center><a href="/PMS-1.0/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
+            <center><a href="/PMS-1.1/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
 
 		<h1 style="color: maroon">Employee List</h1>
 
