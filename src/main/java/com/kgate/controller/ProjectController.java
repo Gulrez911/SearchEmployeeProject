@@ -1,7 +1,5 @@
 package com.kgate.controller;
 
-import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,12 +27,13 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @SuppressWarnings("deprecation")
 @Controller
 public class ProjectController {
-	
-	 private static final Logger logger = Logger.getLogger(ProjectController.class);
+
+    private static final Logger logger = Logger.getLogger(ProjectController.class);
 
     @Autowired
     ProjectService projectservice;
@@ -45,6 +44,9 @@ public class ProjectController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private Employee emp;
+    
     @InitBinder
     public void initConverter(WebDataBinder binder) {
         CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
@@ -52,75 +54,71 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/cproject", method = RequestMethod.POST)
-    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails,@RequestParam("project_Name")String name,
-    		ModelMap modelMap ,@SessionAttribute("employee") Employee employee) {
+    public ModelAndView createProject(@ModelAttribute("projectDetails") ProjectDetails projectDetails, @RequestParam("project_Name") String name,
+            ModelMap modelMap) {
         ModelAndView model = new ModelAndView("redirect:/cproject2");
 
 //        ModelAndView model = new ModelAndView("CreateProject");
-        projectDetails.setManageremail(employee.getEmail());
-      
-        	String projectname=projectservice.findproject(name);
-        	if(projectname==null)
-        	{
-        	 projectservice.createProject(projectDetails);
-        	}else {
-        		 ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
-        		 return model1;
-        	}
-        	 ProjectDetails pd = new ProjectDetails();
-             List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-             model.addObject("listProject ", listProject);
-             model.addObject("pd", pd);
-            
-             return model;
-             
+        projectDetails.setManageremail(emp.getEmail());
+
+        String projectname = projectservice.findproject(name);
+        if (projectname == null) {
+            projectservice.createProject(projectDetails);
+        } else {
+            ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
+            return model1;
+        }
+        ProjectDetails pd = new ProjectDetails();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
+        model.addObject("listProject ", listProject);
+        model.addObject("pd", pd);
+
+        return model;
+
     }
+
     @RequestMapping(value = "/duplicateproject", method = RequestMethod.GET)
-    public ModelAndView duplicate(@ModelAttribute("projectDetails") ProjectDetails projectDetails,ModelMap modelMap,
-            @SessionAttribute("employee") Employee employee) {
-        Integer mid = projectservice.getManagerid(employee.getEmail());
+    public ModelAndView duplicate(@ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap) {
+        Integer mid = projectservice.getManagerid(emp.getEmail());
         ModelAndView mav = new ModelAndView("CreateProject");
         ProjectDetails projectdetails = new ProjectDetails();
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("projectdetails", projectdetails);
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("mid", mid);
         mav.addObject("pd", pd);
         mav.addObject("listProject", listProject);
-        modelMap.addAttribute("msg","Already Exists");
-       
-      
+        modelMap.addAttribute("msg", "Already Exists");
+
         return mav;
 
     }
+
     @RequestMapping(value = "/cproject2", method = RequestMethod.GET)
-    public ModelAndView createProject2(@ModelAttribute("projectDetails") ProjectDetails projectDetails,ModelMap modelMap,
-            @SessionAttribute("employee") Employee employee) {
-        Integer mid = projectservice.getManagerid(employee.getEmail());
+    public ModelAndView createProject2(@ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap) {
+        Integer mid = projectservice.getManagerid(emp.getEmail());
         ModelAndView mav = new ModelAndView("CreateProject");
         ProjectDetails projectdetails = new ProjectDetails();
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("projectdetails", projectdetails);
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
         System.out.println("List of Project:  " + listProject);
         mav.addObject("mid", mid);
         mav.addObject("pd", pd);
         mav.addObject("listProject", listProject);
-       
-      
+
         return mav;
 
     }
 
     @RequestMapping(value = "/showtask", method = RequestMethod.GET)
-    public ModelAndView showtask(@SessionAttribute("employee") Employee employee,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
+    public ModelAndView showtask(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         int pId = Integer.parseInt(request.getParameter("project_id"));
 //        int pId = taskdetails.getProjectId();
 //        int mId = taskdetails.getManagerId();
         taskdetails.setProjectId(pId);
-        Integer mid = projectservice.getManagerid(employee.getEmail());
+        Integer mid = projectservice.getManagerid(emp.getEmail());
 //        int mId = Integer.parseInt(request.getParameter("mgrid"));
         taskdetails.setManagerId(mid);
         System.out.println("Project ID::::    " + pId + "Manager ID::::::    " + mid);
@@ -137,8 +135,8 @@ public class ProjectController {
         mav.addObject("td", td);
         mav.addObject("listtask", listtask);
         Employee e = new Employee();
-        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-        mav.addObject("em", employee.getEmail());
+        mav.addObject("e", employeeService.searchByEmail(emp.getEmail()));
+        mav.addObject("em", emp.getEmail());
 
         return mav;
     }
@@ -195,10 +193,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/backtotask", method = RequestMethod.POST)
-    public ModelAndView backtotask( HttpServletRequest request) {
+    public ModelAndView backtotask(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("createtask");
 
-        String s=request.getParameter("em");
+        String s = request.getParameter("em");
 //    	Integer mid = projectservice.getManagerid(email);
         Integer mid = projectservice.getManagerid(s);
         mav.addObject("mid", mid);
@@ -231,15 +229,14 @@ public class ProjectController {
 
     }
 
-
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee, @ModelAttribute("taskdetails") TaskDetails taskdetails) {
+    public ModelAndView deleteTask(HttpServletRequest request,@ModelAttribute("taskdetails") TaskDetails taskdetails) {
         ModelAndView mav = new ModelAndView("createtask");
         int task_id = Integer.parseInt(request.getParameter("task_id"));
         taskservice.deleteTask(task_id);
-        Integer mid = projectservice.getManagerid(employee.getEmail());
+        Integer mid = projectservice.getManagerid(emp.getEmail());
         taskdetails.setManagerId(mid);
-        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+        mav.addObject("e", employeeService.searchByEmail(emp.getEmail()));
         String[] Tasktype = {"Coding", "Design", "Integration", "Quality", "Testing"};
         mav.addObject("task_Type", Tasktype);
         int pId = Integer.parseInt(request.getParameter("project_id"));
@@ -255,8 +252,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/createtask", method = RequestMethod.POST)
-    public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request,
-            @SessionAttribute("employee") Employee employee) {
+    public ModelAndView taskcreate(@ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("createtask");
 
         int pId = taskdetails.getProjectId();
@@ -277,7 +273,7 @@ public class ProjectController {
         String s = request.getParameter("em");
         mav.addObject("em", s);
 
-        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
+        mav.addObject("e", employeeService.searchByEmail(emp.getEmail()));
 
         return mav;
     }
@@ -368,21 +364,21 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/createProject2", method = RequestMethod.POST)
-    public ModelAndView createProject2(@SessionAttribute("employee") Employee employee) {
+    public ModelAndView createProject2() {
         ModelAndView mav = new ModelAndView("CreateProject");
-        Integer mid = projectservice.getManagerid(employee.getEmail());
+        Integer mid = projectservice.getManagerid(emp.getEmail());
 
         mav.addObject("mid", mid);
         ProjectDetails projectdetails = new ProjectDetails();
-        projectdetails.setManageremail(employee.getEmail());
+        projectdetails.setManageremail(emp.getEmail());
         TaskDetails taskdetails = new TaskDetails();
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("projectdetails", projectdetails);
-        taskdetails.setEmp_Email(employee.getEmail());
+        taskdetails.setEmp_Email(emp.getEmail());
         mav.addObject("taskdetails", taskdetails);
         Employee e = new Employee();
-        mav.addObject("e", employeeService.searchByEmail(employee.getEmail()));
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+        mav.addObject("e", employeeService.searchByEmail(emp.getEmail()));
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
 
         mav.addObject("pd", pd);
 
@@ -405,10 +401,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/downloadProjectStatus", method = RequestMethod.POST)
-    public ModelAndView downloadProjectStatus(@SessionAttribute("employee") Employee employee, @RequestParam("project_id") String project_id) {
+    public ModelAndView downloadProjectStatus(@RequestParam("project_id") String project_id) {
         int id = Integer.parseInt(project_id);
         System.out.println("Ide:: " + id);
-        List<TaskDTO> list = projectservice.displayAllStatus2(employee.getEmail(), id);
+        List<TaskDTO> list = projectservice.displayAllStatus2(emp.getEmail(), id);
         ModelAndView mav = new ModelAndView("pdfProjectStatus");
         mav.addObject("listProject", list);
 //        return new ModelAndView("pdfProjectStatus", "listProject", list);
@@ -416,9 +412,9 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/managerProjectView", method = RequestMethod.POST)
-    public ModelAndView managerProjectView(@SessionAttribute("employee") Employee employee) {
+    public ModelAndView managerProjectView() {
         ModelAndView mav = new ModelAndView("managerProjectDetails");
-        List<ProjectDetails> listProjectName = projectservice.getProjectByEmail(employee.getEmail());
+        List<ProjectDetails> listProjectName = projectservice.getProjectByEmail(emp.getEmail());
 
         ProjectDetails pd = new ProjectDetails();
         mav.addObject("listProjectName", listProjectName);
@@ -434,10 +430,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/viewProject", method = RequestMethod.GET)
-    public ModelAndView viewProject(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
+    public ModelAndView viewProject(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("employeeProjectStatus");
         int id = Integer.parseInt(request.getParameter("project_id"));
-        List<TaskDTO> taskDTOs = projectservice.displayAllStatus2(employee.getEmail(), id);
+        List<TaskDTO> taskDTOs = projectservice.displayAllStatus2(emp.getEmail(), id);
         TaskDTO dTO = new TaskDTO();
         System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
@@ -448,10 +444,10 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/overviewProject", method = RequestMethod.GET)
-    public ModelAndView overviewProject(@SessionAttribute("employee") Employee employee, HttpServletRequest request) {
+    public ModelAndView overviewProject(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("overviewProjectStatus");
         int id = Integer.parseInt(request.getParameter("project_id"));
-        List<TaskDTO> taskDTOs = projectservice.displayAllStatus3(employee.getEmail(), id);
+        List<TaskDTO> taskDTOs = projectservice.displayAllStatus3(emp.getEmail(), id);
         TaskDTO dTO = new TaskDTO();
         System.out.println("TaskStatus::::" + taskDTOs);
         mav.addObject("dTO", dTO);
@@ -462,9 +458,9 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/downloadOverviewProjectStatus", method = RequestMethod.POST)
-    public ModelAndView downloadOverviewProjectStatus(@SessionAttribute("employee") Employee employee, @RequestParam("project_id") String project_id) {
+    public ModelAndView downloadOverviewProjectStatus(@RequestParam("project_id") String project_id) {
         int id = Integer.parseInt(project_id);
-        List<TaskDTO> list = projectservice.displayAllStatus3(employee.getEmail(), id);
+        List<TaskDTO> list = projectservice.displayAllStatus3(emp.getEmail(), id);
         ModelAndView mav = new ModelAndView("pdfProjectStatusOverview");
         mav.addObject("listProject", list);
 //        return new ModelAndView("pdfProjectStatus", "listProject", list);
@@ -479,7 +475,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/ManagerProjectDetBack", method = RequestMethod.POST)
-    public ModelAndView ManagerProjectDetBack(@SessionAttribute("employee") Employee emp, @ModelAttribute("employee") Employee employee) {
+    public ModelAndView ManagerProjectDetBack(@ModelAttribute("employee") Employee employee) {
         ModelAndView mav = new ModelAndView("managerProjectDetails");
         List<ProjectDetails> listProjectName = projectservice.getProjectByEmail(emp.getEmail());
 
@@ -488,72 +484,63 @@ public class ProjectController {
         mav.addObject("pd", pd);
         return mav;
     }
-    
-    
+
     @RequestMapping(value = "/deleteproject", method = RequestMethod.GET)
-    public ModelAndView deleteproject(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
-    	int id = Integer.parseInt(request.getParameter("project_id"));
-    	projectservice.deleteproject(id);
-    	  ModelAndView model = new ModelAndView("redirect:/cproject2");
+    public ModelAndView deleteproject(HttpServletRequest request,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+        int id = Integer.parseInt(request.getParameter("project_id"));
+        projectservice.deleteproject(id);
+        ModelAndView model = new ModelAndView("redirect:/cproject2");
 
 //        ModelAndView model = new ModelAndView("CreateProject");
-        projectDetails.setManageremail(employee.getEmail());
+        projectDetails.setManageremail(emp.getEmail());
         ProjectDetails pd = new ProjectDetails();
-        List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
         model.addObject("listProject ", listProject);
         model.addObject("pd", pd);
-       
+
         return model;
-		
-}
-    
+
+    }
+
     @RequestMapping(value = "/editproject", method = RequestMethod.GET)
-    public ModelAndView editproject(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
-    	 ModelAndView mav = new ModelAndView("editProject");
-    	 int id = Integer.parseInt(request.getParameter("project_id"));
-    	 Integer mid = projectservice.getManagerid(employee.getEmail());
-          ProjectDetails prd=projectservice.getProjectById(id);
-          
-         mav.addObject("mid", mid);
+    public ModelAndView editproject(HttpServletRequest request,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+        ModelAndView mav = new ModelAndView("editProject");
+        int id = Integer.parseInt(request.getParameter("project_id"));
+        Integer mid = projectservice.getManagerid(emp.getEmail());
+        ProjectDetails prd = projectservice.getProjectById(id);
+
+        mav.addObject("mid", mid);
         ProjectDetails projectdetails = new ProjectDetails();
-         projectdetails.setManageremail(employee.getEmail());
-        
-         ProjectDetails pd = new ProjectDetails();
-         mav.addObject("projectdetails", projectdetails);
-           mav.addObject("pd", prd);
-		   return mav;   
-    
+        projectdetails.setManageremail(emp.getEmail());
+
+        ProjectDetails pd = new ProjectDetails();
+        mav.addObject("projectdetails", projectdetails);
+        mav.addObject("pd", prd);
+        return mav;
+
     }
-    
+
     @RequestMapping(value = "/editproject1", method = RequestMethod.POST)
-    public ModelAndView editproject1(HttpServletRequest request,@SessionAttribute("employee") Employee employee,@ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap,
-    		@RequestParam("project_Name")String name) {
-    
-    	 
-    	 ModelAndView model = new ModelAndView("editProject");
-    	 String projectname=projectservice.findproject(name);
-     	if(projectname==null)
-     	{
-     	 projectservice.createProject(projectDetails);
-     	}else {
-     		 ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
-     		 return model1;
-     	}
+    public ModelAndView editproject1(HttpServletRequest request,@ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap,
+            @RequestParam("project_Name") String name) {
+
+        ModelAndView model = new ModelAndView("editProject");
+        String projectname = projectservice.findproject(name);
+        if (projectname == null) {
+            projectservice.createProject(projectDetails);
+        } else {
+            ModelAndView model1 = new ModelAndView("redirect:/duplicateproject");
+            return model1;
+        }
 //       ModelAndView model = new ModelAndView("CreateProject");
-       projectDetails.setManageremail(employee.getEmail());
-       ProjectDetails pd = new ProjectDetails();
-       List<ProjectDetails> listProject = projectservice.getProjectByEmail(employee.getEmail());
-       model.addObject("listProject ", listProject);
-       model.addObject("pd", pd);
-       modelMap.addAttribute("msg","You have successfully edited");
-		return model;
-    	
-    
-    
+        projectDetails.setManageremail(emp.getEmail());
+        ProjectDetails pd = new ProjectDetails();
+        List<ProjectDetails> listProject = projectservice.getProjectByEmail(emp.getEmail());
+        model.addObject("listProject ", listProject);
+        model.addObject("pd", pd);
+        modelMap.addAttribute("msg", "You have successfully edited");
+        return model;
+
     }
-    
-    
-    
-    
-    
+
 }

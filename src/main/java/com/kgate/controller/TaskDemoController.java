@@ -34,16 +34,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-//@SessionAttributes("taskDetails")
+
 public class TaskDemoController {
-	
-	private static final Logger logger = Logger.getLogger(TaskDemoController.class);
+
+    private static final Logger logger = Logger.getLogger(TaskDemoController.class);
 
     @Autowired
     TaskService taskService;
 
     @Autowired
     ProjectService projectService;
+
+    @Autowired
+    private Employee emp;
 
     @InitBinder
     public void initConverter(WebDataBinder binder) {
@@ -53,11 +56,11 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/asssign", method = RequestMethod.GET)
 
-    public ModelAndView allotTask(HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+    public ModelAndView allotTask(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("AllocateTask");
         int taskId = Integer.parseInt(request.getParameter("task_id"));
         TaskDetails td2 = taskService.getTask(taskId);
-        List<String> empnameList = taskService.getEmpNameList(employee.getEmail());
+        List<String> empnameList = taskService.getEmpNameList(emp.getEmail());
 
         model.addObject("td", td2);
         model.addObject("empnameList", empnameList);
@@ -69,7 +72,7 @@ public class TaskDemoController {
 
     @RequestMapping(value = "/taskAllocated", method = RequestMethod.POST)
     public ModelAndView success(@ModelAttribute("TaskDetails") TaskDetails TaskDetails,
-            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request, @SessionAttribute("employee") Employee employee) {
+            @ModelAttribute("taskdetails") TaskDetails taskdetails, HttpServletRequest request) {
 
         taskdetails.setStatus("Assigned");
         taskdetails.setTaskStatus("W .I. P");
@@ -110,7 +113,7 @@ public class TaskDemoController {
         String tStartDate = dateFormat.format(taskdetails.gettStart_Time());
         String tEndDate = dateFormat.format(taskdetails.gettEnd_Time());
 
-        String managername = projectService.getmanagernameformail(employee.getEmail());
+        String managername = projectService.getmanagernameformail(emp.getEmail());
         System.out.println("Employee Email:::: " + EmpEmail);
 
         System.out.println("Employee Email:::: " + taskdetails.getEmp_Email());

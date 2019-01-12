@@ -14,7 +14,7 @@
     <!--Date conversion Service -->
     <mvc:annotation-driven
         conversion-service="conversionService" />
-
+        
     <bean id="conversionService"
           class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
 
@@ -33,7 +33,7 @@
         class="org.springframework.jdbc.datasource.DriverManagerDataSource"
         id="dataSource">
         <property name="driverClassName"
-                          value="com.mysql.jdbc.Driver ">
+                  value="com.mysql.jdbc.Driver ">
         </property>
 
 
@@ -43,7 +43,7 @@
         
         <property name="password" value="kgate"></property>
    
-     </bean>
+    </bean>
 
 
     <!-- Hibernate SessionFactory -->
