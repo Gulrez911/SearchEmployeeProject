@@ -17,7 +17,6 @@
                 background-position:left;
                 background-size: 40px; 
             }
-
         </style>
         <script type="text/javascript">
             function chk()
@@ -34,14 +33,14 @@
 
     <body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 
-<%@include file="header.jsp" %>
+        <%@include file="header.jsp" %>
         <div align="center">
 
 
-          <!-- bug 40 Employee List as a title is repeated solved -->
-           
+            <!-- bug 40 Employee List as a title is repeated solved -->
 
-           
+
+
             <center><a href="/PMS-1.0/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
 
             <center><a href="/PMS-1.0/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
@@ -83,24 +82,25 @@
                         <td>${employee.address}</td>
                         <td>${employee.telephone}</td>
                         <td>${employee.category}</td>
-                       <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp; --%>
-                            
-                      <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
+                        <%--  <td ><a href="editEmployee?id=${employee.id}" style="color:blue">Edit</a>
+                             &nbsp;&nbsp;&nbsp;&nbsp; --%>
+
+                        <td><a href="editEmployee?id=${employee.id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a>    
                             &nbsp;&nbsp;&nbsp;&nbsp; 
-                            
-                           <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
-                                
-                          <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
-                           </td>
+
+                            <%--   <a href="deleteEmployee?id=${employee.id}" style="color:maroon">Delete</a></td> --%>
+
+                            <a href="deleteEmployee?id=${employee.id}" style="color:maroon" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+                        </td>
                     </tr>
                 </c:forEach>                
-         </table>
-        
- 
+            </table>
+
+
             <h4><font style="color: darkorange">
                     New Employee Register</font> <a href="newEmployee" style="color: red;">Here</a>
             </h4>
+
             
               <form:form action="backtosuccess" method="post">
    
@@ -127,7 +127,9 @@
    
    
    
+
         </div>
+
        <!--   <div class="pagination">
         <ul>
             
@@ -143,6 +145,7 @@
     </div> -->
     
    
+
 
     </body>
 </html>
