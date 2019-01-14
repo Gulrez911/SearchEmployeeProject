@@ -23,7 +23,7 @@
         <div align="center">
         <form commandName="employee">
          <h2 style="color:blue"> Welcome ${employee.name} </h2>
-         <h2 style="color:red">You have successfully logged in!!!</h2>
+         <h2 style="color:green;">You have successfully logged in!!!</h2>
         </form>
             <form action="downloadProjectReport" method="post">
                 <input type="submit" value="Download Project Report" > 

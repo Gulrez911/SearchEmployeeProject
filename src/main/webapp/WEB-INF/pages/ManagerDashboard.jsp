@@ -25,7 +25,7 @@
                        modelAttribute="employee" commandName="employee">
                           <h2 style=color:blue> Welcome ${employee.name} </h2>
                         
-                         <h2 style="color:red">You have successfully logged in!!!</h2>
+                         <h2 style="color:green">You have successfully logged in!!!</h2>
                 <form:hidden path="email" />
                 <input type="submit" value="Edit Profile">
             </form:form>

@@ -15,7 +15,7 @@
          <form commandName="employee">
              
         <h3 style="color:blue" align="center"> Welcome ${employee.name}</h3>
-        <h3 style="color:Red" align="center"> You have successfully logged in!!!</h3>
+        <h3 style="color:green" align="center"> You have successfully logged in!!!</h3>
 
     <center><a href="/PMS-1.1/test"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
 

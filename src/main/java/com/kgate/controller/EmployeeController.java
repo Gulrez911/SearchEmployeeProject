@@ -325,13 +325,14 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
 	public ModelAndView deleteEmployee(HttpServletRequest request, ModelMap model1,
-			@RequestParam(value = "page", required = false) Integer page) {
+			@RequestParam(value = "page", required = false) Integer page,RedirectAttributes redir) {
 
 		int employeeId = Integer.parseInt(request.getParameter("id"));
 		/* Long pageId = (long) Integer.parseInt(request.getParameter("page")); */
 		employeeService.deleteEmployee(employeeId);
 		System.out.println("deleteEmployee:::   " + emp.getEmail());
 		model1.addAttribute("page", page);
+		redir.addAttribute("page", page);
 		ModelAndView mav = new ModelAndView("redirect:/employeelist");
 		/* mav.addObject("pageid", pageId); */
 
