@@ -23,7 +23,7 @@
                     </tr>
                 </c:forEach>
             </table><br/>
-            <form action="/PMS-1.1/ManagerDashboardBack" method="post">
+            <form action="/PMS-1.2/ManagerDashboardBack" method="post">
                 <input type="submit" value="Back"/>
             </form>
         </div>

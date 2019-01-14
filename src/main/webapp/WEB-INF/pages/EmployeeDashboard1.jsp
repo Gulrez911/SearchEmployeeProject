@@ -11,11 +11,11 @@
     <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg" >
         <%@include file="header.jsp" %>
 
-        <form:form action="/PMS-1.1/Empedit" method="post" modelAttribute="employee" commandName="employee">
+        <form:form action="/PMS-1.2/Empedit" method="post" modelAttribute="employee" commandName="employee">
             <form:hidden path="email" />
             <input type="submit" value="Edit Profile">
         </form:form>
-        <form:form action="/PMS-1.1/editTask" method="POST"
+        <form:form action="/PMS-1.2/editTask" method="POST"
                    commandName="taskdetails" modelAttribute="employee">
 
 
@@ -62,7 +62,7 @@
         </table>
     </form:form>
 
-    <form:form action="/PMS-1.1/Empedit" method="post"  modelAttribute="employee" commandName="employee">
+    <form:form action="/PMS-1.2/Empedit" method="post"  modelAttribute="employee" commandName="employee">
         <form:hidden path="email" />
         <input type="submit" value="Back">
     </form:form>

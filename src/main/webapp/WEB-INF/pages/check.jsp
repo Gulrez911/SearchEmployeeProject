@@ -9,6 +9,6 @@
     <body>
         <h3>This is Test Page</h3>
         ${scopBean.name}
-        <a href="/PMS-1.1/sess2">click</a>
+        <a href="/PMS-1.2/sess2">click</a>
     </body>
 </html>
