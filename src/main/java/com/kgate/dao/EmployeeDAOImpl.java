@@ -29,7 +29,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@SuppressWarnings("unchecked")
 	public List<Employee> searchEmployeesBySkill(String txt) {
 
-        String qry = "select employee0_.name, employee0_.email, employee0_.address, employee0_.telephone, employee0_.category  from  Employee_Details employee0_ cross  join join_employee_skill listskill1_, Skills skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE '" + txt + "'";
+        String qry = "select employee0_.name, employee0_.email, employee0_.address, employee0_.telephone, employee0_.category  from  employee_details employee0_ cross  join join_employee_skill listskill1_, employee_skill skill2_  where  employee0_.id=listskill1_.id and listskill1_.skill_Id=skill2_.skill_Id  and skill2_.skill_name LIKE '" + txt + "'";
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(qry).list();
         List<Employee> emp = new ArrayList<>();
 //      Employee e = new Employee();
@@ -83,7 +83,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	@Override
 	public void deleteEmployee(Integer employeeId) {
 
-        String query = "delete Employee_Details, join_employee_skill from Employee_Details inner join  join_employee_skill  where  Employee_Details.id = join_employee_skill.id and Employee_Details.id =" + employeeId + "";
+        String query = "delete employee_details, join_employee_skill from employee_details inner join  join_employee_skill  where  employee_details.id = join_employee_skill.id and employee_details.id =" + employeeId + "";
 
 
 		SQLQuery sqlq = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -118,9 +118,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 	public List<Employee> displayByManagerId(String email) {
 
 
-        String query = "select  name,address,telephone,email,status,managerId,password,category from Employee_Details where managerId=(select id from Employee_Details where email='" + email + "') ";
-//       String query = "select  name,address,telephone,email,status,managerId,otp,password,category from Employee_Details   where category='Employee' and managerId=(select ManagerId from Employee_Details where category='Manager' and email='"+email+"')";
-        //        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from Employee_Details where managerId=(select id from Employee_Details where email='" + email + "') ";
+        String query = "select  name,address,telephone,email,status,managerId,password,category from employee_details where managerId=(select id from employee_details where email='" + email + "') ";
+//       String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee_details   where category='Employee' and managerId=(select ManagerId from employee_details where category='Manager' and email='"+email+"')";
+        //        String query = "select  name,address,telephone,email,status,managerId,otp,password,category from employee_details where managerId=(select id from employee_details where email='" + email + "') ";
 
 
 		List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();

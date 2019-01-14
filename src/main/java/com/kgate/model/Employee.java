@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
 @Entity
-@Table(name = "Employee_Details")
+@Table(name = "employee_details")
 @Component
 //@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 //@Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)

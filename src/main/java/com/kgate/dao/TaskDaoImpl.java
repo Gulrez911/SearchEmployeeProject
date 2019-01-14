@@ -61,7 +61,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     public List<String> getEmpNameList(String email) {
 
-        String query2 = "select name from Employee_Details where category='employee' and managerid = (select id from Employee_Details where category = 'manager' and email='"
+        String query2 = "select name from employee_details where category='employee' and managerid = (select id from employee_details where category = 'manager' and email='"
                 + email + "')";
         return sessionFactory.getCurrentSession().createSQLQuery(query2).list();
 
@@ -108,7 +108,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<TaskDTO> getEmpTasklist(String email) {
-        String query = "select project_details.project_Name, task_details.task_Type, task_details.task_Name, task_details.tStart_Time, task_details.tEnd_Time,Employee_Details.name, task_details.taskStatus, task_details.task_id, task_details.Emp_Email  from task_details cross join Employee_Details, project_details where task_details.projectId = project_details.project_id and task_details.managerId=Employee_Details.id and task_details.Emp_Email ='"
+        String query = "select project_details.project_Name, task_details.task_Type, task_details.task_Name, task_details.tStart_Time, task_details.tEnd_Time,employee_details.name, task_details.taskStatus, task_details.task_id, task_details.Emp_Email  from task_details cross join employee_details, project_details where task_details.projectId = project_details.project_id and task_details.managerId=employee_details.id and task_details.Emp_Email ='"
                 + email + "'";
         List<Object> data = sessionFactory.getCurrentSession().createSQLQuery(query).list();
         System.out.println("List of Object::::   " + data);
@@ -162,7 +162,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     @SuppressWarnings("unchecked")
     public String getManagerEmail(String email) {
-        String query = "select distinct(e.email) from task_details td cross join Employee_Details e where td.managerId = e.id and td.Emp_Email='"
+        String query = "select distinct(e.email) from task_details td cross join employee_details e where td.managerId = e.id and td.Emp_Email='"
                 + email + "'";
 
         Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -173,7 +173,7 @@ public class TaskDaoImpl implements TaskDao {
     @Override
     @SuppressWarnings("unchecked")
     public String getEmployeeName(String name) {
-        String query = "select distinct(Employee_Details.name) from Employee_Details cross join task_details where Employee_Details.email='"
+        String query = "select distinct(employee_details.name) from employee_details cross join task_details where employee_details.email='"
                 + name + "'";
 
         Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query);
@@ -193,7 +193,7 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public String getManagerName(String name) {
-        String query = "select distinct(Employee_Details.name) from Employee_Details cross join task_details where task_details.managerId=Employee_Details.id and task_details.Emp_Email='"
+        String query = "select distinct(employee_details.name) from employee_details cross join task_details where task_details.managerId=employee_details.id and task_details.Emp_Email='"
                 + name + "'";
 
         Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query);

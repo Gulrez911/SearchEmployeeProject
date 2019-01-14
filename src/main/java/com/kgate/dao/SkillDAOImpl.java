@@ -65,8 +65,8 @@ public class SkillDAOImpl implements SkillDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<String> getEmployeeSkill(int empid) {
-//        String query = "select skill2_.skill_name  from Employee_Details employee0_ cross join join_employee_skill listskill1_, Skills skill2_ where employee0_.id=listskill1_.id  and listskill1_.skill_Id=skill2_.skill_Id  and employee0_.id LIKE '" + empid + "'";
-        String query = "select distinct(s.skill_name) from Skills s cross join join_employee_skill je,Employee_Details e1   where s.skill_id=je.skill_id and je.id= '" + empid + "'";
+//        String query = "select skill2_.skill_name  from employee_details employee0_ cross join join_employee_skill listskill1_, employee_skill skill2_ where employee0_.id=listskill1_.id  and listskill1_.skill_Id=skill2_.skill_Id  and employee0_.id LIKE '" + empid + "'";
+        String query = "select distinct(s.skill_name) from employee_skill s cross join join_employee_skill je,employee_details e1   where s.skill_id=je.skill_id and je.id= '" + empid + "'";
 //        List<Skill> sList = new ArrayList<Skill>();
 //        sList =  
 //        return sessionFactory.getCurrentSession().createSQLQuery(query).list();
@@ -77,18 +77,18 @@ public class SkillDAOImpl implements SkillDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<String> getEmployeeSkillByEmail(String email) {
-        String query = "select distinct(s.skill_name) from Skills s cross join join_employee_skill je,Employee_Details e1 where s.skill_id=je.skill_id and e1.Id=je.Id and e1.email='" + email + "'";
-//     String query = "select skill2_.skill_name from Employee_Details e cross join join_employee_skill listskill1_, Skills skill2_ where  e.id=listskill1_.id  and listskill1_.skill_Id=skill2_.skill_Id  and    e.email = "+email+"";
-//     String query  ="select distinct(s.skill_name) from Employee_Details AS e cross join join_employee_skill AS li ON e.id = li.id CROSS JOIN Skills AS s ON s.skill_name = li.skill_name where e.email = "+email+"";  
+        String query = "select distinct(s.skill_name) from employee_skill s cross join join_employee_skill je,employee_details e1 where s.skill_id=je.skill_id and e1.Id=je.Id and e1.email='" + email + "'";
+//     String query = "select skill2_.skill_name from employee_details e cross join join_employee_skill listskill1_, employee_skill skill2_ where  e.id=listskill1_.id  and listskill1_.skill_Id=skill2_.skill_Id  and    e.email = "+email+"";
+//     String query  ="select distinct(s.skill_name) from employee_details AS e cross join join_employee_skill AS li ON e.id = li.id CROSS JOIN employee_skill AS s ON s.skill_name = li.skill_name where e.email = "+email+"";  
 
-//    String query = "select distinct(s.skill_name) from Skills s cross join join_employee_skill je , Employee_Details e1 where s.skill_id=je.skill_id and e1.id=je.id and e1.email="+email+"";
+//    String query = "select distinct(s.skill_name) from employee_skill s cross join join_employee_skill je , employee_details e1 where s.skill_id=je.skill_id and e1.id=je.id and e1.email="+email+"";
         return sessionFactory.getCurrentSession().createSQLQuery(query).list();
     }
 
     @Override
     public String findSkill(String skill) {
 //        return (Skill) sessionFactory.getCurrentSession().get(Skill.class, skill);
-        String query1 = "select skill_name from Skills where skill_name='" + skill + "'";
+        String query1 = "select skill_name from employee_skill where skill_name='" + skill + "'";
         Query query2 = sessionFactory.getCurrentSession().createSQLQuery(query1);
         String name1 = (String) query2.uniqueResult();
         return name1;
