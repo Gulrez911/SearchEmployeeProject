@@ -69,7 +69,9 @@ public class TaskDemoController {
         int taskId = Integer.parseInt(request.getParameter("task_id"));
         TaskDetails td2 = taskService.getTask(taskId);
         List<String> empnameList = taskService.getEmpNameList(emp.getEmail());
-
+  int pid=Integer.parseInt(request.getParameter("project_id"));
+  List<ProjectDetails> pd=projectService.getProjectDates(pid);
+  model.addObject("pd",pd);
         model.addObject("td", td2);
         model.addObject("empnameList", empnameList);
 
