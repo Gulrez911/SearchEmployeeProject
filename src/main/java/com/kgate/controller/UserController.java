@@ -231,7 +231,12 @@ public class UserController {
             String s = (String) o;
             sk.add(s);
         }
-        emp.setSkills(sk);
+        try{
+            emp.setSkills(sk);
+        }
+        catch(Exception e){
+            
+        };
         String[] userType = {"Employee", "Admin", "Manager"};
         mav.addObject("userTypes", userType);
 
