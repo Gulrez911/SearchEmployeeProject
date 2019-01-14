@@ -65,7 +65,9 @@
         </video>
         <div class="content">
             <form:form action="authenticate" method="post" commandName="employee">
+           
                 <table align="center">
+                 <div align="center"> 
                     <tr>
                         <td style="color: white">User Name:</td>
                         <td><form:input name="email" path="email" type="email" id="nm"/></td>
@@ -97,7 +99,7 @@
 
                     </tr>
                     <td>
-                        <div align="center">   <input type="Reset"></div>
+                          <input type="Reset"></div>
                     </td>
 
 
