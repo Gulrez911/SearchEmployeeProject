@@ -6,38 +6,10 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <title>JSP Page</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $("input").focus(function () {
-                    $(this).css("background-color", "#cccccc");
-                });
-                $("input").blur(function () {
-                    $(this).css("background-color", "#ffffff");
-                });
-            });
-            $(document).ready(function () {
-                $("#myInput").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
-                });
-            });
-            $(document).ready(function () {
-                $("a[id$='id_delete']").click(function () {
-                    alert("Do you want to delete?");
-                });
-            });
-//            $(document).ready(function () {
-//                $("a[id$='id_edit']").click(function () {
-//                    $("input[id$='myInput']").hide();
-//                });
-//            });
-        </script>
-
-
+        <script src="<%=request.getContextPath()%>/resources/JS/jquery.js"></script>
         <style>
             table {
                 border-collapse: collapse;
@@ -53,69 +25,63 @@
                 background-color: #4CAF50;
                 color: white;
             }
+
         </style>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-        <title>Add Skills</title>
+        <script>
+            $(document).ready(function () {
+                $('#skill_Form').submit(function (event) {
+                    var data = {}
+                    data["skill_Id"] = $("#skill_Id").val();
+                    data["skill_name"] = $('#skill_name').val();
+                    $.ajax({
+                        url: "SaveSkillAjax",
+                        data: JSON.stringify(data),
+                        type: "POST",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Accept", "application/json");
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function (skill) {
+                            load();
+                            refresh();
+                        }
+                    });
+                    event.preventDefault();
+                });
+            });
+        </script>
     </head>
+
     <body
-        background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
+        background="<%=request.getContextPath()%>/resources/images/bg2.jpg"  onload="load()">
 
-    <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
-    <div align="center">
-        <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
-        <div style="color: red">${error}</div> 
-    <form:form action="saveTest" method="post" modelAttribute="skill"
-               commandName="skill">
-        <table>
+        <div align="center">
+            <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
+            <div style="color: red">${error}</div> 
 
-            <form:hidden path="skill_Id" />
-            <tr>
-                <td style="color: Dark blue">Name:</td>
-                <td><form:input path="skill_name" name="skill_name"
-                            id="skill_name"  required="true"/> </td>
-                <!--  <input type='text' pattern='[A-Za-z\\s]*'/> -->
+            <form:form id="skill_Form" action="SaveSkillAjax" method="post" modelAttribute="skill"
+                       commandName="skill">
+                <table>
 
-            <br>
-            <td colspan="2" align="center"><input type="submit"
-                                                  value="Add"></td>
-
-            </tr>
+                    <form:hidden path="skill_Id" id="skill_Id"/>
+                    <tr>
+                        <td style="color: Dark blue">Name:</td>
+                        <td><form:input path="skill_name" name="skill_name"
+                                    id="skill_name"  required="true"/> </td>
 
 
-        </table>
+                    <br>
+                    <td colspan="2" align="center"><input type="submit"
+                                                          value="Add" ></td>
+                    </tr>
+                </table>
+            </form:form>
+            <input id="myInput" type="text" placeholder="Search Skill Here.."  /><br></br> 
+            <table id="table1" border=1>
+                <th> Name </th><th> Edit </th> <th> Delete</th> 
 
-    </form:form>
-    <input id="myInput" type="text" placeholder="Search Skill Here.."  /><br></br> 
-
-    <table border="1">
-        <th>Skills</th>
-        <th>Action</th>
-        <tbody id="myTable">
-            <c:forEach var="skill" items="${listSkill}">
-                <tr>
-
-                    <td>${skill.skill_name}</td>
-
-                    <%-- <td><a href="editTest?skill_Id=${skill.skill_Id}">Edit</a>
-                        &nbsp;&nbsp;&nbsp;&nbsp;  --%>
-
-                    <td><a href="editTest?skill_Id=${skill.skill_Id}" style="color:blue" onclick="return confirm('Are you sure you want to edit this skill?');">Edit</a>    
-                        &nbsp;&nbsp;&nbsp;&nbsp; 
-
-                        <%--  <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete">Delete</a> --%>
-
-                        <a href="deleteTest?skill_Id=${skill.skill_Id}" id="id_delete" style="color:maroon" onclick="return confirm('Are you sure you want to delete this skill?');">Delete</a>
-                    </td>
-
-                </tr>
-
-            </c:forEach>
-        </tbody>
-    </table>
-
-</div>
-
-</body>
-
+            </table>
+            <p></p> 
+        </div>
+    </body>
 </html>
