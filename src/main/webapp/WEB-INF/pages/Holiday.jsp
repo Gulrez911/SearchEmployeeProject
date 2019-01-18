@@ -9,7 +9,7 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
 <form action="adminback" method="post">
 <input type="submit" value="Back">
 </form>

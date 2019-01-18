@@ -27,15 +27,11 @@ public interface EmployeeDAO {
     public List<Employee> searchEmployeesBySkill(String skill);
     
     public List<Employee> displayByManagerId(String email);
-    
-    
-    
+          
     public void addHoliday(Holiday holiday);
     
     public List<Holiday> getAllHoliday();
-    
-   
-    
+           
     public void deleteHoliday(Integer Days_id);
    
     public String getEmployeeName(String email);

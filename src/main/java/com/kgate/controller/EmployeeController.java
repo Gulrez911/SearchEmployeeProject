@@ -2,7 +2,9 @@ package com.kgate.controller;
 
 import java.io.IOException;
 import java.security.KeyStore.Entry.Attribute;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -30,8 +32,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kgate.model.Employee;
+import com.kgate.model.Holiday;
 import com.kgate.model.ProjectDetails;
 import com.kgate.model.Skill;
+import com.kgate.model.TaskDTO;
 import com.kgate.model.TaskDetails;
 import com.kgate.service.EmployeeService;
 import com.kgate.service.ProjectService;
@@ -325,7 +329,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/deleteEmployee", method = RequestMethod.GET)
 	public ModelAndView deleteEmployee(HttpServletRequest request, ModelMap model1,
-			@RequestParam(value = "page", required = false) Integer page,RedirectAttributes redir) {
+			@RequestParam(value = "page", required = false) Integer page, RedirectAttributes redir) {
 
 		int employeeId = Integer.parseInt(request.getParameter("id"));
 		/* Long pageId = (long) Integer.parseInt(request.getParameter("page")); */
@@ -384,7 +388,7 @@ public class EmployeeController {
 		}
 
 		employeeService.addEmployee(employee);
-		System.out.println("editEmployee List::: "+emp.getEmail());
+		System.out.println("editEmployee List::: " + emp.getEmail());
 		String message = "Employee is successfully edited.";
 		ModelAndView mav = new ModelAndView("redirect:/employeelist");
 		mav.addObject("message", message);
@@ -395,7 +399,7 @@ public class EmployeeController {
 		model.addAttribute("page", page);
 		return mav;
 
- 	}
+	}
 
 	@RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
 	public ModelAndView downloadPDF() {
@@ -569,6 +573,158 @@ public class EmployeeController {
 	public ModelAndView backtomanagerDash() {
 		ModelAndView mav = new ModelAndView("ManagerDashboard");
 		mav.addObject("employee", emp);
+		return mav;
+
+	}
+
+	@RequestMapping(value = "/employeeReport", method = RequestMethod.GET)
+	public ModelAndView employeeReport(HttpServletRequest request) {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		Employee e = employeeService.getEmployee(id);
+
+		String email = request.getParameter("email");
+		List<TaskDetails> tls = taskservice.getalltaskdetails(email);
+
+		List<ProjectDetails> pj = projectservice.dispalyProjects();
+		
+		List<String> lskill=skillService.getEmployeeSkill(id);
+		
+		List<Holiday> holiday=employeeService.getAllHoliday();
+
+		SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		List<TaskDTO> to = new ArrayList<>();
+		List<Integer> ii = new ArrayList<>();
+		long taskdur1 = 0, taskdur = 0;
+		String s = "";
+		int flag = 0,holiday1=0,holi=0;
+		long tc1 = 0;
+
+		for (int i = 0; i < tls.size(); i++) {
+			TaskDetails ls = tls.get(i);
+			Date d1 = ls.gettStart_Time();
+			String sd1 = d1.toString();
+			Date d2 = ls.gettEnd_Time();
+			String sd2 = d2.toString();
+			String d3 = ls.gettSub_Date();
+			try {
+				long isd1 = myFormat.parse(sd1).getTime();
+				long isd2 = myFormat.parse(sd2).getTime();
+				long isd3 =  myFormat.parse(d3).getTime();
+				taskdur = isd2 - isd1;
+				long tc = isd3 - isd2;
+				tc1 = tc + taskdur;
+				for(Holiday h:holiday)
+				{
+					Date h1=h.gethDays();
+					String h2=h1.toString();
+					long h12=myFormat.parse(h2).getTime();
+					if(h12>isd1 && h12<isd2)
+					{
+						holiday1=holiday1+1;
+					}
+				}
+				
+				System.out.println("first:" + (taskdur / (1000 * 60 * 60 * 24)));
+				System.out.println("tadur:" + (tc1 / (1000 * 60 * 60 * 24)));
+				System.out.println("holianil:" + (holiday1 / (1000 * 60 * 60 * 24)));
+			} catch (Exception e1) {
+
+			}
+			
+
+			for (int j = i + 1; j < tls.size(); j++) {
+				long ttc1 = 0;
+				TaskDetails ls1 = tls.get(j);
+				Date dd1 = ls1.gettStart_Time();
+				String sdd1 = dd1.toString();
+				Date dd2 = ls1.gettEnd_Time();
+				String sdd2 = dd2.toString();
+				String sdd3 = ls1.gettSub_Date();
+				try {
+					long idd1 = myFormat.parse(sdd1).getTime();
+					long idd2 =  myFormat.parse(sdd2).getTime();
+					long idd3 =  myFormat.parse(sdd3).getTime();
+
+					taskdur1 = idd2 - idd1;
+					long ttc = idd3 - idd2;
+					ttc1 = ttc + taskdur1;
+					for(Holiday h:holiday)
+					{
+						Date h1=h.gethDays();
+						String h2=h1.toString();
+						long h12=myFormat.parse(h2).getTime();
+						if(h12>idd1 && h12<idd2)
+						{
+							holi=holi+1;
+						}
+					}
+					System.out.println("second:" + (taskdur1 / (1000 * 60 * 60 * 24)));
+					System.out.println("tadur1:" + (ttc1 / (1000 * 60 * 60 * 24)));
+					System.out.println("half:" + (ttc / (1000 * 60 * 60 * 24)));
+					System.out.println("holianil1:" + (holi / (1000 * 60 * 60 * 24)));
+				} catch (Exception e2) {
+
+				}
+
+				int a = ls.getProjectId();
+				int b = ls1.getProjectId();
+				if (a == b) {
+					taskdur = taskdur + taskdur1;
+					tc1 = tc1 + ttc1;
+					holiday1=holiday1+holi;
+				}
+
+			}
+
+			for (ProjectDetails p : pj) {
+				if (p.getProject_id() == ls.getProjectId()) {
+					s = p.getProject_Name();
+				}
+			}
+
+			float totaldur1 = (taskdur / (1000 * 60 * 60 * 24));
+			int totalduur1 = (int) totaldur1;
+			System.out.println("toalana:" + totalduur1);
+			int ttotalduur1=totalduur1-holiday1;
+			String totaldur2 = Integer.toString(totalduur1);
+			
+			System.out.println("String totalDur:::: " + totaldur2);
+			float totalc1 = (tc1 / (1000 * 60 * 60 * 24));
+			int totalcc1 = (int) totalc1;
+			String totalc2 = Integer.toString(totalcc1);
+			System.out.println("comanil: " + totalc2);
+			
+			int devi=totalcc1-totalduur1;
+			String deviation=Integer.toString(devi);
+			
+			for (int p : ii) {
+				if (p == ls.getProjectId()) {
+					flag = 1;
+				}
+			}
+			if (flag == 0) {
+				ii.add(ls.getProjectId());
+
+				TaskDTO t = new TaskDTO();
+				t.setEstimateDays(totaldur2);
+				t.setProject_Name(s);
+				t.setActualDays(totalc2);
+				t.setDelayDays(deviation);
+				to.add(t);
+				taskdur = 0;
+				tc1 = 0;
+				holi=0;
+			}
+			holiday1=0;
+			holi=0;
+		}
+		/* return new ModelAndView("pdfemployeeReport", "e", e); */
+		ModelAndView mav = new ModelAndView("pdfemployeeReport");
+		mav.addObject("e", e);
+		mav.addObject("tdo", to);
+		mav.addObject("lskill",lskill);
 		return mav;
 
 	}

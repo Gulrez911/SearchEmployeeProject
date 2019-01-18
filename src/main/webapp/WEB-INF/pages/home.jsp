@@ -63,7 +63,7 @@
 				
 					if (result > 0) {
 
-						alert("You can't delete employee");
+						alert("You can't delete employee!!!");
 						returned = false;
 						return false;
 						f3(returned)
@@ -109,6 +109,7 @@
 			}
 	
 		}
+
 </script>
 </head>
 
@@ -155,6 +156,7 @@
 			<th style="color: red">Telephone</th>
 			<th style="color: red">User Type</th>
 			<th style="color: red">Action</th>
+			<th style="color: red">View/Download</th>
 
 
 			<c:forEach var="employee" items="${listEmployee}">
@@ -170,6 +172,16 @@
 						 <a
 							href="deleteEmployee?id=${employee.id}&email=${employee.email}&page=${page}"
 							style="color: maroon" onclick=" return f1('${employee.email}')">Delete</a></td>
+							
+							<c:choose>
+							<c:when test="${ employee.category eq 'Employee'}">
+							<td><a href="/PMS-1.2/employeeReport?id=${employee.id}&email=${employee.email}" >Report</a></td>
+							</c:when>
+							<c:otherwise>
+							<td></td>
+							</c:otherwise>
+							</c:choose>
+						
 
 				</tr>
 			</c:forEach>

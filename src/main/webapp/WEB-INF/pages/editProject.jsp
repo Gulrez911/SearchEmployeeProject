@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"  %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -29,16 +30,22 @@
                         <td>Description:</td>
                         <td><form:textarea path="project_desc" rows="5" cols="5" name="project_Name"/></td>
                     </tr>
-                    <tr>
+                     <tr>
                         <td>Project Start Date:</td>
-                        <td><form:input path="pstart_Date" type="date" name="pstart_Date" required="true"/></td>
+                      
+                         <c:set var="d1" value="<%=new java.util.Date()%>" />  
+                          <fmt:formatDate pattern="yyyy-MM-dd" value="${d1 }" var="p"/>
+                        <td><form:input path="pstart_Date" type="date" min="${p }" max="2039-12-12" name="pstart_Date" required="true"/></td>
                     </tr>
 
                     <tr>
                         <td>Project End Date:</td>
+                         <c:set var="d1" value="<%=new java.util.Date()%>" />  
+                          <fmt:formatDate pattern="yyyy-MM-dd" value="${d1 }" var="p"/>
                         <td><form:input path="pEnd_Date" type="date" id="endDate"
-                                    name="endDate" required="true"/></td>
+                                    name="endDate" min="${p }"  max="2039-12-12" required="true"/></td>
                     </tr> 
+
 
                     <tr>
 
