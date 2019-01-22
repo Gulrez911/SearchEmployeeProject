@@ -2,12 +2,9 @@ package com.kgate.controller;
 
 import com.kgate.model.Skill;
 import com.kgate.service.SkillService;
-import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import static jdk.nashorn.internal.runtime.Debug.id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -33,43 +30,27 @@ public class EmpAjaxController {
 
     @RequestMapping(value = "/SaveSkillAjax", method = RequestMethod.POST)
     public @ResponseBody
-    Skill postEmployeeData(@RequestBody Skill skill) {
-        ModelAndView model = new ModelAndView();
+    Map<String, Object> postEmployeeData(@RequestBody Skill skill) {
+        Map<String, Object> map = new HashMap<>();
         System.out.println("test..............." + skill);
-        skillService.addSkill(skill);
-//        List<Skill> listSkill = skillService.getAllSkills();
-//        model.addObject("listSkill", listSkill);
-        return skill;
-    }
-
-    @RequestMapping(value = "/deleteSkillAjax", method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Skill deleteSkill(@RequestBody int id) {
-        System.out.println("skill ID;;;;;" + id);
-        Skill skill = new Skill();
-        skillService.deleteSkill(id);
-        ModelAndView model = new ModelAndView();
-        List<Skill> listSkill = skillService.getAllSkills();
-        model.addObject("listSkill", listSkill);
-        return skill;
-    }
-
-    @RequestMapping(value = "/getAllSkillsAjax", method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Skill getAllSkillsAjax() {
-        ModelAndView model = new ModelAndView();
-        model.addObject("listSkill", skillService.getAllSkills());
-        Skill skill = new Skill();
-        return skill;
+        String error = "Duplicate Skill";
+        //
+        String skillName = skillService.findSkill(skill.getSkill_name());
+        if (skillName == null) {
+            skillService.addSkill(skill);
+            map.put("message", "Your record have been saved successfully");
+        } else {
+            map.put("message", "Duplicate Skill");
+        }
+        //
+        return map;
     }
 
     @RequestMapping(value = "/save2", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     Map<String, Object> getSaved(Skill skill) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         skillService.addSkill(skill);
 
         return map;
@@ -78,7 +59,7 @@ public class EmpAjaxController {
     @RequestMapping(value = "/list2", method = RequestMethod.GET)
     public @ResponseBody
     Map<String, Object> getAll(Skill skill) {
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
 
         List<Skill> list = skillService.getAllSkills();
 
@@ -98,8 +79,7 @@ public class EmpAjaxController {
     @RequestMapping(value = "/delete2", method = RequestMethod.POST)
     public @ResponseBody
     Map<String, Object> delete(Skill skill) {
-        Map<String, Object> map = new HashMap<String, Object>();
-
+        Map<String, Object> map = new HashMap<>();
         System.out.println("delete skill...........");
         skillService.deleteSkill(skill.getSkill_Id());
         return map;

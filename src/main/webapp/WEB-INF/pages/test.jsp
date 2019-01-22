@@ -1,65 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
+        <title>Skill Page</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="<%=request.getContextPath()%>/resources/JS/jquery.js"></script>
-        <style>
-            table {
-                border-collapse: collapse;
-            }
-            th, td {
-                text-align: left;
-                padding: 8px;
-            }
-            tr:nth-child(even) {
-                background-color: #f2f2f2
-            }
-            th {
-                background-color: #4CAF50;
-                color: white;
-            }
-
-        </style>
-        <script>
-            $(document).ready(function () {
-                $('#skill_Form').submit(function (event) {
-                    var data = {}
-                    data["skill_Id"] = $("#skill_Id").val();
-                    data["skill_name"] = $('#skill_name').val();
-                    $.ajax({
-                        url: "SaveSkillAjax",
-                        data: JSON.stringify(data),
-                        type: "POST",
-                        beforeSend: function (xhr) {
-                            xhr.setRequestHeader("Accept", "application/json");
-                            xhr.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function (skill) {
-                            load();
-                            refresh();
-                        }
-                    });
-                    event.preventDefault();
-                });
-            });
-        </script>
+        <spring:url value="/resources/JS/jquery.js" var="a"/>
+        <spring:url value="/resources/css/mycss.css" var="cs"/>
+        <script src="${a}"></script>
+        <link href="${cs}" rel="stylesheet"/>
     </head>
 
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg"  onload="load()">
+    <tr> <form:form action="backtosuccess" method="post"><input type="submit" value="Back"></form:form> </tr>
 
         <div align="center">
             <h1 style="color:red">Skills Tracker: Add Skill Page</h1>
             <div style="color: red">${error}</div> 
 
-            <form:form id="skill_Form" action="SaveSkillAjax" method="post" modelAttribute="skill"
+            <form:form id="skill_Form"  method="post" modelAttribute="skill"
                        commandName="skill">
                 <table>
 
@@ -68,9 +33,7 @@
                         <td style="color: Dark blue">Name:</td>
                         <td><form:input path="skill_name" name="skill_name"
                                     id="skill_name"  required="true"/> </td>
-
-
-                    <br>
+                     <br>
                     <td colspan="2" align="center"><input type="submit"
                                                           value="Add" ></td>
                     </tr>

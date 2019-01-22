@@ -19,7 +19,8 @@
 
             <center><a href="/PMS-1.2/testAjax"><font style="color:Dark blue" size="5">Add Skill</font></a><br></center>
 
-            <center><a href="/PMS-1.2/employeelist?page=0"><font style="color:Dark blue" size="5">Employee List</font></a></center>
+            <!--<center><a href="/PMS-1.2/employeelist?page=0"><font style="color:Dark blue" size="5">Employee List</font></a></center>-->
+            <center><a href="/PMS-1.2/employeelist2"><font style="color:Dark blue" size="5">Employee List</font></a></center>
             <center><a href="/PMS-1.2/Holiday"><font style="color:Dark blue" size="5">Add Holiday</font></a></center>
             <tr>
 
