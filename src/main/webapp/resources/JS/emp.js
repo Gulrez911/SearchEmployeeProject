@@ -5,36 +5,22 @@
  */
 data = '';
 $(document).ready(function () {
-    load();
-//    function load_data(page) {
-//        $.ajax({
-//            url: 'pagination',
-//            type: 'GET',
-//            success: function (data) {
-//                $('#pagination_data').html(data);
-//            }
-//        });
-//    }
-//    $(document).on('click', '.pagination_link', function () {
-//        var page = $(this).attr("id");
-//        load_data(page);
-//    });
+    load(1);
 });
-
 load = function (page) {
-//    var url2 = "listEmp?page=" + page;
+    var url2 = "listEmp?page=" + page;
     $.ajax({
-        url: 'listEmp',
-//        ulr: url2,
+//        url: 'listEmp',
+        url: url2,
         type: 'GET',
         success: function (response) {
             data = response.list;
             //            alert(data);
             $('.tr').remove();
             for (i = 0; i < response.list.length; i++) {
-                $("#tbl").append("<tr class='tr'><td>" + response.list[i].name + "</td><td>" + response.list[i].email + "</td><td>" + response.list[i].address + "</td><td>" + response.list[i].telephone + "</td><td>" + response.list[i].category + "</td><td></td>")
+                $("#tbl").append("<tr class='tr'><td>" + response.list[i].name + "</td><td>" + response.list[i].email + "</td><td>" + response.list[i].address + "</td><td>" + response.list[i].telephone + "</td><td>" + response.list[i].category + "</td><td><a href='editEmployeeAjax?id=" + response.list[i].id + "' >Edit</a>&nbsp&nbsp<a href='#' onclick='deleteEmp(" + response.list[i].id + ",`" + response.list[i].email + "`);'>Delete</a></td>");
             }
-            console.log(response.pno);
+//            console.log(response.pno);
             pagenumber = "";
             for (i = 0; i < response.pno; i++) {
                 j = i + 1;
@@ -46,21 +32,26 @@ load = function (page) {
     }
     );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+deleteEmp = function (id, email) {
+    var con = confirm("Do you want to delete this Employee");
+    if (con === true) {
+        $.ajax({
+            url: 'deleteEmployeeAjax',
+            type: 'POST',
+            data: JSON.stringify({id: id, email: email}),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+            success: function (data) {
+                alert(data.msg);
+                load(1);
+            }
+        });
+    } else {
+        return false;
+    }
+};
 function chk() {
     var x = document.forms["skillform"]["skillSearch"].value;
     if (x == "" || x.length < 3) {
@@ -79,27 +70,21 @@ $(document).ready(function () {
             success: function (result) {
                 console.log("SUCCESS: ", result);
                 console.log("Hello world! anil");
-
             }
         });
     });
 });
-
 function f1(mail) {
     var returned = true;
-
     var r = confirm("Are you sure want to delete");
     if (r == true) {
         var url = "success1?mail=" + mail;
-
-
         $.ajax({
             url: url,
             async: false,
             success: function (result) {
 
                 console.log("SUCCESS: ", result);
-
                 if (result > 0) {
 
                     alert("You can't delete employee");
@@ -110,12 +95,10 @@ function f1(mail) {
                 } else
                 {
                     alert("Employee deleted successfully");
-
                 }
 
             }
         });
-
     } else
     {
         return false;
@@ -141,7 +124,6 @@ function f3(flag)
         console.log("anil flase");
         alert('flag false');
         return false;
-
     }
 
 }
