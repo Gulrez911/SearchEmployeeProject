@@ -54,7 +54,7 @@ load = function () {
 
             }
         }
-    });
+    });	
 };
 
 edit = function (index) {

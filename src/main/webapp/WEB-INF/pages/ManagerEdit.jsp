@@ -111,6 +111,31 @@ function ValidatePAN()
 }
 
 </script> 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	
+	$('#f').click(function() {
+		var str = $("#eedit").serialize(); 
+		
+		
+		$.ajax({
+			type : "post",
+			data : str,
+			url : "byEmployeeEdit1",
+			
+			success : function(d) {
+				alert('Details save successfully');
+				
+			}
+		});
+
+	});
+
+});
+
+</script>
 </head>
 <body  background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
  <%@include file="header.jsp" %>
@@ -118,7 +143,7 @@ function ValidatePAN()
             <h1 style="color: orangered">Edit Manager Details</h1>
             <h3> <p style="color: green" >${msg}</p></h3>
                 <form:form action="byManagerEdit" method="post"
-                           modelAttribute="employee" commandName="employee">
+                           modelAttribute="employee" commandName="employee" id="eedit">
                     <form:errors path="*" cssClass="errorblock" element="div" />
                 <table>
                     <form:hidden path="id" />
@@ -190,8 +215,8 @@ function ValidatePAN()
 
                     <tr>
                         <!--                        <td><input type="submit" value="Send OTP" name="action1" /></td>-->
-                        <td colspan="2" align="center"><input type="submit"
-                                                              value="Save" name="action2"></td>
+                        <td colspan="2" align="center"><input type="button"
+                                                              value="Save" name="action2" id="f"></td>
 
                     </tr>
                 </table>

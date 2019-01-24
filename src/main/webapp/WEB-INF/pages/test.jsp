@@ -29,6 +29,7 @@
         </style>
         <script>
             $(document).ready(function () {
+            	  alert("on load");
                 $('#skill_Form').submit(function (event) {
                     var data = {}
                     data["skill_Id"] = $("#skill_Id").val();

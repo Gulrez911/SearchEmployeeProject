@@ -22,10 +22,6 @@
     <url-pattern>/</url-pattern>
   </servlet-mapping>
   <session-config>
-    <session-timeout>1</session-timeout>
+    <session-timeout>1000000</session-timeout>
   </session-config>
- <!--  <error-page>
-    <exception-type>java.lang.Throwable</exception-type>
-    <location>/500</location>
-  </error-page> -->
 </web-app>

@@ -1,4 +1,4 @@
-package com.controllers;
+package com.kgate.controller;
 
 import java.util.HashMap;
 import java.util.List;
