@@ -29,11 +29,9 @@
 
     <body
         background="<%=request.getContextPath()%>/resources/images/bg2.jpg">
-        <h5>hi</h5>
         <%@include file="header.jsp"%>
         <div align="center">
-
-
+ 
             <center><a href="/PMS-1.2/downloadPDF"><font style="color:blue" size="4">Download Employee PDF</font></a><br></center>
 
             <center><a href="/PMS-1.2/downloadExcel"><font style="color:blue" size="4">Download Employee Excel</font></a><br></center>
@@ -69,31 +67,12 @@
                 <th style="color: red">Telephone</th>
                 <th style="color: red">User Type</th>
                 <th style="color: red">Action</th>
-
-
-                <%--  <c:forEach var="employee" items="${listEmployee}">
-                      <tr style="color: Dark blue">
-
-                        <td>${employee.name}</td>
-                        <td>${employee.email}</td>
-                        <td>${employee.address}</td>
-                        <td>${employee.telephone}</td>
-                        <td>${employee.category}</td>
-                        <td><a href="editEmployee?id=${employee.id}&page=${page}"
-                               style="color: blue" onclick="return confirm('Are you sure you want to edit this employee?');">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; 
-                            <a
-                                href="deleteEmployee?id=${employee.id}&email=${employee.email}&page=${page}"
-                                style="color: maroon" onclick=" return f1('${employee.email}')">Delete</a></td>
-
-                    </tr>
-                </c:forEach>--%>
+ 
             </table><br>
             <div align="center">Pages: <p id="n"></p></div>
             <tr>
 
             </tr>
-
-
             <h4>
                 <font style="color: darkorange"> New Employee Register</font> <a
                     href="newEmployee" style="color: red;">Here</a>
@@ -105,26 +84,9 @@
             </form:form>
         </div>
 
-
-
-    </div>
-
-    <div class="pagination">
-        <ul style="list-style-type:none">
-
-            <li>Page
-                <!--   <a href="employeelist?page=0">0</a> -->
-                <c:forEach begin="${startpage}" end="${endpage}" var="p">
-                    <a href="<c:url value="employeelist" >
-                           <c:param name="page" value="${p}"/>${p}</c:url>">${p}</a>
-                </c:forEach>
-            </li>
-
-        </ul>
     </div>
 
 </div>
-
 
 </body>
 
