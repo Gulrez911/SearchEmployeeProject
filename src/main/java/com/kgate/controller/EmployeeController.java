@@ -1,11 +1,7 @@
 package com.kgate.controller;
 
 import java.io.IOException;
-import java.security.KeyStore.Entry.Attribute;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -19,13 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,8 +39,6 @@ import java.util.Random;
 import org.springframework.ui.ModelMap;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 

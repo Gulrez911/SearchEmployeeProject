@@ -9,7 +9,7 @@ public interface EmployeeDAO {
 
     public void addEmployee(Employee employee);
 
-   public List<Employee> getAllEmployees();
+    public List<Employee> getAllEmployees();
     //search Employee
 
     public List<Employee> getAllEmployees(Integer page);
@@ -19,27 +19,21 @@ public interface EmployeeDAO {
     public Employee searchByEmail(String email);
 
     public void deleteEmployee(Integer employeeId);
-    
+
     public Employee updateEmployee(Employee employee);
 
     public Employee getEmployee(int employeeid);
 
     public List<Employee> searchEmployeesBySkill(String skill);
-    
+
     public List<Employee> displayByManagerId(String email);
-    
-    
-    
+
     public void addHoliday(Holiday holiday);
-    
+
     public List<Holiday> getAllHoliday();
-    
-   
-    
+
     public void deleteHoliday(Integer Days_id);
-   
+
     public String getEmployeeName(String email);
-    
-    
 
 }

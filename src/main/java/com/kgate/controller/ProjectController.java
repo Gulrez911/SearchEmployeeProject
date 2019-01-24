@@ -47,7 +47,7 @@ public class ProjectController {
 
     @Autowired
     private Employee emp;
-    
+
     @InitBinder
     public void initConverter(WebDataBinder binder) {
         CustomDateEditor dateEditor = new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true);
@@ -231,7 +231,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public ModelAndView deleteTask(HttpServletRequest request,@ModelAttribute("taskdetails") TaskDetails taskdetails) {
+    public ModelAndView deleteTask(HttpServletRequest request, @ModelAttribute("taskdetails") TaskDetails taskdetails) {
         ModelAndView mav = new ModelAndView("createtask");
         int task_id = Integer.parseInt(request.getParameter("task_id"));
         taskservice.deleteTask(task_id);
@@ -366,7 +366,8 @@ public class ProjectController {
 
     @RequestMapping(value = "/createProject2", method = RequestMethod.POST)
     public ModelAndView createProject2() {
-        ModelAndView mav = new ModelAndView("CreateProject");
+//        ModelAndView mav = new ModelAndView("CreateProject");
+        ModelAndView mav = new ModelAndView("createProject2");
         Integer mid = projectservice.getManagerid(emp.getEmail());
 
         mav.addObject("mid", mid);
@@ -487,7 +488,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/deleteproject", method = RequestMethod.GET)
-    public ModelAndView deleteproject(HttpServletRequest request,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+    public ModelAndView deleteproject(HttpServletRequest request, @ModelAttribute("projectDetails") ProjectDetails projectDetails) {
         int id = Integer.parseInt(request.getParameter("project_id"));
         projectservice.deleteproject(id);
         ModelAndView model = new ModelAndView("redirect:/cproject2");
@@ -504,7 +505,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/editproject", method = RequestMethod.GET)
-    public ModelAndView editproject(HttpServletRequest request,@ModelAttribute("projectDetails") ProjectDetails projectDetails) {
+    public ModelAndView editproject(HttpServletRequest request, @ModelAttribute("projectDetails") ProjectDetails projectDetails) {
         ModelAndView mav = new ModelAndView("editProject");
         int id = Integer.parseInt(request.getParameter("project_id"));
         Integer mid = projectservice.getManagerid(emp.getEmail());
@@ -522,7 +523,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/editproject1", method = RequestMethod.POST)
-    public ModelAndView editproject1(HttpServletRequest request,@ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap,
+    public ModelAndView editproject1(HttpServletRequest request, @ModelAttribute("projectDetails") ProjectDetails projectDetails, ModelMap modelMap,
             @RequestParam("project_Name") String name) {
 
         ModelAndView model = new ModelAndView("editProject");
@@ -547,23 +548,18 @@ public class ProjectController {
     @RequestMapping(value = "/getProjecttask")
     @ResponseBody()
     public int getProjecttask(HttpServletRequest request) {
-    	String s = request.getParameter("pid");
-    	int id=Integer.parseInt(s);
-    	List<TaskDetails> tl=taskservice.getByProjectId(id);
-    	for(int i=0;i<tl.size();i++)
-    	{
-    		TaskDetails  s1=tl.get(i);
-            String p=s1.getTaskStatus();
-            if(p.equals("W .I. P"))
-            {
-            	return 1;
+        String s = request.getParameter("pid");
+        int id = Integer.parseInt(s);
+        List<TaskDetails> tl = taskservice.getByProjectId(id);
+        for (int i = 0; i < tl.size(); i++) {
+            TaskDetails s1 = tl.get(i);
+            String p = s1.getTaskStatus();
+            if (p.equals("W .I. P")) {
+                return 1;
             }
-          	}
-		return 0;
-      
+        }
+        return 0;
+
     }
-   
+
 }
-
-
-

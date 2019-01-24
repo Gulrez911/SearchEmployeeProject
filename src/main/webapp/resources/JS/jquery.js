@@ -5,39 +5,49 @@
  */
 
 data = "";
-//                $("#skill_Form").submit(function () {
-//                    var data = {}
-//                    data["skill_Id"] = $("#skill_Id").val();
-//                    data["skill_name"] = $('#skill_name').val();
-//                    submit = function () {
-//                        $.ajax({
-//                            url: "save2",
-//                            type: 'POST',
-//                            data: json.stringify(data),
-//                            beforeSend: function (xhr) {
-//                                xhr.setRequestHeader("Accept", "application/json");
-//                                xhr.setRequestHeader("Content-Type", "application/json");
-//                            },
-//                            success: function (data, textStatus, jqXHR) {
-//                                alert("You have successfully saved skill");
-//                                load();
-//                            }
-//                        });
-//                    }
-//                });
+$(document).ready(function () {
+    $('#skill_Form').submit(function (event) {
+        var data = {}
+        data["skill_Id"] = $("#skill_Id").val();
+        data["skill_name"] = $('#skill_name').val();
+        $.ajax({
+            url: "SaveSkillAjax",
+            data: JSON.stringify(data),
+            type: "POST",
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json");
+            },
+            success: function (response) {
+                alert(response.message);
+                load();
+                refresh();
+            },
+
+        });
+        event.preventDefault();
+    });
+});
 
 
 delete_ = function (id) {
-    $.ajax({
-        url: 'delete2',
-        type: 'POST',
-        data: {skill_Id: id},
-        success: function (response) {
+    var con = confirm("Do you want to delete this Skill ?");
+    if (con === true) {
+        $.ajax({
+            url: 'delete2',
+            type: 'POST',
+            data: {skill_Id: id},
+            success: function (response) {
 //                            alert(response.message);
-            alert("you have successfully deleted");
-            load();
-        }
-    });
+                alert("you have successfully deleted");
+                load();
+            }
+        });
+
+    } else {
+        return false;
+    }
+
 };
 
 load = function () {
@@ -54,7 +64,7 @@ load = function () {
 
             }
         }
-    });	
+    });
 };
 
 edit = function (index) {
@@ -86,6 +96,10 @@ $(document).ready(function () {
         });
     });
 });
+
+
+//createProject Script
+
 
 
      
