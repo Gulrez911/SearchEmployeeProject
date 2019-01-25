@@ -4,10 +4,17 @@ import java.io.IOException;
 import java.security.KeyStore.Entry.Attribute;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Random;
+import java.util.Set;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -17,6 +24,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -585,6 +593,7 @@ public class EmployeeController {
 
 		String email = request.getParameter("email");
 		List<TaskDetails> tls = taskservice.getalltaskdetails(email);
+		System.out.println("all list "+tls);
 
 		List<ProjectDetails> pj = projectservice.dispalyProjects();
 		
@@ -596,8 +605,14 @@ public class EmployeeController {
 
 		List<TaskDTO> to = new ArrayList<>();
 		List<Integer> ii = new ArrayList<>();
+		Map<String,Integer> m=new HashMap<String,Integer>();
+		
+		 Date d12 = new Date();
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        String date1 = sdf.format(d12);
+		
 		long taskdur1 = 0, taskdur = 0;
-		String s = "";
+		String s = "",d3="",sdd3="";
 		int flag = 0,holiday1=0,holi=0;
 		long tc1 = 0;
 
@@ -607,13 +622,25 @@ public class EmployeeController {
 			String sd1 = d1.toString();
 			Date d2 = ls.gettEnd_Time();
 			String sd2 = d2.toString();
-			String d3 = ls.gettSub_Date();
+			if(ls.gettSub_Date()==null || ls.gettSub_Date()=="" ||ls.gettSub_Date().isEmpty())
+			{
+				d3=date1;
+				
+			}else
+			{
+			 d3 = ls.gettSub_Date();	
+			}
+			
+			String tasknm=ls.getTask_Name();
 			try {
 				long isd1 = myFormat.parse(sd1).getTime();
 				long isd2 = myFormat.parse(sd2).getTime();
 				long isd3 =  myFormat.parse(d3).getTime();
 				taskdur = isd2 - isd1;
 				long tc = isd3 - isd2;
+				Integer d=(int)(tc/ (1000 * 60 * 60 * 24));
+				System.out.println("map first"+d);
+				m.put(tasknm, d);
 				tc1 = tc + taskdur;
 				for(Holiday h:holiday)
 				{
@@ -641,7 +668,16 @@ public class EmployeeController {
 				String sdd1 = dd1.toString();
 				Date dd2 = ls1.gettEnd_Time();
 				String sdd2 = dd2.toString();
-				String sdd3 = ls1.gettSub_Date();
+				if(ls1.gettSub_Date()==null ||ls1.gettSub_Date()==""||ls1.gettSub_Date().isEmpty())
+				{
+					sdd3=date1;
+				}
+				else
+				{
+					 sdd3 = ls1.gettSub_Date();	
+				}
+			
+				String tasknm1=ls1.getTask_Name();
 				try {
 					long idd1 = myFormat.parse(sdd1).getTime();
 					long idd2 =  myFormat.parse(sdd2).getTime();
@@ -650,6 +686,9 @@ public class EmployeeController {
 					taskdur1 = idd2 - idd1;
 					long ttc = idd3 - idd2;
 					ttc1 = ttc + taskdur1;
+					Integer d11=(int)(ttc/ (1000 * 60 * 60 * 24));
+					System.out.println("map second"+d11);
+					m.put(tasknm1, d11);
 					for(Holiday h:holiday)
 					{
 						Date h1=h.gethDays();
@@ -720,13 +759,34 @@ public class EmployeeController {
 			holiday1=0;
 			holi=0;
 		}
+		
+		
 		/* return new ModelAndView("pdfemployeeReport", "e", e); */
 		ModelAndView mav = new ModelAndView("pdfemployeeReport");
 		mav.addObject("e", e);
 		mav.addObject("tdo", to);
 		mav.addObject("lskill",lskill);
+		
+	Set<Entry<String,Integer>> set=m.entrySet();
+	List<Entry<String,Integer>> list=new ArrayList<Entry<String,Integer>>(set);
+	Collections.sort(list,new Comparator<Map.Entry<String,Integer>>() {
+
+		@Override
+		public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+			
+			 return (o2.getValue()).compareTo( o1.getValue() );
+		}
+		
+		
+	});
+	 for(Map.Entry<String, Integer> entry:list){
+         System.out.println("sorted "+entry.getKey()+" ==== "+entry.getValue());
+         
+	 }
+	 mav.addObject("list",list);
 		return mav;
 
 	}
+	
 
 }

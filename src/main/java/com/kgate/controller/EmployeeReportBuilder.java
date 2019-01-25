@@ -1,23 +1,34 @@
 package com.kgate.controller;
 
+import java.awt.Graphics2D;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.persistence.criteria.Join;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
+import com.itextpdf.awt.DefaultFontMapper;
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfTemplate;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.kgate.model.Employee;
 import com.kgate.model.Skill;
@@ -29,7 +40,10 @@ public class EmployeeReportBuilder extends AbstractITextPdfView {
 	protected void buildPdfDocument(Map<String, Object> model, Document doc, PdfWriter writer,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		/*doc.add(new Paragraph("Details of Employee"));*/
+		Image i=Image.getInstance("emp.png");
 		
+		i.setAbsolutePosition(-50,680);
+		doc.add(i);
 		Paragraph p2=new Paragraph("Details of Employee:");
 		p2.setSpacingAfter(20f);
 		p2.setAlignment(Element.ALIGN_CENTER);
@@ -40,19 +54,24 @@ public class EmployeeReportBuilder extends AbstractITextPdfView {
 		Employee e = (Employee) model.get("e");
 	List<TaskDTO> td = (List<TaskDTO>) model.get("tdo");
 	List<String> ls=(List<String>) model.get("lskill");
+	List<Entry<String,Integer>> list=(List<Entry<String, Integer>>) model.get("list");
+	
 	
 	 Font font = FontFactory.getFont(FontFactory.TIMES_ROMAN);
 		PdfPTable table = new PdfPTable(2);
-		table.getDefaultCell().setBorder(0);
+		/*table.getDefaultCell().setBorder(0);*/
 		table.addCell("Name:");
 		table.addCell(e.getName());
-		table.addCell("Email:");
-		table.addCell(e.getEmail());
-		table.addCell("Address:");
-		table.addCell(e.getAddress());
 		
-table.addCell("Telephone No:");
-table.addCell(e.getTelephone());
+		PdfPTable table12 = new PdfPTable(2);
+		table12.addCell("Email:");
+		table12.addCell(e.getEmail());
+		table12.addCell("Address:");
+		table12.addCell(e.getAddress());
+table12.addCell("Telephone No:");
+table12.addCell(e.getTelephone());
+
+
 table.addCell("Skills:");
 System.out.println("skanil"+ls);
 String as="";
@@ -65,12 +84,17 @@ table.addCell("Adhar No:");
 table.addCell(e.getAadhar());	
 table.addCell("Pan No:");
 table.addCell(e.getPan());
+table.addCell("Contact:");
+table.addCell(table12);
 
 		doc.add(table);
 		doc.add(new Paragraph("------------------------------------------------------------------------------------------------------------------------"));
 		
+		doc.add(Chunk.NEWLINE);
+	    
+	     
 		Paragraph p1=new Paragraph("Employee Project Details:");
-		p1.setSpacingAfter(20f);
+		p1.setSpacingAfter(15f);
 		p1.setAlignment(Element.ALIGN_CENTER);
 		
 		doc.add(p1);
@@ -100,10 +124,13 @@ table.addCell(e.getPan());
 			delay=delay+j1;
 			
 		}
-		
 		doc.add(table1);
+		
+		doc.add(Chunk.NEWLINE);
+	    
+	     
 		Paragraph p=new Paragraph("Performance Status:");
-		p.setSpacingAfter(20f);
+		p.setSpacingAfter(15f);
 		p.setAlignment(Element.ALIGN_CENTER);
 		doc.add(p);
 		if(delay>15)
@@ -146,9 +173,77 @@ table.addCell(e.getPan());
 	     rect.setBorderColor(BaseColor.BLACK);
 	     rect.setBorderWidth(1);
 	     doc.add(rect);
-		
-		
-		
+	     
+	     doc.add(Chunk.NEWLINE);
+	     
+	     
+	     Paragraph p11=new Paragraph("Most delayed tasks:");
+			p11.setSpacingAfter(15f);
+			p11.setAlignment(Element.ALIGN_CENTER);
+			doc.add(p11);
+			
+			PdfPTable t1=new PdfPTable(2);
+			PdfPCell c=new PdfPCell();
+			c.setBackgroundColor(BaseColor.YELLOW);
+            c.setPadding(5);
+            c.setPhrase(new Phrase("Task Name",font));
+            t1.addCell(c);
+            c.setPhrase(new Phrase("Delay Days",font));
+            t1.addCell(c);
+            int size=list.size();
+            DefaultPieDataset defaultCategoryDataset = new DefaultPieDataset();
+            if(size>=5)
+            {
+            	 /*for(Map.Entry<String, Integer> entry:list){
+                     t1.addCell(entry.getKey());
+                     t1.addCell(entry.getValue().toString());
+                     System.out.println("sorted pdf "+entry.getKey()+" ==== "+entry.getValue());
+                      
+             	 }*/
+            	 for(int ij=0;ij<3;ij++)
+            	 {
+            		 t1.addCell(list.get(ij).getKey());
+                 	t1.addCell(list.get(ij).getValue().toString());
+                 	 
+                 	 
+            		 
+            	 }
+            	
+            }else
+            {
+            	t1.addCell(list.get(0).getKey());
+            	t1.addCell(list.get(0).getValue().toString());
+            }
+           
+            doc.add(t1);
+            
+            for(int i1=0;i1<size;i1++)
+            {
+            	 defaultCategoryDataset.setValue(list.get(i1).getKey(), list.get(i1).getValue());
+            }
+            
+            JFreeChart jFreeChart = ChartFactory.createPieChart(
+                    "All Tasks ",  //pie chart title
+                    defaultCategoryDataset, //pie chart dataset
+                    false, false, false);  //pie chart> legend, tooltips and
+            
+            PdfContentByte pdfContentByte = writer.getDirectContent();
+            int width = 350; //width of PieChart
+            int height = 150; //height of pieChart
+            PdfTemplate pdfTemplate = pdfContentByte.createTemplate(width, height);
+            
+            //create graphics
+            @SuppressWarnings("deprecation")
+			Graphics2D graphics2d = pdfTemplate.createGraphics(width, height,
+                         new DefaultFontMapper());
+            
+            //create rectangle
+            java.awt.geom.Rectangle2D rectangle2d = new java.awt.geom.Rectangle2D.Double(
+                         0, 0, width, height);
+  
+            jFreeChart.draw(graphics2d, rectangle2d);
+            graphics2d.dispose();
+            pdfContentByte.addTemplate(pdfTemplate, 60, 50); //0, 0 will draw PIE chart on bottom left of page
 	}
 
 }
